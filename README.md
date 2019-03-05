@@ -27,5 +27,6 @@
 - https://en.wikipedia.org/wiki/Web_Components
 - https://css-tricks.com/modular-future-web-components/
 - https://github.com/ionic-team/ionic/tree/master/core
+- http://slimjs.com/#/data-binding
 - https://stenciljs.com/
 - https://capacitor.ionicframework.com/

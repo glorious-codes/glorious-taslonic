@@ -1,5 +1,5 @@
 # [WIP] Taslonic
-A glorious web components library
+> A glorious web components library
 
 ## Early definitions
 

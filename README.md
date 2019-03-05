@@ -23,6 +23,7 @@
 ## References
 
 - https://www.webcomponents.org/
+- https://open-wc.org/
 - https://developer.mozilla.org/en-US/docs/Web/Web_Components
 - https://en.wikipedia.org/wiki/Web_Components
 - https://css-tricks.com/modular-future-web-components/

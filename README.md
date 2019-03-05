@@ -15,7 +15,7 @@ A glorious web components library
 - alert
 - button
 - input
-- email
+- email input
 - field
 - form
 - data-grid

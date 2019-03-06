@@ -26,8 +26,9 @@
 - https://open-wc.org/
 - https://developer.mozilla.org/en-US/docs/Web/Web_Components
 - https://en.wikipedia.org/wiki/Web_Components
-- https://css-tricks.com/modular-future-web-components/
 - https://github.com/ionic-team/ionic/tree/master/core
+- https://css-tricks.com/modular-future-web-components/
+- https://www.smashingmagazine.com/2016/12/styling-web-components-using-a-shared-style-sheet/
 - http://slimjs.com/#/data-binding
 - https://stenciljs.com/
 - https://capacitor.ionicframework.com/

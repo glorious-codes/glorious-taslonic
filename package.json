@@ -1,0 +1,30 @@
+{
+  "name": "glorious-taslonic",
+  "version": "0.1.0",
+  "description": "A glorious UI library built on top of native custom elements",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glorious-codes/glorious-taslonic.git"
+  },
+  "keywords": [
+    "UI",
+    "library",
+    "custom",
+    "elements",
+    "native",
+    "HTML",
+    "CSS",
+    "Javascript",
+    "vanilla"
+  ],
+  "author": "Rafael Camargo <hello@rafaelcamargo.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/glorious-codes/glorious-taslonic/issues"
+  },
+  "homepage": "https://github.com/glorious-codes/glorious-taslonic#readme"
+}

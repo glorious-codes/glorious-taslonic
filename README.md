@@ -22,20 +22,27 @@
 
 ## References
 
+### W3C Custom Element Spec
+- https://w3c.github.io/webcomponents/spec/custom/
+
+### Web Components
 - https://www.webcomponents.org/
 - https://open-wc.org/
 - https://developer.mozilla.org/en-US/docs/Web/Web_Components
 - https://en.wikipedia.org/wiki/Web_Components
+
+### Libraries
 - https://github.com/ionic-team/ionic/tree/master/core
-- https://css-tricks.com/modular-future-web-components/
-- https://www.smashingmagazine.com/2016/12/styling-web-components-using-a-shared-style-sheet/
 - http://slimjs.com/#/data-binding
 - https://stenciljs.com/
 - https://capacitor.ionicframework.com/
 - https://x-tag.github.io/
 
+### Articles
+- https://css-tricks.com/modular-future-web-components/
+- https://www.smashingmagazine.com/2016/12/styling-web-components-using-a-shared-style-sheet/
+
 ## Troubleshooting
 
-**Failed to construct 'HTMLElement':**
-
-https://github.com/github/babel-plugin-transform-custom-element-classes
+- Failed to construct 'HTMLElement':
+  - https://github.com/github/babel-plugin-transform-custom-element-classes

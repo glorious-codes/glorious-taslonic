@@ -33,3 +33,9 @@
 - https://stenciljs.com/
 - https://capacitor.ionicframework.com/
 - https://x-tag.github.io/
+
+## Troubleshooting
+
+**Failed to construct 'HTMLElement':**
+
+https://github.com/github/babel-plugin-transform-custom-element-classes

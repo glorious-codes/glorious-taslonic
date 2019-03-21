@@ -31,6 +31,9 @@
 - https://developer.mozilla.org/en-US/docs/Web/Web_Components
 - https://en.wikipedia.org/wiki/Web_Components
 
+### Lifecycle Callbacks
+- https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#Using_the_lifecycle_callbacks
+
 ### Libraries
 - https://github.com/ionic-team/ionic/tree/master/core
 - http://slimjs.com/#/data-binding

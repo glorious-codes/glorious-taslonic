@@ -1,0 +1,19 @@
+@require '_variables'
+@require '_mixins'
+
+.tas-button
+  position relative
+  padding 0 10px
+  color $color-grey-dark
+  background-color $color-grey
+  font-size $font-size-sm
+  text-align center
+  line-height 35px
+  cursor pointer
+  webkit-appearance(none)
+  box-sizing(border-box)
+  transition(all, 300ms)
+  border-radius(6px)
+  +highlight()
+    outline 0
+    background-color $color-grey-semi-light

@@ -1,6 +1,9 @@
 # [WIP] Taslonic
 > A glorious UI library built on top of native custom elements
 
+[![CircleCI](https://circleci.com/gh/glorious-codes/glorious-taslonic.svg?style=svg)](https://circleci.com/gh/glorious-codes/glorious-taslonic)
+[![codecov](https://codecov.io/gh/glorious-codes/glorious-taslonic/branch/master/graph/badge.svg)](https://codecov.io/gh/glorious-codes/glorious-taslonic)
+
 ## Early definitions
 
 1. Taslonic aims to be an easy to use UI library on top of the latest advances of Web Components specification.

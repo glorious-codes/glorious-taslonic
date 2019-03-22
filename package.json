@@ -5,6 +5,7 @@
   "main": "src/scripts/index.js",
   "scripts": {
     "build": "./node_modules/webpack/bin/webpack.js",
+    "format": "./node_modules/eslint/bin/eslint.js './src/**/*.js'",
     "test": "./node_modules/jest/bin/jest.js"
   },
   "repository": {
@@ -36,6 +37,7 @@
     "babel-preset-env": "^1.7.0",
     "css-loader": "^1.0.0",
     "document-register-element": "^1.13.1",
+    "eslint": "^5.15.3",
     "file-loader": "^2.0.0",
     "html-loader": "^0.5.5",
     "html-loader-jest": "^0.2.1",

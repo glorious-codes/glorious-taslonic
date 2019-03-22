@@ -1,0 +1,32 @@
+{
+  "scripts": {
+    "source": {
+      "root": "src/scripts/",
+      "index": "src/scripts/index.js"
+    },
+    "dist": {
+      "filename": {
+        "prod": "taslonic.min.js",
+        "dev": "taslonic.js"
+      }
+    }
+  },
+  "styles": {
+    "source": {
+      "root": "src/styles/"
+    },
+    "dist": {
+      "filename": {
+        "prod": "taslonic.min.css",
+        "dev": "taslonic.css"
+      }
+    }
+  },
+  "tests": {
+    "source": {
+      "files": [
+        "src/scripts/**/!(index).js"
+      ]
+    }
+  }
+}

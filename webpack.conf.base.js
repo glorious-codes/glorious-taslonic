@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const project = require('./project.json');
 
@@ -28,6 +29,11 @@ module.exports = {
       '@styles': `${__dirname}/${project.styles.source.root}`
     }
   },
-  plugins: [],
+  plugins: [
+    new CopyWebpackPlugin([{
+      from: project.images.source.files,
+      to: project.images.dist.root
+    }]),
+  ],
   context: path.resolve(__dirname)
 }

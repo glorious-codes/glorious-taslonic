@@ -1,19 +1,43 @@
 @require '_variables'
 @require '_mixins'
 
+$button-box-shadow-color = alpha($color-grey-darker, .25)
+
+themed-button($text-color, $bg-color)
+  background-color $bg-color
+  color $text-color
+  +highlight()
+    background-color alpha($bg-color, .9)
+
 .tas-button
-  position relative
-  padding 0 10px
+  padding 0 35px
   color $color-grey-dark
-  background-color $color-grey
-  font-size $font-size-sm
+  background-color $color-grey-light
+  font-size $font-size-xs
+  font-weight 600
   text-align center
   line-height 35px
   cursor pointer
+  border 0
   webkit-appearance(none)
-  box-sizing(border-box)
   transition(all, 300ms)
-  border-radius(6px)
+  border-radius(4px)
+  unselectable()
   +highlight()
+    background-color alpha($color-grey-light, .8)
     outline 0
-    background-color $color-grey-semi-light
+  &:active
+    padding 3px 35px 0
+    line-height 32px
+    box-shadow(0 1px 3px $button-box-shadow-color inset)
+  &.tas-button-display-block
+    float left
+    width 100%
+    box-sizing(border-box)
+    clearfix()
+  &.tas-button-theme-primary
+    themed-button($color-grey-lighter, $color-green)
+  &.tas-button-theme-secondary
+    themed-button($color-grey-lighter, $color-blue)
+  &.tas-button-theme-danger
+    themed-button($color-grey-lighter, $color-red)

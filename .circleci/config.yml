@@ -30,7 +30,11 @@ jobs:
 
       - run:
           name: Build
-          command: npm run build
+          command: NODE_ENV=production npm run build
+
+      - run:
+          name: Docs
+          command: NODE_ENV=production npm run docs
 
       - run:
           name: Test

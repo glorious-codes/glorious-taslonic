@@ -11,7 +11,8 @@
     "format": "eslint './src/**/*.js'",
     "start": "npm run docs -- --watch --port=5000",
     "docs": "pitsby build",
-    "test": "jest"
+    "test": "jest",
+    "deploy": "firebase deploy --non-interactive"
   },
   "repository": {
     "type": "git",
@@ -47,6 +48,7 @@
     "document-register-element": "^1.13.1",
     "eslint": "^5.15.3",
     "file-loader": "^2.0.0",
+    "firebase-tools": "^7.6.1",
     "html-loader": "^0.5.5",
     "html-loader-jest": "^0.2.1",
     "html-webpack-plugin": "^3.2.0",

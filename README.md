@@ -1,5 +1,5 @@
 # [WIP] Taslonic
-> A glorious UI library built on top of native custom elements
+> A very experimental UI library built on top of native custom elements
 
 [![CircleCI](https://circleci.com/gh/glorious-codes/glorious-taslonic.svg?style=svg)](https://circleci.com/gh/glorious-codes/glorious-taslonic)
 [![codecov](https://codecov.io/gh/glorious-codes/glorious-taslonic/branch/master/graph/badge.svg)](https://codecov.io/gh/glorious-codes/glorious-taslonic)
@@ -25,6 +25,44 @@
 - dialog
 - form
 - data-grid
+
+## Contributing
+
+1. Install [Node](https://nodejs.org/en/). Download the "Recommend for Most Users" version.
+
+2. Clone the repo:
+``` bash
+git clone git@github.com:glorious-codes/glorious-taslonic.git
+```
+
+3. Go to the project directory
+``` bash
+cd glorious-taslonic
+```
+
+4. Install the project dependencies
+``` bash
+npm install
+```
+
+5. In one terminal tab, run:
+```
+npm run build -- --watch
+```
+
+6. In another one, run:
+``` bash
+npm run start
+```
+
+Documentation will be running on `http://localhost:5000` and the browser will automatically reload with the changes you make in any source file.
+
+## Tests
+
+1. Ensure that all code that you have added is covered with unit tests:
+``` bash
+npm run test -- --coverage
+```
 
 ## References
 

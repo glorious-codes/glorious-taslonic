@@ -2,12 +2,16 @@
   "name": "glorious-taslonic",
   "version": "0.1.0",
   "description": "A glorious UI library built on top of native custom elements",
-  "main": "src/scripts/index.js",
+  "main": "taslonic.js",
+  "files": [
+    "./dist/**/*.*"
+  ],
   "scripts": {
-    "build": "./node_modules/webpack/bin/webpack.js",
-    "format": "./node_modules/eslint/bin/eslint.js './src/**/*.js'",
-    "start": "./node_modules/.bin/pitsby build --watch --port=5000",
-    "test": "./node_modules/jest/bin/jest.js"
+    "build": "webpack",
+    "format": "eslint './src/**/*.js'",
+    "start": "npm run docs -- --watch --port=5000",
+    "docs": "pitsby build",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -31,7 +35,7 @@
   },
   "homepage": "https://github.com/glorious-codes/glorious-taslonic#readme",
   "devDependencies": {
-    "@glorious/pitsby": "file:../glorious-pitsby",
+    "@glorious/pitsby": "^1.25.1",
     "babel-core": "^6.26.3",
     "babel-jest": "^23.6.0",
     "babel-loader": "^7.1.2",

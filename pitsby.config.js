@@ -1,15 +1,39 @@
 module.exports = {
   projects: [
     {
-      engine: "vanilla",
-      collectDocsFrom: "./src"
+      engine: 'vanilla',
+      collectDocsFrom: './src'
     }
   ],
   styles: [
-    "./dist/taslonic.css"
+    './dist/index/index.css'
   ],
   scripts: [
-    "./dist/taslonic.js"
+    './dist/taslonic.js'
   ],
-  outputDirectory: "./docs"
+  other: [
+    './dist/images/'
+  ],
+  custom: {
+    favicon: {
+      filepath: './dist/images/favicon_taslonic_32x32.png'
+    },
+    logo: {
+      filepath: './dist/images/logo.svg',
+      width: '180px',
+      height: '60px'
+    },
+    windowTitle: 'taslonic',
+    styles: `
+      .p-components-menu-item {
+        border-left-color: transparent;
+        border-radius: 6px 0 0 6px;
+      }
+      .p-external-component-heading-container + p-paragraph {
+        display: block;
+        margin-top: 30px;
+      }
+    `
+  },
+  outputDirectory: './docs'
 }

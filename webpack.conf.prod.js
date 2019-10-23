@@ -7,9 +7,6 @@ const project = require('./project.json');
 module.exports = {
   mode: 'production',
   devtool: 'source-map',
-  output: {
-    filename: project.scripts.dist.filename.prod
-  },
   optimization: {
     minimizer: [
       new TerserPlugin({
@@ -25,9 +22,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.SourceMapDevToolPlugin(),
-    new MiniCssExtractPlugin({
-      filename: project.styles.dist.filename.prod
-    })
+    new webpack.SourceMapDevToolPlugin()
   ]
 }

@@ -1,0 +1,25 @@
+@require '_mixins'
+
+.tas-col
+  float left
+  padding 0 10px
+  box-sizing border-box
+
+for $size in (1..12)
+  .tas-col-size-{$size}
+    width ($size/12) * 100%
+
+for $size in (1..11)
+  .tas-col-offset-{$size}
+    margin-left ($size/12) * 100%
+
++breakpoint('xs')
+  tas-col
+    display block
+    clearfix()
+  & + tas-col
+    margin-top 20px
+  .tas-col
+    width 100%
+  [class*=tas-col-offset]
+    margin-left 0

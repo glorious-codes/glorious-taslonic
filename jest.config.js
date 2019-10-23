@@ -12,13 +12,15 @@ module.exports = {
     }
   },
   'moduleNameMapper': {
+    '@mocks\/(.*)$': `<rootDir>/${project.mocks.source.root}$1`,
     '@scripts\/(.*)$': `<rootDir>/${project.scripts.source.root}$1`,
     '@styles\/(.*)$': `<rootDir>/${project.styles.source.root}$1`,
-    '^.+\\.css$': '<rootDir>/src/mocks/raw-files.js'
+    '^.+\\.css$': '<rootDir>/src/scripts/mocks/raw-files.js'
   },
-  'setupTestFrameworkScriptFile': '<rootDir>/src/mocks/global.js',
+  'setupTestFrameworkScriptFile': '<rootDir>/src/scripts/mocks/global.js',
+  'testMatch': ['**/**.test.js'],
   'transform': {
-    '^.+\\.styl$': '<rootDir>/src/mocks/raw-files.js',
+    '^.+\\.styl$': '<rootDir>/src/scripts/mocks/raw-files.js',
     '^.+\\.js$': 'babel-jest',
     '^.+\\.html$': 'html-loader-jest'
   }

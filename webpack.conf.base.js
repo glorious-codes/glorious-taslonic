@@ -1,9 +1,15 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const project = require('./project.json');
 
 module.exports = {
-  entry: [`${__dirname}/${project.scripts.source.index}`],
+  entry: project.scripts.source.modules,
+  output: {
+    filename: ({ chunk }) => {
+      return chunk.name == 'index' ? 'taslonic.js': '[name]/index.js';
+    }
+  },
   module: {
     rules: [{
       test: /\.(styl|css)$/,
@@ -24,10 +30,19 @@ module.exports = {
   },
   resolve: {
     alias: {
+      '@mocks': `${__dirname}/${project.mocks.source.root}`,
       '@scripts': `${__dirname}/${project.scripts.source.root}`,
       '@styles': `${__dirname}/${project.styles.source.root}`
     }
   },
-  plugins: [],
+  plugins: [
+    new CopyWebpackPlugin([{
+      from: project.images.source.files,
+      to: project.images.dist.root
+    }]),
+    new MiniCssExtractPlugin({
+      filename: project.styles.dist.filename
+    })
+  ],
   context: path.resolve(__dirname)
 }

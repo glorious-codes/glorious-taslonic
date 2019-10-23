@@ -1,0 +1,17 @@
+@require '_mixins'
+
+tas-row
+  display block
+  & + tas-row
+    margin-top 20px
+
+.tas-row
+  margin 0 10px * -1
+  clearfix()
+  &.tas-row-align-center
+    text-align center
+  &.tas-row-align-right
+    text-align right
+  for $size in (1..10)
+    &.tas-row-offset-{$size}
+      margin-top $size * 10px

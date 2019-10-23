@@ -2,13 +2,15 @@
   "scripts": {
     "source": {
       "root": "src/scripts/",
-      "index": "src/scripts/index.js"
+      "modules": {
+        "index": "./src/scripts/components/index.js",
+        "col": "./src/scripts/components/col/index.js",
+        "container": "./src/scripts/components/container/index.js",
+        "row": "./src/scripts/components/row/index.js"
+      }
     },
     "dist": {
-      "filename": {
-        "prod": "taslonic.min.js",
-        "dev": "taslonic.js"
-      }
+      "filename": "[name]/[name].js"
     }
   },
   "styles": {
@@ -16,17 +18,30 @@
       "root": "src/styles/"
     },
     "dist": {
-      "filename": {
-        "prod": "taslonic.min.css",
-        "dev": "taslonic.css"
-      }
+      "filename": "[name]/[name].css"
+    }
+  },
+  "images": {
+    "source": {
+      "files": "src/images/**/*.*"
+    },
+    "dist": {
+      "root": "images/[name].[ext]"
     }
   },
   "tests": {
     "source": {
       "files": [
-        "src/scripts/**/!(index).js"
+        "src/scripts/**/!(index).js",
+        "!src/scripts/**/*.doc.js",
+        "!src/scripts/mocks/**/*.*"
+
       ]
+    }
+  },
+  "mocks": {
+    "source": {
+      "root": "src/scripts/mocks/"
     }
   }
 }

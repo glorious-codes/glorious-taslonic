@@ -20,8 +20,8 @@ module.exports = {
     },
     logo: {
       filepath: './dist/images/logo.svg',
-      width: '180px',
-      height: '60px'
+      width: '172.5px',
+      height: '30px'
     },
     windowTitle: 'taslonic',
     styles: `

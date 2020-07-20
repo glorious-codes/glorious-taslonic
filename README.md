@@ -2,7 +2,7 @@
 > A very experimental UI library built on top of native custom elements
 
 [![CircleCI](https://circleci.com/gh/glorious-codes/glorious-taslonic.svg?style=svg)](https://circleci.com/gh/glorious-codes/glorious-taslonic)
-[![codecov](https://codecov.io/gh/glorious-codes/glorious-taslonic/branch/master/graph/badge.svg)](https://codecov.io/gh/glorious-codes/glorious-taslonic)
+[![Coverage Status](https://coveralls.io/repos/github/glorious-codes/glorious-taslonic/badge.svg)](https://coveralls.io/github/glorious-codes/glorious-taslonic)
 
 ## Early definitions
 

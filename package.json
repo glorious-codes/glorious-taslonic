@@ -36,7 +36,7 @@
   },
   "homepage": "https://github.com/glorious-codes/glorious-taslonic#readme",
   "devDependencies": {
-    "@glorious/pitsby": "^1.25.3",
+    "@glorious/pitsby": "^1.27.8",
     "babel-core": "^6.26.3",
     "babel-jest": "^23.6.0",
     "babel-loader": "^7.1.2",

@@ -20,7 +20,7 @@ module.exports = {
     },
     logo: {
       filepath: './dist/images/logo.svg',
-      width: '165px',
+      width: '180px',
       height: '30px'
     },
     windowTitle: 'taslonic',
@@ -32,6 +32,11 @@ module.exports = {
       .p-external-component-heading-container + p-paragraph {
         display: block;
         margin-top: 30px;
+      }
+      @media screen and (max-width: 767px) {
+        .p-topbar .p-logo {
+          max-height: 20px;
+        }
       }
     `
   },

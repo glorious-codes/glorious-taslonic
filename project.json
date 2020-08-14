@@ -1,29 +1,43 @@
 {
+  "name": "taslonic",
   "scripts": {
     "source": {
-      "root": "src/scripts/",
-      "modules": {
-        "index": "./src/scripts/components/index.js",
-        "col": "./src/scripts/components/col/index.js",
-        "container": "./src/scripts/components/container/index.js",
-        "row": "./src/scripts/components/row/index.js"
+      "root": {
+        "base": "src/base/",
+        "vue": "src/vue/",
+        "react": "src/react/"
+      },
+      "libs": {
+        "taslonic": {
+          "entry": "src/base/styles/_index.js",
+          "output": "index.js"
+        },
+        "taslonicReact": {
+          "entry": "src/react/index.js",
+          "output": "react/index.js"
+        },
+        "taslonicVue": {
+          "entry": "src/vue/index.js",
+          "output": "vue/index.js"
+        }
       }
     },
     "dist": {
-      "filename": "[name]/[name].js"
+      "root": "dist/"
     }
   },
   "styles": {
     "source": {
-      "root": "src/styles/"
+      "root": "src/base/styles/"
     },
     "dist": {
-      "filename": "[name]/[name].css"
+      "filename": "[name].css"
     }
   },
   "images": {
     "source": {
-      "files": "src/images/**/*.*"
+      "root": "src/base/images/",
+      "files": "src/base/images/**/*.*"
     },
     "dist": {
       "root": "images/[name].[ext]"
@@ -32,16 +46,11 @@
   "tests": {
     "source": {
       "files": [
-        "src/scripts/**/!(index).js",
-        "!src/scripts/**/*.doc.js",
-        "!src/scripts/mocks/**/*.*"
-
+        "src/**/*.js",
+        "!src/**/*.doc.js",
+        "!src/**/index.js",
+        "!src/**/mocks/**/*.js"
       ]
-    }
-  },
-  "mocks": {
-    "source": {
-      "root": "src/scripts/mocks/"
     }
   }
 }

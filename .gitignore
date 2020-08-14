@@ -161,4 +161,4 @@ assets/js/
 ./coverage/
 ./screenshots/
 spec/visual/results/
-docs/
+./docs/

@@ -1,15 +1,22 @@
 module.exports = {
   projects: [
     {
-      engine: 'vanilla',
-      collectDocsFrom: './src'
+      engine: 'vue',
+      collectDocsFrom: './src/vue',
+      importFrom: './dist/vue',
+      libraryName: 'taslonicVue'
+    },
+    {
+      engine: 'react',
+      collectDocsFrom: './src/react'
     }
   ],
   styles: [
-    './dist/index/index.css'
+    './dist/taslonic.css'
   ],
   scripts: [
-    './dist/taslonic.js'
+    './dist/react/index.js',
+    './dist/vue/index.js'
   ],
   other: [
     './dist/images/'
@@ -20,25 +27,15 @@ module.exports = {
     },
     logo: {
       filepath: './dist/images/logo.svg',
-      width: '180px',
-      height: '30px'
+      width: '150px',
+      height: '25px'
     },
-    windowTitle: 'taslonic',
     styles: `
-      .p-components-menu-item {
-        border-left-color: transparent;
-        border-radius: 6px 0 0 6px;
+      .p-topbar .p-logo {
+        max-height: 20px;
       }
-      .p-external-component-heading-container + p-paragraph {
-        display: block;
-        margin-top: 30px;
-      }
-      @media screen and (max-width: 767px) {
-        .p-topbar .p-logo {
-          max-height: 20px;
-        }
-      }
-    `
+    `,
+    windowTitle: 'Taslonic',
   },
   outputDirectory: './docs'
-}
+};

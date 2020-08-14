@@ -2,37 +2,66 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const project = require('./project.json');
+const env = process.env.NODE_ENV || 'development';
+
+function buildEntries(){
+  const entries = {}
+  const libs = getProjectLibs();
+  Object.keys(libs).forEach(lib => {
+    entries[lib] = `${__dirname}/${libs[lib].entry}`;
+  });
+  return entries;
+}
+
+function buildFilename({ chunk }){
+  const { name } = chunk;
+  const libs = getProjectLibs();
+  return libs[name] ? libs[name].output : name;
+}
+
+function getProjectLibs(){
+  return project.scripts.source.libs;
+}
 
 module.exports = {
-  entry: project.scripts.source.modules,
+  entry: buildEntries(),
   output: {
-    filename: ({ chunk }) => {
-      return chunk.name == 'index' ? 'taslonic.js': '[name]/index.js';
-    }
+    library: '[name]',
+    libraryExport: 'default',
+    libraryTarget: 'umd',
+    filename: buildFilename
+  },
+  externals: {
+    '@vue': 'Vue',
+    'react': 'React',
+    'react-dom': 'ReactDOM'
   },
   module: {
-    rules: [{
-      test: /\.(styl|css)$/,
-      use: [
-        MiniCssExtractPlugin.loader,
-        { loader: 'css-loader', options: { minimize: true } },
-        'stylus-loader'
-      ]
-    }, {
-      test: /\.html$/,
-      include: [`${__dirname}/${project.scripts.source.root}`],
-      use: 'html-loader'
-    }, {
-      test: /\.js$/,
-      exclude: /(node_modules|external)/,
-      use: 'babel-loader'
-    }]
+    rules: [
+      {
+        test: /\.(styl|css)$/,
+        use: [ MiniCssExtractPlugin.loader, 'css-loader', 'stylus-loader' ]
+      },
+      {
+        test: /\.html$/,
+        include: [
+          path.resolve(__dirname, project.scripts.source.root.vue)
+        ],
+        use: 'html-loader'
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: 'babel-loader'
+      }
+    ]
   },
   resolve: {
     alias: {
-      '@mocks': `${__dirname}/${project.mocks.source.root}`,
-      '@scripts': `${__dirname}/${project.scripts.source.root}`,
-      '@styles': `${__dirname}/${project.styles.source.root}`
+      '@base': `${__dirname}/${project.scripts.source.root.base}`,
+      '@react': `${__dirname}/${project.scripts.source.root.react}`,
+      '@vue': `${__dirname}/${project.scripts.source.root.vue}`,
+      '@vue$': 'vue/dist/vue.esm.js'
     }
   },
   plugins: [
@@ -43,6 +72,5 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: project.styles.dist.filename
     })
-  ],
-  context: path.resolve(__dirname)
+  ]
 }

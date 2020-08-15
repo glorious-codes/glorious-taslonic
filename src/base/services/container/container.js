@@ -1,10 +1,12 @@
+import propBasedCssClassService from '@base/services/prop-based-css-class/prop-based-css-class';
+
 const _public = {};
 
 _public.buildCssClasses = ({ size } = {}) => {
+  const { handleProp } = propBasedCssClassService;
   const baseCssClass = getBaseCssClass();
   const cssClasses = [baseCssClass];
-  if(size && isValidSize(size))
-    cssClasses.push(`${baseCssClass}-${size}`);
+  handleProp(size, isValidSize, cssClasses, baseCssClass);
   return cssClasses.join(' ');
 };
 

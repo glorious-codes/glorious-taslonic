@@ -72,7 +72,7 @@ module.exports = {
     },
     {
       title: 'Row alignment',
-      description: 'You can optionally align columns inside a row at left, center or right.',
+      description: 'You can optionally align columns at left, center or right of a row.',
       template: `
       <div>
         <!-- The following div has been created for documentation purpose only -->
@@ -142,7 +142,7 @@ module.exports = {
     },
     {
       title: 'Row vertical alignment',
-      description: 'You can optionally vertically align columns inside a row at top, middle or bottom.',
+      description: 'You can optionally vertically align columns at top, middle or bottom of a row.',
       template: `
       <div>
         <!-- The following div has been created for documentation purpose only -->

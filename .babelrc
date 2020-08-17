@@ -1,4 +1,3 @@
 {
-  "presets": ["env"],
-  "plugins": ["transform-custom-element-classes"]
+  "presets": ["@babel/env", "@babel/react"]
 }

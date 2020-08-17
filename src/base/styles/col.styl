@@ -1,0 +1,26 @@
+@require '_mixins'
+
+.t-col
+  flexbox(0, 0, auto)
+  -webkit-box-flex 1
+  -ms-flex-positive 1
+  flex-grow 1
+  -ms-flex-preferred-size 0
+  flex-basis 100%
+  padding var(--t-row-gutter) var(--t-col-padding) 0
+  max-width 100%
+  box-sizing border-box
+
+for $screen in xs sm md lg
+  +breakpoint($screen)
+    .t-col
+      &.t-col-align-{$screen}-center
+        text-align center
+      &.t-col-align-{$screen}-right
+        text-align right
+      for $size in (1..12)
+        &.t-col-{$screen}-{$size}
+          col-size((($size/12) * 100%))
+      for $size in (1..11)
+        &.t-col-offset-{$screen}-{$size}
+          margin-left ($size/12) * 100%

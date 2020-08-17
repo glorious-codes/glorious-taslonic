@@ -78,7 +78,7 @@ module.exports = {
     },
     {
       title: 'Row alignment',
-      description: 'You can optionally align columns inside a row at left, center or right.',
+      description: 'You can optionally align columns at left, center or right of a row.',
       controller: function(){
         const { Col, Row } = taslonicReact;
 
@@ -160,7 +160,7 @@ module.exports = {
     },
     {
       title: 'Row vertical alignment',
-      description: 'You can optionally vertically align columns inside a row at top, middle or bottom.',
+      description: 'You can optionally vertically align columns at top, middle or bottom of a row.',
       controller: function(){
         const { Col, Row } = taslonicReact;
 

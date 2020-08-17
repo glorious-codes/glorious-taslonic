@@ -1,0 +1,68 @@
+import colService from '@base/services/col/col';
+import React from 'react';
+
+export const Col = ({
+  xs,
+  sm,
+  md,
+  lg,
+  offsetXs,
+  offsetSm,
+  offsetMd,
+  offsetLg,
+  alignXs,
+  alignSm,
+  alignMd,
+  alignLg,
+  children
+}) => {
+  return (
+    <div
+      className={buildCssClasses({
+        xs,
+        sm,
+        md,
+        lg,
+        offsetXs,
+        offsetSm,
+        offsetMd,
+        offsetLg,
+        alignXs,
+        alignSm,
+        alignMd,
+        alignLg
+      })}>
+      { children }
+    </div>
+  );
+};
+
+function buildCssClasses({
+  xs,
+  sm,
+  md,
+  lg,
+  offsetXs,
+  offsetSm,
+  offsetMd,
+  offsetLg,
+  alignXs,
+  alignSm,
+  alignMd,
+  alignLg
+}){
+  return colService.buildCssClasses({
+    xs,
+    sm,
+    md,
+    lg,
+    offsetXs,
+    offsetSm,
+    offsetMd,
+    offsetLg,
+    alignXs,
+    alignSm,
+    alignMd,
+    alignLg
+  });
+}

@@ -39,4 +39,69 @@ describe('Prop Based Css Class Service', () => {
     );
     expect(currentCssClasses).toEqual([baseCssClass]);
   });
+
+  it('should append css class if boolean prop is true', () => {
+    const baseCssClass = 't-base';
+    const currentCssClasses = [baseCssClass];
+    const isValidBooleanProp = prop => ['blocked'].includes(prop);
+    propBaseCssClassService.handleBooleanProp(
+      { blocked: true },
+      isValidBooleanProp,
+      currentCssClasses,
+      baseCssClass
+    );
+    expect(currentCssClasses).toEqual([baseCssClass, `${baseCssClass}-blocked`]);
+  });
+
+  it('should append css class if boolean prop is stringified true', () => {
+    const baseCssClass = 't-base';
+    const currentCssClasses = [baseCssClass];
+    const isValidBooleanProp = prop => ['blocked'].includes(prop);
+    propBaseCssClassService.handleBooleanProp(
+      { blocked: 'true' },
+      isValidBooleanProp,
+      currentCssClasses,
+      baseCssClass
+    );
+    expect(currentCssClasses).toEqual([baseCssClass, `${baseCssClass}-blocked`]);
+  });
+
+  it('should not append css class if boolean prop is false', () => {
+    const baseCssClass = 't-base';
+    const currentCssClasses = [baseCssClass];
+    const isValidBooleanProp = prop => ['blocked'].includes(prop);
+    propBaseCssClassService.handleBooleanProp(
+      { blocked: false },
+      isValidBooleanProp,
+      currentCssClasses,
+      baseCssClass
+    );
+    expect(currentCssClasses).toEqual([baseCssClass]);
+  });
+
+  it('should not append css class if boolean prop is falsy', () => {
+    const baseCssClass = 't-base';
+    const currentCssClasses = [baseCssClass];
+    const isValidBooleanProp = prop => ['blocked'].includes(prop);
+    propBaseCssClassService.handleBooleanProp(
+      {},
+      isValidBooleanProp,
+      currentCssClasses,
+      baseCssClass
+    );
+    expect(currentCssClasses).toEqual([baseCssClass]);
+  });
+
+  it('should not append css class if boolean prop is invalid', () => {
+    const baseCssClass = 't-base';
+    const currentCssClasses = [baseCssClass];
+    const isValidBooleanProp = prop => ['blocked'].includes(prop);
+    propBaseCssClassService.handleBooleanProp(
+      { lowered: true },
+      isValidBooleanProp,
+      currentCssClasses,
+      baseCssClass
+    );
+    expect(currentCssClasses).toEqual([baseCssClass]);
+  });
 });

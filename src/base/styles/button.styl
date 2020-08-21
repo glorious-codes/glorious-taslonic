@@ -1,0 +1,53 @@
+.t-button
+  --t-button-border-radius: 4px
+  padding 11px
+  background-color var(--t-color-grey-light)
+  color var(--t-color-grey-dark)
+  font-size var(--t-font-size-xs)
+  font-weight bold
+  text-align center
+  line-height var(--t-font-size-sm)
+  border 1px solid var(--t-color-grey)
+  border-radius var(--t-button-border-radius)
+  box-sizing border-box
+  box-shadow 0 0 0 var(--t-color-purple-lighter)
+  cursor pointer
+  transition-property box-shadow, background-color
+  transition-duration 200ms
+  transition-timing-function ease-in-out
+  outline 0
+  user-select none
+  -webkit-appearance none
+  &:hover
+    background-color var(--t-color-grey-lighter)
+  &:focus
+    background-color var(--t-color-grey-lighter)
+    box-shadow: 0 0 0 4px var(--t-color-purple-x-lighter)
+  &[disabled]
+    background-color var(--t-color-grey-lighter)
+    color var(--t-color-grey)
+    border-color var(--t-color-grey)
+    cursor default
+  &.t-button-blocked
+    width 100%
+  &.t-button-primary
+    background-color var(--t-color-purple)
+    color white
+    border-color var(--t-color-purple)
+    &:hover,
+    &:focus
+      background-color var(--t-color-purple-light)
+      border-color var(--t-color-purple-light)
+    &[disabled]
+      background-color var(--t-color-purple-lighter)
+      border-color var(--t-color-purple-lighter)
+  &.t-button-secondary
+    background-color transparent
+    color var(--t-color-purple)
+    border-color var(--t-color-purple)
+    &:hover,
+    &:focus
+      border-color var(--t-color-purple-lighter)
+    &[disabled]
+      color var(--t-color-purple-lighter)
+      border-color var(--t-color-purple-lighter)

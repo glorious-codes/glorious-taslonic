@@ -1,5 +1,5 @@
 {
-  "name": "glorious-taslonic",
+  "name": "@glorious/taslonic",
   "version": "0.1.0",
   "description": "A glorious UI library available for React and Vue",
   "files": [

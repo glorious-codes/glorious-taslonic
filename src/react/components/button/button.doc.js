@@ -51,6 +51,11 @@ module.exports = {
                   Blocked Button
                 </Button>
               </Col>
+              <Col sm="6">
+                <Button tag="a" blocked>
+                  Blocked Button
+                </Button>
+              </Col>
             </Row>
           );
         }

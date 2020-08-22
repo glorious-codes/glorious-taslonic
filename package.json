@@ -1,6 +1,6 @@
 {
   "name": "@glorious/taslonic",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A glorious UI library available for React and Vue",
   "files": [
     "dist/**/*.*"

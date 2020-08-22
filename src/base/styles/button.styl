@@ -1,3 +1,5 @@
+@require '_mixins'
+
 .t-button
   --t-button-border-radius: 4px
   padding 11px
@@ -6,6 +8,7 @@
   font-size var(--t-font-size-xs)
   font-weight bold
   text-align center
+  text-decoration none
   line-height var(--t-font-size-sm)
   border 1px solid var(--t-color-grey)
   border-radius var(--t-button-border-radius)
@@ -16,13 +19,14 @@
   transition-duration 200ms
   transition-timing-function ease-in-out
   outline 0
-  user-select none
+  user-select(none)
   -webkit-appearance none
   &:hover
     background-color var(--t-color-grey-lighter)
-  &:focus
+  &:focus,
+  &:active
     background-color var(--t-color-grey-lighter)
-    box-shadow: 0 0 0 4px var(--t-color-purple-x-lighter)
+    box-shadow 0 0 0 4px var(--t-color-purple-x-lighter)
   &[disabled]
     background-color var(--t-color-grey-lighter)
     color var(--t-color-grey)
@@ -35,7 +39,8 @@
     color white
     border-color var(--t-color-purple)
     &:hover,
-    &:focus
+    &:focus,
+    &:active
       background-color var(--t-color-purple-light)
       border-color var(--t-color-purple-light)
     &[disabled]
@@ -46,7 +51,8 @@
     color var(--t-color-purple)
     border-color var(--t-color-purple)
     &:hover,
-    &:focus
+    &:focus,
+    &:active
       border-color var(--t-color-purple-lighter)
     &[disabled]
       color var(--t-color-purple-lighter)

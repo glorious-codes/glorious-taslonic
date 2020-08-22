@@ -11,6 +11,16 @@ describe('Button', () => {
     expect(wrapper.classes()).toContain('t-button');
   });
 
+  it('should render a button using a button tag name by default', () => {
+    const wrapper = mount();
+    expect(wrapper.vm.$el.tagName.toLowerCase()).toEqual('button');
+  });
+
+  it('should optionally render a button using a anchor tag name', () => {
+    const wrapper = mount({ tag: 'a' });
+    expect(wrapper.vm.$el.tagName.toLowerCase()).toEqual('a');
+  });
+
   it('should optionally set a primary theme', () => {
     const wrapper = mount({ theme: 'primary' });
     expect(wrapper.classes()).toContain('t-button-primary');

@@ -5,7 +5,11 @@ import { Button } from './button';
 describe('Button', () => {
   function mount(props = {}){
     return shallow(
-      <Button theme={ props.theme } blocked={ props.blocked } { ...props }>
+      <Button
+        theme={ props.theme }
+        blocked={ props.blocked }
+        tag={props.tag}
+        { ...props }>
         { props.content }
       </Button>
     );
@@ -14,6 +18,16 @@ describe('Button', () => {
   it('should have base css class', () => {
     const wrapper = mount();
     expect(wrapper.prop('className')).toEqual('t-button');
+  });
+
+  it('should render a button using a button tag name by default', () => {
+    const wrapper = mount();
+    expect(wrapper.name().toLowerCase()).toEqual('button');
+  });
+
+  it('should optionally render a button using a anchor tag name', () => {
+    const wrapper = mount({ tag: 'a' });
+    expect(wrapper.name().toLowerCase()).toEqual('a');
   });
 
   it('should optionally set a primary theme', () => {
@@ -29,6 +43,14 @@ describe('Button', () => {
   it('should optionally set as blocked', () => {
     const wrapper = mount({ blocked: true });
     expect(wrapper.prop('className').includes('t-button-blocked')).toEqual(true);
+  });
+
+  it('should optionally render custom attributes', () => {
+    const href = 'https://rafaelcamargo.com';
+    const target = '_blank';
+    const wrapper = mount({ href , target });
+    expect(wrapper.prop('href')).toEqual(href);
+    expect(wrapper.prop('target')).toEqual(target);
   });
 
   it('should render some content', () => {

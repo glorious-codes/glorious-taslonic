@@ -38,6 +38,10 @@ col-size($size)
   flex-basis $size
   max-width $size
 
+user-select($prop)
+  -webkit-user-select $prop
+  user-select         $prop
+
 breakpoint($size)
   if($size == 'xs')
     @media screen and (min-width 0)

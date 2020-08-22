@@ -1,11 +1,16 @@
 module.exports = {
   name: 'Button',
-  description: 'Abstraction of a native button',
+  description: 'Abstraction of a native button.',
   properties: [
     {
       name: 'blocked',
       type: 'Boolean, String',
       values: 'true, false'
+    },
+    {
+      name: 'tag',
+      type: 'String',
+      values: 'a'
     },
     {
       name: 'theme',
@@ -44,6 +49,25 @@ module.exports = {
               <Col sm="6">
                 <Button blocked>
                   Blocked Button
+                </Button>
+              </Col>
+            </Row>
+          );
+        }
+      }
+    },
+    {
+      title: 'Button tag',
+      description: 'You can optionally render a button as anchor.',
+      controller: function(){
+        const { Button, Col, Row } = taslonicReact;
+
+        return function(){
+          return (
+            <Row>
+              <Col sm="6">
+                <Button tag="a" href="https://github.com/glorious-codes/glorious-taslonic" target="_blank">
+                  Anchor Button
                 </Button>
               </Col>
             </Row>

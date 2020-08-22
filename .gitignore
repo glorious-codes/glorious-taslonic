@@ -160,5 +160,5 @@ assets/js/
 # Tests generated files
 ./coverage/
 ./screenshots/
+/docs
 spec/visual/results/
-./docs/

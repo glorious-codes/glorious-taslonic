@@ -1,11 +1,16 @@
 module.exports = {
   name: 'Button',
-  description: 'Abstraction of a native button',
+  description: 'Abstraction of a native button.',
   properties: [
     {
       name: 'blocked',
       type: 'Boolean, String',
       values: 'true, false'
+    },
+    {
+      name: 'tag',
+      type: 'String',
+      values: 'a'
     },
     {
       name: 'theme',
@@ -34,6 +39,19 @@ module.exports = {
         <t-col sm="6">
           <t-button blocked>
             Blocked Button
+          </t-button>
+        </t-col>
+      </t-row>
+      `
+    },
+    {
+      title: 'Button tag',
+      description: 'You can optionally render a button as anchor.',
+      template: `
+      <t-row>
+        <t-col sm="6">
+          <t-button tag="a" href="https://github.com/glorious-codes/glorious-taslonic" target="_blank">
+            Anchor Button
           </t-button>
         </t-col>
       </t-row>

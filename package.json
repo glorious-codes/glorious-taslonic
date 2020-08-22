@@ -1,9 +1,9 @@
 {
   "name": "@glorious/taslonic",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A glorious UI library available for React and Vue",
   "files": [
-    "./dist/**/*.*"
+    "dist/**/*.*"
   ],
   "scripts": {
     "build": "webpack",
@@ -11,7 +11,8 @@
     "start": "npm run docs -- --watch --port=5000",
     "docs": "pitsby build",
     "test": "jest",
-    "deploy": "firebase deploy --non-interactive"
+    "deploy": "firebase deploy --non-interactive",
+    "prepublishOnly": "rm -rf ./dist && NODE_ENV=production npm run build"
   },
   "repository": {
     "type": "git",

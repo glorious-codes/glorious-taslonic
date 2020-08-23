@@ -1,41 +1,13 @@
-module.exports = {
-  projects: [
-    {
-      engine: 'vue',
-      collectDocsFrom: './src/vue',
-      importFrom: './dist/vue',
-      libraryName: 'taslonicVue'
-    },
-    {
-      engine: 'react',
-      collectDocsFrom: './src/react'
-    }
-  ],
-  styles: [
-    './dist/taslonic.css'
-  ],
-  scripts: [
-    './dist/react/index.js',
-    './dist/vue/index.js'
-  ],
-  other: [
-    './dist/images/'
-  ],
-  custom: {
-    favicon: {
-      filepath: './dist/images/favicon_taslonic_32x32.png'
-    },
-    logo: {
-      filepath: './dist/images/logo.svg',
-      width: '150px',
-      height: '25px'
-    },
-    styles: `
-      .p-topbar .p-logo {
-        max-height: 20px;
-      }
-    `,
-    windowTitle: 'Taslonic',
-  },
-  outputDirectory: './docs'
-};
+const { isArray, mergeWith } = require('lodash');
+const baseConfig = require('./pitsby.conf.base');
+const devConfig = require('./pitsby.conf.dev');
+const prodConfig = require('./pitsby.conf.prod');
+const specificConfig = process.env.NODE_ENV == 'production' ? prodConfig : devConfig;
+
+module.exports = mergeWith(
+  baseConfig,
+  specificConfig,
+  (baseValue, specificValue) => {
+    if (isArray(baseValue)) return baseValue.concat(specificValue);
+  }
+);

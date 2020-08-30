@@ -1,0 +1,5 @@
+const REQUIRED_ERROR_MESSAGE = 'Required';
+
+export {
+  REQUIRED_ERROR_MESSAGE
+};

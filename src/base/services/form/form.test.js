@@ -35,4 +35,12 @@ describe('Form Service', () => {
     formService.remove(formId);
     expect(formService.get(formId)).toEqual(undefined);
   });
+
+  it('should find parent form model from child element', () => {
+    const formEl = buildFormElement();
+    const formModel = formService.build(formEl);
+    const input = document.createElement('input');
+    formEl.appendChild(input);
+    expect(formService.findParentFormModel(input)).toEqual(formModel);
+  });
 });

@@ -32,7 +32,7 @@
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "complexity": ["error", { "max": 3 }],
-    "max-lines": ["error", { "max": 120 }],
+    "max-lines": ["error", { "max": 100 }],
     "max-statements": ["error", { "max": 5 },
       { "ignoreTopLevelFunctions": true }
     ]

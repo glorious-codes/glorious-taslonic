@@ -140,7 +140,10 @@ module.exports = {
       template: `
       <t-input :validations="validations" placeholder="Enter a programming language" />
       `,
-      styles: 'p-external-component-examples-list p-list-item:nth-child(6) input { width: 300px; max-width: 100%; }'
+      styles: `
+        p-external-component-examples-list p-list-item:nth-child(6) .t-form-control { max-width: 100%; }
+        p-external-component-examples-list p-list-item:nth-child(6) input { width: 300px; max-width: 100%; }
+      `
     },
     {
       title: 'Input with autofocus',

@@ -1,0 +1,44 @@
+.t-form-control
+  position relative
+  display inline-block
+  input
+    padding 10px
+    font-size var(--t-font-size-sm)
+    line-height var(--t-font-size-sm)
+    border 1px solid var(--t-color-grey)
+    border-radius var(--t-default-border-radius)
+    box-sizing border-box
+    box-shadow 0 0 0 var(--t-color-purple-lighter)
+    transition-property box-shadow, border-color
+    transition-duration 200ms
+    transition-timing-function ease-in-out
+    outline 0
+    -webkit-appearance none
+    &:focus,
+    &:active
+      box-shadow 0 0 0 4px var(--t-color-purple-x-lighter)
+      border-color var(--t-color-purple-lighter)
+    &[disabled]
+      background-color var(--t-color-grey-lighter)
+      color var(--t-color-grey-dark)
+      border-color var(--t-color-grey-light)
+      pointer-events none
+  &.t-form-control-invalid
+    input
+      border-color var(--t-color-red)
+      &:focus,
+      &:active
+        box-shadow 0 0 0 4px var(--t-color-red-lighter)
+        border-color var(--t-color-red)
+  &.t-form-control-blocked
+    width 100%
+    input
+      width 100%
+
+.t-form-control-error-message
+  position absolute
+  left 0
+  bottom -18px
+  display block
+  color var(--t-color-red)
+  font-size var(--t-font-size-xxs)

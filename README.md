@@ -1,5 +1,5 @@
 # Taslonic
-> A glorious UI library available for React and Vue.
+> Glorious components for Vue & React.
 
 [![CircleCI](https://circleci.com/gh/glorious-codes/glorious-taslonic.svg?style=svg)](https://circleci.com/gh/glorious-codes/glorious-taslonic)
 [![Coverage Status](https://coveralls.io/repos/github/glorious-codes/glorious-taslonic/badge.svg)](https://coveralls.io/github/glorious-codes/glorious-taslonic)

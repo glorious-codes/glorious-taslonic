@@ -1,0 +1,16 @@
+<t-form-control
+  :value="value"
+  :blocked="blocked"
+  :validations="validations"
+  query-selector="input"
+>
+  <input
+    :type="inputType"
+    :placeholder="placeholder"
+    :readonly="readonly"
+    :autofocus="autofocus"
+    :disabled="disabled"
+    :required="required"
+    v-on="$listeners"
+  />
+</t-form-control>

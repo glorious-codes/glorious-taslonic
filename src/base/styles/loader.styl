@@ -1,0 +1,36 @@
+:root
+  --t-loader-width 30px
+  --t-loader-height 8px
+  --t-loader-speed 600ms
+  --t-loader-color var(--t-color-grey-dark)
+  --t-loader-light-color white
+
+.t-loader
+  display flex
+  justify-content center
+  align-items center
+  min-height var(--t-loader-size)
+  height 100%
+  &.t-loader-light
+    .t-loader-item
+      background-color var(--t-loader-light-color)
+
+.t-loader-item
+  display inline-block
+  width calc(var(--t-loader-width)/3)
+  height var(--t-loader-height)
+  background-color var(--t-loader-color)
+  border-radius calc(var(--t-loader-height)/3)
+  animation loader var(--t-loader-speed) infinite ease-in-out both
+  &:first-child
+    animation-delay calc(var(--t-loader-speed)/3 * -1)
+  &:last-child
+    animation-delay calc(var(--t-loader-speed)/3)
+
+@keyframes loader
+  0%, 80%, 100%
+    opacity .6
+    transform scale(0.75)
+  40%
+    opacity 1
+    transform scale(1)

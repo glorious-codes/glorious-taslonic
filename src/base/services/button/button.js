@@ -30,7 +30,7 @@ _public.buildTagName = propValue => {
 };
 
 function isValidTheme(theme){
-  return ['primary','secondary'].includes(theme);
+  return ['primary','secondary', 'lookless'].includes(theme);
 }
 
 function isValidBooleanProp(propName){

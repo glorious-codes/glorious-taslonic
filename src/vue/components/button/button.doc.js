@@ -15,7 +15,7 @@ module.exports = {
     {
       name: 'theme',
       type: 'String',
-      values: 'primary, secondary'
+      values: 'primary, secondary, lookless'
     }
   ],
   examples: [
@@ -65,15 +65,20 @@ module.exports = {
     {
       title: 'Button theme',
       template: `
-      <t-row>
-        <t-col xs="6" sm="3">
+      <t-row vertical-align="middle">
+        <t-col sm="4">
           <t-button theme="primary" blocked>
             Primary
           </t-button>
         </t-col>
-        <t-col xs="6" sm="3">
+        <t-col sm="4">
           <t-button theme="secondary" blocked>
             Secondary
+          </t-button>
+        </t-col>
+        <t-col sm="4" align-xs="center">
+          <t-button theme="lookless">
+            Lookless
           </t-button>
         </t-col>
       </t-row>
@@ -82,7 +87,7 @@ module.exports = {
     {
       title: 'Button disabled',
       template: `
-      <t-row>
+      <t-row vertical-align="middle">
         <t-col sm="3">
           <t-button theme="primary" blocked disabled>
             Primary
@@ -96,6 +101,11 @@ module.exports = {
         <t-col sm="3">
           <t-button blocked disabled>
             Default
+          </t-button>
+        </t-col>
+        <t-col sm="3" align-xs="center">
+          <t-button theme="lookless" disabled>
+            Lookless
           </t-button>
         </t-col>
       </t-row>

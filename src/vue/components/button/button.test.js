@@ -2,8 +2,8 @@ import { shallowMount } from '@vue/test-utils';
 import { button } from './button';
 
 describe('Button', () => {
-  function mount(propsData = {}, content = ''){
-    return shallowMount(button, { propsData, slots: { default: content } });
+  function mount({ listeners = {}, ...propsData } = {}, content = ''){
+    return shallowMount(button, { propsData, listeners, slots: { default: content } });
   }
 
   it('should have base css class', () => {
@@ -31,9 +31,21 @@ describe('Button', () => {
     expect(wrapper.classes()).toContain('t-button-secondary');
   });
 
+  it('should optionally set a lookless theme', () => {
+    const wrapper = mount({ theme: 'lookless' });
+    expect(wrapper.classes()).toContain('t-button-lookless');
+  });
+
   it('should optionally set as blocked', () => {
     const wrapper = mount({ blocked: true });
     expect(wrapper.classes()).toContain('t-button-blocked');
+  });
+
+  it('should optionally set button listeners', () => {
+    const onChange = jest.fn();
+    const wrapper = mount({ listeners: { change: onChange } });
+    wrapper.trigger('change');
+    expect(onChange).toHaveBeenCalled();
   });
 
   it('should render some content', () => {

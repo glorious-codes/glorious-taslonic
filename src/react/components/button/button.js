@@ -5,8 +5,10 @@ export const Button = ({ theme, blocked, tag, children, ...rest }) => {
   const TagName = buttonService.buildTagName(tag);
   return (
     <TagName
-      className={buildCssClasses(theme, blocked)} { ...rest }
-      tabindex="0">
+      className={buildCssClasses(theme, blocked)}
+      tabIndex="0"
+      { ...rest }
+    >
       { children }
     </TagName>
   );

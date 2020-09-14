@@ -40,6 +40,11 @@ describe('Button', () => {
     expect(wrapper.prop('className').includes('t-button-secondary')).toEqual(true);
   });
 
+  it('should optionally set a lookless theme', () => {
+    const wrapper = mount({ theme: 'lookless' });
+    expect(wrapper.prop('className').includes('t-button-lookless')).toEqual(true);
+  });
+
   it('should optionally set as blocked', () => {
     const wrapper = mount({ blocked: true });
     expect(wrapper.prop('className').includes('t-button-blocked')).toEqual(true);

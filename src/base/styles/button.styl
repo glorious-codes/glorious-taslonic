@@ -57,3 +57,20 @@
     &[disabled]
       color var(--t-color-purple-lighter)
       border-color var(--t-color-purple-lighter)
+  &.t-button-lookless
+    margin-bottom 1px
+    padding 0 0 1px 0
+    background-color transparent
+    color inherit
+    border 0
+    &:hover,
+    &:focus,
+    &:active
+      background-color transparent
+      box-shadow none
+    &:focus
+      margin-bottom 0
+      border-bottom 1px dashed
+      border-radius 0
+    &[disabled]
+      opacity .5

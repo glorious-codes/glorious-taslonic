@@ -87,15 +87,20 @@ module.exports = {
 
         return function(){
           return (
-            <Row>
-              <Col xs="6" sm="3">
+            <Row verticalAlign="middle">
+              <Col sm="4">
                 <Button theme="primary" blocked>
                   Primary
                 </Button>
               </Col>
-              <Col xs="6" sm="3">
+              <Col sm="4">
                 <Button theme="secondary" blocked>
                   Secondary
+                </Button>
+              </Col>
+              <Col sm="4" alignXs="center">
+                <Button theme="lookless">
+                  Lookless
                 </Button>
               </Col>
             </Row>
@@ -110,7 +115,7 @@ module.exports = {
 
         return function(){
           return (
-            <Row>
+            <Row verticalAlign="middle">
               <Col sm="3">
                 <Button theme="primary" blocked disabled>
                   Primary
@@ -124,6 +129,11 @@ module.exports = {
               <Col sm="3">
                 <Button blocked disabled>
                   Default
+                </Button>
+              </Col>
+              <Col sm="3" alignXs="center">
+                <Button theme="lookless">
+                  Lookless
                 </Button>
               </Col>
             </Row>

@@ -19,7 +19,7 @@ function isValidTheme(theme){
 }
 
 function getBaseCssClass(){
-  return 't-stripe';
+  return 't-banner';
 }
 
 export default _public;

@@ -1,0 +1,15 @@
+<div :class="classes" v-if="isVisible">
+  <div class="t-banner-content">
+    <slot></slot>
+  </div>
+  <div class="t-banner-action" v-if="onTriggerClick">
+    <t-button theme="lookless" @click="onTriggerClick" data-banner-trigger>
+      {{ triggerText }}
+    </t-button>
+  </div>
+  <div class="t-banner-close">
+    <t-button theme="lookless" @click="onCloseButtonClick" data-banner-close-button>
+      ×
+    </t-button>
+  </div>
+</div>

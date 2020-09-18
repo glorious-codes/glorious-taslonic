@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'Stripe',
+  name: 'Banner',
   description: 'Element to be shown usually at the top of screen containing useful information - feedback about the completion of an async process, for example.',
   properties: [
     {
@@ -25,39 +25,39 @@ module.exports = {
   ],
   examples: [
     {
-      title: 'Default Stripe',
+      title: 'Default Banner',
       controller: function(){
-        const { Stripe } = taslonicReact;
+        const { Banner } = taslonicReact;
 
         return function(){
           return (
-            <Stripe>Welcome onboard!</Stripe>
+            <Banner>Welcome onboard!</Banner>
           );
         }
       }
     },
     {
-      title: 'Stripe theme',
+      title: 'Banner theme',
       controller: function(){
-        const { Stripe, Col, Row } = taslonicReact;
+        const { Banner, Col, Row } = taslonicReact;
 
         return function(){
           return (
             <Row>
               <Col md="4">
-                <Stripe theme="warning">
+                <Banner theme="warning">
                   We found security vulnerabilities.
-                </Stripe>
+                </Banner>
               </Col>
               <Col md="4">
-                <Stripe theme="danger">
+                <Banner theme="danger">
                   Sorry, something went wrong.
-                </Stripe>
+                </Banner>
               </Col>
               <Col md="4">
-                <Stripe theme="success">
+                <Banner theme="success">
                   You’re all set up!
-                </Stripe>
+                </Banner>
               </Col>
             </Row>
           );
@@ -65,9 +65,9 @@ module.exports = {
       }
     },
     {
-      title: 'Stripe trigger',
+      title: 'Banner trigger',
       controller: function(){
-        const { Stripe, Col, Row } = taslonicReact;
+        const { Banner, Col, Row } = taslonicReact;
         const viewVulnerabilities = () => alert('Clicked on "View Vulnerabilities"!');
         const retry = () => alert('Clicked on "Retry"!');
         const viewProfile = () => alert('Clicked on "View Profile"!');
@@ -76,31 +76,31 @@ module.exports = {
           return (
             <Row>
               <Col md="4">
-                <Stripe
+                <Banner
                   theme="warning"
                   triggerText="See Vulnerabilities"
                   onTriggerClick={viewVulnerabilities}
                 >
                   We found security vulnerabilities.
-                </Stripe>
+                </Banner>
               </Col>
               <Col md="4">
-                <Stripe
+                <Banner
                   theme="danger"
                   triggerText="Retry"
                   onTriggerClick={retry}
                 >
                   Sorry, something went wrong.
-                </Stripe>
+                </Banner>
               </Col>
               <Col md="4">
-                <Stripe
+                <Banner
                   theme="success"
                   triggerText="View Profile"
                   onTriggerClick={viewProfile}
                 >
                   You’re all set up!
-                </Stripe>
+                </Banner>
               </Col>
             </Row>
           );
@@ -108,17 +108,17 @@ module.exports = {
       }
     },
     {
-      title: 'Stripe close listener',
-      description: 'You can optionally execute some action at the moment user closes a Stripe.',
+      title: 'Banner close listener',
+      description: 'You can optionally execute some action at the moment user closes a Banner.',
       controller: function(){
-        const { Stripe } = taslonicReact;
+        const { Banner } = taslonicReact;
         const onClose = () => alert('Clicked on "Close Button"!');
 
         return function(){
           return (
-            <Stripe theme="danger" onClose={onClose}>
+            <Banner theme="danger" onClose={onClose}>
               Sorry, something went wrong.
-            </Stripe>
+            </Banner>
           );
         }
       }

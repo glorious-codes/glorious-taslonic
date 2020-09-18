@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import stripeService from '@base/services/stripe/stripe';
+import bannerService from '@base/services/banner/banner';
 import { Button } from '@react/components/button/button';
 
-export const Stripe = ({
+export const Banner = ({
   theme,
   triggerText,
   onTriggerClick,
@@ -18,16 +18,16 @@ export const Stripe = ({
 
   return isVisible &&
     (
-      <div className={stripeService.buildCssClasses({ theme })} {...rest}>
-        <div className="t-stripe-content">
+      <div className={bannerService.buildCssClasses({ theme })} {...rest}>
+        <div className="t-banner-content">
           { children }
         </div>
         { onTriggerClick && buildTrigger(triggerText, onTriggerClick) }
-        <div className="t-stripe-close">
+        <div className="t-banner-close">
           <Button
             theme="lookless"
             onClick={onCloseButtonClick}
-            data-stripe-close-button
+            data-banner-close-button
           >
             ×
           </Button>
@@ -38,8 +38,8 @@ export const Stripe = ({
 
 function buildTrigger(triggerText, onTriggerClick){
   return (
-    <div className="t-stripe-action">
-      <Button theme="lookless" onClick={onTriggerClick} data-stripe-trigger>
+    <div className="t-banner-action">
+      <Button theme="lookless" onClick={onTriggerClick} data-banner-trigger>
         { triggerText }
       </Button>
     </div>

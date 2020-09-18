@@ -1,9 +1,9 @@
-import stripeService from '@base/services/stripe/stripe';
+import bannerService from '@base/services/banner/banner';
 import { button } from '@vue/components/button/button';
-import template from './stripe.html';
+import template from './banner.html';
 
-export const stripe = {
-  name: 't-stripe',
+export const banner = {
+  name: 't-banner',
   components: {
     tButton: button
   },
@@ -25,7 +25,7 @@ export const stripe = {
   computed: {
     classes(){
       const { theme } = this;
-      return stripeService.buildCssClasses({ theme });
+      return bannerService.buildCssClasses({ theme });
     }
   },
   template

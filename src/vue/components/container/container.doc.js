@@ -45,7 +45,7 @@ module.exports = {
         <!-- The following div has been created for documentation purpose only -->
         <div data-wrapper>
           <t-container size="lg">
-            <p>Large container streches up to 960px</p>
+            <p>Large container streches up to 1200px</p>
           </t-container>
         </div>
       </div>

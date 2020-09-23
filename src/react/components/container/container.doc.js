@@ -55,7 +55,7 @@ module.exports = {
               {/* The following div has been created for documentation purpose only */}
               <div data-wrapper>
                 <Container size="lg">
-                  <div>Large container streches up to 960px</div>
+                  <div>Large container streches up to 1200px</div>
                 </Container>
               </div>
             </>

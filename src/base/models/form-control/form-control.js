@@ -1,36 +1,38 @@
-import { REQUIRED_ERROR_MESSAGE }  from '@base/constants/messages';
 import idService from '@base/services/id/id';
-import formService from '@base/services/form/form';
+import formControlService from '@base/services/form-control/form-control';
 
-class FormControlModel {
+export class FormControlModel {
   constructor(formControlEl, options = {}){
     this.setId(idService.generate());
+    this.configElement(formControlEl, options);
     this.setOptions(options);
     this.configForm(formControlEl);
     this.configValidations(formControlEl, options.validations);
-    this.configElement(formControlEl, options.value);
   }
   setId(id){
     this.id = id;
   }
-  configElement(element, value){
+  configElement(element, { required, value }){
     this.element = element;
+    if(required) this.setElementRequired(required);
     if(value) this.setElementValue(value);
     this.handleAutofocus();
-    this.validate(this.element);
+  }
+  setElementValue(value){
+    this.element.value = value;
+  }
+  setElementRequired(required){
+    this.element.required = required;
   }
   handleAutofocus(){
     const { element } = this;
     if(element.getAttribute('autofocus')) element.focus();
   }
-  setElementValue(value){
-    this.element.value = value;
-  }
   setOptions(options){
     this.options = options;
   }
   configForm(formControlEl){
-    this.setForm(formService.findParentFormModel(formControlEl));
+    this.setForm(formControlService.findParentFormModel(formControlEl));
     if(this.form)
       this.form.onSubmit(() => {
         this.setBlurred(true);
@@ -41,13 +43,9 @@ class FormControlModel {
     this.form = form;
   }
   configValidations(formControlEl, validations = []){
-    if(formControlEl.required)
-      validations.unshift(this.buildRequiredValidation());
     this.setValidations(validations);
     this.configValidationListeners(formControlEl);
-  }
-  buildRequiredValidation(){
-    return { isValid: data => !!data, errorMessage: REQUIRED_ERROR_MESSAGE };
+    this.validate(formControlEl);
   }
   setValidations(validations){
     this.validations = validations;
@@ -60,38 +58,39 @@ class FormControlModel {
     this.validate(evt.target);
     this.handleCallbackOption('onInput', evt);
   }
-  validate({ checked, value }){
-    const data = checked || value;
+  onBlur({ target }){
+    this.setBlurred(true);
+    this.validate(target);
+  }
+  onRequiredChange(required){
+    this.setElementRequired(required);
+    this.validate(this.element);
+  }
+  validate({ value }){
     const errors = [];
-    this.validations.forEach(({ isValid, errorMessage }) => {
-      if(!isValid(data))
-        errors.push(errorMessage);
+    this.buildValidations().forEach(({ isValid, errorMessage }) => {
+      if(!isValid(value)) errors.push(errorMessage);
     });
     return errors.length ? this.emitError(errors[0]) : this.emitSuccess();
   }
+  buildValidations(){
+    const validations = [...this.validations];
+    if(this.element.required) validations.unshift(formControlService.buildRequiredValidation());
+    return validations;
+  }
   emitError(err){
-    if(this.form)
-      this.form.setError(this.id, err);
-    if(this.hasBeenBlured)
-      this.handleCallbackOption('onValidate', err);
+    if(this.form) this.form.setError(this.id, err);
+    if(this.hasBeenBlured) this.handleCallbackOption('onValidate', err);
   }
   emitSuccess(){
-    if(this.form)
-      this.form.clearError(this.id);
-    if(this.hasBeenBlured)
-      this.handleCallbackOption('onValidate');
+    if(this.form) this.form.clearError(this.id);
+    if(this.hasBeenBlured) this.handleCallbackOption('onValidate');
   }
   handleCallbackOption(option, data){
     const callback = this.options[option];
     return callback && callback(data);
   }
-  onBlur({ target }){
-    this.setBlurred(true);
-    this.validate(target);
-  }
   setBlurred(hasBeenBlured){
     this.hasBeenBlured = hasBeenBlured;
   }
 }
-
-export { FormControlModel };

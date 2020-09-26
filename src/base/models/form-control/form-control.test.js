@@ -4,10 +4,9 @@ import formService from '@base/services/form/form';
 import { FormControlModel } from './form-control';
 
 describe('Form Control Model', () => {
-  function mockFormControlElement({ required, autofocus } = {}){
+  function mockFormControlElement({ autofocus } = {}){
     const input = document.createElement('input');
     input.setAttribute('type', 'text');
-    if(required) input.setAttribute('required', '');
     if(autofocus) input.setAttribute('autofocus', 'autofocus');
     return input;
   }
@@ -37,10 +36,10 @@ describe('Form Control Model', () => {
   });
 
   it('should validate on initialize', () => {
-    const formControlEl = mockFormControlElement({ required: true });
+    const formControlEl = mockFormControlElement();
     const form = mockForm(formControlEl);
     form.setError = jest.fn();
-    const formControl = new FormControlModel(formControlEl);
+    const formControl = new FormControlModel(formControlEl, { required: true });
     expect(form.setError).toHaveBeenCalledWith(formControl.id, REQUIRED_ERROR_MESSAGE);
   });
 
@@ -62,12 +61,30 @@ describe('Form Control Model', () => {
   });
 
   it('should execute validation callback if required form control is blank on blur', () => {
-    const formControlEl = mockFormControlElement({ required: true });
+    const formControlEl = mockFormControlElement();
     const onValidate = jest.fn();
-    const formControl = new FormControlModel(formControlEl, { onValidate });
+    const formControl = new FormControlModel(formControlEl, { onValidate, required: true });
     const evtMock = { target: { value: '' } };
     formControl.onBlur(evtMock);
     expect(onValidate).toHaveBeenCalledWith(REQUIRED_ERROR_MESSAGE);
+  });
+
+  it('should execute validation callback when required changes and form control has already been blurred', () => {
+    const formControlEl = mockFormControlElement();
+    const onValidate = jest.fn();
+    const formControl = new FormControlModel(formControlEl, { onValidate, required: true });
+    formControl.onRequiredChange(false);
+    const evtMock = { target: { value: '' } };
+    formControl.onBlur(evtMock);
+    expect(onValidate).toHaveBeenCalledWith(undefined);
+  });
+
+  it('should not execute validation callback when required changes but form control has not been blurred yet', () => {
+    const formControlEl = mockFormControlElement();
+    const onValidate = jest.fn();
+    const formControl = new FormControlModel(formControlEl, { onValidate, required: true });
+    formControl.onRequiredChange(false);
+    expect(onValidate).not.toHaveBeenCalled();
   });
 
   it('should execute validation callback if custom validation fails on blur', () => {
@@ -81,6 +98,15 @@ describe('Form Control Model', () => {
     expect(onValidate).toHaveBeenCalledWith(errorMessage);
   });
 
+  it('should execute validation callback if custom validation succeed on blur', () => {
+    const formControlEl = mockFormControlElement();
+    const onValidate = jest.fn();
+    const formControl = new FormControlModel(formControlEl, { onValidate, required: true });
+    const evtMock = { target: { value: 'John' } };
+    formControl.onBlur(evtMock);
+    expect(onValidate).toHaveBeenCalledWith(undefined);
+  });
+
   it('should not execute validation callback if form control has not been blurred yet', () => {
     const formControlEl = mockFormControlElement({ required: true });
     const onValidate = jest.fn();
@@ -91,10 +117,10 @@ describe('Form Control Model', () => {
   });
 
   it('should execute validation callback on form submit even if form control has not been blurred yet', () => {
-    const formControlEl = mockFormControlElement({ required: true });
+    const formControlEl = mockFormControlElement();
     const form = mockForm(formControlEl);
     const onValidate = jest.fn();
-    new FormControlModel(formControlEl, { onValidate });
+    new FormControlModel(formControlEl, { onValidate, required: true });
     form.handleSubmit({ preventDefault: jest.fn() });
     expect(onValidate).toHaveBeenCalledWith(REQUIRED_ERROR_MESSAGE);
   });
@@ -109,9 +135,9 @@ describe('Form Control Model', () => {
   });
 
   it('should set validation error to form if form control is invalid on change', () => {
-    const formControlEl = mockFormControlElement({ required: true });
+    const formControlEl = mockFormControlElement();
     const form = mockForm(formControlEl);
-    const formControl = new FormControlModel(formControlEl);
+    const formControl = new FormControlModel(formControlEl, { required: true });
     const evtMock = { target: { value: '' } };
     formControl.onInput(evtMock);
     expect(form.setError).toHaveBeenCalledWith(formControl.id, REQUIRED_ERROR_MESSAGE);

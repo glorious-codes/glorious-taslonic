@@ -1,3 +1,5 @@
+import { REQUIRED_ERROR_MESSAGE }  from '@base/constants/messages';
+import formService from '@base/services/form/form';
 import formControlService from './form-control';
 
 describe('Form Control Service', () => {
@@ -15,5 +17,19 @@ describe('Form Control Service', () => {
   it('should append blocked modifier css class if it has been given as true', () => {
     const cssClasses = formControlService.buildCssClasses({ blocked: true });
     expect(cssClasses).toEqual('t-form-control t-form-control-blocked');
+  });
+
+  it('should build required validation model', () => {
+    const validationModel = formControlService.buildRequiredValidation();
+    expect(validationModel.isValid('')).toEqual(false);
+    expect(validationModel.isValid('Rafael')).toEqual(true);
+    expect(validationModel.errorMessage).toEqual(REQUIRED_ERROR_MESSAGE);
+  });
+
+  it('should find parent form model', () => {
+    const formControlElMock = document.createElement('input');
+    formService.findParentFormModel = jest.fn();
+    formControlService.findParentFormModel(formControlElMock);
+    expect(formService.findParentFormModel).toHaveBeenCalledWith(formControlElMock);
   });
 });

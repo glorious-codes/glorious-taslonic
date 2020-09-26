@@ -1,4 +1,6 @@
+import { REQUIRED_ERROR_MESSAGE }  from '@base/constants/messages';
 import propBasedCssClassService from '@base/services/prop-based-css-class/prop-based-css-class';
+import formService from '@base/services/form/form';
 
 const _public = {};
 
@@ -13,6 +15,14 @@ _public.buildCssClasses = ({ errorMessage, blocked } = {}) => {
     baseCssClass
   );
   return cssClasses.join(' ');
+};
+
+_public.buildRequiredValidation = () => {
+  return { isValid: data => !!data, errorMessage: REQUIRED_ERROR_MESSAGE };
+};
+
+_public.findParentFormModel = formControlEl => {
+  return formService.findParentFormModel(formControlEl);
 };
 
 function getBaseCssClass(){

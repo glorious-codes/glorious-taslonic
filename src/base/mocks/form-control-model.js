@@ -1,5 +1,6 @@
 export const formControlModelInstanceMock = {
-  setElementValue: jest.fn()
+  setElementValue: jest.fn(),
+  onRequiredChange: jest.fn()
 };
 
 export const FormControlModelMock = jest.fn((el, options) => {

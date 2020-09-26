@@ -4,7 +4,7 @@ import template from './form-control.html';
 
 export const formControl = {
   name: 't-form-control',
-  props: ['value', 'autofocus', 'validations', 'querySelector', 'blocked'],
+  props: ['value', 'required', 'autofocus', 'validations', 'formControlElSelector', 'blocked'],
   data(){
     return {
       errorMessage: '',
@@ -12,15 +12,19 @@ export const formControl = {
     };
   },
   mounted(){
-    const formControlEl = this.$el.querySelector(this.querySelector);
-    this.setFormControl(this.buildFormControlModel(formControlEl));
+    this.setFormControlElement(this.$el.querySelector(this.formControlElSelector));
+    this.setFormControl(this.buildFormControlModel(this.formControlEl));
   },
   methods: {
+    setFormControlElement(element){
+      this.formControlEl = element;
+    },
     buildFormControlModel(formControlEl){
       return new FormControlModel(formControlEl, {
         onValidate: errorMessage => this.setErrorMessage(errorMessage),
         onInput: evt => this.$parent.$emit('input', evt.target.value),
         validations: this.validations,
+        required: this.required,
         value: this.value
       });
     },
@@ -32,9 +36,12 @@ export const formControl = {
     }
   },
   watch: {
+    required(required){
+      this.formControl.onRequiredChange(required);
+    },
     value(value) {
       this.formControl.setElementValue(value);
-    },
+    }
   },
   computed: {
     classes(){

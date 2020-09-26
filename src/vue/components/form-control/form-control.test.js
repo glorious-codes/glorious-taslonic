@@ -4,7 +4,7 @@ import { formControl } from './form-control';
 
 describe('Form Control', () => {
   function mount(propsData = {}, content = '<input type="text" />'){
-    propsData.querySelector = propsData.querySelector || 'input';
+    propsData.formControlElSelector = propsData.formControlElSelector || 'input';
     return shallowMount(formControl, { propsData, slots: { default: content } });
   }
 
@@ -22,15 +22,6 @@ describe('Form Control', () => {
   it('should have base css class', () => {
     const wrapper = mount();
     expect(wrapper.classes()).toContain('t-form-control');
-  });
-
-  it('should show error message if form control is invalid on blur', done => {
-    const wrapper = mount({}, '<input type="text" required />');
-    fillInput(wrapper, '');
-    wrapper.vm.$nextTick(() => {
-      expect(getErrorMessageEl(wrapper).text()).toEqual(REQUIRED_ERROR_MESSAGE);
-      done();
-    });
   });
 
   it('should append invalid css class if form control gets invalid', done => {
@@ -66,6 +57,16 @@ describe('Form Control', () => {
     });
   });
 
+  it('should optionally set required', done => {
+    const required = true;
+    const wrapper = mount({ required });
+    wrapper.find('input').trigger('blur');
+    wrapper.vm.$nextTick(() => {
+      expect(getErrorMessageEl(wrapper).text()).toEqual(REQUIRED_ERROR_MESSAGE);
+      done();
+    });
+  });
+
   it('should optionally set initial value', done => {
     const value = 'Rafael';
     const wrapper = mount({ value });
@@ -83,6 +84,17 @@ describe('Form Control', () => {
     wrapper.find('input').trigger('blur');
     wrapper.vm.$nextTick(() => {
       expect(getErrorMessageEl(wrapper).text()).toEqual('');
+      done();
+    });
+  });
+
+  it('should optionally set required programmatically', done => {
+    const required = true;
+    const wrapper = mount();
+    wrapper.find('input').trigger('blur');
+    wrapper.setProps({ required });
+    wrapper.vm.$nextTick(() => {
+      expect(getErrorMessageEl(wrapper).text()).toEqual(REQUIRED_ERROR_MESSAGE);
       done();
     });
   });

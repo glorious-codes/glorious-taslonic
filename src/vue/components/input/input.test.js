@@ -13,6 +13,12 @@ describe('Input', () => {
     expect(wrapper.findComponent(formControl).props('value')).toEqual(value);
   });
 
+  it('should pass required to form control', () => {
+    const required = true;
+    const wrapper = mount({ required });
+    expect(wrapper.findComponent(formControl).props('required')).toEqual(required);
+  });
+
   it('should pass validations to form control', () => {
     const validations = [];
     const wrapper = mount({ validations });
@@ -27,7 +33,7 @@ describe('Input', () => {
 
   it('should form control query for an input', () => {
     const wrapper = mount();
-    expect(wrapper.findComponent(formControl).props('querySelector')).toEqual('input');
+    expect(wrapper.findComponent(formControl).props('formControlElSelector')).toEqual('input');
   });
 
   it('should input contain an attribute type as text by default', () => {
@@ -60,16 +66,6 @@ describe('Input', () => {
   it('should optionally set input as disabled', () => {
     const wrapper = mount({ disabled: true });
     expect(wrapper.find('input').attributes('disabled')).toEqual('disabled');
-  });
-
-  it('should not be required by default', () => {
-    const wrapper = mount();
-    expect(wrapper.find('input').attributes('required')).not.toBeDefined();
-  });
-
-  it('should optionally set input as required', () => {
-    const wrapper = mount({ required: true });
-    expect(wrapper.find('input').attributes('required')).toEqual('required');
   });
 
   it('should optionally set input listeners', () => {

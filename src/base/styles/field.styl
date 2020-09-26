@@ -1,0 +1,20 @@
+.t-field
+  display inline-block
+  &.t-field-blocked
+    display block
+  &.t-field-required
+    .t-field-label
+      &:after
+        content '*'
+        position absolute
+        top 0
+        right -8px
+        color var(--t-color-red)
+
+.t-field-label
+  position relative
+  color var(--t-color-grey-dark)
+  font-size var(--t-font-size-xxs)
+  font-weight bold
+  & + .t-field-content
+    margin-top 5px

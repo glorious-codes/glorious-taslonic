@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import testingService from '@react/services/testing/testing';
 import { FormControlModel } from '@base/models/form-control/form-control';
 import { FormControlModelMock, formControlModelInstanceMock } from '@base/mocks/form-control-model';
 import { FormControl } from './form-control';
@@ -12,21 +13,13 @@ describe('Form Control', () => {
     return mount(
       <FormControl
         value={ props.value }
+        required={ props.required }
         validations={ props.validations }
-        querySelector={ props.querySelector || 'input' }
+        formControlElSelector={ props.formControlElSelector || 'input' }
         blocked={ props.blocked }>
         { content }
       </FormControl>
     );
-  }
-
-  function getErrorMessageEl(wrapper){
-    return wrapper.find('[data-form-control-error-message]');
-  }
-
-  function getRootElProp(wrapper, prop){
-    const rootEl = wrapper.childAt(0);
-    return rootEl.prop(prop);
   }
 
   beforeEach(() => {
@@ -36,7 +29,7 @@ describe('Form Control', () => {
 
   it('should have base css class', () => {
     const wrapper = mountComponent();
-    expect(getRootElProp(wrapper, 'className')).toEqual('t-form-control');
+    expect(testingService.getRootElProp(wrapper, 'className')).toEqual('t-form-control');
   });
 
   it('should instantiate form control model passing form control child as first argument', () => {
@@ -46,23 +39,23 @@ describe('Form Control', () => {
     expect(wrapper.find('input').getDOMNode()).toEqual(child);
   });
 
-  it('should show error message on validation error', () => {
-    const errorMessage = 'Error!';
-    FormControlModel.mockImplementation((el, options) => options.onValidate(errorMessage));
-    const content = <input type="text" required />;
-    const wrapper = mountComponent({ content });
-    expect(getErrorMessageEl(wrapper).text()).toEqual(errorMessage);
+  it('should optionally set required', () => {
+    let options;
+    const required = true;
+    FormControlModel.mockImplementation((el, opt) => (options = opt));
+    mountComponent({ required });
+    expect(options.required).toEqual(required);
   });
 
   it('should append invalid css class if form control gets invalid', () => {
     FormControlModel.mockImplementation((el, options) => options.onValidate('Error!'));
     const wrapper = mountComponent();
-    expect(getRootElProp(wrapper, 'className').includes('t-form-control-invalid')).toEqual(true);
+    expect(testingService.getRootElProp(wrapper, 'className').includes('t-form-control-invalid')).toEqual(true);
   });
 
   it('should optionally set form control as blocked', () => {
     const wrapper = mountComponent({ blocked: true });
-    expect(getRootElProp(wrapper, 'className').includes('t-form-control-blocked')).toEqual(true);
+    expect(testingService.getRootElProp(wrapper, 'className').includes('t-form-control-blocked')).toEqual(true);
   });
 
   it('should accept custom validations', () => {
@@ -98,5 +91,13 @@ describe('Form Control', () => {
     expect(formControlModelInstanceMock.setElementValue).toHaveBeenCalledWith(value);
     wrapper.setProps({ value });
     expect(formControlModelInstanceMock.setElementValue).toHaveBeenCalledTimes(1);
+  });
+
+  it('should optionally set required programmatically', () => {
+    const required = true;
+    FormControlModel.mockImplementation(FormControlModelMock);
+    const wrapper = mountComponent();
+    wrapper.setProps({ required });
+    expect(formControlModelInstanceMock.onRequiredChange).toHaveBeenCalledWith(required);
   });
 });

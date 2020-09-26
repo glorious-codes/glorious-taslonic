@@ -7,17 +7,17 @@ export const input = {
   components: {
     tFormControl: formControl
   },
-  props: [
-    'type',
-    'value',
-    'placeholder',
-    'validations',
-    'autofocus',
-    'readonly',
-    'blocked',
-    'disabled',
-    'required'
-  ],
+  props: {
+    type: { type: String },
+    value: { type: String },
+    placeholder: { type: String },
+    validations: { type: Array },
+    autofocus: { type: Boolean },
+    readonly: { type: Boolean },
+    blocked: { type: Boolean },
+    required: { type: Boolean },
+    disabled: { type: Boolean }
+  },
   computed: {
     inputType(){
       return inputService.parseType(this.type);

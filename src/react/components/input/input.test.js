@@ -39,7 +39,7 @@ describe('Input', () => {
 
   it('should form control query for an input', () => {
     const wrapper = mount();
-    expect(wrapper.find(FormControl).prop('querySelector')).toEqual('input');
+    expect(wrapper.find(FormControl).prop('formControlElSelector')).toEqual('input');
   });
 
   it('should input contain an attribute type as text by default', () => {
@@ -73,17 +73,6 @@ describe('Input', () => {
     const disabled = true;
     const wrapper = mount({ disabled });
     expect(wrapper.find('input').prop('disabled')).toEqual(disabled);
-  });
-
-  it('should not be required by default', () => {
-    const wrapper = mount();
-    expect(wrapper.find('input').prop('required')).toEqual(undefined);
-  });
-
-  it('should optionally set input as required', () => {
-    const required = true;
-    const wrapper = mount({ required });
-    expect(wrapper.find('input').prop('required')).toEqual(required);
   });
 
   it('should optionally set input listeners', () => {

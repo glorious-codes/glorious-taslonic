@@ -15,15 +15,15 @@ export const Input = ({
   return (
     <FormControl
       value={value}
+      required={required}
       blocked={blocked}
       validations={validations}
-      querySelector="input"
+      formControlElSelector="input"
     >
       <input
         type={inputService.parseType(type)}
         placeholder={placeholder}
         disabled={disabled}
-        required={required}
         {...rest}
       />
     </FormControl>

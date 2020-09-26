@@ -29,6 +29,7 @@
     "linebreak-style": ["error", "unix"],
     "no-console": 0,
     "react/prop-types": 0,
+    "react/display-name": 0,
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "complexity": ["error", { "max": 3 }],

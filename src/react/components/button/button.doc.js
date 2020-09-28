@@ -15,7 +15,7 @@ module.exports = {
     {
       name: 'theme',
       type: 'String',
-      values: 'primary, secondary'
+      values: 'primary, secondary, lookless'
     }
   ],
   examples: [
@@ -132,7 +132,7 @@ module.exports = {
                 </Button>
               </Col>
               <Col sm="3" alignXs="center">
-                <Button theme="lookless">
+                <Button theme="lookless" disabled>
                   Lookless
                 </Button>
               </Col>

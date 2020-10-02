@@ -23,17 +23,17 @@ cd glorious-taslonic
 npm install
 ```
 
-5. If you want to just build the project, run:
+5. In one terminal tab run:
 ``` bash
-npm run build
+npm run build -- --watch
 ```
 
-6. Otherwise, run:
+6. In another run:
 ``` bash
 npm run start
 ```
 
-The app will be running on `http://localhost:7000`.
+Docs will be running on `http://localhost:7000`.
 
 ## Tests
 

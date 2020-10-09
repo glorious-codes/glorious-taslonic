@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import bannerService from '@base/services/banner/banner';
 import { Button } from '@react/components/button/button';
+import { CloseButton } from '@react/components/close-button/close-button';
 
 export const Banner = ({
   theme,
@@ -23,15 +24,7 @@ export const Banner = ({
           { children }
         </div>
         { onTriggerClick && buildTrigger(triggerText, onTriggerClick) }
-        <div className="t-banner-close">
-          <Button
-            theme="lookless"
-            onClick={onCloseButtonClick}
-            data-banner-close-button
-          >
-            ×
-          </Button>
-        </div>
+        <CloseButton onClick={onCloseButtonClick} />
       </div>
     );
 };

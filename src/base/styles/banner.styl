@@ -1,3 +1,10 @@
+banner-theme($theme, $backgroundColor, $textColor)
+  &.t-banner-{$theme}
+    background-color $backgroundColor
+    color $textColor
+    .t-close-button
+      color $textColor
+
 .t-banner
   position relative
   padding 10px 30px 10px 10px
@@ -5,21 +12,15 @@
   color var(--t-color-blue)
   font-size var(--t-font-size-xs)
   border-radius var(--t-default-border-radius)
-  &.t-banner-warning
-    background-color var(--t-color-yellow-lighter)
-    color var(--t-color-yellow-darker)
-  &.t-banner-danger
-    background-color var(--t-color-red-lighter)
-    color var(--t-color-red)
-  &.t-banner-success
-    background-color var(--t-color-green-lighter)
-    color var(--t-color-green)
+  banner-theme('warning', var(--t-color-yellow-lighter), var(--t-color-yellow-darker))
+  banner-theme('danger', var(--t-color-red-lighter), var(--t-color-red))
+  banner-theme('success', var(--t-color-green-lighter), var(--t-color-green))
+  .t-close-button
+    position absolute
+    top 18px
+    right 8px
+    color var(--t-color-blue)
+    transform translate(-50%,-50%)
 
 .t-banner-action
   margin-top 10px
-
-.t-banner-close
-  position absolute
-  top 18px
-  right 8px
-  transform translate(-50%,-50%)

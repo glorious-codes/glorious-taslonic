@@ -46,7 +46,7 @@ describe('Banner', () => {
 
   it('should remove itself on close button click', done => {
     const wrapper = mountComponent();
-    wrapper.find('[data-banner-close-button]').trigger('click');
+    wrapper.find('[data-close-button]').trigger('click');
     wrapper.vm.$nextTick(() => {
       expect(wrapper.html()).toEqual('');
       done();
@@ -56,7 +56,7 @@ describe('Banner', () => {
   it('should execute close callback on close', () => {
     const onClose = jest.fn();
     const wrapper = mountComponent({ onClose });
-    wrapper.find('[data-banner-close-button]').trigger('click');
+    wrapper.find('[data-close-button]').trigger('click');
     expect(onClose).toHaveBeenCalled();
   });
 });

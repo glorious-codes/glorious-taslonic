@@ -1,6 +1,7 @@
 import './_variables.styl';
 import './banner.styl';
 import './button.styl';
+import './close-button.styl';
 import './col.styl';
 import './container.styl';
 import './field.styl';

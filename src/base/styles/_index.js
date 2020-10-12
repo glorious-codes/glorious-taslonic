@@ -9,3 +9,4 @@ import './form-control.styl';
 import './loader.styl';
 import './row.styl';
 import './toast.styl';
+import './toaster.styl';

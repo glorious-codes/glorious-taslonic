@@ -1,7 +1,7 @@
 import { FORM_ID_CUSTOM_ATTR }  from '@base/constants/form';
 import idService from '@base/services/id/id';
 
-class Form {
+export class Form {
   constructor(formEl, options){
     this.identify(formEl);
     this.setOptions(options);
@@ -73,5 +73,3 @@ class Form {
     this.submitListeners.push(notifyFn);
   }
 }
-
-export { Form };

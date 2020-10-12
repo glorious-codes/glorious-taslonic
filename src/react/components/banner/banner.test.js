@@ -56,14 +56,14 @@ describe('Banner', () => {
 
   it('should remove itself on close button click', () => {
     const wrapper = mountComponent();
-    wrapper.find('[data-banner-close-button]').at(0).simulate('click');
+    wrapper.find('button[data-close-button]').simulate('click');
     expect(wrapper.html()).toEqual(null);
   });
 
   it('should execute close callback on close', () => {
     const onClose = jest.fn();
     const wrapper = mountComponent({ onClose });
-    wrapper.find('[data-banner-close-button]').at(0).simulate('click');
+    wrapper.find('button[data-close-button]').simulate('click');
     expect(onClose).toHaveBeenCalled();
   });
 

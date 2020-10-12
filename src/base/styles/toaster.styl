@@ -1,0 +1,13 @@
+.t-toaster
+  --t-toaster-width 300px
+  --t-toast-spacing 30px
+  --t-toaster-layer var(--t-layer-low)
+  position fixed
+  top 0
+  right 0
+  width calc(var(--t-toaster-width) + var(--t-toast-spacing) * 2)
+  max-width 100%
+  box-sizing border-box
+  z-index var(--t-toaster-layer)
+  .t-toast
+    margin var(--t-toast-spacing) var(--t-toast-spacing) 0 var(--t-toast-spacing)

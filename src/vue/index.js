@@ -1,4 +1,5 @@
 import * as components from '@vue/components';
+import toaster from '@vue/services/toaster/toaster';
 
 export default {
   install(Vue) {
@@ -6,5 +7,6 @@ export default {
       const component = components[key];
       Vue.component(component.name, component);
     });
-  }
+  },
+  toaster
 };

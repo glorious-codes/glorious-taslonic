@@ -1,0 +1,31 @@
+toast-theme($theme, $borderColor, $textColor)
+  &.t-toast-{$theme}
+    border-left-color $borderColor
+    .t-toast-title
+      color $textColor
+
+.t-toast
+  position relative
+  padding 20px 30px 20px 20px
+  background-color white
+  font-size var(--t-font-size-xs)
+  border-radius var(--t-default-border-radius)
+  box-shadow 4px 0px 16px 0px rgba(0,0,0,0.15)
+  border 5px solid transparent
+  border-top 0
+  border-bottom 0
+  box-sizing border-box
+  toast-theme('info', var(--t-color-blue-lighter), var(--t-color-blue))
+  toast-theme('warning', var(--t-color-yellow-lighter), var(--t-color-yellow-darker))
+  toast-theme('danger', var(--t-color-red-lighter), var(--t-color-red))
+  toast-theme('success', var(--t-color-green-lighter), var(--t-color-green))
+  .t-close-button
+    position absolute
+    top 5px
+    right 8px
+
+.t-toast-title
+  margin 0
+  font-size var(--t-font-size-xs)
+  & + .t-toast-content
+    margin-top 15px

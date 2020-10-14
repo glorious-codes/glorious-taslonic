@@ -7,14 +7,14 @@ module.exports = {
       params: [
         {
           name: 'message',
-          type: 'String',
+          type: 'String, React Node',
           values: 'Any',
           description: 'Text to be used as toast content.',
           required: true
         },
         {
           name: 'title',
-          type: 'String',
+          type: 'String, React Node',
           values: 'Any',
           description: 'Text to be used as toast title.'
         },

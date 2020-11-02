@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import testingService from '@react/services/testing/testing';
+import { getRootElProp } from '@react/services/testing/testing';
 import { FormControlModel } from '@base/models/form-control/form-control';
 import { FormControlModelMock, formControlModelInstanceMock } from '@base/mocks/form-control-model';
 import { FormControl } from './form-control';
@@ -29,7 +29,7 @@ describe('Form Control', () => {
 
   it('should have base css class', () => {
     const wrapper = mountComponent();
-    expect(testingService.getRootElProp(wrapper, 'className')).toEqual('t-form-control');
+    expect(getRootElProp(wrapper, 'className')).toEqual('t-form-control');
   });
 
   it('should instantiate form control model passing form control child as first argument', () => {
@@ -50,12 +50,12 @@ describe('Form Control', () => {
   it('should append invalid css class if form control gets invalid', () => {
     FormControlModel.mockImplementation((el, options) => options.onValidate('Error!'));
     const wrapper = mountComponent();
-    expect(testingService.getRootElProp(wrapper, 'className').includes('t-form-control-invalid')).toEqual(true);
+    expect(getRootElProp(wrapper, 'className').includes('t-form-control-invalid')).toEqual(true);
   });
 
   it('should optionally set form control as blocked', () => {
     const wrapper = mountComponent({ blocked: true });
-    expect(testingService.getRootElProp(wrapper, 'className').includes('t-form-control-blocked')).toEqual(true);
+    expect(getRootElProp(wrapper, 'className').includes('t-form-control-blocked')).toEqual(true);
   });
 
   it('should accept custom validations', () => {

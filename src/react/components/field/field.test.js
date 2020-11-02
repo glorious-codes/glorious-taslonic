@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import testingService from '@react/services/testing/testing';
+import { getRootElProp } from '@react/services/testing/testing';
 import { Field } from './field';
 
 describe('Field', () => {
@@ -14,7 +14,7 @@ describe('Field', () => {
 
   it('should have base css class', () => {
     const wrapper = mountComponent();
-    expect(testingService.getRootElProp(wrapper, 'className')).toEqual('t-field');
+    expect(getRootElProp(wrapper, 'className')).toEqual('t-field');
   });
 
   it('should render a label', () => {
@@ -25,11 +25,11 @@ describe('Field', () => {
 
   it('should contain required css class if required prop has been given as true', () => {
     const wrapper = mountComponent({ required: true });
-    expect(testingService.getRootElProp(wrapper, 'className').includes('t-field-required')).toEqual(true);
+    expect(getRootElProp(wrapper, 'className').includes('t-field-required')).toEqual(true);
   });
 
   it('should contain required css class if no required prop has been passed but content is required', () => {
     const wrapper = mountComponent({}, <input type="text" required />);
-    expect(testingService.getRootElProp(wrapper, 'className').includes('t-field-required')).toEqual(true);
+    expect(getRootElProp(wrapper, 'className').includes('t-field-required')).toEqual(true);
   });
 });

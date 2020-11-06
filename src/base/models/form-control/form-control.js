@@ -6,8 +6,10 @@ export class FormControlModel {
     this.setId(idService.generate());
     this.configElement(formControlEl, options);
     this.setOptions(options);
-    this.configForm(formControlEl);
-    this.configValidations(formControlEl, options.validations);
+    setTimeout(() => {
+      this.configForm(formControlEl);
+      this.configValidations(formControlEl, options.validations);
+    });
   }
   setId(id){
     this.id = id;
@@ -25,8 +27,7 @@ export class FormControlModel {
     this.element.required = required;
   }
   handleAutofocus(){
-    const { element } = this;
-    if(element.getAttribute('autofocus')) element.focus();
+    if(this.element.getAttribute('autofocus')) this.element.focus();
   }
   setOptions(options){
     this.options = options;
@@ -34,10 +35,10 @@ export class FormControlModel {
   configForm(formControlEl){
     this.setForm(formControlService.findParentFormModel(formControlEl));
     if(this.form)
-      this.form.onSubmit(() => {
+      this.setSubmitListenerId(this.form.onSubmit(() => {
         this.setBlurred(true);
         this.validate(formControlEl);
-      });
+      }));
   }
   setForm(form){
     this.form = form;
@@ -67,10 +68,9 @@ export class FormControlModel {
     this.validate(this.element);
   }
   validate({ value }){
-    const errors = [];
-    this.buildValidations().forEach(({ isValid, errorMessage }) => {
-      if(!isValid(value)) errors.push(errorMessage);
-    });
+    const errors = this.buildValidations().map(({ isValid, errorMessage }) => {
+      if(!isValid(value)) return errorMessage;
+    }).filter(err => !!err);
     return errors.length ? this.emitError(errors[0]) : this.emitSuccess();
   }
   buildValidations(){
@@ -79,18 +79,28 @@ export class FormControlModel {
     return validations;
   }
   emitError(err){
-    if(this.form) this.form.setError(this.id, err);
-    if(this.hasBeenBlured) this.handleCallbackOption('onValidate', err);
+    if(this.form) this.form.setError(this.id, { element: this.element, message: err});
+    if(this.hasBeenBlurred) this.handleCallbackOption('onValidate', err);
   }
   emitSuccess(){
     if(this.form) this.form.clearError(this.id);
-    if(this.hasBeenBlured) this.handleCallbackOption('onValidate');
+    if(this.hasBeenBlurred) this.handleCallbackOption('onValidate');
   }
   handleCallbackOption(option, data){
     const callback = this.options[option];
     return callback && callback(data);
   }
-  setBlurred(hasBeenBlured){
-    this.hasBeenBlured = hasBeenBlured;
+  setBlurred(hasBeenBlurred){
+    this.hasBeenBlurred = hasBeenBlurred;
+  }
+  setSubmitListenerId(id){
+    this.submitListenerId = id;
+  }
+  destroy(){
+    this.form && this.clearControlFromParentFormModel();
+  }
+  clearControlFromParentFormModel(){
+    this.form.clearError(this.id);
+    this.form.removeSubmitListener(this.submitListenerId);
   }
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import loaderService from '@base/services/loader/loader';
 
-export const Loader = ({ theme }) => {
+export const Loader = ({ theme, ...rest }) => {
   const wrapper = useRef();
 
   useEffect(() => {
@@ -11,6 +11,6 @@ export const Loader = ({ theme }) => {
   }, []);
 
   return (
-    <div className={loaderService.buildCssClasses({ theme })} ref={wrapper} />
+    <div className={loaderService.buildCssClasses({ theme })} ref={wrapper} {...rest} />
   );
 };

@@ -1,0 +1,15 @@
+<form :class="classes" novalidate>
+  <t-loader v-if="isFetching" data-form-loader />
+  <t-form-banner
+    v-if="banner"
+    theme="danger"
+    trigger-text="Retry"
+    :message="banner.message"
+    :on-trigger-click="banner.onTriggerClick"
+    :on-close="() => setBanner(null)"
+    data-form-error-banner
+  />
+  <div class="t-form-content">
+    <slot></slot>
+  </div>
+</form>

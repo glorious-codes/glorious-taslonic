@@ -1,3 +1,6 @@
-<component :is="tagName" :class="classes" tabindex="0" v-on="$listeners">
-  <slot></slot>
+<component :is="tagName" :class="classes" :type="buttonType" tabindex="0" v-on="$listeners">
+  <span v-if="!submitting">
+    <slot></slot>
+  </span>
+  <t-loader v-if="submitting" data-button-loader />
 </component>

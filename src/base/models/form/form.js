@@ -2,62 +2,76 @@ import { FORM_ID_CUSTOM_ATTR }  from '@base/constants/form';
 import idService from '@base/services/id/id';
 
 export class Form {
-  constructor(formEl, options){
+  constructor(formEl, options = {}){
     this.identify(formEl);
     this.setOptions(options);
     this.setErrors({});
     this.configListeners(formEl);
+    setTimeout(() => this.handleFetch(options));
   }
   identify(formEl){
-    this.setId(idService.generate());
-    this.setElementId(formEl);
+    const id = idService.generate();
+    this.setId(id);
+    this.setElementId(formEl, id);
   }
   setId(id){
     this.id = id;
   }
-  setElementId(formEl){
-    formEl.setAttribute(FORM_ID_CUSTOM_ATTR, this.id);
+  setElementId(formEl, id){
+    formEl.setAttribute(FORM_ID_CUSTOM_ATTR, id);
   }
-  setOptions(options = {}){
+  setOptions(options){
     this.options = options;
   }
   configListeners(formEl){
     formEl.addEventListener('submit', evt => this.handleSubmit(evt));
   }
-  handleSubmit({ preventDefault, ...rest }){
-    preventDefault();
-    this.notifySubmitListeners(this.submitListeners);
-    if(this.isValid())
-      this.processSubmission({ preventDefault, ...rest });
+  handleProcess(process){
+    return process == 'fetch' ? this.handleFetch(this.options) : this.handleSubmit();
   }
-  notifySubmitListeners(listeners = []){
-    listeners.forEach(notify => notify());
+  handleFetch({ onFetch, onFetchSuccess, onFetchError }){
+    if(onFetch) this.processRequest(onFetch, onFetchSuccess, onFetchError, 'isFetching');
+  }
+  handleSubmit(evt){
+    const { onSubmit, onSubmitSuccess, onSubmitError } = this.options;
+    evt && evt.preventDefault();
+    this.notifyListeners(this.submitListeners);
+    return this.isValid() ?
+      this.processRequest(onSubmit, onSubmitSuccess, onSubmitError, 'isSubmitting') :
+      this.highlightFirstErroredFormControl();
+  }
+  notifyListeners(listeners = [], data){
+    listeners.forEach(listener => listener.notifyFn(data));
   }
   isValid(){
-    return Object.keys(this.errors).length === 0;
+    return this.getErrorObjectKeys().length === 0;
   }
-  processSubmission(evt){
-    const result = this.handleCallbackOption('onSubmit', evt);
-    if(result && result.then){
-      this.handleCallbackOption('onProcessChange', { isSubmitting: true });
+  getErrorObjectKeys(){
+    return Object.keys(this.errors);
+  }
+  processRequest(requestFn, successCallback, errorCallback, processDescription){
+    const result = !this.isProcessing ? this.runCallbackOption(requestFn) : null;
+    if(this.isPromise(result)){
+      this.setProcessing(true);
+      this.notifyListeners(this.processListeners, { [processDescription]: true });
       result
-        .then(response => this.handleSubmitSuccess(response))
-        .catch(err => this.handleSubmitError(err))
-        .finally(() => this.handleSubmitComplete());
+        .then(response => this.runCallbackOption(successCallback, response))
+        .catch(err => this.runCallbackOption(errorCallback, err))
+        .finally(() => this.onProcessRequestComplete(processDescription));
     }
   }
-  handleSubmitSuccess(response){
-    this.handleCallbackOption('onSubmitSuccess', response);
+  isPromise(obj){
+    return obj && obj.then;
   }
-  handleSubmitError(err){
-    this.handleCallbackOption('onSubmitError', err);
+  onProcessRequestComplete(processDescription){
+    this.setProcessing(false);
+    this.notifyListeners(this.processListeners, { [processDescription]: false });
   }
-  handleSubmitComplete(){
-    this.handleCallbackOption('onProcessChange', { isSubmitting: false });
-  }
-  handleCallbackOption(option, data){
-    const callback = this.options[option];
+  runCallbackOption(callback, data){
     return callback && callback(data);
+  }
+  setProcessing(isProcessing){
+    this.isProcessing = isProcessing;
   }
   setErrors(errors){
     this.errors = errors;
@@ -68,8 +82,23 @@ export class Form {
   clearError(id){
     delete this.errors[id];
   }
+  highlightFirstErroredFormControl(){
+    const [ firstKey ] = this.getErrorObjectKeys();
+    this.errors[firstKey].element.focus();
+  }
+  onProcessChange(notifyFn){
+    this.processListeners = this.addListener(this.processListeners, { notifyFn });
+  }
   onSubmit(notifyFn){
-    this.submitListeners = this.submitListeners || [];
-    this.submitListeners.push(notifyFn);
+    const listener = { id: idService.generate(), notifyFn };
+    this.submitListeners = this.addListener(this.submitListeners, listener);
+    return listener.id;
+  }
+  addListener(listeners = [], newListener){
+    listeners.push(newListener);
+    return listeners;
+  }
+  removeSubmitListener(id){
+    this.submitListeners = this.submitListeners.filter(listener => listener.id !== id);
   }
 }

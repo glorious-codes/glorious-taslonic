@@ -28,11 +28,11 @@ describe('Form Service', () => {
     expect(formService.get(formEl.getAttribute('data-form-id'))).toEqual(form);
   });
 
-  it('should remove an existing form model', () => {
+  it('should destroy an existing form model', () => {
     const formEl = buildFormElement();
     formService.build(formEl);
     const formId = formEl.getAttribute('data-form-id');
-    formService.remove(formId);
+    formService.destroy(formId);
     expect(formService.get(formId)).toEqual(undefined);
   });
 
@@ -42,5 +42,17 @@ describe('Form Service', () => {
     const input = document.createElement('input');
     formEl.appendChild(input);
     expect(formService.findParentFormModel(input)).toEqual(formModel);
+  });
+
+  it('should build base css class', () => {
+    expect(formService.buildCssClasses()).toEqual('t-form');
+  });
+
+  it('should optionally build fetching css class', () => {
+    expect(formService.buildCssClasses({ fetching: true }).includes('t-form-fetching')).toEqual(true);
+  });
+
+  it('should optionally build fetch failed css class', () => {
+    expect(formService.buildCssClasses({ fetchFailed: true }).includes('t-form-fetch-failed')).toEqual(true);
   });
 });

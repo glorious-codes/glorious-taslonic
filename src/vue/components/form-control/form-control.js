@@ -15,6 +15,9 @@ export const formControl = {
     this.setFormControlElement(this.$el.querySelector(this.formControlElSelector));
     this.setFormControl(this.buildFormControlModel(this.formControlEl));
   },
+  beforeDestroy(){
+    this.formControl.destroy();
+  },
   methods: {
     setFormControlElement(element){
       this.formControlEl = element;

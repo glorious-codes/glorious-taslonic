@@ -100,4 +100,11 @@ describe('Form Control', () => {
     wrapper.setProps({ required });
     expect(formControlModelInstanceMock.onRequiredChange).toHaveBeenCalledWith(required);
   });
+
+  it('should destroy form control model on unmount', () => {
+    FormControlModel.mockImplementation(FormControlModelMock);
+    const wrapper = mountComponent();
+    wrapper.unmount();
+    expect(formControlModelInstanceMock.destroy).toHaveBeenCalled();
+  });
 });

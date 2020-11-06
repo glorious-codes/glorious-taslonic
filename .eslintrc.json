@@ -33,7 +33,7 @@
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "complexity": ["error", { "max": 3 }],
-    "max-lines": ["error", { "max": 100 }],
+    "max-lines": ["error", { "max": 110 }],
     "max-statements": ["error", { "max": 5 },
       { "ignoreTopLevelFunctions": true }
     ]
@@ -42,8 +42,8 @@
     {
       "files": [ "src/**/*.test.js" ],
       "rules": {
-        "max-lines": ["error", { "max": 250 }],
-        "max-statements": ["error", { "max": 10 },
+        "max-lines": ["error", { "max": 300 }],
+        "max-statements": ["error", { "max": 12 },
           { "ignoreTopLevelFunctions": true }
         ]
       }

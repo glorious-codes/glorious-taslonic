@@ -1,4 +1,4 @@
-import { FORM_ID_CUSTOM_ATTR }  from '@base/constants/form';
+import * as formConstants  from '@base/constants/form';
 import domService from '@base/services/dom/dom';
 import { Form } from '@base/models/form/form';
 
@@ -13,18 +13,39 @@ _public.build = (formEl, options) => {
 };
 
 _public.get = id => {
-  return getFormModel(id);
+  return id ? getFormModel(id) : forms;
 };
 
-_public.remove = id => {
+_public.destroy = id => {
   delete forms[id];
 };
 
 _public.findParentFormModel = childEl => {
-  const formEl = domService.queryAncestorByAttribute(childEl, FORM_ID_CUSTOM_ATTR);
+  const formIdCustomAttrName = getFormConstant('FORM_ID_CUSTOM_ATTR');
+  const formEl = domService.queryAncestorByAttribute(childEl, formIdCustomAttrName);
   if(formEl)
-    return getFormModel(formEl.getAttribute(FORM_ID_CUSTOM_ATTR));
+    return getFormModel(formEl.getAttribute(formIdCustomAttrName));
 };
+
+_public.getMessage = key => {
+  return getFormConstant(key);
+};
+
+_public.buildCssClasses = ({ fetching, fetchFailed } = {}) => {
+  const baseCssClass = getBaseCssClass();
+  const cssClasses = [baseCssClass];
+  if(fetching) cssClasses.push(`${baseCssClass}-fetching`);
+  if(fetchFailed) cssClasses.push(`${baseCssClass}-fetch-failed`);
+  return cssClasses.join(' ');
+};
+
+function getBaseCssClass(){
+  return 't-form';
+}
+
+function getFormConstant(key){
+  return formConstants[key];
+}
 
 function getFormModel(formId){
   return forms[formId];

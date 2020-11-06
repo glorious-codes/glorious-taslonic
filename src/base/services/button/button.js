@@ -1,3 +1,4 @@
+import formService from '@base/services/form/form';
 import propBasedCssClassService from '@base/services/prop-based-css-class/prop-based-css-class';
 import propBasedTagNameService from '@base/services/prop-based-tag-name/prop-based-tag-name';
 
@@ -29,12 +30,27 @@ _public.buildTagName = propValue => {
   );
 };
 
+_public.parseType = type => {
+  return isValidType(type) ? type : 'button';
+};
+
+_public.findParentFormModel = (buttonEl, onFind) => {
+  setTimeout(() => {
+    const model = formService.findParentFormModel(buttonEl);
+    model && onFind(model);
+  });
+};
+
 function isValidTheme(theme){
   return ['primary','secondary', 'lookless'].includes(theme);
 }
 
 function isValidBooleanProp(propName){
   return ['blocked'].includes(propName);
+}
+
+function isValidType(type){
+  return ['button', 'submit', 'reset'].includes(type);
 }
 
 function isOptionalTagNameValid(tagName){

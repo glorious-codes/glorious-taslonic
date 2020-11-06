@@ -1,8 +1,9 @@
-const _public = {};
-
-_public.getRootElProp = (wrapper, prop) => {
+export const getRootElProp = (wrapper, prop) => {
   const rootEl = wrapper.childAt(0);
   return rootEl.prop(prop);
 };
 
-export default _public;
+export const fireEvent = (target, eventType) => {
+  const evt = new Event(eventType, { bubbles: true });
+  target.dispatchEvent(evt);
+};

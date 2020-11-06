@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import testingService from '@react/services/testing/testing';
+import { getRootElProp } from '@react/services/testing/testing';
 import { CloseButton } from './close-button';
 
 describe('Close Button', () => {
@@ -10,7 +10,7 @@ describe('Close Button', () => {
 
   it('should have base css class', () => {
     const wrapper = mountComponent();
-    expect(testingService.getRootElProp(wrapper, 'className')).toEqual('t-close-button');
+    expect(getRootElProp(wrapper, 'className')).toEqual('t-close-button');
   });
 
   it('should contain a lookless theme button', () => {

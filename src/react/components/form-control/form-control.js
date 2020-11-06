@@ -19,6 +19,7 @@ export const FormControl = ({ value, required, validations, formControlElSelecto
         value
       });
     setFormControlModel(formControlModel);
+    return () => formControlModel.destroy();
   }, []);
 
   useEffect(() => {

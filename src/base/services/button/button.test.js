@@ -1,4 +1,7 @@
+import formService from '@base/services/form/form';
 import buttonService from './button';
+
+jest.useFakeTimers();
 
 describe('Button Service', () => {
   it('should append theme modifier css class according given theme', () => {
@@ -39,5 +42,28 @@ describe('Button Service', () => {
   it('should build a button tag name if tag prop value is not valid', () => {
     const tagName = buttonService.buildTagName('ul');
     expect(tagName).toEqual('button');
+  });
+
+  it('should find parent form model', () => {
+    const buttonEl = document.createElement('button');
+    const fakeModel = {some: 'model'};
+    const onFind = jest.fn();
+    formService.findParentFormModel = jest.fn(() => fakeModel);
+    buttonService.findParentFormModel(buttonEl, onFind);
+    jest.runOnlyPendingTimers();
+    expect(formService.findParentFormModel).toHaveBeenCalledWith(buttonEl);
+    expect(onFind).toHaveBeenCalledWith(fakeModel);
+  });
+
+  it('should parse button type as button if no type has been given', () => {
+    expect(buttonService.parseType()).toEqual('button');
+  });
+
+  it('should parse button type as button if type given is invalid', () => {
+    expect(buttonService.parseType('unknown')).toEqual('button');
+  });
+
+  it('should parse button type as given type if given type is valid', () => {
+    expect(buttonService.parseType('submit')).toEqual('submit');
   });
 });

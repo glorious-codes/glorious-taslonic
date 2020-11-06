@@ -2,6 +2,7 @@
 
 .t-button
   padding 11px
+  min-height 40px
   background-color var(--t-color-grey-light)
   color var(--t-color-grey-dark)
   font-size var(--t-font-size-xs)
@@ -46,6 +47,8 @@
     &[disabled]
       background-color var(--t-color-purple-lighter)
       border-color var(--t-color-purple-lighter)
+    .t-loader-item
+      background-color white
   &.t-button-secondary
     background-color transparent
     color var(--t-color-purple)
@@ -57,9 +60,12 @@
     &[disabled]
       color var(--t-color-purple-lighter)
       border-color var(--t-color-purple-lighter)
+    .t-loader-item
+      background-color var(--t-color-purple)
   &.t-button-lookless
     margin-bottom 1px
     padding 0 0 1px 0
+    min-height 0
     background-color transparent
     color inherit
     border 0

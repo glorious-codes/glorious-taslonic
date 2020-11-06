@@ -2,10 +2,14 @@ import { shallowMount } from '@vue/test-utils';
 import { REQUIRED_ERROR_MESSAGE } from '@base/constants/messages';
 import { formControl } from './form-control';
 
+jest.useFakeTimers();
+
 describe('Form Control', () => {
   function mount(propsData = {}, content = '<input type="text" />'){
     propsData.formControlElSelector = propsData.formControlElSelector || 'input';
-    return shallowMount(formControl, { propsData, slots: { default: content } });
+    const wrapper = shallowMount(formControl, { propsData, slots: { default: content } });
+    jest.runOnlyPendingTimers();
+    return wrapper;
   }
 
   function fillInput(wrapper, value){
@@ -97,5 +101,12 @@ describe('Form Control', () => {
       expect(getErrorMessageEl(wrapper).text()).toEqual(REQUIRED_ERROR_MESSAGE);
       done();
     });
+  });
+
+  it('should destroy form control model on unmount', () => {
+    const wrapper = mount();
+    wrapper.vm.formControl.destroy = jest.fn();
+    wrapper.destroy();
+    expect(wrapper.vm.formControl.destroy).toHaveBeenCalled();
   });
 });

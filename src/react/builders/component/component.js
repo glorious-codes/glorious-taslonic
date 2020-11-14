@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 
 const _public = {};
 
-_public.build = (component, container, onBuild) => {
+_public.build = (component, container, onBuild = () => {}) => {
   ReactDOM.render(component, container, () => onBuild(container));
 };
 

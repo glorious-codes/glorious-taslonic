@@ -1,4 +1,5 @@
 import * as components from '@vue/components';
+import dialog from '@vue/services/dialog/dialog';
 import toaster from '@vue/services/toaster/toaster';
 
 export default {
@@ -8,5 +9,6 @@ export default {
       Vue.component(component.name, component);
     });
   },
+  dialog,
   toaster
 };

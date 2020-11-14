@@ -15,16 +15,8 @@ describe('Toaster Service', () => {
 
   it('should have a base css class', () => {
     toasterService.pop(buildFakeToast('one'));
-    const toaster = document.querySelector(`[${CUSTOM_ATTR}]`);
+    const toaster = document.querySelector('[data-toaster]');
     expect(toaster.getAttribute('class')).toEqual('t-toaster');
-  });
-
-  it('should build no more than one toaster', () => {
-    const toast1 = buildFakeToast('one');
-    const toast2 = buildFakeToast('two');
-    toasterService.pop(toast1);
-    toasterService.pop(toast2);
-    expect(document.querySelectorAll(`[${CUSTOM_ATTR}]`).length).toEqual(1);
   });
 
   it('should last popped toast be o top of others', () => {

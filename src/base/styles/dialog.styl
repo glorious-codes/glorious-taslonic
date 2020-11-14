@@ -1,0 +1,63 @@
+@require '_mixins'
+
+$backdrop-color = #333333
+:root
+  --t-dialog-spacing 120px
+
+@keyframes fadin
+  0%
+    opacity 0
+  100%
+    opacity 1
+
+@keyframes moveup
+  0%
+    top 25px
+  100%
+    top 0
+
+.t-dialog-backdrop
+  position fixed
+  top 0
+  right 0
+  bottom 0
+  left 0
+  max-height calc(100vh - var(--t-dialog-spacing))
+  padding-bottom var(--t-dialog-spacing)
+  background-color alpha($backdrop-color, .5)
+  z-index var(--t-layer-middle)
+  animation fadin 300ms
+  overflow-y scroll
+
+.t-dialog
+  position relative
+  margin var(--t-dialog-spacing) auto 0
+  padding 20px
+  width 95%
+  max-width 600px
+  background-color var(--t-color-lightest)
+  animation moveup 300ms
+  border-radius 6px
+  box-sizing border-box
+
+.t-dialog-header
+  position relative
+  padding-right 30px
+  box-sizing border-box
+
+.t-dialog-title
+  margin 0 0 20px 0
+
+.t-dialog-close-button-container
+  position absolute
+  top 0
+  right 5px
+  .t-button
+    margin 0
+    line-height 20px
+    font-size var(--t-font-size-lg)
+    +highlight()
+      color var(--t-color-red)
+
+.t-dialog-open
+  overflow hidden

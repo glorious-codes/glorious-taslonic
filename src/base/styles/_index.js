@@ -4,6 +4,7 @@ import './button.styl';
 import './close-button.styl';
 import './col.styl';
 import './container.styl';
+import './dialog.styl';
 import './field.styl';
 import './form.styl';
 import './form-control.styl';

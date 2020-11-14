@@ -33,6 +33,12 @@ flexbox-justify($justify, $pack)
   flexbox-pack($pack)
   justify-content: $justify;
 
+highlight()
+  &:hover,
+  &:focus,
+  &:active
+    {block}
+
 col-size($size)
   -ms-flex-preferred-size $size
   flex-basis $size

@@ -1,0 +1,24 @@
+<div class="t-dialog-backdrop">
+  <div class="t-dialog" :style="styles" data-dialog>
+    <div class="t-dialog-header">
+      <h2
+        v-if="title"
+        class="t-dialog-title"
+        v-html="title"
+        data-dialog-title>
+      </h2>
+      <span class="t-dialog-close-button-container">
+        <t-button
+          aria-label="close"
+          theme="lookless"
+          @click="onCloseButtonClick"
+          data-dialog-close-button>
+          ×
+        </t-button>
+      </span>
+    </div>
+    <div class="t-dialog-content" data-dialog-content>
+      <slot></slot>
+    </div>
+  </div>
+</div>

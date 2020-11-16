@@ -1,6 +1,6 @@
 {
   "name": "@glorious/taslonic",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "A glorious UI library available for React and Vue",
   "files": [
     "dist/**/*.*"
@@ -37,7 +37,7 @@
     "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.7.4",
-    "@glorious/pitsby": "^1.29.2",
+    "@glorious/pitsby": "^1.29.3",
     "@vue/test-utils": "^1.0.0-beta.32",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^26.3.0",

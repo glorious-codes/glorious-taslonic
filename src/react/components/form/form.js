@@ -86,7 +86,7 @@ export const Form = ({
       {...rest}>
       { handleLoader(fetching) }
       { handleBanner(banner) }
-      <div className="t-form-content">
+      <div className="t-form-content" aria-live="polite" aria-busy={fetching} data-form-content>
         { children }
       </div>
     </form>

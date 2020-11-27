@@ -9,7 +9,7 @@
     :on-close="() => setBanner(null)"
     data-form-error-banner
   />
-  <div class="t-form-content">
+  <div class="t-form-content" aria-live="polite" :aria-busy="isBusy" data-form-content>
     <slot></slot>
   </div>
 </form>

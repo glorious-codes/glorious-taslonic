@@ -41,6 +41,24 @@ describe('Form', () => {
     });
   });
 
+  it('should form content be busy on fetch', () => {
+    const onFetch = jest.fn(() => new PromiseMock('success', { shouldAbort: true }));
+    wrapper = mountComponent({ onFetch });
+    wrapper.vm.$nextTick(() => {
+      expect(wrapper.find('[data-form-content]').attributes('aria-live')).toEqual('polite');
+      expect(wrapper.find('[data-form-content]').attributes('aria-busy')).toEqual('true');
+    });
+  });
+
+  it('should form content not be busy on fetch complete', () => {
+    const onFetch = jest.fn(() => new PromiseMock('success'));
+    wrapper = mountComponent({ onFetch });
+    wrapper.vm.$nextTick(() => {
+      expect(wrapper.find('[data-form-content]').attributes('aria-live')).toEqual('polite');
+      expect(wrapper.find('[data-form-content]').attributes('aria-busy')).toEqual('false');
+    });
+  });
+
   it('should hide loader on fetch complete', () => {
     const onFetch = jest.fn(() => new PromiseMock('success'));
     wrapper = mountComponent({ onFetch });

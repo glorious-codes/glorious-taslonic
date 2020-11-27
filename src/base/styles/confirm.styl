@@ -1,0 +1,27 @@
+@require '_mixins'
+
+.t-confirm-wrapper
+  .t-dialog-header
+    padding 0
+
+.t-confirm-footer
+  display flex
+  flex-direction column-reverse
+  margin-top 30px
+  .t-button
+    width 100%
+  .t-button:first-child
+    margin 10px 0 0 0
+
++breakpoint('sm')
+  .t-confirm-footer
+    flex-direction row
+    justify-content flex-end
+    .t-button
+      width auto
+      min-width 120px
+    .t-button
+      &:first-child
+        margin 0
+      &:not(:first-child)
+        margin 0 0 0 10px

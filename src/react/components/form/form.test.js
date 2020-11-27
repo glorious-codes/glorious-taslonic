@@ -88,6 +88,26 @@ describe('Form Banner', () => {
     });
   });
 
+  it('should form content be busy on fetch', done => {
+    const onFetch = jest.fn(() => new PromiseMock('success', { shouldAbort: true }));
+    mount({ onFetch }, element => {
+      const formContentEl = element.querySelector('[data-form-content]');
+      expect(formContentEl.getAttribute('aria-live')).toEqual('polite');
+      expect(formContentEl.getAttribute('aria-busy')).toEqual('true');
+      done();
+    });
+  });
+
+  it('should form content not be busy on fetch complete', done => {
+    const onFetch = jest.fn(() => new PromiseMock('success'));
+    mount({ onFetch }, element => {
+      const formContentEl = element.querySelector('[data-form-content]');
+      expect(formContentEl.getAttribute('aria-live')).toEqual('polite');
+      expect(formContentEl.getAttribute('aria-busy')).toEqual('false');
+      done();
+    });
+  });
+
   it('should hide loader on fetch complete', done => {
     const onFetch = jest.fn(() => new PromiseMock('success'));
     mount({ onFetch }, element => {

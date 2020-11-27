@@ -94,6 +94,9 @@ export const form = {
     classes(){
       const { isFetching, fetchFailed } = this;
       return formService.buildCssClasses({ fetching: isFetching, fetchFailed });
+    },
+    isBusy(){
+      return this.isFetching ? 'true' : 'false';
     }
   },
   template

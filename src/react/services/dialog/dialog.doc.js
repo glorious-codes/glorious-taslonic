@@ -3,7 +3,7 @@ module.exports = {
   description: 'Service to open dialogs.',
   methods: [
     {
-      name: 'open({ title, content, width, onClose })',
+      name: 'open({ title, content, width, hideCloseButton, onClose })',
       params: [
         {
           name: 'content',
@@ -23,6 +23,12 @@ module.exports = {
           type: 'String',
           values: 'Any',
           description: 'Sets how wide dialog can be.'
+        },
+        {
+          name: 'hideCloseButton',
+          type: 'Boolean',
+          values: 'true, false',
+          description: 'Hides dialog close button.'
         },
         {
           name: 'onClose',
@@ -127,17 +133,39 @@ module.exports = {
     },
     {
       title: 'Dialog closed programmatically',
+      description: 'You can optionally hide the dialog close button and take full control on how and when to close the dialog.',
       controller: function(){
-        const { useState } = React;
+        const { useState, useEffect } = React;
         const { Button, dialog } = taslonicReact;
 
         return function(){
+          let selfClosingDialog;
+
+          const DialogContent = () => {
+            const [count, setCount] = useState(5);
+
+            useEffect(() => {
+              const interval = window.setInterval(() => {
+                const newCount = count - 1;
+                if(newCount === 0) selfClosingDialog.close();
+                else setCount(newCount)
+              }, 1000);
+              return () => window.clearInterval(interval);
+            }, [count, setCount])
+
+            return (
+              <span>
+                This dialog will close in <strong>{count}</strong> seconds...
+              </span>
+            );
+          }
+
           const openDialog = () => {
-            const selfClosingDialog = dialog.open({
-              content: 'This dialog will close in 3 seconds...',
+            selfClosingDialog = dialog.open({
+              content: <DialogContent />,
               title: 'Self Closing Dialog',
+              hideCloseButton: true
             });
-            setTimeout(() => selfClosingDialog.close(), 3000);
           };
 
           return <Button onClick={openDialog}>Open Dialog</Button>;

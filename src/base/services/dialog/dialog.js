@@ -1,11 +1,10 @@
 import floatingContainerService from '@base/services/floating-container/floating-container';
-import idService from '@base/services/id/id';
 
 const _public = {};
 
-_public.buildWrapper = () => {
-  const container = floatingContainerService.build('dialog-container');
-  const wrapper = buildWrapper(idService.generate());
+_public.buildWrapper = name => {
+  const container = floatingContainerService.build();
+  const wrapper = buildWrapper(name);
   container.appendChild(wrapper);
   preventBodyScroll();
   return wrapper;
@@ -13,19 +12,17 @@ _public.buildWrapper = () => {
 
 _public.destroy = wrapper => {
   setTimeout(() => {
-    if(hasOnlyOneDialogOpen()) releaseBodyScroll();
+    if(hasOnlyOneDialogOpen(wrapper)) releaseBodyScroll();
     wrapper.remove();
   });
 };
 
-function buildWrapper(id) {
+function buildWrapper(name = 'dialog') {
   const wrapper = document.createElement('div');
-  wrapper.setAttribute(getWrapperCustomAttribute(), id);
+  const wrapperFullName = `${name}-wrapper`;
+  wrapper.setAttribute(`data-${wrapperFullName}`, '');
+  wrapper.classList.add(`t-${wrapperFullName}`);
   return wrapper;
-}
-
-function getWrapperCustomAttribute() {
-  return 'data-dialog-wrapper';
 }
 
 function preventBodyScroll(){
@@ -49,9 +46,8 @@ function handleBodyCssClass(action, cssClass){
   document.body.classList[action](cssClass);
 }
 
-function hasOnlyOneDialogOpen(){
-  const selector = `[${getWrapperCustomAttribute()}]`;
-  return document.querySelectorAll(selector).length === 1;
+function hasOnlyOneDialogOpen(wrapper){
+  return wrapper.parentElement.children.length === 1;
 }
 
 export default _public;

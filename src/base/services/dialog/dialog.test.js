@@ -12,9 +12,17 @@ describe('Dialog Service', () => {
     return 't-dialog-open';
   }
 
-  it('should build a dialog wrapper contained in a dialog container', () => {
+  it('should build a dialog wrapper contained in a floating container', () => {
     const wrapper = dialogService.buildWrapper();
-    expect(wrapper.parentElement.getAttribute('class')).toEqual('t-dialog-container');
+    const floatingContainerEl = wrapper.parentElement;
+    expect(wrapper.getAttribute('class')).toEqual('t-dialog-wrapper');
+    expect(floatingContainerEl.getAttribute('class')).toEqual('t-floating-container');
+    expect(floatingContainerEl.getAttribute('data-floating-container')).toBeDefined();
+  });
+
+  it('should optionally name wrapper contained in a floating container', () => {
+    const wrapper = dialogService.buildWrapper('confirm');
+    expect(wrapper.getAttribute('class')).toEqual('t-confirm-wrapper');
   });
 
   it('should be able to prevent body scroll', () => {

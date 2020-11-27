@@ -3,6 +3,7 @@ import './banner.styl';
 import './button.styl';
 import './close-button.styl';
 import './col.styl';
+import './confirm.styl';
 import './container.styl';
 import './dialog.styl';
 import './field.styl';

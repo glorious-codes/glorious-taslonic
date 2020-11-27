@@ -7,7 +7,7 @@
         v-html="title"
         data-dialog-title>
       </h2>
-      <span class="t-dialog-close-button-container">
+      <span class="t-dialog-close-button-container" v-if="!hideCloseButton">
         <t-button
           aria-label="close"
           theme="lookless"

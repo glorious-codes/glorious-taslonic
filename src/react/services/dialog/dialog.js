@@ -5,16 +5,20 @@ import componentBuilder from '@react/builders/component/component';
 
 const _public = {};
 
-_public.open = ({ title, width, onClose, content } = {}) => {
-  const wrapper = dialogService.buildWrapper();
-  const dialog = buildDialog({ wrapper, title, width, onClose, content });
+_public.open = ({ title, width, onClose, content, name, hideCloseButton } = {}) => {
+  const wrapper = dialogService.buildWrapper(name);
+  const dialog = buildDialog({ wrapper, title, width, onClose, content, hideCloseButton });
   componentBuilder.build(dialog, wrapper);
   return { close: () => destroy(wrapper, onClose) };
 };
 
-function buildDialog({ wrapper, title, width, onClose, content }) {
+function buildDialog({ wrapper, title, width, onClose, content, hideCloseButton }) {
   return (
-    <Dialog title={ title } width={ width } onClose={ () => destroy(wrapper, onClose) }>
+    <Dialog
+      title={ title }
+      width={ width }
+      hideCloseButton={hideCloseButton}
+      onClose={ () => destroy(wrapper, onClose) }>
       { content }
     </Dialog>
   );

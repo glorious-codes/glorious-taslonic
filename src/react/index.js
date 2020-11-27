@@ -1,9 +1,11 @@
 import * as components from '@react/components';
-import toaster from '@react/services/toaster/toaster';
+import confirm from '@react/services/confirm/confirm';
 import dialog from '@react/services/dialog/dialog';
+import toaster from '@react/services/toaster/toaster';
 
 export default {
   ...components,
-  toaster,
-  dialog
+  confirm,
+  dialog,
+  toaster
 };

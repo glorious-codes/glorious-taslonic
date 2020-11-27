@@ -4,22 +4,27 @@ import componentBuilder from '@vue/builders/component/component';
 
 const _public = {};
 
-_public.open = ({ title, width, onClose, content } = {}) => {
-  const wrapper = dialogService.buildWrapper();
-  const { vm, element } = buildDialog({ wrapper, title, width, onClose });
-  const dialogEl = appendDialogContent(element, buildDialogContent(content));
-  wrapper.appendChild(dialogEl);
-  return { close: () => destroy(vm, wrapper, onClose) };
+_public.open = ({ title, width, onClose, content, name, hideCloseButton } = {}) => {
+  const wrapper = dialogService.buildWrapper(name);
+  const { vm, element } = buildDialog({ wrapper, title, width, onClose, hideCloseButton });
+  const dialogContent = buildDialogContent(content);
+  wrapper.appendChild(appendDialogContent(element, dialogContent));
+  return {
+    close: () => {
+      if(dialogContent.vm) dialogContent.vm.$destroy();
+      destroy(vm, wrapper, onClose);
+    }
+  };
 };
 
-function buildDialog({ wrapper, title, width, onClose }) {
+function buildDialog({ wrapper, title, width, onClose, hideCloseButton }) {
   return componentBuilder.build({
     controller: {
       components: {
         tDialog: dialog
       },
       data(){
-        return { title, width };
+        return { title, width, hideCloseButton };
       },
       methods: {
         onCloseDialog(){
@@ -27,24 +32,30 @@ function buildDialog({ wrapper, title, width, onClose }) {
         }
       }
     },
-    template: '<t-dialog :title="title" :width="width" :on-close="onCloseDialog"></t-dialog>'
+    template: `
+    <t-dialog
+      :title="title"
+      :width="width"
+      :on-close="onCloseDialog"
+      :hideCloseButton="hideCloseButton">
+    </t-dialog>`
   });
 }
 
 function appendDialogContent(dialog, dialogContent){
-  dialog.querySelector('[data-dialog-content]').appendChild(dialogContent);
+  dialog.querySelector('[data-dialog-content]').appendChild(dialogContent.element);
   return dialog;
 }
 
 function buildDialogContent(content = ''){
   if(typeof content == 'string') return buildContentElementFromString(content);
-  return componentBuilder.build(structureContent(content)).element;
+  return componentBuilder.build(structureContent(content));
 }
 
 function buildContentElementFromString(content){
   const element = document.createElement('div');
   element.innerHTML = content;
-  return element;
+  return { element };
 }
 
 function structureContent({ template, ...rest }){

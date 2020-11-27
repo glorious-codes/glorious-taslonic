@@ -13,6 +13,12 @@ describe('Dialog', () => {
     expect(wrapper.find('[data-dialog]').classes()).toContain('t-dialog');
   });
 
+  it('should deactivate any active element on document on create', () => {
+    document.activeElement.blur = jest.fn();
+    mountComponent();
+    expect(document.activeElement.blur).toHaveBeenCalled();
+  });
+
   it('should contain a backdrop', () => {
     const wrapper = mountComponent();
     expect(wrapper.classes()).toContain('t-dialog-backdrop');
@@ -48,12 +54,21 @@ describe('Dialog', () => {
     expect(onClose).toHaveBeenCalled();
   });
 
-  it('should execute close callback on esc keydown event', () => {
+  it('should execute close callback on esc keydown event by default', () => {
     const escKeyCode = 27;
     const onClose = jest.fn();
     mountComponent({ onClose });
     testingService.simulateKeydown(escKeyCode);
     expect(onClose).toHaveBeenCalled();
+  });
+
+  it('should not execute close callback on esc keydown event if close button is hidden', () => {
+    const escKeyCode = 27;
+    const onClose = jest.fn();
+    const wrapper = mountComponent({ onClose, hideCloseButton: true });
+    testingService.simulateKeydown(escKeyCode);
+    expect(onClose).not.toHaveBeenCalled();
+    expect(wrapper.findAll('[data-dialog-close-button]').length).toEqual(0);
   });
 
   it('should stop listening esc keydown event on unmount', () => {

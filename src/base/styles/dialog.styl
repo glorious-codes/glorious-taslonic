@@ -2,7 +2,7 @@
 
 $backdrop-color = #333333
 :root
-  --t-dialog-spacing 120px
+  --t-dialog-spacing 60px
 
 @keyframes fadin
   0%
@@ -61,3 +61,9 @@ $backdrop-color = #333333
 
 .t-dialog-open
   overflow hidden
+
++breakpoint('sm')
+  .t-dialog-backdrop
+    padding-bottom calc(var(--t-dialog-spacing) * 2)
+  .t-dialog
+    margin calc(var(--t-dialog-spacing) * 2) auto 0

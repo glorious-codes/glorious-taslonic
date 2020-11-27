@@ -7,18 +7,18 @@ export const dialog = {
   components: {
     tButton: button
   },
-  props: ['width', 'title', 'onClose'],
+  props: ['width', 'title', 'onClose', 'hideCloseButton'],
   data(){
     return {
       keyboardSubscriptionId: null
     };
   },
   created(){
-    this.listenEscapeKeydown();
+    document.activeElement.blur();
+    if(!this.hideCloseButton) this.listenEscapeKeydown();
   },
   beforeDestroy(){
     this.dismissEscapeKeydown();
-
   },
   methods: {
     onCloseButtonClick(){
@@ -27,7 +27,9 @@ export const dialog = {
     listenEscapeKeydown(){
       const { subscribe } = keyboardSubscriptionService;
       const escKeyCode = 27;
-      if(this.onClose) this.keyboardSubscriptionId = subscribe(escKeyCode, () => this.onClose());
+      this.keyboardSubscriptionId = subscribe(escKeyCode, () => {
+        this.onClose && this.onClose();
+      });
     },
     dismissEscapeKeydown(){
       const { keyboardSubscriptionId } = this;

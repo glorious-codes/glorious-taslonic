@@ -5,7 +5,7 @@ _public.build = id => {
   return container;
 };
 
-function getContainer(id){
+function getContainer(id = 'floating-container'){
   const container = document.querySelector(`[${getContainerCustomAttrName(id)}]`);
   return container ? container : buildContainer(id);
 }

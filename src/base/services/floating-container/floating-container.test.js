@@ -6,15 +6,13 @@ describe('Floating Container Service', () => {
   });
 
   it('should build a base css class according given id', () => {
-    const id = 'toaster';
-    const container = floatingContainerService.build(id);
-    expect(container.getAttribute('class')).toEqual('t-toaster');
+    const container = floatingContainerService.build();
+    expect(container.getAttribute('class')).toEqual('t-floating-container');
   });
 
   it('should append no more than one container on body', () => {
-    const id = 'toaster';
-    floatingContainerService.build(id);
-    floatingContainerService.build(id);
-    expect(document.querySelectorAll('[data-toaster]').length).toEqual(1);
+    floatingContainerService.build();
+    floatingContainerService.build();
+    expect(document.querySelectorAll('[data-floating-container]').length).toEqual(1);
   });
 });

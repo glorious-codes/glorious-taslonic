@@ -3,7 +3,7 @@ module.exports = {
   description: 'Service to open dialogs.',
   methods: [
     {
-      name: 'open({ title, content, width, onClose })',
+      name: 'open({ title, content, width, hideCloseButton, onClose })',
       params: [
         {
           name: 'content',
@@ -23,6 +23,12 @@ module.exports = {
           type: 'String',
           values: 'Any',
           description: 'Sets how wide dialog can be.'
+        },
+        {
+          name: 'hideCloseButton',
+          type: 'Boolean',
+          values: 'true, false',
+          description: 'Hides dialog close button.'
         },
         {
           name: 'onClose',
@@ -127,15 +133,37 @@ module.exports = {
     },
     {
       title: 'Dialog closed programmatically',
+      description: 'You can optionally hide the dialog close button and take full control on how and when to close the dialog.',
       controller: {
         methods: {
           openDialog(){
             const { dialog } = taslonicVue;
             const selfClosingDialog = dialog.open({
-              content: 'This dialog will close in 3 seconds...',
+              content: {
+                data(){
+                  return {
+                    interval: null,
+                    count: 5
+                  };
+                },
+                mounted(){
+                  this.interval = window.setInterval(() => {
+                    --this.count;
+                    if(this.count === 0) selfClosingDialog.close()
+                  }, 1000);
+                },
+                beforeDestroy(){
+                  window.clearInterval(this.interval);
+                },
+                template: `
+                <span>
+                  This dialog will close in <strong>{{ count }}</strong> seconds...
+                </span>
+                `
+              },
               title: 'Self Closing Dialog',
+              hideCloseButton: true
             });
-            setTimeout(() => selfClosingDialog.close(), 3000);
           }
         }
       },

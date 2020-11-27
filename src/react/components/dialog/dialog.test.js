@@ -6,9 +6,13 @@ import keyboardSubscriptionService from '@base/services/keyboardSubscription/key
 import { Dialog } from './dialog';
 
 describe('Dialog', () => {
-  function mountComponent({ width, title, onClose = () => {}, children } = {}){
+  function mountComponent({ width, title, hideCloseButton, onClose = () => {}, children } = {}){
     return mount(
-      <Dialog title={ title } width={ width } onClose={ onClose }>
+      <Dialog
+        title={ title }
+        width={ width }
+        hideCloseButton={ hideCloseButton }
+        onClose={ onClose }>
         { children }
       </Dialog>
     );
@@ -17,6 +21,12 @@ describe('Dialog', () => {
   it('should have appropriate css class', () => {
     const wrapper = mountComponent();
     expect(wrapper.find('[data-dialog]').prop('className')).toEqual('t-dialog');
+  });
+
+  it('should deactivate any active element on document on create', () => {
+    document.activeElement.blur = jest.fn();
+    mountComponent();
+    expect(document.activeElement.blur).toHaveBeenCalled();
   });
 
   it('should contain a backdrop', () => {
@@ -62,6 +72,15 @@ describe('Dialog', () => {
     mountComponent({ onClose });
     testingService.simulateKeydown(escKeyCode);
     expect(onClose).toHaveBeenCalled();
+  });
+
+  it('should not execute close callback on esc keydown event if close button is hidden', () => {
+    const escKeyCode = 27;
+    const onClose = jest.fn();
+    const wrapper = mountComponent({ onClose, hideCloseButton: true });
+    testingService.simulateKeydown(escKeyCode);
+    expect(onClose).not.toHaveBeenCalled();
+    expect(wrapper.find('[data-dialog-close-button]').length).toEqual(0);
   });
 
   it('should stop listening esc keydown event on unmount', () => {

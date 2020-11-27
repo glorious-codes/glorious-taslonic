@@ -25,11 +25,21 @@ describe('Dialog Service', () => {
     expect(document.querySelector('[data-dialog]').style.maxWidth).toEqual(width);
   });
 
+  it('should optionally set a custom dialog wrapper name', () => {
+    dialogService.open({ name: 'confirm' });
+    expect(document.querySelector('[data-confirm-wrapper]')).toBeDefined();
+  });
+
   it('should execute close callback on close', () => {
     const onClose = jest.fn();
     dialogService.open({ onClose });
     document.querySelector('[aria-label="close"]').click();
     expect(onClose).toHaveBeenCalled();
+  });
+
+  it('should optionally not render close button', () => {
+    dialogService.open({ hideCloseButton: true });
+    expect(document.querySelector('[aria-label="close"]')).toEqual(null);
   });
 
   it('should destroy dialog', () => {

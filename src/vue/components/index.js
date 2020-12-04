@@ -1,5 +1,6 @@
 export { banner } from './banner/banner';
 export { button } from './button/button';
+export { card } from './card/card';
 export { col } from './col/col';
 export { container } from './container/container';
 export { field } from './field/field';

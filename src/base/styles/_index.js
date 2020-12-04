@@ -2,6 +2,7 @@ import './_variables.styl';
 import './alert.styl';
 import './banner.styl';
 import './button.styl';
+import './card.styl';
 import './close-button.styl';
 import './col.styl';
 import './confirm.styl';

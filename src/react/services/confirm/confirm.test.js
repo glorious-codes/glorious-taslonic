@@ -1,8 +1,7 @@
 import React from 'react';
+import testingService from '@base/services/testing/testing';
 import dialogService from '@react/services/dialog/dialog';
 import confirmService from './confirm';
-
-jest.useFakeTimers();
 
 describe('Confirm Service', () => {
   beforeEach(() => {
@@ -68,12 +67,14 @@ describe('Confirm Service', () => {
     expect(onCancel).toHaveBeenCalled();
   });
 
-  it('should close dialog on cancel button click', () => {
+  it('should close dialog on cancel button click', done => {
     const content = <p>Hello!</p>;
     confirmService.open({ content });
     getButton('cancel').click();
-    jest.runOnlyPendingTimers();
-    expect(document.querySelector('p')).toEqual(null);
+    setTimeout(() => {
+      expect(document.querySelector('p')).toEqual(null);
+      done();
+    });
   });
 
   it('should optionally set custom cancel button text', () => {
@@ -89,17 +90,32 @@ describe('Confirm Service', () => {
     expect(onConfirm).toHaveBeenCalled();
   });
 
+  it('should not execute confirm callback on Enter keydown if cancel button is focused', done => {
+    const enterKeyCode = 13;
+    const onConfirm = jest.fn();
+    confirmService.open({ onConfirm });
+    setTimeout(() => {
+      const cancelButtonEl = getButton('cancel');
+      cancelButtonEl.focus();
+      testingService.simulateKeydown(enterKeyCode);
+      expect(onConfirm).not.toHaveBeenCalled();
+      done();
+    });
+  });
+
   it('should optionally set custom confirm button text', () => {
     const confirmButtonText = 'Go!';
     confirmService.open({ confirmButtonText });
     expect(getButton('confirm').textContent.trim()).toEqual(confirmButtonText);
   });
 
-  it('should close dialog on confirm button click', () => {
+  it('should close dialog on confirm button click', done => {
     const content = <p>Hello!</p>;
     confirmService.open({ content });
     getButton('confirm').click();
-    jest.runOnlyPendingTimers();
-    expect(document.querySelector('p')).toEqual(null);
+    setTimeout(() => {
+      expect(document.querySelector('p')).toEqual(null);
+      done();
+    });
   });
 });

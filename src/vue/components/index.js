@@ -8,3 +8,4 @@ export { form } from './form/form';
 export { input } from './input/input';
 export { loader } from './loader/loader';
 export { row } from './row/row';
+export { tag } from './tag/tag';

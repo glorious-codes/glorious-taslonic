@@ -13,5 +13,6 @@ import './form.styl';
 import './form-control.styl';
 import './loader.styl';
 import './row.styl';
+import './tag.styl';
 import './toast.styl';
 import './toaster.styl';

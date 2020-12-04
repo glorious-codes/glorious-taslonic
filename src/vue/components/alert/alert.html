@@ -1,0 +1,8 @@
+<div class="t-alert-content">
+  <slot></slot>
+  <div class="t-alert-footer">
+    <t-button theme="primary" @click="onDismiss" ref="dismissButton">
+      {{ dismissButtonText }}
+    </t-button>
+  </div>
+</div>

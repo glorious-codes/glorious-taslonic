@@ -8,6 +8,10 @@ _public.queryAncestorByAttribute = (element, attribute) => {
   return _public.queryAncestorByAttribute(parentEl, attribute);
 };
 
+_public.isFocused = element => {
+  return document.activeElement === element;
+};
+
 function elementMatchesAttribute(element, attribute){
   return element && (element.getAttribute(attribute) !== null);
 }

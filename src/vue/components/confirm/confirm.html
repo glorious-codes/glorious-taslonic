@@ -1,11 +1,11 @@
 <div class="t-confirm-content">
   <slot></slot>
   <div class="t-confirm-footer">
-    <t-button @click="onCancel">
-      {{ cancelButtonText }}
+    <t-button @click="onCancelButtonClick" ref="cancelButton">
+      {{ cancelButtonText || defaultCancelButtonText }}
     </t-button>
-    <t-button theme="primary" @click="onConfirm">
-      {{ confirmButtonText }}
+    <t-button theme="primary" @click="onConfirmButtonClick" ref="confirmButton">
+      {{ confirmButtonText || defaultConfirmButtonText }}
     </t-button>
   </div>
 </div>

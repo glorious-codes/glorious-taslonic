@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils';
-import testingService from '@base/services/testing/testing';
 import { confirm } from './confirm';
 
 describe('Confirm', () => {
@@ -49,12 +48,11 @@ describe('Confirm', () => {
     expect(onCancel).toHaveBeenCalled();
   });
 
-  it('should execute cancel callback on Esc keydown', () => {
-    const escKeyCode = 27;
-    const onCancel = jest.fn();
-    mountComponent({ onCancel });
-    testingService.simulateKeydown(escKeyCode);
-    expect(onCancel).toHaveBeenCalled();
+  it('should not log errors on cancel button click if no cancel callback has been given', () => {
+    console.error = jest.fn();
+    const wrapper = mountComponent();
+    getButton(wrapper, 'cancel').trigger('click');
+    expect(console.error).not.toHaveBeenCalled();
   });
 
   it('should execute confirm callback on confirm button click', () => {
@@ -64,11 +62,10 @@ describe('Confirm', () => {
     expect(onConfirm).toHaveBeenCalled();
   });
 
-  it('should execute confirm callback on Enter keydown', () => {
-    const enterKeyCode = 13;
-    const onConfirm = jest.fn();
-    mountComponent({ onConfirm });
-    testingService.simulateKeydown(enterKeyCode);
-    expect(onConfirm).toHaveBeenCalled();
+  it('should not log errors on confirm button click if no confirm callback has been given', () => {
+    console.error = jest.fn();
+    const wrapper = mountComponent();
+    getButton(wrapper, 'confirm').trigger('click');
+    expect(console.error).not.toHaveBeenCalled();
   });
 });

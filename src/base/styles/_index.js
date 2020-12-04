@@ -1,4 +1,5 @@
 import './_variables.styl';
+import './alert.styl';
 import './banner.styl';
 import './button.styl';
 import './close-button.styl';

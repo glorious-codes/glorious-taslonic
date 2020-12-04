@@ -47,7 +47,7 @@ function handleBodyCssClass(action, cssClass){
 }
 
 function hasOnlyOneDialogOpen(wrapper){
-  return wrapper.parentElement.children.length === 1;
+  return wrapper.parentElement && wrapper.parentElement.children.length === 1;
 }
 
 export default _public;

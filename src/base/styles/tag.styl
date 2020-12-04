@@ -1,0 +1,33 @@
+@require '_mixins'
+
+tag-theme($backgroundColor, $borderColor, $textColor)
+  background-color $backgroundColor
+  color $textColor
+  border-color $borderColor
+
+.t-tag
+  display inline-block
+  padding 5px
+  background-color var(--t-color-grey-lighter)
+  color var(--t-color-grey-dark)
+  font-size var(--t-font-size-xxxs)
+  font-weight bold
+  line-height 1
+  text-transform uppercase
+  border-width 1px
+  border-style solid
+  border-color var(--t-color-grey)
+  border-radius var(--t-default-border-radius)
+  user-select(none)
+  &.t-tag-primary
+    tag-theme(var(--t-color-purple), var(--t-color-purple), var(--t-color-lightest))
+  &.t-tag-secondary
+    tag-theme(transparent, var(--t-color-purple), var(--t-color-purple))
+  &.t-tag-info
+    tag-theme(var(--t-color-blue-lighter), var(--t-color-blue-light), var(--t-color-blue))
+  &.t-tag-success
+    tag-theme(var(--t-color-green-lighter), var(--t-color-green-light), var(--t-color-green))
+  &.t-tag-warning
+    tag-theme(var(--t-color-yellow-lighter), var(--t-color-yellow-dark), var(--t-color-yellow-darker))
+  &.t-tag-danger
+    tag-theme(var(--t-color-red-lighter), var(--t-color-red-light), var(--t-color-red))

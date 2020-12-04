@@ -1,0 +1,8 @@
+<div class="t-card">
+  <component :is="tagName" v-if="title" class="t-card-title">
+    {{ title }}
+  </component>
+  <div class="t-card-content">
+    <slot></slot>
+  </div>
+</div>

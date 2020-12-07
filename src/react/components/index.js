@@ -8,4 +8,5 @@ export { Form } from '@react/components/form/form';
 export { Input } from '@react/components/input/input';
 export { Loader } from '@react/components/loader/loader';
 export { Row } from '@react/components/row/row';
+export { Select } from '@react/components/select/select';
 export { Tag } from '@react/components/tag/tag';

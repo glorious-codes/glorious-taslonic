@@ -1,0 +1,17 @@
+<t-form-control
+  :value="value"
+  :required="required"
+  :blocked="blocked"
+  :validations="validations"
+  form-control-el-selector="select"
+>
+  <span :class="wrapperCssClasses">
+    <select
+      :autofocus="autofocus"
+      :disabled="disabled"
+      v-on="$listeners"
+    >
+      <slot></slot>
+    </select>
+  </span>
+</t-form-control>

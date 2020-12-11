@@ -10,6 +10,7 @@ export const input = {
   props: {
     type: { type: String },
     value: { type: String },
+    name: { type: String },
     placeholder: { type: String },
     validations: { type: Array },
     autofocus: { type: Boolean },

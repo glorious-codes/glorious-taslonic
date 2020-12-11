@@ -52,6 +52,12 @@ describe('Input', () => {
     expect(wrapper.find('input').attributes('type')).toEqual(type);
   });
 
+  it('should optionally set an input name', () => {
+    const name = 'username';
+    const wrapper = mount({ name });
+    expect(wrapper.find('input').attributes('name')).toEqual(name);
+  });
+
   it('should optionally set a placeholder', () => {
     const placeholder = 'Enter a name';
     const wrapper = mount({ placeholder });

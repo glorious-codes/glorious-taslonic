@@ -51,6 +51,26 @@ describe('Select', () => {
     expect(wrapper.find('select').attributes('autofocus')).toEqual('autofocus');
   });
 
+  it('should optionally set a name', () => {
+    const name = 'fruit'
+    const wrapper = mount({ name });
+    expect(wrapper.find('select').attributes('name')).toEqual(name);
+  });
+
+  it('should not show a placeholder by default', () => {
+    const wrapper = mount();
+    const firstOption = wrapper.findAll('option');
+    expect(firstOption.length).toEqual(0);
+  });
+
+  it('should optionally set a placeholder', () => {
+    const placeholder = 'Select';
+    const wrapper = mount({ placeholder });
+    const firstOption = wrapper.findAll('option').at(0);
+    expect(firstOption.text()).toEqual(placeholder);
+    expect(firstOption.attributes('value')).toEqual('');
+  });
+
   it('should optionally set select listeners', () => {
     const onBlur = jest.fn();
     const wrapper = mount({ listeners: { blur: onBlur } });

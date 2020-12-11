@@ -4,6 +4,7 @@ import selectService from '@base/services/select/select';
 
 export const Select = ({
   value,
+  placeholder,
   validations,
   blocked,
   disabled,
@@ -21,6 +22,7 @@ export const Select = ({
     >
       <span className={selectService.buildWrapperCssClasses({ disabled })}>
         <select disabled={disabled} {...rest}>
+          { placeholder && <option value="">{placeholder}</option> }
           { children }
         </select>
       </span>

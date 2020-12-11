@@ -7,10 +7,12 @@
 >
   <span :class="wrapperCssClasses">
     <select
+      :name="name"
       :autofocus="autofocus"
       :disabled="disabled"
       v-on="$listeners"
     >
+      <option value="" v-if="placeholder">{{ placeholder }}</option>
       <slot></slot>
     </select>
   </span>

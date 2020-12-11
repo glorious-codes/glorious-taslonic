@@ -63,6 +63,18 @@ describe('Select', () => {
     expect(wrapper.find('select').prop('autofocus')).toEqual(true);
   });
 
+  it('should not show placeholder by default', () => {
+    const wrapper = mount();
+    expect(wrapper.find('option').length).toEqual(0);
+  });
+
+  it('should optionally set a placeholder', () => {
+    const placeholder = 'Select';
+    const wrapper = mount({ placeholder });
+    expect(wrapper.find('option').text()).toEqual(placeholder);
+    expect(wrapper.find('option').prop('value')).toEqual('');
+  });
+
   it('should optionally set select listeners', () => {
     const onBlur = jest.fn();
     const wrapper = mount({ onBlur });

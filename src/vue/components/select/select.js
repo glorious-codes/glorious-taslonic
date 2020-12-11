@@ -9,6 +9,8 @@ export const select = {
   },
   props: {
     value: { type: String },
+    name: { type: String },
+    placeholder: { type: String },
     validations: { type: Array },
     autofocus: { type: Boolean },
     blocked: { type: Boolean },

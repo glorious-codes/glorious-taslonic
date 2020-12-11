@@ -83,7 +83,7 @@ module.exports = {
         return function(){
           return (
             <Row>
-              <Col xs="4">
+              <Col md="4">
                 <Select blocked>
                   <option value="">Select</option>
                   <option value="apple">Apple</option>
@@ -91,7 +91,7 @@ module.exports = {
                   <option value="banana">Banana</option>
                 </Select>
               </Col>
-              <Col xs="4">
+              <Col md="4">
                 <Select blocked>
                   <option value="">Select</option>
                   <option value="rock">Rock</option>
@@ -99,7 +99,7 @@ module.exports = {
                   <option value="samba">Samba</option>
                 </Select>
               </Col>
-              <Col xs="4">
+              <Col md="4">
                 <Select blocked>
                   <option value="">Select</option>
                   <option value="football">Football</option>

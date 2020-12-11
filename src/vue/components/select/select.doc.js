@@ -42,7 +42,7 @@ module.exports = {
     {
       title: 'Default Select',
       template: `
-      <t-select>
+      <t-select multiple required>
         <option value="">Select</option>
         <option value="apple">Apple</option>
         <option value="orange">Orange</option>
@@ -119,7 +119,7 @@ module.exports = {
       description: 'Blocked selects behave like a block.',
       template: `
       <t-row>
-        <t-col xs="4">
+        <t-col md="4">
           <t-select blocked>
             <option value="">Select</option>
             <option value="apple">Apple</option>
@@ -127,7 +127,7 @@ module.exports = {
             <option value="banana">Banana</option>
           </t-select>
         </t-col>
-        <t-col xs="4">
+        <t-col md="4">
           <t-select blocked>
             <option value="">Select</option>
             <option value="rock">Rock</option>
@@ -135,7 +135,7 @@ module.exports = {
             <option value="samba">Samba</option>
           </t-select>
         </t-col>
-        <t-col xs="4">
+        <t-col md="4">
           <t-select blocked>
             <option value="">Select</option>
             <option value="football">Football</option>

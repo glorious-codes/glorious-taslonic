@@ -1,0 +1,18 @@
+<t-form-control
+  :value="value"
+  :required="required"
+  :blocked="blocked"
+  :validations="validations"
+  form-control-el-selector="textarea"
+>
+  <textarea
+    :cols="cols"
+    :rows="rows"
+    :name="name"
+    :placeholder="placeholder"
+    :readonly="readonly"
+    :autofocus="autofocus"
+    :disabled="disabled"
+    v-on="$listeners"
+  />
+</t-form-control>

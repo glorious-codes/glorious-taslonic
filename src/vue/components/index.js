@@ -10,3 +10,4 @@ export { loader } from './loader/loader';
 export { row } from './row/row';
 export { select } from './select/select';
 export { tag } from './tag/tag';
+export { textarea } from './textarea/textarea';

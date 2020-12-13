@@ -13,7 +13,8 @@ select-arrow()
   position relative
   display inline-block
   input,
-  select
+  select,
+  textarea
     padding-top 10px
     padding-right 10px
     padding-bottom 10px
@@ -40,6 +41,8 @@ select-arrow()
       color var(--t-color-grey-darker)
       border-color var(--t-color-grey-light)
       pointer-events none
+  textarea
+    font-family inherit
   .t-select-wrapper
     position relative
     select
@@ -60,7 +63,8 @@ select-arrow()
         border-color var(--t-color-grey)
   &.t-form-control-invalid
     input,
-    select
+    select,
+    textarea
       border-color var(--t-color-red)
       &:focus,
       &:active
@@ -69,7 +73,8 @@ select-arrow()
   &.t-form-control-blocked
     width 100%
     input,
-    select
+    select,
+    textarea
       width 100%
 
 .t-form-control-error-message

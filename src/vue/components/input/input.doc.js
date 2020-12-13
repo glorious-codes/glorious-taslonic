@@ -44,13 +44,13 @@ module.exports = {
     },
     {
       name: 'disabled',
-      type: 'Boolean/String',
-      values: 'true, false, disabled'
+      type: 'Boolean',
+      values: 'true, false'
     },
     {
       name: 'required',
-      type: 'Boolean/String',
-      values: 'true, false, required'
+      type: 'Boolean',
+      values: 'true, false'
     }
   ],
   examples: [

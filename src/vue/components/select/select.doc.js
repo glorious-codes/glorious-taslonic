@@ -4,7 +4,12 @@ module.exports = {
   properties: [
     {
       name: 'v-model',
-      type: 'String/Number',
+      type: 'String',
+      values: 'Any'
+    },
+    {
+      name: 'placeholder',
+      type: 'String',
       values: 'Any'
     },
     {
@@ -29,13 +34,13 @@ module.exports = {
     },
     {
       name: 'disabled',
-      type: 'Boolean/String',
-      values: 'true, false, disabled'
+      type: 'Boolean',
+      values: 'true, false'
     },
     {
       name: 'required',
-      type: 'Boolean/String',
-      values: 'true, false, required'
+      type: 'Boolean',
+      values: 'true, false'
     }
   ],
   examples: [
@@ -43,6 +48,26 @@ module.exports = {
       title: 'Default Select',
       template: `
       <t-select>
+        <option value="apple">Apple</option>
+        <option value="orange">Orange</option>
+        <option value="banana">Banana</option>
+      </t-select>
+      `
+    },
+    {
+      title: 'Select with placeholder',
+      template: `
+      <t-select placeholder="Select">
+        <option value="apple">Apple</option>
+        <option value="orange">Orange</option>
+        <option value="banana">Banana</option>
+      </t-select>
+      `
+    },
+    {
+      title: 'Select with name',
+      template: `
+      <t-select name="fruit">
         <option value="">Select</option>
         <option value="apple">Apple</option>
         <option value="orange">Orange</option>
@@ -63,8 +88,7 @@ module.exports = {
       <div>
         <t-row vertical-align="middle">
           <t-col md="3">
-            <t-select v-model="fruit">
-              <option value="">Select</option>
+            <t-select v-model="fruit" placeholder="Select">
               <option value="apple">Apple</option>
               <option value="orange">Orange</option>
               <option value="banana">Banana</option>
@@ -75,17 +99,6 @@ module.exports = {
           </t-col>
         </t-row>
       </div>
-      `
-    },
-    {
-      title: 'Select with name',
-      template: `
-      <t-select name="fruit">
-        <option value="">Select</option>
-        <option value="apple">Apple</option>
-        <option value="orange">Orange</option>
-        <option value="banana">Banana</option>
-      </t-select>
       `
     },
     {
@@ -102,8 +115,7 @@ module.exports = {
         }
       },
       template: `
-      <t-select :validations="validations">
-        <option value="">Select</option>
+      <t-select :validations="validations" placeholder="Select">
         <option value="java">Java</option>
         <option value="javascript">Javascript</option>
         <option value="go">Go</option>
@@ -119,25 +131,22 @@ module.exports = {
       description: 'Blocked selects behave like a block.',
       template: `
       <t-row>
-        <t-col xs="4">
-          <t-select blocked>
-            <option value="">Select</option>
+        <t-col md="4">
+          <t-select placeholder="Select" blocked>
             <option value="apple">Apple</option>
             <option value="orange">Orange</option>
             <option value="banana">Banana</option>
           </t-select>
         </t-col>
-        <t-col xs="4">
-          <t-select blocked>
-            <option value="">Select</option>
+        <t-col md="4">
+          <t-select placeholder="Select" blocked>
             <option value="rock">Rock</option>
             <option value="punk">Punk</option>
             <option value="samba">Samba</option>
           </t-select>
         </t-col>
-        <t-col xs="4">
-          <t-select blocked>
-            <option value="">Select</option>
+        <t-col md="4">
+          <t-select placeholder="Select" blocked>
             <option value="football">Football</option>
             <option value="basketball">Basketball</option>
             <option value="baseboll">Baseboll</option>
@@ -149,8 +158,7 @@ module.exports = {
     {
       title: 'Select with autofocus',
       template: `
-      <t-select autofocus>
-        <option value="">Select</option>
+      <t-select placeholder="Select" autofocus>
         <option value="apple">Apple</option>
         <option value="orange">Orange</option>
         <option value="banana">Banana</option>
@@ -160,8 +168,7 @@ module.exports = {
     {
       title: 'Disabled Select',
       template: `
-      <t-select disabled>
-        <option value="">Select</option>
+      <t-select placeholder="Select" disabled>
         <option value="apple">Apple</option>
         <option value="orange">Orange</option>
         <option value="banana">Banana</option>
@@ -171,8 +178,7 @@ module.exports = {
     {
       title: 'Required Select',
       template: `
-      <t-select required>
-        <option value="">Select</option>
+      <t-select placeholder="Select" required>
         <option value="apple">Apple</option>
         <option value="orange">Orange</option>
         <option value="banana">Banana</option>
@@ -197,8 +203,7 @@ module.exports = {
       <div>
         <t-row vertical-align="middle">
           <t-col md="3">
-            <t-select @blur="count" blocked>
-              <option value="">Select</option>
+            <t-select @blur="count" placeholder="Select" blocked>
               <option value="apple">Apple</option>
               <option value="orange">Orange</option>
               <option value="banana">Banana</option>

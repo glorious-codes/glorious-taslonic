@@ -1,8 +1,9 @@
 import React from 'react';
 import { FormControl } from '@react/components/form-control/form-control';
-import selectService from '@base/services/select/select';
 
-export const Select = ({
+export const Textarea = ({
+  cols,
+  rows,
   value,
   placeholder,
   validations,
@@ -18,14 +19,15 @@ export const Select = ({
       required={required}
       blocked={blocked}
       validations={validations}
-      formControlElSelector="select"
+      formControlElSelector="textarea"
     >
-      <span className={selectService.buildWrapperCssClasses({ disabled })}>
-        <select disabled={disabled} {...rest}>
-          { placeholder && <option value="">{placeholder}</option> }
-          { children }
-        </select>
-      </span>
+      <textarea
+        disabled={disabled}
+        placeholder={placeholder}
+        cols={cols}
+        rows={rows}
+        {...rest}
+      >{ children }</textarea>
     </FormControl>
   );
 };

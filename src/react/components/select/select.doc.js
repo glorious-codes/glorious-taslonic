@@ -3,6 +3,16 @@ module.exports = {
   description: 'Abstration of a native select.',
   properties: [
     {
+      name: 'value',
+      type: 'String',
+      values: 'Any'
+    },
+    {
+      name: 'placeholder',
+      type: 'String',
+      values: 'Any'
+    },
+    {
       name: 'validations',
       type: 'Array',
       values: '[{ isValid: <Boolean> Function, errorMessage: String }]'
@@ -19,13 +29,13 @@ module.exports = {
     },
     {
       name: 'disabled',
-      type: 'Boolean/String',
-      values: 'true, false, disabled'
+      type: 'Boolean',
+      values: 'true, false'
     },
     {
       name: 'required',
-      type: 'Boolean/String',
-      values: 'true, false, required'
+      type: 'Boolean',
+      values: 'true, false'
     }
   ],
   examples: [
@@ -37,7 +47,6 @@ module.exports = {
         return function(){
           return (
             <Select>
-              <option value="">Select</option>
               <option value="apple">Apple</option>
               <option value="orange">Orange</option>
               <option value="banana">Banana</option>
@@ -60,8 +69,7 @@ module.exports = {
           }]
 
           return (
-            <Select validations={validations}>
-              <option value="">Select</option>
+            <Select validations={validations} placeholder="Select">
               <option value="java">Java</option>
               <option value="javascript">Javascript</option>
               <option value="go">Go</option>
@@ -83,25 +91,22 @@ module.exports = {
         return function(){
           return (
             <Row>
-              <Col xs="4">
-                <Select blocked>
-                  <option value="">Select</option>
+              <Col md="4">
+                <Select placeholder="Select" blocked>
                   <option value="apple">Apple</option>
                   <option value="orange">Orange</option>
                   <option value="banana">Banana</option>
                 </Select>
               </Col>
-              <Col xs="4">
-                <Select blocked>
-                  <option value="">Select</option>
+              <Col md="4">
+                <Select placeholder="Select" blocked>
                   <option value="rock">Rock</option>
                   <option value="punk">Punk</option>
                   <option value="samba">Samba</option>
                 </Select>
               </Col>
-              <Col xs="4">
-                <Select blocked>
-                  <option value="">Select</option>
+              <Col md="4">
+                <Select placeholder="Select" blocked>
                   <option value="football">Football</option>
                   <option value="basketball">Basketball</option>
                   <option value="baseboll">Baseboll</option>
@@ -119,8 +124,7 @@ module.exports = {
 
         return function(){
           return (
-            <Select autoFocus>
-              <option value="">Select</option>
+            <Select placeholder="Select" autoFocus>
               <option value="apple">Apple</option>
               <option value="orange">Orange</option>
               <option value="banana">Banana</option>
@@ -136,8 +140,7 @@ module.exports = {
 
         return function(){
           return (
-            <Select disabled>
-              <option value="">Select</option>
+            <Select placeholder="Select" disabled>
               <option value="apple">Apple</option>
               <option value="orange">Orange</option>
               <option value="banana">Banana</option>
@@ -153,8 +156,7 @@ module.exports = {
 
         return function(){
           return (
-            <Select required>
-              <option value="">Select</option>
+            <Select placeholder="Select" required>
               <option value="apple">Apple</option>
               <option value="orange">Orange</option>
               <option value="banana">Banana</option>
@@ -179,8 +181,7 @@ module.exports = {
             <>
               <Row verticalAlign="middle">
                 <Col md="3">
-                  <Select name="fruit" onChange={handleDataChange}>
-                    <option value="">Select</option>
+                  <Select name="fruit" onChange={handleDataChange} placeholder="Select">
                     <option value="apple">Apple</option>
                     <option value="orange">Orange</option>
                     <option value="banana">Banana</option>

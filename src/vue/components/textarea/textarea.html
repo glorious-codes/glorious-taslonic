@@ -3,10 +3,11 @@
   :required="required"
   :blocked="blocked"
   :validations="validations"
-  form-control-el-selector="input"
+  form-control-el-selector="textarea"
 >
-  <input
-    :type="inputType"
+  <textarea
+    :cols="cols"
+    :rows="rows"
     :name="name"
     :placeholder="placeholder"
     :readonly="readonly"

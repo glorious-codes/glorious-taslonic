@@ -52,7 +52,7 @@ describe('Select', () => {
   });
 
   it('should optionally set a name', () => {
-    const name = 'fruit'
+    const name = 'fruit';
     const wrapper = mount({ name });
     expect(wrapper.find('select').attributes('name')).toEqual(name);
   });

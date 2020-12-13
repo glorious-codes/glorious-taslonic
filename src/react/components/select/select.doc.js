@@ -3,6 +3,11 @@ module.exports = {
   description: 'Abstration of a native select.',
   properties: [
     {
+      name: 'value',
+      type: 'String',
+      values: 'Any'
+    },
+    {
       name: 'placeholder',
       type: 'String',
       values: 'Any'

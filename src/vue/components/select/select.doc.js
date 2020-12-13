@@ -4,7 +4,7 @@ module.exports = {
   properties: [
     {
       name: 'v-model',
-      type: 'String/Number',
+      type: 'String',
       values: 'Any'
     },
     {

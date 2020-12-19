@@ -20,7 +20,7 @@ export const Banner = ({
   return isVisible &&
     (
       <div className={bannerService.buildCssClasses({ theme })} {...rest}>
-        <div className="t-banner-content">
+        <div className="t-banner-content" data-banner-content>
           { children }
         </div>
         { onTriggerClick && buildTrigger(triggerText, onTriggerClick) }

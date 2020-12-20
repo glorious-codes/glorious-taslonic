@@ -1,0 +1,16 @@
+<div :class="classes">
+  <t-loader v-if="isFetching" data-form-loader />
+  <t-banner
+    v-if="banner"
+    theme="danger"
+    trigger-text="Retry"
+    :on-trigger-click="banner.onTriggerClick"
+    :on-close="() => setBanner(null)"
+    data-fetcher-error-banner
+  >
+    {{ banner.message }}
+  </t-banner>
+  <div class="t-fetcher-content" aria-live="polite" :aria-busy="isBusy" data-fetcher-content>
+    <slot></slot>
+  </div>
+</div>

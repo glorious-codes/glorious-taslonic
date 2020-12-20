@@ -3,6 +3,7 @@ export { button } from './button/button';
 export { card } from './card/card';
 export { col } from './col/col';
 export { container } from './container/container';
+export { fetcher } from './fetcher/fetcher';
 export { field } from './field/field';
 export { form } from './form/form';
 export { input } from './input/input';

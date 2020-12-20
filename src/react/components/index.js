@@ -3,6 +3,7 @@ export { Button } from '@react/components/button/button';
 export { Card } from '@react/components/card/card';
 export { Col } from '@react/components/col/col';
 export { Container } from '@react/components/container/container';
+export { Fetcher } from '@react/components/fetcher/fetcher';
 export { Field } from '@react/components/field/field';
 export { Form } from '@react/components/form/form';
 export { Input } from '@react/components/input/input';

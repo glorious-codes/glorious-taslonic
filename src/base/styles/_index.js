@@ -8,6 +8,7 @@ import './col.styl';
 import './confirm.styl';
 import './container.styl';
 import './dialog.styl';
+import './fetcher.styl';
 import './field.styl';
 import './form.styl';
 import './form-control.styl';

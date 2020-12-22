@@ -4,9 +4,9 @@ import { getRootElProp } from '@react/services/testing/testing';
 import { Field } from './field';
 
 describe('Field', () => {
-  function mountComponent({ label, required, blocked } = {}, content = <input />){
+  function mountComponent({ label, required, block } = {}, content = <input />){
     return mount(
-      <Field label={ label } required={ required } blocked={ blocked }>
+      <Field label={ label } required={ required } block={ block }>
         { content }
       </Field>
     );
@@ -26,6 +26,11 @@ describe('Field', () => {
   it('should contain required css class if required prop has been given as true', () => {
     const wrapper = mountComponent({ required: true });
     expect(getRootElProp(wrapper, 'className').includes('t-field-required')).toEqual(true);
+  });
+
+  it('should contain block css class if block prop has been given as true', () => {
+    const wrapper = mountComponent({ block: true });
+    expect(getRootElProp(wrapper, 'className').includes('t-field-block')).toEqual(true);
   });
 
   it('should contain required css class if no required prop has been passed but content is required', () => {

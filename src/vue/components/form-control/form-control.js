@@ -4,7 +4,7 @@ import template from './form-control.html';
 
 export const formControl = {
   name: 't-form-control',
-  props: ['value', 'required', 'autofocus', 'validations', 'formControlElSelector', 'blocked'],
+  props: ['value', 'required', 'autofocus', 'validations', 'formControlElSelector', 'block'],
   data(){
     return {
       errorMessage: '',
@@ -48,8 +48,8 @@ export const formControl = {
   },
   computed: {
     classes(){
-      const { blocked, errorMessage } = this;
-      return formControlService.buildCssClasses({ blocked, errorMessage });
+      const { block, errorMessage } = this;
+      return formControlService.buildCssClasses({ block, errorMessage });
     }
   },
   template

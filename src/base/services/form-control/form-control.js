@@ -4,12 +4,12 @@ import formService from '@base/services/form/form';
 
 const _public = {};
 
-_public.buildCssClasses = ({ errorMessage, blocked } = {}) => {
+_public.buildCssClasses = ({ errorMessage, block } = {}) => {
   const baseCssClass = getBaseCssClass();
   const cssClasses = [baseCssClass];
   handleInvalidCssClass(errorMessage, cssClasses, baseCssClass);
   propBasedCssClassService.handleBooleanProp(
-    { blocked },
+    { block },
     isValidBooleanProp,
     cssClasses,
     baseCssClass
@@ -30,7 +30,7 @@ function getBaseCssClass(){
 }
 
 function isValidBooleanProp(propName){
-  return ['blocked'].includes(propName);
+  return ['block'].includes(propName);
 }
 
 function handleInvalidCssClass(errorMessage, cssClasses, baseCssClass){

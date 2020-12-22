@@ -9,7 +9,7 @@ describe('Button', () => {
     return mount(
       <Button
         theme={ props.theme }
-        blocked={ props.blocked }
+        block={ props.block }
         tag={props.tag}
         { ...props }>
         { content }
@@ -48,9 +48,9 @@ describe('Button', () => {
     expect(getRootElProp(wrapper, 'className').includes('t-button-lookless')).toEqual(true);
   });
 
-  it('should optionally set as blocked', () => {
-    const wrapper = mountComponent({ blocked: true });
-    expect(getRootElProp(wrapper, 'className').includes('t-button-blocked')).toEqual(true);
+  it('should optionally set as block', () => {
+    const wrapper = mountComponent({ block: true });
+    expect(getRootElProp(wrapper, 'className').includes('t-button-block')).toEqual(true);
   });
 
   it('should optionally render custom attributes', () => {

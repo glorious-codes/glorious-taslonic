@@ -38,7 +38,7 @@ module.exports = {
       values: 'true, false'
     },
     {
-      name: 'blocked',
+      name: 'block',
       type: 'Boolean',
       values: 'true, false'
     },
@@ -73,7 +73,7 @@ module.exports = {
       <div>
         <t-row vertical-align="middle">
           <t-col md="3">
-            <t-input v-model="name" placeholder="Enter your name" blocked />
+            <t-input v-model="name" placeholder="Enter your name" block />
           </t-col>
           <t-col md="3" v-if="name">
             Name: {{ name }}
@@ -89,24 +89,24 @@ module.exports = {
       <div>
         <t-row>
           <t-col md="4">
-            <t-input type="email" placeholder="Email" blocked />
+            <t-input type="email" placeholder="Email" block />
           </t-col>
           <t-col md="4">
-            <t-input type="number" placeholder="Number" blocked />
+            <t-input type="number" placeholder="Number" block />
           </t-col>
           <t-col md="4">
-            <t-input type="password" placeholder="Password" blocked />
+            <t-input type="password" placeholder="Password" block />
           </t-col>
         </t-row>
         <t-row>
           <t-col md="4">
-            <t-input type="search" placeholder="Search" blocked />
+            <t-input type="search" placeholder="Search" block />
           </t-col>
           <t-col md="4">
-            <t-input type="tel" placeholder="Phone" blocked />
+            <t-input type="tel" placeholder="Phone" block />
           </t-col>
           <t-col md="4">
-            <t-input type="url" placeholder="URL" blocked />
+            <t-input type="url" placeholder="URL" block />
           </t-col>
         </t-row>
       </div>
@@ -158,18 +158,18 @@ module.exports = {
       `
     },
     {
-      title: 'Input blocked',
-      description: 'Blocked inputs behave like a block.',
+      title: 'Input block',
+      description: 'Block property makes inputs behave like a block.',
       template: `
       <t-row>
         <t-col xs="4">
-          <t-input blocked />
+          <t-input block />
         </t-col>
         <t-col xs="4">
-          <t-input blocked />
+          <t-input block />
         </t-col>
         <t-col xs="4">
-          <t-input blocked />
+          <t-input block />
         </t-col>
       </t-row>
       `
@@ -204,7 +204,7 @@ module.exports = {
       <div>
         <t-row vertical-align="middle">
           <t-col md="3">
-            <t-input @blur="count" blocked />
+            <t-input @blur="count" block />
           </t-col>
           <t-col md="3" v-if="counter">
             Blurred {{ counter }}x

@@ -14,7 +14,7 @@ module.exports = {
       values: 'true, false'
     },
     {
-      name: 'blocked',
+      name: 'block',
       type: 'Boolean',
       values: 'true, false'
     }
@@ -81,8 +81,8 @@ module.exports = {
       }
     },
     {
-      title: 'Blocked Field',
-      description: 'Blocked fields behave like a block.',
+      title: 'Block Field',
+      description: 'Block property makes fields behave like a block.',
       controller: function(){
         const { useState } = React;
         const { Field, Input, Row, Col } = taslonicReact;
@@ -93,13 +93,13 @@ module.exports = {
           return (
             <Row>
               <Col md="6">
-                <Field label="First Name" blocked>
-                  <Input blocked />
+                <Field label="First Name" block>
+                  <Input block />
                 </Field>
               </Col>
               <Col md="6">
-                <Field label="Last Name" blocked>
-                  <Input blocked />
+                <Field label="Last Name" block>
+                  <Input block />
                 </Field>
               </Col>
             </Row>

@@ -7,7 +7,7 @@ export const button = {
   components: {
     tLoader: loader
   },
-  props: ['theme', 'blocked', 'tag', 'type'],
+  props: ['theme', 'block', 'tag', 'type'],
   data(){
     return {
       submitting: false
@@ -32,8 +32,8 @@ export const button = {
   },
   computed: {
     classes(){
-      const { theme, blocked } = this;
-      return buttonService.buildCssClasses({ theme, blocked });
+      const { theme, block } = this;
+      return buttonService.buildCssClasses({ theme, block });
     },
     tagName(){
       return buttonService.buildTagName(this.tag);

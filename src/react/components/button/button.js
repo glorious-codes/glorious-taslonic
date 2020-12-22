@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import buttonService from '@base/services/button/button';
 import { Loader } from '@react/components/loader/loader';
 
-export const Button = ({ theme, blocked, tag, type = 'button', children, ...rest }) => {
+export const Button = ({ theme, block, tag, type = 'button', children, ...rest }) => {
   const { buildCssClasses, findParentFormModel } = buttonService;
   const TagName = buttonService.buildTagName(tag);
   const [submitting, setSubmitting] = useState();
@@ -31,7 +31,7 @@ export const Button = ({ theme, blocked, tag, type = 'button', children, ...rest
 
   return (
     <TagName
-      className={buildCssClasses({ theme, blocked })}
+      className={buildCssClasses({ theme, block })}
       tabIndex="0"
       type={type}
       ref={buttonEl}

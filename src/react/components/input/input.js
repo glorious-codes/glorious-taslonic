@@ -7,7 +7,7 @@ export const Input = ({
   value,
   placeholder,
   validations,
-  blocked,
+  block,
   disabled,
   required,
   ...rest
@@ -16,7 +16,7 @@ export const Input = ({
     <FormControl
       value={value}
       required={required}
-      blocked={blocked}
+      block={block}
       validations={validations}
       formControlElSelector="input"
     >

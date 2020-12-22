@@ -13,7 +13,7 @@ export const select = {
     placeholder: { type: String },
     validations: { type: Array },
     autofocus: { type: Boolean },
-    blocked: { type: Boolean },
+    block: { type: Boolean },
     required: { type: Boolean },
     disabled: { type: Boolean }
   },

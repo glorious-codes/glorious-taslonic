@@ -3,7 +3,7 @@ import template from './field.html';
 
 export const field = {
   name: 't-field',
-  props: ['label', 'required', 'blocked'],
+  props: ['label', 'required', 'block'],
   data(){
     return {
       element: null
@@ -19,8 +19,8 @@ export const field = {
   },
   computed: {
     classes(){
-      const { required, blocked, element } = this;
-      return fieldService.buildCssClasses({ required, blocked, element });
+      const { required, block, element } = this;
+      return fieldService.buildCssClasses({ required, block, element });
     }
   },
   template

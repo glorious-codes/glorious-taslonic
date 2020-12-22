@@ -15,7 +15,7 @@ export const textarea = {
     validations: { type: Array },
     autofocus: { type: Boolean },
     readonly: { type: Boolean },
-    blocked: { type: Boolean },
+    block: { type: Boolean },
     required: { type: Boolean },
     disabled: { type: Boolean }
   },

@@ -6,7 +6,7 @@ export const Select = ({
   value,
   placeholder,
   validations,
-  blocked,
+  block,
   disabled,
   required,
   children,
@@ -16,7 +16,7 @@ export const Select = ({
     <FormControl
       value={value}
       required={required}
-      blocked={blocked}
+      block={block}
       validations={validations}
       formControlElSelector="select"
     >

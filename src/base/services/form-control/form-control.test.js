@@ -14,9 +14,9 @@ describe('Form Control Service', () => {
     expect(cssClasses).toEqual('t-form-control');
   });
 
-  it('should append blocked modifier css class if it has been given as true', () => {
-    const cssClasses = formControlService.buildCssClasses({ blocked: true });
-    expect(cssClasses).toEqual('t-form-control t-form-control-blocked');
+  it('should append block modifier css class if it has been given as true', () => {
+    const cssClasses = formControlService.buildCssClasses({ block: true });
+    expect(cssClasses).toEqual('t-form-control t-form-control-block');
   });
 
   it('should build required validation model', () => {

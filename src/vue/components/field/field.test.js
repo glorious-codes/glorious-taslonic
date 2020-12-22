@@ -22,6 +22,11 @@ describe('Field', () => {
     expect(wrapper.classes()).toContain('t-field-required');
   });
 
+  it('should contain block css class if block prop has been given as true', () => {
+    const wrapper = mount({ block: true });
+    expect(wrapper.classes()).toContain('t-field-block');
+  });
+
   it('should contain required css class if no required prop has been passed but content is required', () => {
     const wrapper = mount({}, '<input type="text" required />');
     wrapper.vm.$nextTick(() => {

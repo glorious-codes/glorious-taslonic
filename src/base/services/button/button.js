@@ -4,7 +4,7 @@ import propBasedTagNameService from '@base/services/prop-based-tag-name/prop-bas
 
 const _public = {};
 
-_public.buildCssClasses = ({ theme, blocked } = {}) => {
+_public.buildCssClasses = ({ theme, block } = {}) => {
   const baseCssClass = getBaseCssClass();
   const cssClasses = [baseCssClass];
   propBasedCssClassService.handleProp(
@@ -14,7 +14,7 @@ _public.buildCssClasses = ({ theme, blocked } = {}) => {
     baseCssClass
   );
   propBasedCssClassService.handleBooleanProp(
-    { blocked },
+    { block },
     isValidBooleanProp,
     cssClasses,
     baseCssClass
@@ -46,7 +46,7 @@ function isValidTheme(theme){
 }
 
 function isValidBooleanProp(propName){
-  return ['blocked'].includes(propName);
+  return ['block'].includes(propName);
 }
 
 function isValidType(type){

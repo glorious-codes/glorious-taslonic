@@ -14,7 +14,7 @@ module.exports = {
       values: 'true, false'
     },
     {
-      name: 'blocked',
+      name: 'block',
       type: 'Boolean',
       values: 'true, false'
     }
@@ -72,18 +72,18 @@ module.exports = {
       `
     },
     {
-      title: 'Blocked Field',
-      description: 'Blocked fields behave like a block.',
+      title: 'Block Field',
+      description: 'Block property makes fields behave like a block.',
       template: `
       <t-row>
         <t-col md="6">
-          <t-field label="First Name" blocked>
-            <t-input blocked />
+          <t-field label="First Name" block>
+            <t-input block />
           </t-field>
         </t-col>
         <t-col md="6">
-          <t-field label="Last Name" blocked>
-            <t-input blocked />
+          <t-field label="Last Name" block>
+            <t-input block />
           </t-field>
         </t-col>
       </t-row>

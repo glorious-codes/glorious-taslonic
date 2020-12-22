@@ -37,9 +37,9 @@ describe('Form Control', () => {
     });
   });
 
-  it('should optionally set form control as blocked', () => {
-    const wrapper = mount({ blocked: true });
-    expect(wrapper.classes()).toContain('t-form-control-blocked');
+  it('should optionally set form control as block', () => {
+    const wrapper = mount({ block: true });
+    expect(wrapper.classes()).toContain('t-form-control-block');
   });
 
   it('should emit input value when user fills input', () => {

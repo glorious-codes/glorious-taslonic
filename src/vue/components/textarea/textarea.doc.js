@@ -33,7 +33,7 @@ module.exports = {
       values: '[{ isValid: <Boolean> Function, errorMessage: String }]'
     },
     {
-      name: 'blocked',
+      name: 'block',
       type: 'Boolean',
       values: 'true, false'
     },
@@ -77,7 +77,7 @@ module.exports = {
       template: `
       <t-row vertical-align="middle">
         <t-col md="6">
-          <t-textarea v-model="bio" placeholder="Tell us a bit about you..." blocked />
+          <t-textarea v-model="bio" placeholder="Tell us a bit about you..." block />
         </t-col>
         <t-col md="6" v-if="bio">
           Bio: {{ bio }}
@@ -120,15 +120,15 @@ module.exports = {
       `
     },
     {
-      title: 'Blocked Textarea',
-      description: 'Blocked textareas behave like a block.',
+      title: 'Block Textarea',
+      description: 'Block property makes textareas behave like a block.',
       template: `
       <t-row>
         <t-col md="6">
-          <t-textarea blocked />
+          <t-textarea block />
         </t-col>
         <t-col md="6">
-          <t-textarea blocked />
+          <t-textarea block />
         </t-col>
       </t-row>
       `
@@ -174,7 +174,7 @@ module.exports = {
       template: `
       <t-row vertical-align="middle">
         <t-col md="6">
-          <t-textarea @blur="count" blocked />
+          <t-textarea @blur="count" block />
         </t-col>
         <t-col md="6" v-if="counter">
           Blurred {{ counter }}x

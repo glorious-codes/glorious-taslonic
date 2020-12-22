@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FormControlModel } from '@base/models/form-control/form-control';
 import formControlService from '@base/services/form-control/form-control';
 
-export const FormControl = ({ value, required, validations, formControlElSelector, blocked, children }) => {
+export const FormControl = ({ value, required, validations, formControlElSelector, block, children }) => {
   const [formControlModel, setFormControlModel] = useState();
   const [currentValue, setCurrentValue] = useState(value);
   const [errorMessage, setErrorMessage] = useState();
@@ -34,7 +34,7 @@ export const FormControl = ({ value, required, validations, formControlElSelecto
   }, [required]);
 
   return (
-    <span className={buildCssClasses({ errorMessage, blocked })} ref={formControlEl}>
+    <span className={buildCssClasses({ errorMessage, block })} ref={formControlEl}>
       { children }
       <span className="t-form-control-error-message" data-form-control-error-message>
         { errorMessage }

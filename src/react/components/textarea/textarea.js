@@ -7,7 +7,7 @@ export const Textarea = ({
   value,
   placeholder,
   validations,
-  blocked,
+  block,
   disabled,
   required,
   children,
@@ -17,7 +17,7 @@ export const Textarea = ({
     <FormControl
       value={value}
       required={required}
-      blocked={blocked}
+      block={block}
       validations={validations}
       formControlElSelector="textarea"
     >

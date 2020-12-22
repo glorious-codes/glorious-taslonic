@@ -19,12 +19,12 @@ describe('Button Service', () => {
     expect(cssClasses).toEqual('t-button');
   });
 
-  it('should append blocked modifier css class if it has been given as true', () => {
-    const cssClasses = buttonService.buildCssClasses({ blocked: true });
-    expect(cssClasses).toEqual('t-button t-button-blocked');
+  it('should append block modifier css class if it has been given as true', () => {
+    const cssClasses = buttonService.buildCssClasses({ block: true });
+    expect(cssClasses).toEqual('t-button t-button-block');
   });
 
-  it('should not append blocked modifier css class if it has not been given', () => {
+  it('should not append block modifier css class if it has not been given', () => {
     const cssClasses = buttonService.buildCssClasses();
     expect(cssClasses).toEqual('t-button');
   });

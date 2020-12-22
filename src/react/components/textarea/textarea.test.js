@@ -12,7 +12,7 @@ describe('Textarea', () => {
         placeholder={ props.placeholder }
         value={ props.value }
         validations={ props.validations }
-        blocked={ props.blocked }
+        block={ props.block }
         disabled={ props.disabled }
         required={ props.required }
         { ...props }
@@ -40,10 +40,10 @@ describe('Textarea', () => {
     expect(wrapper.find(FormControl).prop('validations')).toEqual(validations);
   });
 
-  it('should pass blocked to form control', () => {
-    const blocked = true;
-    const wrapper = mount({ blocked });
-    expect(wrapper.find(FormControl).prop('blocked')).toEqual(blocked);
+  it('should pass block to form control', () => {
+    const block = true;
+    const wrapper = mount({ block });
+    expect(wrapper.find(FormControl).prop('block')).toEqual(block);
   });
 
   it('should form control query for a textarea', () => {

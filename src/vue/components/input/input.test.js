@@ -25,10 +25,10 @@ describe('Input', () => {
     expect(wrapper.findComponent(formControl).props('validations')).toEqual(validations);
   });
 
-  it('should pass blocked to form control', () => {
-    const blocked = true;
-    const wrapper = mount({ blocked });
-    expect(wrapper.findComponent(formControl).props('blocked')).toEqual(blocked);
+  it('should pass block to form control', () => {
+    const block = true;
+    const wrapper = mount({ block });
+    expect(wrapper.findComponent(formControl).props('block')).toEqual(block);
   });
 
   it('should form control query for an input', () => {

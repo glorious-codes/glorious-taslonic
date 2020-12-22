@@ -33,7 +33,7 @@ module.exports = {
       values: '[{ isValid: <Boolean> Function, errorMessage: String }]'
     },
     {
-      name: 'blocked',
+      name: 'block',
       type: 'Boolean',
       values: 'true, false'
     },
@@ -125,8 +125,8 @@ module.exports = {
       }
     },
     {
-      title: 'Blocked Textarea',
-      description: 'Blocked textareas behave like a block.',
+      title: 'Block Textarea',
+      description: 'Block property makes textareas behave like a block.',
       controller: function(){
         const { Row, Col, Textarea } = taslonicReact;
 
@@ -134,10 +134,10 @@ module.exports = {
           return (
             <Row>
               <Col md="6">
-                <Textarea blocked />
+                <Textarea block />
               </Col>
               <Col md="6">
-                <Textarea blocked />
+                <Textarea block />
               </Col>
             </Row>
           )
@@ -204,7 +204,7 @@ module.exports = {
           return (
             <Row verticalAlign="middle">
               <Col md="6">
-                <Textarea onBlur={() => setCounter(counter + 1)} blocked />
+                <Textarea onBlur={() => setCounter(counter + 1)} block />
               </Col>
               {
                 counter > 0 &&

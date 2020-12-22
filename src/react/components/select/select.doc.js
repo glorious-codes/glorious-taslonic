@@ -18,7 +18,7 @@ module.exports = {
       values: '[{ isValid: <Boolean> Function, errorMessage: String }]'
     },
     {
-      name: 'blocked',
+      name: 'block',
       type: 'Boolean',
       values: 'true, false'
     },
@@ -83,8 +83,8 @@ module.exports = {
       `
     },
     {
-      title: 'Blocked Select',
-      description: 'Blocked selects behave like a block.',
+      title: 'Block Select',
+      description: 'Block property makes selects behave like a block.',
       controller: function(){
         const { Row, Col, Select } = taslonicReact;
 
@@ -92,21 +92,21 @@ module.exports = {
           return (
             <Row>
               <Col md="4">
-                <Select placeholder="Select" blocked>
+                <Select placeholder="Select" block>
                   <option value="apple">Apple</option>
                   <option value="orange">Orange</option>
                   <option value="banana">Banana</option>
                 </Select>
               </Col>
               <Col md="4">
-                <Select placeholder="Select" blocked>
+                <Select placeholder="Select" block>
                   <option value="rock">Rock</option>
                   <option value="punk">Punk</option>
                   <option value="samba">Samba</option>
                 </Select>
               </Col>
               <Col md="4">
-                <Select placeholder="Select" blocked>
+                <Select placeholder="Select" block>
                   <option value="football">Football</option>
                   <option value="basketball">Basketball</option>
                   <option value="baseboll">Baseboll</option>

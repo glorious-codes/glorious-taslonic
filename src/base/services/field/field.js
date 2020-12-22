@@ -2,11 +2,11 @@ import propBasedCssClassService from '@base/services/prop-based-css-class/prop-b
 
 const _public = {};
 
-_public.buildCssClasses = ({ required, blocked, element } = {}) => {
+_public.buildCssClasses = ({ required, block, element } = {}) => {
   const baseCssClass = getBaseCssClass();
   const cssClasses = [baseCssClass, buildRequiredCssClass(required, element, baseCssClass)];
   propBasedCssClassService.handleBooleanProp(
-    { blocked },
+    { block },
     isValidBooleanProp,
     cssClasses,
     baseCssClass
@@ -19,7 +19,7 @@ function getBaseCssClass(){
 }
 
 function isValidBooleanProp(propName){
-  return ['blocked'].includes(propName);
+  return ['block'].includes(propName);
 }
 
 function buildRequiredCssClass(required, element, baseCssClass){

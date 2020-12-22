@@ -16,7 +16,7 @@ describe('Form Control', () => {
         required={ props.required }
         validations={ props.validations }
         formControlElSelector={ props.formControlElSelector || 'input' }
-        blocked={ props.blocked }>
+        block={ props.block }>
         { content }
       </FormControl>
     );
@@ -53,9 +53,9 @@ describe('Form Control', () => {
     expect(getRootElProp(wrapper, 'className').includes('t-form-control-invalid')).toEqual(true);
   });
 
-  it('should optionally set form control as blocked', () => {
-    const wrapper = mountComponent({ blocked: true });
-    expect(getRootElProp(wrapper, 'className').includes('t-form-control-blocked')).toEqual(true);
+  it('should optionally set form control as block', () => {
+    const wrapper = mountComponent({ block: true });
+    expect(getRootElProp(wrapper, 'className').includes('t-form-control-block')).toEqual(true);
   });
 
   it('should accept custom validations', () => {

@@ -3,8 +3,8 @@ module.exports = {
   description: 'Abstraction of a native button.',
   properties: [
     {
-      name: 'blocked',
-      type: 'Boolean, String',
+      name: 'block',
+      type: 'Boolean',
       values: 'true, false'
     },
     {
@@ -38,8 +38,8 @@ module.exports = {
       }
     },
     {
-      title: 'Button blocked',
-      description: 'Blocked buttons behave like a block.',
+      title: 'Block Button',
+      description: 'Block property makes buttons behave like a block.',
       controller: function(){
         const { Button, Col, Row } = taslonicReact;
 
@@ -47,12 +47,12 @@ module.exports = {
           return (
             <Row>
               <Col sm="6">
-                <Button blocked>
+                <Button block>
                   Blocked Button
                 </Button>
               </Col>
               <Col sm="6">
-                <Button tag="a" blocked>
+                <Button tag="a" block>
                   Blocked Button
                 </Button>
               </Col>
@@ -89,12 +89,12 @@ module.exports = {
           return (
             <Row verticalAlign="middle">
               <Col sm="4">
-                <Button theme="primary" blocked>
+                <Button theme="primary" block>
                   Primary
                 </Button>
               </Col>
               <Col sm="4">
-                <Button theme="secondary" blocked>
+                <Button theme="secondary" block>
                   Secondary
                 </Button>
               </Col>
@@ -117,17 +117,17 @@ module.exports = {
           return (
             <Row verticalAlign="middle">
               <Col sm="3">
-                <Button theme="primary" blocked disabled>
+                <Button theme="primary" block disabled>
                   Primary
                 </Button>
               </Col>
               <Col sm="3">
-                <Button theme="secondary" blocked disabled>
+                <Button theme="secondary" block disabled>
                   Secondary
                 </Button>
               </Col>
               <Col sm="3">
-                <Button blocked disabled>
+                <Button block disabled>
                   Default
                 </Button>
               </Col>

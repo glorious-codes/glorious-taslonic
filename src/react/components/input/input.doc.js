@@ -38,7 +38,7 @@ module.exports = {
       values: 'true, false'
     },
     {
-      name: 'blocked',
+      name: 'block',
       type: 'Boolean',
       values: 'true, false'
     },
@@ -77,24 +77,24 @@ module.exports = {
             <>
               <Row>
                 <Col md="4">
-                  <Input type="email" placeholder="Email" blocked />
+                  <Input type="email" placeholder="Email" block />
                 </Col>
                 <Col md="4">
-                  <Input type="number" placeholder="Number" blocked />
+                  <Input type="number" placeholder="Number" block />
                 </Col>
                 <Col md="4">
-                  <Input type="password" placeholder="Password" blocked />
+                  <Input type="password" placeholder="Password" block />
                 </Col>
               </Row>
               <Row>
                 <Col md="4">
-                  <Input type="search" placeholder="Search" blocked />
+                  <Input type="search" placeholder="Search" block />
                 </Col>
                 <Col md="4">
-                  <Input type="tel" placeholder="Phone" blocked />
+                  <Input type="tel" placeholder="Phone" block />
                 </Col>
                 <Col md="4">
-                  <Input type="url" placeholder="URL" blocked />
+                  <Input type="url" placeholder="URL" block />
                 </Col>
               </Row>
             </>
@@ -185,8 +185,8 @@ module.exports = {
       }
     },
     {
-      title: 'Input blocked',
-      description: 'Blocked inputs behave like a block.',
+      title: 'Input block',
+      description: 'Block property makes inputs behave like a block.',
       controller: function(){
         const { Input, Row, Col } = taslonicReact;
 
@@ -194,13 +194,13 @@ module.exports = {
           return (
             <Row>
               <Col xs="4">
-                <Input blocked />
+                <Input block />
               </Col>
               <Col xs="4">
-                <Input blocked />
+                <Input block />
               </Col>
               <Col xs="4">
-                <Input blocked />
+                <Input block />
               </Col>
             </Row>
           );
@@ -251,7 +251,7 @@ module.exports = {
                   name="city"
                   placeholder="Enter your city name"
                   onChange={handleChange}
-                  blocked
+                  block
                 />
               </Col>
               <Col md="6">

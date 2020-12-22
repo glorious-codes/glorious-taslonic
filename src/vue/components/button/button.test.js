@@ -37,9 +37,9 @@ describe('Button', () => {
     expect(wrapper.classes()).toContain('t-button-lookless');
   });
 
-  it('should optionally set as blocked', () => {
-    const wrapper = mountComponent({ blocked: true });
-    expect(wrapper.classes()).toContain('t-button-blocked');
+  it('should optionally set as block', () => {
+    const wrapper = mountComponent({ block: true });
+    expect(wrapper.classes()).toContain('t-button-block');
   });
 
   it('should optionally set button listeners', () => {

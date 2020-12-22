@@ -23,7 +23,7 @@ module.exports = {
       values: '[{ isValid: <Boolean> Function, errorMessage: String }]'
     },
     {
-      name: 'blocked',
+      name: 'block',
       type: 'Boolean',
       values: 'true, false'
     },
@@ -127,26 +127,26 @@ module.exports = {
       `
     },
     {
-      title: 'Blocked Select',
-      description: 'Blocked selects behave like a block.',
+      title: 'Block Select',
+      description: 'Block property makes selects behave like a block.',
       template: `
       <t-row>
         <t-col md="4">
-          <t-select placeholder="Select" blocked>
+          <t-select placeholder="Select" block>
             <option value="apple">Apple</option>
             <option value="orange">Orange</option>
             <option value="banana">Banana</option>
           </t-select>
         </t-col>
         <t-col md="4">
-          <t-select placeholder="Select" blocked>
+          <t-select placeholder="Select" block>
             <option value="rock">Rock</option>
             <option value="punk">Punk</option>
             <option value="samba">Samba</option>
           </t-select>
         </t-col>
         <t-col md="4">
-          <t-select placeholder="Select" blocked>
+          <t-select placeholder="Select" block>
             <option value="football">Football</option>
             <option value="basketball">Basketball</option>
             <option value="baseboll">Baseboll</option>
@@ -203,7 +203,7 @@ module.exports = {
       <div>
         <t-row vertical-align="middle">
           <t-col md="3">
-            <t-select @blur="count" placeholder="Select" blocked>
+            <t-select @blur="count" placeholder="Select" block>
               <option value="apple">Apple</option>
               <option value="orange">Orange</option>
               <option value="banana">Banana</option>

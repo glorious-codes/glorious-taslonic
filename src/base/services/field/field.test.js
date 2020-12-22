@@ -23,8 +23,8 @@ describe('Field Service', () => {
     expect(cssClasses).toEqual('t-field');
   });
 
-  it('should append blocked modifier css class if it has been given as true', () => {
-    const cssClasses = fieldService.buildCssClasses({ blocked: true });
-    expect(cssClasses).toEqual('t-field t-field-blocked');
+  it('should append block modifier css class if it has been given as true', () => {
+    const cssClasses = fieldService.buildCssClasses({ block: true });
+    expect(cssClasses).toEqual('t-field t-field-block');
   });
 });

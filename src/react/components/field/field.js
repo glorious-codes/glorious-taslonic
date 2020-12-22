@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import fieldService from '@base/services/field/field';
 
-export const Field = ({ label, required, blocked, children }) => {
+export const Field = ({ label, required, block, children }) => {
   const [cssClasses, setCssClasses] = useState('');
   const fieldElement = useRef();
 
   useEffect(() => {
-    setCssClasses(buildCssClasses(required, blocked, fieldElement.current));
-  }, [required, blocked, fieldElement, setCssClasses]);
+    setCssClasses(buildCssClasses(required, block, fieldElement.current));
+  }, [required, block, fieldElement, setCssClasses]);
 
   return (
     <span ref={fieldElement} className={cssClasses}>
@@ -21,6 +21,6 @@ export const Field = ({ label, required, blocked, children }) => {
   );
 };
 
-function buildCssClasses(required, blocked, element){
-  return fieldService.buildCssClasses({ required, blocked, element });
+function buildCssClasses(required, block, element){
+  return fieldService.buildCssClasses({ required, block, element });
 }

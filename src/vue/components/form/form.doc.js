@@ -85,21 +85,21 @@ module.exports = {
             submit-success-message="Form successfully sent.">
             <t-row>
               <t-col>
-                <t-field label="Name" blocked>
-                  <t-input v-model="data.name" blocked required />
+                <t-field label="Name" block>
+                  <t-input v-model="data.name" block required />
                 </t-field>
               </t-col>
             </t-row>
             <t-row>
               <t-col>
-                <t-field label="Surname" blocked>
-                  <t-input v-model="data.surname" blocked />
+                <t-field label="Surname" block>
+                  <t-input v-model="data.surname" block />
                 </t-field>
               </t-col>
             </t-row>
             <t-row>
               <t-col>
-                <t-button type="submit" theme="primary" blocked>
+                <t-button type="submit" theme="primary" block>
                   Send
                 </t-button>
               </t-col>
@@ -152,21 +152,21 @@ module.exports = {
             </t-row>
             <t-row>
               <t-col>
-                <t-field label="Name" blocked>
-                  <t-input v-model="data.name" blocked required />
+                <t-field label="Name" block>
+                  <t-input v-model="data.name" block required />
                 </t-field>
               </t-col>
             </t-row>
             <t-row>
               <t-col>
-                <t-field label="Surname" blocked>
-                  <t-input v-model="data.surname" blocked />
+                <t-field label="Surname" block>
+                  <t-input v-model="data.surname" block />
                 </t-field>
               </t-col>
             </t-row>
             <t-row>
               <t-col>
-                <t-button type="submit" theme="primary" blocked>
+                <t-button type="submit" theme="primary" block>
                   Send
                 </t-button>
               </t-col>
@@ -207,21 +207,21 @@ module.exports = {
             submit-error-message="Sorry, we could not reach the server. Please try again.">
             <t-row>
               <t-col>
-                <t-field label="Name" blocked>
-                  <t-input v-model="data.name" blocked required />
+                <t-field label="Name" block>
+                  <t-input v-model="data.name" block required />
                 </t-field>
               </t-col>
             </t-row>
             <t-row>
               <t-col>
-                <t-field label="Surname" blocked>
-                  <t-input v-model="data.surname" blocked />
+                <t-field label="Surname" block>
+                  <t-input v-model="data.surname" block />
                 </t-field>
               </t-col>
             </t-row>
             <t-row>
               <t-col>
-                <t-button type="submit" theme="primary" blocked>
+                <t-button type="submit" theme="primary" block>
                   Send
                 </t-button>
               </t-col>
@@ -275,21 +275,21 @@ module.exports = {
             submit-success-message="Form successfully sent.">
             <t-row>
               <t-col>
-                <t-field label="Name" blocked>
-                  <t-input v-model="data.name" blocked required />
+                <t-field label="Name" block>
+                  <t-input v-model="data.name" block required />
                 </t-field>
               </t-col>
             </t-row>
             <t-row>
               <t-col>
-                <t-field label="Surname" blocked>
-                  <t-input v-model="data.surname" blocked />
+                <t-field label="Surname" block>
+                  <t-input v-model="data.surname" block />
                 </t-field>
               </t-col>
             </t-row>
             <t-row>
               <t-col>
-                <t-button type="submit" theme="primary" blocked>
+                <t-button type="submit" theme="primary" block>
                   Send
                 </t-button>
               </t-col>
@@ -330,21 +330,21 @@ module.exports = {
             fetch-error-message="We had some trouble fetching data. Please try again.">
             <t-row>
               <t-col>
-                <t-field label="Name" blocked>
-                  <t-input v-model="data.name" blocked required />
+                <t-field label="Name" block>
+                  <t-input v-model="data.name" block required />
                 </t-field>
               </t-col>
             </t-row>
             <t-row>
               <t-col>
-                <t-field label="Surname" blocked>
-                  <t-input v-model="data.surname" blocked />
+                <t-field label="Surname" block>
+                  <t-input v-model="data.surname" block />
                 </t-field>
               </t-col>
             </t-row>
             <t-row>
               <t-col>
-                <t-button type="submit" theme="primary" blocked>
+                <t-button type="submit" theme="primary" block>
                   Send
                 </t-button>
               </t-col>
@@ -392,15 +392,15 @@ module.exports = {
             submit-success-message="Form successfully sent.">
             <t-row>
               <t-col>
-                <t-field label="Name" blocked>
-                  <t-input v-model="data.name" blocked required />
+                <t-field label="Name" block>
+                  <t-input v-model="data.name" block required />
                 </t-field>
               </t-col>
             </t-row>
             <t-row v-if="!shouldOmitSurname">
               <t-col>
-                <t-field label="Surname" blocked>
-                  <t-input v-model="data.surname" :validations="validations" blocked required />
+                <t-field label="Surname" block>
+                  <t-input v-model="data.surname" :validations="validations" block required />
                 </t-field>
               </t-col>
             </t-row>
@@ -412,7 +412,7 @@ module.exports = {
             </t-row>
             <t-row>
               <t-col>
-                <t-button type="submit" theme="primary" blocked>
+                <t-button type="submit" theme="primary" block>
                   Send
                 </t-button>
               </t-col>
@@ -476,21 +476,21 @@ module.exports = {
             </t-row>
             <t-row>
               <t-col>
-                <t-field label="Name" blocked>
-                  <t-input v-model="data.name" blocked required />
+                <t-field label="Name" block>
+                  <t-input v-model="data.name" block required />
                 </t-field>
               </t-col>
             </t-row>
             <t-row>
               <t-col>
-                <t-field label="Surname" blocked>
-                  <t-input v-model="data.surname" blocked />
+                <t-field label="Surname" block>
+                  <t-input v-model="data.surname" block />
                 </t-field>
               </t-col>
             </t-row>
             <t-row>
               <t-col>
-                <t-button type="submit" theme="primary" blocked>
+                <t-button type="submit" theme="primary" block>
                   Send
                 </t-button>
               </t-col>

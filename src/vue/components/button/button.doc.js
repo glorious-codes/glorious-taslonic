@@ -38,12 +38,12 @@ module.exports = {
       <t-row>
         <t-col sm="6">
           <t-button block>
-            Blocked Button
+            Block Button
           </t-button>
         </t-col>
         <t-col sm="6">
           <t-button tag="a" block>
-            Blocked Button
+            Block Button
           </t-button>
         </t-col>
       </t-row>

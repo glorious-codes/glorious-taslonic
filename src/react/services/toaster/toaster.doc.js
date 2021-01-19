@@ -99,16 +99,16 @@ module.exports = {
           return (
             <Row>
               <Col md="3">
-                <Button onClick={() => pop('info')} blocked>Info Toast</Button>
+                <Button onClick={() => pop('info')} block>Info Toast</Button>
               </Col>
               <Col md="3">
-                <Button onClick={() => pop('warning')} blocked>Warning Toast</Button>
+                <Button onClick={() => pop('warning')} block>Warning Toast</Button>
               </Col>
               <Col md="3">
-                <Button onClick={() => pop('danger')} blocked>Danger Toast</Button>
+                <Button onClick={() => pop('danger')} block>Danger Toast</Button>
               </Col>
               <Col md="3">
-                <Button onClick={() => pop('success')} blocked>Success Toast</Button>
+                <Button onClick={() => pop('success')} block>Success Toast</Button>
               </Col>
             </Row>
           );

@@ -48,12 +48,12 @@ module.exports = {
             <Row>
               <Col sm="6">
                 <Button block>
-                  Blocked Button
+                  Block Button
                 </Button>
               </Col>
               <Col sm="6">
                 <Button tag="a" block>
-                  Blocked Button
+                  Block Button
                 </Button>
               </Col>
             </Row>

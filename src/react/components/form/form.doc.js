@@ -87,21 +87,21 @@ module.exports = {
                   submitSuccessMessage="Form successfully sent.">
                   <Row>
                     <Col>
-                      <Field label="Name" blocked>
-                        <Input name="name" value={data.name} onChange={onDataChange} blocked required />
+                      <Field label="Name" block>
+                        <Input name="name" value={data.name} onChange={onDataChange} block required />
                       </Field>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <Field label="Surname" blocked>
-                        <Input name="surname" value={data.surname} onChange={onDataChange} blocked />
+                      <Field label="Surname" block>
+                        <Input name="surname" value={data.surname} onChange={onDataChange} block />
                       </Field>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <Button type="submit" theme="primary" blocked>
+                      <Button type="submit" theme="primary" block>
                         Send
                       </Button>
                     </Col>
@@ -156,21 +156,21 @@ module.exports = {
                   }
                   <Row>
                     <Col>
-                      <Field label="Name" blocked>
-                        <Input name="name" value={data.name} onChange={onDataChange} blocked required />
+                      <Field label="Name" block>
+                        <Input name="name" value={data.name} onChange={onDataChange} block required />
                       </Field>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <Field label="Surname" blocked>
-                        <Input name="surname" value={data.surname} onChange={onDataChange} blocked />
+                      <Field label="Surname" block>
+                        <Input name="surname" value={data.surname} onChange={onDataChange} block />
                       </Field>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <Button type="submit" theme="primary" blocked>
+                      <Button type="submit" theme="primary" block>
                         Send
                       </Button>
                     </Col>
@@ -212,21 +212,21 @@ module.exports = {
                   onSubmitError={onSubmitError}>
                   <Row>
                     <Col>
-                      <Field label="Name" blocked>
-                        <Input name="name" value={data.name} onChange={onDataChange} blocked required />
+                      <Field label="Name" block>
+                        <Input name="name" value={data.name} onChange={onDataChange} block required />
                       </Field>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <Field label="Surname" blocked>
-                        <Input name="surname" value={data.surname} onChange={onDataChange} blocked />
+                      <Field label="Surname" block>
+                        <Input name="surname" value={data.surname} onChange={onDataChange} block />
                       </Field>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <Button type="submit" theme="primary" blocked>
+                      <Button type="submit" theme="primary" block>
                         Send
                       </Button>
                     </Col>
@@ -288,21 +288,21 @@ module.exports = {
                   submitSuccessMessage="Form successfully sent.">
                   <Row>
                     <Col>
-                      <Field label="Name" blocked>
-                        <Input name="name" value={data.name} onChange={onDataChange} blocked required />
+                      <Field label="Name" block>
+                        <Input name="name" value={data.name} onChange={onDataChange} block required />
                       </Field>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <Field label="Surname" blocked>
-                        <Input name="surname" value={data.surname} onChange={onDataChange} blocked />
+                      <Field label="Surname" block>
+                        <Input name="surname" value={data.surname} onChange={onDataChange} block />
                       </Field>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <Button type="submit" theme="primary" blocked>
+                      <Button type="submit" theme="primary" block>
                         Send
                       </Button>
                     </Col>
@@ -346,21 +346,21 @@ module.exports = {
                   onFetchError={onFetchError}>
                   <Row>
                     <Col>
-                      <Field label="Name" blocked>
-                        <Input name="name" value={data.name} onChange={onDataChange} blocked required />
+                      <Field label="Name" block>
+                        <Input name="name" value={data.name} onChange={onDataChange} block required />
                       </Field>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <Field label="Surname" blocked>
-                        <Input name="surname" value={data.surname} onChange={onDataChange} blocked />
+                      <Field label="Surname" block>
+                        <Input name="surname" value={data.surname} onChange={onDataChange} block />
                       </Field>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <Button type="submit" theme="primary" blocked>
+                      <Button type="submit" theme="primary" block>
                         Send
                       </Button>
                     </Col>
@@ -412,8 +412,8 @@ module.exports = {
                   submitSuccessMessage="Form successfully sent.">
                   <Row>
                     <Col>
-                      <Field label="Name" blocked>
-                        <Input name="name" value={data.name} onChange={onDataChange} blocked required />
+                      <Field label="Name" block>
+                        <Input name="name" value={data.name} onChange={onDataChange} block required />
                       </Field>
                     </Col>
                   </Row>
@@ -421,8 +421,8 @@ module.exports = {
                     !shouldOmitSurname &&
                     <Row>
                       <Col>
-                        <Field label="Surname" blocked>
-                          <Input name="surname" value={data.surname} validations={surnameValidations} onChange={onDataChange} blocked required />
+                        <Field label="Surname" block>
+                          <Input name="surname" value={data.surname} validations={surnameValidations} onChange={onDataChange} block required />
                         </Field>
                       </Col>
                     </Row>
@@ -439,7 +439,7 @@ module.exports = {
                   </Row>
                   <Row>
                     <Col>
-                      <Button type="submit" theme="primary" blocked>
+                      <Button type="submit" theme="primary" block>
                         Send
                       </Button>
                     </Col>
@@ -505,21 +505,21 @@ module.exports = {
                   }
                   <Row>
                     <Col>
-                      <Field label="Name" blocked>
-                        <Input name="name" value={data.name} onChange={onDataChange} blocked required />
+                      <Field label="Name" block>
+                        <Input name="name" value={data.name} onChange={onDataChange} block required />
                       </Field>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <Field label="Surname" blocked>
-                        <Input name="surname" value={data.surname} onChange={onDataChange} blocked />
+                      <Field label="Surname" block>
+                        <Input name="surname" value={data.surname} onChange={onDataChange} block />
                       </Field>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <Button type="submit" theme="primary" blocked>
+                      <Button type="submit" theme="primary" block>
                         Send
                       </Button>
                     </Col>

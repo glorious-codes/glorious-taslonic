@@ -43,35 +43,35 @@ describe('Prop Based Css Class Service', () => {
   it('should append css class if boolean prop is true', () => {
     const baseCssClass = 't-base';
     const currentCssClasses = [baseCssClass];
-    const isValidBooleanProp = prop => ['blocked'].includes(prop);
+    const isValidBooleanProp = prop => ['block'].includes(prop);
     propBaseCssClassService.handleBooleanProp(
-      { blocked: true },
+      { block: true },
       isValidBooleanProp,
       currentCssClasses,
       baseCssClass
     );
-    expect(currentCssClasses).toEqual([baseCssClass, `${baseCssClass}-blocked`]);
+    expect(currentCssClasses).toEqual([baseCssClass, `${baseCssClass}-block`]);
   });
 
   it('should append css class if boolean prop is stringified true', () => {
     const baseCssClass = 't-base';
     const currentCssClasses = [baseCssClass];
-    const isValidBooleanProp = prop => ['blocked'].includes(prop);
+    const isValidBooleanProp = prop => ['block'].includes(prop);
     propBaseCssClassService.handleBooleanProp(
-      { blocked: 'true' },
+      { block: 'true' },
       isValidBooleanProp,
       currentCssClasses,
       baseCssClass
     );
-    expect(currentCssClasses).toEqual([baseCssClass, `${baseCssClass}-blocked`]);
+    expect(currentCssClasses).toEqual([baseCssClass, `${baseCssClass}-block`]);
   });
 
   it('should not append css class if boolean prop is false', () => {
     const baseCssClass = 't-base';
     const currentCssClasses = [baseCssClass];
-    const isValidBooleanProp = prop => ['blocked'].includes(prop);
+    const isValidBooleanProp = prop => ['block'].includes(prop);
     propBaseCssClassService.handleBooleanProp(
-      { blocked: false },
+      { block: false },
       isValidBooleanProp,
       currentCssClasses,
       baseCssClass
@@ -82,7 +82,7 @@ describe('Prop Based Css Class Service', () => {
   it('should not append css class if boolean prop is falsy', () => {
     const baseCssClass = 't-base';
     const currentCssClasses = [baseCssClass];
-    const isValidBooleanProp = prop => ['blocked'].includes(prop);
+    const isValidBooleanProp = prop => ['block'].includes(prop);
     propBaseCssClassService.handleBooleanProp(
       {},
       isValidBooleanProp,
@@ -95,7 +95,7 @@ describe('Prop Based Css Class Service', () => {
   it('should not append css class if boolean prop is invalid', () => {
     const baseCssClass = 't-base';
     const currentCssClasses = [baseCssClass];
-    const isValidBooleanProp = prop => ['blocked'].includes(prop);
+    const isValidBooleanProp = prop => ['block'].includes(prop);
     propBaseCssClassService.handleBooleanProp(
       { lowered: true },
       isValidBooleanProp,

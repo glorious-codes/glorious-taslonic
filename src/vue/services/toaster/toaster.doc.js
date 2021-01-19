@@ -83,16 +83,16 @@ module.exports = {
       template: `
       <t-row>
         <t-col md="3">
-          <t-button @click="() => pop('info')" blocked>Info Toast</t-button>
+          <t-button @click="() => pop('info')" block>Info Toast</t-button>
         </t-col>
         <t-col md="3">
-          <t-button @click="() => pop('warning')" blocked>Warning Toast</t-button>
+          <t-button @click="() => pop('warning')" block>Warning Toast</t-button>
         </t-col>
         <t-col md="3">
-          <t-button @click="() => pop('danger')" blocked>Danger Toast</t-button>
+          <t-button @click="() => pop('danger')" block>Danger Toast</t-button>
         </t-col>
         <t-col md="3">
-          <t-button @click="() => pop('success')" blocked>Success Toast</t-button>
+          <t-button @click="() => pop('success')" block>Success Toast</t-button>
         </t-col>
       </t-row>
 

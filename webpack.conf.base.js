@@ -4,73 +4,80 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const project = require('./project.json');
 const env = process.env.NODE_ENV || 'development';
 
-function buildEntries(){
-  const entries = {}
-  const libs = getProjectLibs();
-  Object.keys(libs).forEach(lib => {
-    entries[lib] = `${__dirname}/${libs[lib].entry}`;
-  });
-  return entries;
-}
-
-function buildFilename({ chunk }){
-  const { name } = chunk;
-  const libs = getProjectLibs();
-  return libs[name] ? libs[name].output : name;
-}
-
-function getProjectLibs(){
-  return project.scripts.source.libs;
-}
-
-module.exports = {
-  entry: buildEntries(),
-  output: {
-    library: '[name]',
-    libraryExport: 'default',
-    libraryTarget: 'umd',
-    filename: buildFilename
-  },
-  externals: {
-    '@vue': 'Vue',
-    'react': 'React',
-    'react-dom': 'ReactDOM'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(styl|css)$/,
-        use: [ MiniCssExtractPlugin.loader, 'css-loader', 'stylus-loader' ]
+function getBaseConfig() {
+  return {
+    externals: {
+      '@vue': {
+        commonjs: 'vue',
+        commonjs2: 'vue',
+        amd: 'vue',
+        root: 'Vue'
       },
-      {
-        test: /\.html$/,
-        include: [
-          path.resolve(__dirname, project.scripts.source.root.vue)
-        ],
-        use: 'html-loader'
+      'react': {
+        commonjs: 'react',
+        commonjs2: 'react',
+        amd: 'react',
+        root: 'React'
       },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: 'babel-loader'
+      'react-dom': {
+        commonjs: 'react-dom',
+        commonjs2: 'react-dom',
+        amd: 'react-dom',
+        root: 'ReactDOM'
       }
+    },
+    module: {
+      rules: [
+        {
+          test: /\.(styl|css)$/,
+          use: [ MiniCssExtractPlugin.loader, 'css-loader', 'stylus-loader' ]
+        },
+        {
+          test: /\.html$/,
+          include: [
+            path.resolve(__dirname, project.scripts.source.root.vue)
+          ],
+          use: 'html-loader'
+        },
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: 'babel-loader'
+        }
+      ]
+    },
+    resolve: {
+      alias: {
+        '@base': `${__dirname}/${project.scripts.source.root.base}`,
+        '@react': `${__dirname}/${project.scripts.source.root.react}`,
+        '@vue': `${__dirname}/${project.scripts.source.root.vue}`,
+        '@vue$': 'vue/dist/vue.esm.js'
+      }
+    },
+    plugins: [
+      new CopyWebpackPlugin([{
+        from: project.images.source.files,
+        to: project.images.dist.root
+      }]),
+      new MiniCssExtractPlugin({
+        filename: project.styles.dist.filename
+      })
     ]
-  },
-  resolve: {
-    alias: {
-      '@base': `${__dirname}/${project.scripts.source.root.base}`,
-      '@react': `${__dirname}/${project.scripts.source.root.react}`,
-      '@vue': `${__dirname}/${project.scripts.source.root.vue}`,
-      '@vue$': 'vue/dist/vue.esm.js'
-    }
-  },
-  plugins: [
-    new CopyWebpackPlugin([{
-      from: project.images.source.files,
-      to: project.images.dist.root
-    }]),
-    new MiniCssExtractPlugin({
-      filename: project.styles.dist.filename
-    })
-  ]
+  };
 }
+
+function buildConfig(type){
+  const base = getBaseConfig();
+  const { entry, output } = project.scripts.source.libs[type];
+  return {
+    ...base,
+    entry,
+    output
+  }
+}
+
+module.exports = [
+  buildConfig('styles'),
+  buildConfig('react'),
+  buildConfig('vue-plugin')
+];

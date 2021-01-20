@@ -156,6 +156,9 @@ local.properties
 .sass-cache/
 assets/css/
 assets/js/
+react.js
+vue-plugin.js
+taslonic.css
 
 # Tests generated files
 ./coverage/

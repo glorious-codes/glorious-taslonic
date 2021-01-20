@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "A glorious UI library available for React and Vue",
   "files": [
-    "dist/**/*.*"
+    "react.js",
+    "vue-plugin.js",
+    "taslonic.css"
   ],
   "scripts": {
     "build": "webpack",
@@ -12,7 +14,7 @@
     "docs": "pitsby build",
     "test": "jest",
     "deploy": "firebase deploy --non-interactive",
-    "prepublishOnly": "rm -rf ./dist && NODE_ENV=production npm run build"
+    "prepublishOnly": "rm -rf ./dist && NODE_ENV=production npm run build && bash ./pre-publish.sh"
   },
   "repository": {
     "type": "git",

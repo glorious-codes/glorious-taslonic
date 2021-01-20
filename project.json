@@ -8,17 +8,28 @@
         "react": "src/react/"
       },
       "libs": {
-        "taslonic": {
-          "entry": "src/base/styles/_index.js",
-          "output": "index.js"
+        "styles": {
+          "entry": "./src/base/styles/_index.js",
+          "output": {
+            "filename": "index.js"
+          }
         },
-        "taslonicReact": {
-          "entry": "src/react/index.js",
-          "output": "react/index.js"
+        "react": {
+          "entry": "./src/react/index.js",
+          "output": {
+            "library": "taslonicReact",
+            "libraryTarget": "umd",
+            "filename": "react.js"
+          }
         },
-        "taslonicVue": {
-          "entry": "src/vue/index.js",
-          "output": "vue/index.js"
+        "vue-plugin": {
+          "entry": "./src/vue/index.js",
+          "output": {
+            "library": "taslonicVue",
+            "libraryTarget": "umd",
+            "libraryExport": "default",
+            "filename": "vue-plugin.js"
+          }
         }
       }
     },
@@ -31,7 +42,7 @@
       "root": "src/base/styles/"
     },
     "dist": {
-      "filename": "[name].css"
+      "filename": "taslonic.css"
     }
   },
   "images": {

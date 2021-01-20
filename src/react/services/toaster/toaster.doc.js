@@ -65,21 +65,6 @@ module.exports = {
     {
       title: 'Toast with theme',
       description: 'You can optionally set a theme to the toast.',
-      controller: {
-        methods: {
-          pop(theme){
-            const { toaster } = taslonicVue;
-            toaster.pop({
-              title: this.capitalize(theme),
-              message: `This is a <i>${theme}</i> toast.`,
-              theme
-            });
-          },
-          capitalize([ firstLetter, ...rest ]){
-            return [firstLetter.toUpperCase(), ...rest].join('');
-          }
-        }
-      },
       controller: function(){
         const { Button, Col, Row, toaster } = taslonicReact;
 

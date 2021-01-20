@@ -138,11 +138,11 @@ module.exports = {
         }
       },
       template: `
-      <t-input :validations="validations" placeholder="Enter a programming language" />
-      `,
-      styles: `
-        p-external-component-examples-list p-list-item:nth-child(6) .t-form-control { max-width: 100%; }
-        p-external-component-examples-list p-list-item:nth-child(6) input { width: 300px; max-width: 100%; }
+      <t-row>
+        <t-col md="4">
+          <t-input :validations="validations" placeholder="Enter a programming language" block />
+        </t-col>
+      </t-row>
       `
     },
     {
@@ -162,13 +162,13 @@ module.exports = {
       description: 'Block property makes inputs behave like a block.',
       template: `
       <t-row>
-        <t-col xs="4">
+        <t-col sm="4">
           <t-input block />
         </t-col>
-        <t-col xs="4">
+        <t-col sm="4">
           <t-input block />
         </t-col>
-        <t-col xs="4">
+        <t-col sm="4">
           <t-input block />
         </t-col>
       </t-row>

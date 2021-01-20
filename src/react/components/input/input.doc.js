@@ -142,7 +142,7 @@ module.exports = {
       title: 'Input with custom validations',
       description: 'Validations should be an Array of objects containing a function isValid that returns a Boolean and an errorMessage.',
       controller: function(){
-        const { Input } = taslonicReact;
+        const { Row, Col, Input } = taslonicReact;
 
         return function(){
           const validations = [{
@@ -151,14 +151,14 @@ module.exports = {
           }];
 
           return (
-            <Input validations={validations} placeholder="Enter a programming language" />
+            <Row>
+              <Col md="4">
+                <Input validations={validations} placeholder="Enter a programming language" block />
+              </Col>
+            </Row>
           );
         }
-      },
-      styles: `
-        p-external-component-examples-list p-list-item:nth-child(6) .t-form-control { max-width: 100%; }
-        p-external-component-examples-list p-list-item:nth-child(6) input { width: 300px; max-width: 100%; }
-      `
+      }
     },
     {
       title: 'Input with autofocus',
@@ -193,13 +193,13 @@ module.exports = {
         return function(){
           return (
             <Row>
-              <Col xs="4">
+              <Col sm="4">
                 <Input block />
               </Col>
-              <Col xs="4">
+              <Col sm="4">
                 <Input block />
               </Col>
-              <Col xs="4">
+              <Col sm="4">
                 <Input block />
               </Col>
             </Row>

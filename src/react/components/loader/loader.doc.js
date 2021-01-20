@@ -29,17 +29,14 @@ module.exports = {
 
         return function(){
           return (
-            <Loader theme="light" />
+            <div className="example-loader-theme">
+              <Loader theme="light" />
+            </div>
           )
         }
       },
       styles: `
-        p-external-component-examples-list p-list-item:nth-child(2) .p-external-component-preview { height: 100% }
-        p-external-component-examples-list p-list-item:nth-child(2) .p-tabs-content [data-name="Preview"] .p-tab {
-          margin: -30px;
-          height: 80px;
-          background-color: #6772FF;
-        }
+        .example-loader-theme { height: 80px; background-color: #6772FF; }
       `
     }
   ]

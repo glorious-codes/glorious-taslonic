@@ -19,14 +19,12 @@ module.exports = {
       title: 'Loader theme',
       description: 'A loader is dark by default, but you can optionally make it light.',
       template: `
-      <t-loader theme="light" />
+      <div class="example-loader-theme">
+        <t-loader theme="light" />
+      </div\>
       `,
       styles: `
-        p-external-component-examples-list p-list-item:nth-child(2) .p-tabs-content [data-name="Preview"] .p-tab {
-          margin: -30px;
-          height: 80px;
-          background-color: #6772FF;
-        }
+        .example-loader-theme { height: 80px; background-color: #6772FF; }
       `
     }
   ]

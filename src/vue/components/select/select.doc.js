@@ -115,15 +115,15 @@ module.exports = {
         }
       },
       template: `
-      <t-select :validations="validations" placeholder="Select">
-        <option value="java">Java</option>
-        <option value="javascript">Javascript</option>
-        <option value="go">Go</option>
-      </t-select>
-      `,
-      styles: `
-        p-external-component-examples-list p-list-item:nth-child(4) .t-form-control { max-width: 100%; }
-        p-external-component-examples-list p-list-item:nth-child(4) select { width: 200px; max-width: 100%; }
+      <t-row>
+        <t-col md="3">
+          <t-select :validations="validations" placeholder="Select" block>
+            <option value="java">Java</option>
+            <option value="javascript">Javascript</option>
+            <option value="go">Go</option>
+          </t-select>
+        </t-col>
+      </t-row>
       `
     },
     {

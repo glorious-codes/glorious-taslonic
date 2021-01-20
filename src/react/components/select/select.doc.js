@@ -60,7 +60,7 @@ module.exports = {
       description: 'Validations should be an Array of objects containing a function isValid that returns a Boolean and an errorMessage.',
       controller: function(){
         const { useState } = React;
-        const { Select } = taslonicReact;
+        const { Row, Col, Select } = taslonicReact;
 
         return function(){
           const validations = [{
@@ -69,18 +69,18 @@ module.exports = {
           }]
 
           return (
-            <Select validations={validations} placeholder="Select">
-              <option value="java">Java</option>
-              <option value="javascript">Javascript</option>
-              <option value="go">Go</option>
-            </Select>
+            <Row>
+              <Col md="3">
+                <Select validations={validations} placeholder="Select" block>
+                  <option value="java">Java</option>
+                  <option value="javascript">Javascript</option>
+                  <option value="go">Go</option>
+                </Select>
+              </Col>
+            </Row>
           )
         }
-      },
-      styles: `
-        p-external-component-examples-list p-list-item:nth-child(2) .t-form-control { max-width: 100%; }
-        p-external-component-examples-list p-list-item:nth-child(2) select { width: 200px; max-width: 100%; }
-      `
+      }
     },
     {
       title: 'Block Select',

@@ -2,7 +2,7 @@ const project = require('./project.json');
 
 module.exports = {
   collectCoverageFrom: project.tests.source.files,
-  coverageReporters: ['html'],
+  coverageReporters: ['html', 'text-summary'],
   coverageThreshold: {
     global: {
       statements: 100,

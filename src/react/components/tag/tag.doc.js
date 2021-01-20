@@ -28,19 +28,19 @@ module.exports = {
 
         return function(){
           return (
-            <>
+            <div className="example-tag-theme">
               <Tag theme="primary">Primary</Tag>
               <Tag theme="secondary">Secondary</Tag>
               <Tag theme="info">Info</Tag>
               <Tag theme="success">Success</Tag>
               <Tag theme="warning">Warning</Tag>
               <Tag theme="danger">Danger</Tag>
-            </>
+            </div>
           )
         }
       },
       styles: `
-      .p-external-component-examples-list p-list-item:nth-child(2) .t-tag:not(:first-child) { margin-left: 5px; }
+        .example-tag-theme .t-tag:not(:first-child) { margin-left: 5px; }
       `
     }
   ]

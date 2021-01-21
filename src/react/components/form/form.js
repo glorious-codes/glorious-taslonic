@@ -1,57 +1,74 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { Component, createRef } from 'react';
 import { Loader } from '@react/components/loader/loader';
 import { FormBanner } from '@react/components/form-banner/form-banner';
 import toasterService from '@react/services/toaster/toaster';
 import formService from '@base/services/form/form';
 
-export const Form = ({
-  onFetch,
-  onFetchSuccess,
-  onFetchError,
-  onSubmit,
-  onSubmitSuccess,
-  onSubmitError,
-  fetchErrorMessage,
-  submitErrorMessage,
-  submitSuccessMessage,
-  submitSuccessTitle,
-  children,
-  ...rest
-}) => {
-  let form;
-  const [fetching, setFetching] = useState();
-  const [fetchFailed, setFetchFailed] = useState();
-  const [banner, setBanner] = useState();
-  const formEl = useRef();
-  const handleRequest = requestFn => {
-    setBanner(null);
-    setFetchFailed(false);
+export class Form extends Component {
+  constructor(props){
+    super(props);
+    this.state = {};
+    this.formEl = createRef();
+  }
+
+  handleRequest(requestFn){
+    this.setBanner(null);
+    this.setFetchFailed(false);
     return requestFn && requestFn();
-  };
-  const handleRequestError = (err, requestType, callbackProp) => {
-    setBanner({
-      message: getBannerMessage(requestType),
-      onTriggerClick: () => handleProcess(requestType)
+  }
+
+  handleRequestError(requestType, callbackProp){
+    this.setBanner({
+      message: this.getBannerMessage(requestType),
+      onTriggerClick: () => this.handleProcess(requestType)
     });
-    handleCallbackProp(callbackProp, err);
-    if(requestType == 'fetch') setFetchFailed(true);
-  };
-  const getBannerMessage = type => {
+    callbackProp();
+    if(requestType == 'fetch') this.setFetchFailed(true);
+  }
+
+  setBanner(banner){
+    this.setState({ banner });
+  }
+
+  setFetching(fetching){
+    this.setState({ fetching });
+  }
+
+  setFetchFailed(fetchFailed){
+    this.setState({ fetchFailed });
+  }
+
+  getBannerMessage(type){
+    const { fetchErrorMessage, submitErrorMessage } = this.props;
     const message = type == 'fetch' ? fetchErrorMessage : submitErrorMessage;
     return message || formService.getMessage('REQUEST_ERROR_MESSAGE');
-  };
-  const handleSubmitSuccess = response => {
-    const message = submitSuccessMessage;
-    if(message) toasterService.pop({ title: submitSuccessTitle, theme: 'success', message });
-    handleCallbackProp(onSubmitSuccess, response);
-  };
-  const onProcessChange = ({ isFetching }) => setFetching(isFetching);
-  const handleCallbackProp = (callback, data) => callback && callback(data);
-  const handleProcess = type => form.handleProcess(type);
-  const handleLoader = () => {
-    if(fetching) return <Loader data-form-loader />;
-  };
-  const handleBanner = () => {
+  }
+
+  handleSubmitSuccess(response){
+    const message = this.props.submitSuccessMessage;
+    const title = this.props.submitSuccessTitle;
+    if(message) toasterService.pop({ title, message, theme: 'success' });
+    this.handleCallbackProp(this.props.onSubmitSuccess, response);
+  }
+
+  onProcessChange({ isFetching }){
+    this.setFetching(isFetching);
+  }
+
+  handleCallbackProp(callback, data){
+    callback && callback(data);
+  }
+
+  handleProcess(type){
+    this.state.form.handleProcess(type);
+  }
+
+  handleLoader(){
+    if(this.state.fetching) return <Loader data-form-loader />;
+  }
+
+  handleBanner(){
+    const { banner } = this.state;
     if(banner)
       return (
         <FormBanner
@@ -59,36 +76,43 @@ export const Form = ({
           triggerText="Retry"
           message={banner.message}
           onTriggerClick={banner.onTriggerClick}
-          onClose={() => setBanner(null)}
+          onClose={() => this.setBanner(null)}
           data-form-error-banner
         />
       );
-  };
+  }
 
-  useEffect(() => {
-    form = formService.build(formEl.current, {
-      onFetch: onFetch ? () => handleRequest(onFetch) : null,
-      onFetchSuccess: onFetchSuccess,
-      onFetchError: err => handleRequestError(err, 'fetch', onFetchError),
-      onSubmit: () => handleRequest(onSubmit),
-      onSubmitSuccess: handleSubmitSuccess,
-      onSubmitError: err => handleRequestError(err, 'submit', onSubmitError)
+  componentDidMount(){
+    const form = formService.build(this.formEl.current, {
+      onFetch: this.props.onFetch ? () => this.handleRequest(() => this.props.onFetch()) : null,
+      onFetchSuccess: response => this.handleCallbackProp(this.props.onFetchSuccess, response),
+      onFetchError: err => this.handleRequestError('fetch', () => this.handleCallbackProp(this.props.onFetchError, err)),
+      onSubmit: () => this.handleRequest(() => this.props.onSubmit()),
+      onSubmitSuccess: response => this.handleSubmitSuccess(response),
+      onSubmitError: err => this.handleRequestError('submit', () => this.handleCallbackProp(this.props.onSubmitError, err))
     });
-    form.onProcessChange(onProcessChange);
-    return () => formService.destroy(form.id);
-  }, []);
+    form.onProcessChange(process => this.onProcessChange(process));
+    this.setState({ form });
+  }
 
-  return (
-    <form
-      className={formService.buildCssClasses({ fetching, fetchFailed })}
-      ref={formEl}
-      noValidate
-      {...rest}>
-      { handleLoader(fetching) }
-      { handleBanner(banner) }
-      <div className="t-form-content" aria-live="polite" aria-busy={fetching} data-form-content>
-        { children }
-      </div>
-    </form>
-  );
-};
+  componentWillUnmount(){
+    formService.destroy(this.state.form.id);
+  }
+
+  render(){
+    const { fetching, fetchFailed } = this.state;
+    const { children } = this.props;
+    return (
+      <form
+        className={formService.buildCssClasses({ fetching, fetchFailed })}
+        ref={this.formEl}
+        noValidate>
+        { this.handleLoader() }
+        { this.handleBanner() }
+        <div className="t-form-content" aria-live="polite" aria-busy={fetching} data-form-content>
+          { children }
+        </div>
+      </form>
+    );
+  }
+}

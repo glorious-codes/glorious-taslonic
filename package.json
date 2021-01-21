@@ -1,6 +1,6 @@
 {
   "name": "@glorious/taslonic",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A glorious UI library available for React and Vue",
   "files": [
     "react.js",
@@ -37,6 +37,7 @@
   "homepage": "https://github.com/glorious-codes/glorious-taslonic#readme",
   "devDependencies": {
     "@babel/core": "^7.10.2",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.7.4",
     "@glorious/pitsby": "^1.30.0",

@@ -8,9 +8,9 @@ function getBaseConfig() {
   return {
     externals: {
       '@vue': {
-        commonjs: 'vue',
-        commonjs2: 'vue',
-        amd: 'vue',
+        commonjs: 'vue/dist/vue.esm',
+        commonjs2: 'vue/dist/vue.esm',
+        amd: 'vue/dist/vue.esm',
         root: 'Vue'
       },
       'react': {
@@ -69,11 +69,7 @@ function getBaseConfig() {
 function buildConfig(type){
   const base = getBaseConfig();
   const { entry, output } = project.scripts.source.libs[type];
-  return {
-    ...base,
-    entry,
-    output
-  }
+  return { ...base, entry, output };
 }
 
 module.exports = [

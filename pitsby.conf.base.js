@@ -4,7 +4,8 @@ module.exports = {
       engine: 'vue',
       collectDocsFrom: './src/vue',
       importFrom: './dist/vue',
-      libraryName: 'taslonicVue'
+      libraryName: 'taslonicVue',
+      version: '2.6.11'
     },
     {
       engine: 'react',

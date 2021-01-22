@@ -8,9 +8,9 @@ function getBaseConfig() {
   return {
     externals: {
       '@vue': {
-        commonjs: 'vue/dist/vue.esm',
-        commonjs2: 'vue/dist/vue.esm',
-        amd: 'vue/dist/vue.esm',
+        commonjs: 'vue/dist/vue.common',
+        commonjs2: 'vue/dist/vue.common',
+        amd: 'vue/dist/vue.common',
         root: 'Vue'
       },
       'react': {

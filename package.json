@@ -40,7 +40,7 @@
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.7.4",
-    "@glorious/pitsby": "^1.30.0",
+    "@glorious/pitsby": "^1.30.1",
     "@vue/test-utils": "^1.0.0-beta.32",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^26.3.0",

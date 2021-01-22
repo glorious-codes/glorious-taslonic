@@ -10,7 +10,7 @@
       :name="name"
       :autofocus="autofocus"
       :disabled="disabled"
-      v-on="$listeners"
+      v-on="{...$listeners, input: () => {}}"
     >
       <option value="" v-if="placeholder">{{ placeholder }}</option>
       <slot></slot>

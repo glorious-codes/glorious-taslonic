@@ -7,7 +7,7 @@ const env = process.env.NODE_ENV || 'development';
 function getBaseConfig() {
   return {
     externals: {
-      '@vue': {
+      'vue': {
         commonjs: 'vue/dist/vue.common',
         commonjs2: 'vue/dist/vue.common',
         amd: 'vue/dist/vue.common',
@@ -51,7 +51,7 @@ function getBaseConfig() {
         '@base': `${__dirname}/${project.scripts.source.root.base}`,
         '@react': `${__dirname}/${project.scripts.source.root.react}`,
         '@vue': `${__dirname}/${project.scripts.source.root.vue}`,
-        '@vue$': 'vue/dist/vue.esm.js'
+        'vue$': 'vue/dist/vue.common.js'
       }
     },
     plugins: [

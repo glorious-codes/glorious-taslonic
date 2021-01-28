@@ -22,7 +22,9 @@ describe('Form Control Service', () => {
   it('should build required validation model', () => {
     const validationModel = formControlService.buildRequiredValidation();
     expect(validationModel.isValid('')).toEqual(false);
+    expect(validationModel.isValid('  ')).toEqual(false);
     expect(validationModel.isValid('Rafael')).toEqual(true);
+    expect(validationModel.isValid(12)).toEqual(true);
     expect(validationModel.errorMessage).toEqual(REQUIRED_ERROR_MESSAGE);
   });
 

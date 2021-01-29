@@ -1,3 +1,4 @@
+import '@base/styles/button.styl';
 import React, { useState, useEffect, useRef } from 'react';
 import buttonService from '@base/services/button/button';
 import { Loader } from '@react/components/loader/loader';

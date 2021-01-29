@@ -1,3 +1,4 @@
+import '@base/styles/dialog.styl';
 import React, { useEffect } from 'react';
 import keyboardSubscriptionService from '@base/services/keyboardSubscription/keyboardSubscription';
 import { Button } from '@react/components/button/button';

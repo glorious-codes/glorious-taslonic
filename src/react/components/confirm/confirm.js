@@ -1,3 +1,4 @@
+import '@base/styles/confirm.styl';
 import React, { useEffect, useRef } from 'react';
 import { CANCEL_BUTTON_TEXT, CONFIRM_BUTTON_TEXT } from '@base/constants/confirm';
 import domService from '@base/services/dom/dom';

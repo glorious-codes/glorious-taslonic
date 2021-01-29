@@ -1,3 +1,4 @@
+import '@base/styles/close-button.styl';
 import React from 'react';
 import { Button } from '@react/components/button/button';
 

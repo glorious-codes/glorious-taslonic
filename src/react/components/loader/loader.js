@@ -1,3 +1,4 @@
+import '@base/styles/loader.styl';
 import React, { useEffect, useRef } from 'react';
 import loaderService from '@base/services/loader/loader';
 

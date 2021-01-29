@@ -1,3 +1,4 @@
+import '@base/styles/container.styl';
 import containerService from '@base/services/container/container';
 import React from 'react';
 

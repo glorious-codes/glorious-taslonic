@@ -29,10 +29,6 @@ function getBaseConfig() {
     module: {
       rules: [
         {
-          test: /\.(styl|css)$/,
-          use: [ MiniCssExtractPlugin.loader, 'css-loader', 'stylus-loader' ]
-        },
-        {
           test: /\.html$/,
           include: [
             path.resolve(__dirname, project.scripts.source.root.vue)
@@ -58,22 +54,53 @@ function getBaseConfig() {
       new CopyWebpackPlugin([{
         from: project.images.source.files,
         to: project.images.dist.root
-      }]),
-      new MiniCssExtractPlugin({
-        filename: project.styles.dist.filename
-      })
+      }])
     ]
   };
 }
 
-function buildConfig(type){
+function getCSSConfig(cssType){
+  const config = {
+    rule: {
+      test: /\.(styl|css)$/,
+      use: [ 'css-loader', 'stylus-loader' ]
+    }
+  };
+  if(cssType == 'inline') {
+    config.rule.use.unshift({ loader: 'style-loader', options: { injectType: 'singletonStyleTag' } });
+  } else {
+    config.rule.use.unshift(MiniCssExtractPlugin.loader);
+    config.plugin = new MiniCssExtractPlugin({
+      filename: project.styles.dist.filename
+    })
+  }
+  return config;
+}
+
+function buildConfig(type, cssType){
   const base = getBaseConfig();
+  const cssConfig = getCSSConfig(cssType);
   const { entry, output } = project.scripts.source.libs[type];
-  return { ...base, entry, output };
+  return {
+    ...base,
+    entry,
+    output,
+    module: {
+      ...base.module,
+      rules: [
+        ...base.module.rules,
+        cssConfig.rule
+      ]
+    },
+    plugins: [
+      ...base.plugins,
+      cssConfig.plugin
+    ].filter(plugin => !!plugin)
+  };
 }
 
 module.exports = [
-  buildConfig('styles'),
   buildConfig('react'),
+  buildConfig('react-styled', 'inline'),
   buildConfig('vue-plugin')
 ];

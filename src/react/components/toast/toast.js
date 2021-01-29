@@ -1,3 +1,4 @@
+import '@base/styles/toast.styl';
 import React from 'react';
 import toastService from '@base/services/toast/toast';
 import { CloseButton } from '@react/components/close-button/close-button';

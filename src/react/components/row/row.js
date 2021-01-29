@@ -1,3 +1,4 @@
+import '@base/styles/row.styl';
 import rowService from '@base/services/row/row';
 import React from 'react';
 

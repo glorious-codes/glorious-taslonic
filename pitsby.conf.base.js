@@ -9,7 +9,8 @@ module.exports = {
     },
     {
       engine: 'react',
-      collectDocsFrom: './src/react'
+      collectDocsFrom: './src/react',
+      version: '16.14.0'
     }
   ],
   styles: [

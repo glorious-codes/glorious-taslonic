@@ -1,3 +1,5 @@
+@require '_variables'
+
 select-arrow()
   position absolute
   top 42%
@@ -7,7 +9,7 @@ select-arrow()
   height 4px
   border-width 1px 0 0 1px
   border-style solid
-  border-color var(--t-color-grey-dark)
+  border-color $color-grey-dark
 
 .t-form-control
   position relative
@@ -19,14 +21,14 @@ select-arrow()
     padding-right 10px
     padding-bottom 10px
     padding-left 10px
-    font-size var(--t-font-size-sm)
-    line-height var(--t-font-size-sm)
+    font-size $font-size-sm
+    line-height $font-size-sm
     border-width 1px
     border-style solid
-    border-color var(--t-color-grey)
-    border-radius var(--t-default-border-radius)
+    border-color $color-grey
+    border-radius $default-border-radius
     box-sizing border-box
-    box-shadow 0 0 0 var(--t-color-purple-lighter)
+    box-shadow 0 0 0 $color-purple-lighter
     transition-property box-shadow, border-color
     transition-duration 200ms
     transition-timing-function ease-in-out
@@ -34,12 +36,12 @@ select-arrow()
     -webkit-appearance none
     &:focus,
     &:active
-      box-shadow 0 0 0 4px var(--t-color-purple-x-lighter)
-      border-color var(--t-color-purple-lighter)
+      box-shadow 0 0 0 4px $color-purple-x-lighter
+      border-color $color-purple-lighter
     &[disabled]
-      background-color var(--t-color-grey-lighter)
-      color var(--t-color-grey-darker)
-      border-color var(--t-color-grey-light)
+      background-color $color-grey-lighter
+      color $color-grey-darker
+      border-color $color-grey-light
       pointer-events none
   textarea
     font-family inherit
@@ -49,7 +51,7 @@ select-arrow()
       padding-top 9px
       padding-right 30px
       padding-bottom 9px
-      line-height var(--t-font-size-lg)
+      line-height $font-size-lg
     &:before
       select-arrow()
       transform rotate(-135deg) translate(-60%, -60%)
@@ -58,18 +60,18 @@ select-arrow()
       transform rotate(45deg) translate(-50%, -50%)
     &.t-select-wrapper-disabled
       &:before
-        border-color var(--t-color-grey)
+        border-color $color-grey
       &:after
-        border-color var(--t-color-grey)
+        border-color $color-grey
   &.t-form-control-invalid
     input,
     select,
     textarea
-      border-color var(--t-color-red)
+      border-color $color-red
       &:focus,
       &:active
-        box-shadow 0 0 0 4px var(--t-color-red-lighter)
-        border-color var(--t-color-red)
+        box-shadow 0 0 0 4px $color-red-lighter
+        border-color $color-red
   &.t-form-control-block
     width 100%
     input,
@@ -82,5 +84,5 @@ select-arrow()
   left 0
   bottom -17px
   display block
-  color var(--t-color-red)
-  font-size var(--t-font-size-xxs)
+  color $color-red
+  font-size $font-size-xxs

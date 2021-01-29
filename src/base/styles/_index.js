@@ -1,4 +1,3 @@
-import './_variables.styl';
 import './alert.styl';
 import './banner.styl';
 import './button.styl';

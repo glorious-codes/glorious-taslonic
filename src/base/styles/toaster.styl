@@ -1,13 +1,16 @@
+@require '_variables'
+
+$toaster-width = 300px
+$toast-spacing = 30px
+$toaster-layer = $layer-highest
+
 .t-toaster
-  --t-toaster-width 300px
-  --t-toast-spacing 30px
-  --t-toaster-layer var(--t-layer-highest)
   position fixed
   top 0
   right 0
-  width calc(var(--t-toaster-width) + var(--t-toast-spacing) * 2)
+  width $toaster-width + $toast-spacing * 2
   max-width 100%
   box-sizing border-box
-  z-index var(--t-toaster-layer)
+  z-index $toaster-layer
   .t-toast
-    margin var(--t-toast-spacing) var(--t-toast-spacing) 0 var(--t-toast-spacing)
+    margin $toast-spacing $toast-spacing 0 $toast-spacing

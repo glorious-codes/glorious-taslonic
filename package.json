@@ -1,6 +1,6 @@
 {
   "name": "@glorious/taslonic",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "A glorious UI library available for React and Vue",
   "files": [
     "react.js",
@@ -60,6 +60,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "style-loader": "^2.0.0",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
     "terser-webpack-plugin": "^2.3.1",

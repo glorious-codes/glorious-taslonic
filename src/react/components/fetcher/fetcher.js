@@ -1,3 +1,4 @@
+import '@base/styles/fetcher.styl';
 import React, { useState, useEffect } from 'react';
 import { Loader } from '@react/components/loader/loader';
 import { Banner } from '@react/components/banner/banner';

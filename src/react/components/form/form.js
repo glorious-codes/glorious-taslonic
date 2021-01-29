@@ -1,3 +1,4 @@
+import '@base/styles/form.styl';
 import React, { Component, createRef } from 'react';
 import { Loader } from '@react/components/loader/loader';
 import { FormBanner } from '@react/components/form-banner/form-banner';

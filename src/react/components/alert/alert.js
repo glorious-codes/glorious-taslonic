@@ -1,3 +1,4 @@
+import '@base/styles/alert.styl';
 import React, { useEffect } from 'react';
 import { DISMISS_BUTTON_TEXT } from '@base/constants/alert';
 import keyboardSubscriptionService from '@base/services/keyboardSubscription/keyboardSubscription';

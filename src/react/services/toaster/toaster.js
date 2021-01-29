@@ -1,3 +1,4 @@
+import '@base/styles/toaster.styl';
 import React from 'react';
 import toasterService from '@base/services/toaster/toaster';
 import componentBuilder from '@react/builders/component/component';

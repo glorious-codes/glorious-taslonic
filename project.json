@@ -8,18 +8,20 @@
         "react": "src/react/"
       },
       "libs": {
-        "styles": {
-          "entry": "./src/base/styles/_index.js",
-          "output": {
-            "filename": "index.js"
-          }
-        },
         "react": {
           "entry": "./src/react/index.js",
           "output": {
             "library": "taslonicReact",
             "libraryTarget": "umd",
             "filename": "react.js"
+          }
+        },
+        "react-styled": {
+          "entry": "./src/react/index.js",
+          "output": {
+            "library": "taslonicReact",
+            "libraryTarget": "umd",
+            "filename": "react-styled.js"
           }
         },
         "vue-plugin": {

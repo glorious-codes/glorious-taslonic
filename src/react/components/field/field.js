@@ -1,3 +1,4 @@
+import '@base/styles/field.styl';
 import React, { useState, useEffect, useRef } from 'react';
 import fieldService from '@base/services/field/field';
 

@@ -1,3 +1,4 @@
+import '@base/styles/col.styl';
 import colService from '@base/services/col/col';
 import React from 'react';
 

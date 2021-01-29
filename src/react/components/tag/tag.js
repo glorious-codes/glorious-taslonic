@@ -1,3 +1,4 @@
+import '@base/styles/tag.styl';
 import React from 'react';
 import tagService from '@base/services/tag/tag';
 

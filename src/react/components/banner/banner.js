@@ -1,3 +1,4 @@
+import '@base/styles/banner.styl';
 import React, { useState } from 'react';
 import bannerService from '@base/services/banner/banner';
 import { Button } from '@react/components/button/button';

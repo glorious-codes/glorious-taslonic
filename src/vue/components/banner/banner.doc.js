@@ -48,7 +48,7 @@ module.exports = {
         </t-col>
         <t-col md="4">
           <t-banner theme="success">
-            You’re all set up!
+            You're all set up!
           </t-banner>
         </t-col>
       </t-row>
@@ -95,7 +95,7 @@ module.exports = {
             trigger-text="View Profile"
             :on-trigger-click="viewProfile"
           >
-            You’re all set up!
+            You're all set up!
           </t-banner>
         </t-col>
       </t-row>

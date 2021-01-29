@@ -56,7 +56,7 @@ module.exports = {
               </Col>
               <Col md="4">
                 <Banner theme="success">
-                  You’re all set up!
+                  You're all set up!
                 </Banner>
               </Col>
             </Row>
@@ -99,7 +99,7 @@ module.exports = {
                   triggerText="View Profile"
                   onTriggerClick={viewProfile}
                 >
-                  You’re all set up!
+                  You're all set up!
                 </Banner>
               </Col>
             </Row>

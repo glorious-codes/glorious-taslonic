@@ -1,15 +1,16 @@
 {
   "name": "@glorious/taslonic",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A glorious UI library available for React and Vue",
   "files": [
     "react.js",
+    "react-styled.js",
     "vue-plugin.js",
     "taslonic.css"
   ],
   "scripts": {
     "build": "webpack",
-    "build:clear": "rm -rf ./dist && rm -f ./react.js ./vue-plugin.js ./taslonic.css",
+    "build:clear": "rm -rf ./dist && rm -f ./react.js rm -f ./react-styled.js ./vue-plugin.js ./taslonic.css",
     "format": "eslint './src/**/*.js'",
     "start": "npm run docs -- --watch --port=5000",
     "docs": "pitsby build",

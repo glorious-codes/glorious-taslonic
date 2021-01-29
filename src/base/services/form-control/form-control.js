@@ -18,7 +18,10 @@ _public.buildCssClasses = ({ errorMessage, block } = {}) => {
 };
 
 _public.buildRequiredValidation = () => {
-  return { isValid: data => !!data, errorMessage: REQUIRED_ERROR_MESSAGE };
+  const isValid = data => {
+    return typeof data == 'string' ? !!data.trim() : !!data;
+  };
+  return { isValid, errorMessage: REQUIRED_ERROR_MESSAGE };
 };
 
 _public.findParentFormModel = formControlEl => {

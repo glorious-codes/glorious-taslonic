@@ -1,19 +1,20 @@
+@require '_variables'
 @require '_mixins'
 
 .t-button
   padding 11px
   min-height 40px
-  background-color var(--t-color-grey-light)
-  color var(--t-color-grey-dark)
-  font-size var(--t-font-size-xs)
+  background-color $color-grey-light
+  color $color-grey-dark
+  font-size $font-size-xs
   font-weight bold
   text-align center
   text-decoration none
-  line-height var(--t-font-size-sm)
-  border 1px solid var(--t-color-grey)
-  border-radius var(--t-default-border-radius)
+  line-height $font-size-sm
+  border 1px solid $color-grey
+  border-radius $default-border-radius
   box-sizing border-box
-  box-shadow 0 0 0 var(--t-color-purple-lighter)
+  box-shadow 0 0 0 $color-purple-lighter
   transition-property box-shadow, background-color
   transition-duration 200ms
   transition-timing-function ease-in-out
@@ -22,46 +23,46 @@
   user-select(none)
   -webkit-appearance none
   &:hover
-    background-color var(--t-color-grey-lighter)
+    background-color $color-grey-lighter
   &:focus,
   &:active
-    background-color var(--t-color-grey-lighter)
-    box-shadow 0 0 0 4px var(--t-color-purple-x-lighter)
+    background-color $color-grey-lighter
+    box-shadow 0 0 0 4px $color-purple-x-lighter
   &[disabled]
-    background-color var(--t-color-grey-lighter)
-    color var(--t-color-grey)
-    border-color var(--t-color-grey)
+    background-color $color-grey-lighter
+    color $color-grey
+    border-color $color-grey
     cursor default
   &.t-button-block
     display block
     width 100%
   &.t-button-primary
-    background-color var(--t-color-purple)
+    background-color $color-purple
     color white
-    border-color var(--t-color-purple)
+    border-color $color-purple
     &:hover,
     &:focus,
     &:active
-      background-color var(--t-color-purple-light)
-      border-color var(--t-color-purple-light)
+      background-color $color-purple-light
+      border-color $color-purple-light
     &[disabled]
-      background-color var(--t-color-purple-lighter)
-      border-color var(--t-color-purple-lighter)
+      background-color $color-purple-lighter
+      border-color $color-purple-lighter
     .t-loader-item
       background-color white
   &.t-button-secondary
     background-color transparent
-    color var(--t-color-purple)
-    border-color var(--t-color-purple)
+    color $color-purple
+    border-color $color-purple
     &:hover,
     &:focus,
     &:active
-      border-color var(--t-color-purple-lighter)
+      border-color $color-purple-lighter
     &[disabled]
-      color var(--t-color-purple-lighter)
-      border-color var(--t-color-purple-lighter)
+      color $color-purple-lighter
+      border-color $color-purple-lighter
     .t-loader-item
-      background-color var(--t-color-purple)
+      background-color $color-purple
   &.t-button-lookless
     margin-bottom 1px
     padding 0 0 1px 0

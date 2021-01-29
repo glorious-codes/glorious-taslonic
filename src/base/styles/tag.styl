@@ -1,3 +1,4 @@
+@require '_variables'
 @require '_mixins'
 
 tag-theme($backgroundColor, $borderColor, $textColor)
@@ -8,26 +9,26 @@ tag-theme($backgroundColor, $borderColor, $textColor)
 .t-tag
   display inline-block
   padding 5px
-  background-color var(--t-color-grey-lighter)
-  color var(--t-color-grey-dark)
-  font-size var(--t-font-size-xxxs)
+  background-color $color-grey-lighter
+  color $color-grey-dark
+  font-size $font-size-xxxs
   font-weight bold
   line-height 1
   text-transform uppercase
   border-width 1px
   border-style solid
-  border-color var(--t-color-grey)
-  border-radius var(--t-default-border-radius)
+  border-color $color-grey
+  border-radius $default-border-radius
   user-select(none)
   &.t-tag-primary
-    tag-theme(var(--t-color-purple), var(--t-color-purple), var(--t-color-lightest))
+    tag-theme($color-purple, $color-purple, $color-lightest)
   &.t-tag-secondary
-    tag-theme(transparent, var(--t-color-purple), var(--t-color-purple))
+    tag-theme(transparent, $color-purple, $color-purple)
   &.t-tag-info
-    tag-theme(var(--t-color-blue-lighter), var(--t-color-blue-light), var(--t-color-blue))
+    tag-theme($color-blue-lighter, $color-blue-light, $color-blue)
   &.t-tag-success
-    tag-theme(var(--t-color-green-lighter), var(--t-color-green-light), var(--t-color-green))
+    tag-theme($color-green-lighter, $color-green-light, $color-green)
   &.t-tag-warning
-    tag-theme(var(--t-color-yellow-lighter), var(--t-color-yellow-dark), var(--t-color-yellow-darker))
+    tag-theme($color-yellow-lighter, $color-yellow-dark, $color-yellow-darker)
   &.t-tag-danger
-    tag-theme(var(--t-color-red-lighter), var(--t-color-red-light), var(--t-color-red))
+    tag-theme($color-red-lighter, $color-red-light, $color-red)

@@ -1,3 +1,5 @@
+@require '_variables'
+
 .t-field
   display inline-block
   &.t-field-block
@@ -9,12 +11,12 @@
         position absolute
         top 0
         right -8px
-        color var(--t-color-red)
+        color $color-red
 
 .t-field-label
   position relative
-  color var(--t-color-grey-dark)
-  font-size var(--t-font-size-xxs)
+  color $color-grey-dark
+  font-size $font-size-xxs
   font-weight bold
   & + .t-field-content
     margin-top 5px

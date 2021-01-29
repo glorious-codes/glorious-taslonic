@@ -1,31 +1,32 @@
-:root
-  --t-loader-width 30px
-  --t-loader-height 8px
-  --t-loader-speed 600ms
-  --t-loader-color var(--t-color-grey-dark)
-  --t-loader-light-color white
+@require '_variables'
+
+$loader-width = 30px
+$loader-height = 8px
+$loader-speed = 600ms
+$loader-color = $color-grey-dark
+$loader-light-color = white
 
 .t-loader
   display flex
   justify-content center
   align-items center
-  min-height var(--t-loader-size)
+  min-height $loader-size
   height 100%
   &.t-loader-light
     .t-loader-item
-      background-color var(--t-loader-light-color)
+      background-color $loader-light-color
 
 .t-loader-item
   display inline-block
-  width calc(var(--t-loader-width)/3)
-  height var(--t-loader-height)
-  background-color var(--t-loader-color)
-  border-radius calc(var(--t-loader-height)/3)
-  animation loader var(--t-loader-speed) infinite ease-in-out both
+  width ($loader-width/3)
+  height $loader-height
+  background-color $loader-color
+  border-radius ($loader-height/3)
+  animation loader $loader-speed infinite ease-in-out both
   &:first-child
-    animation-delay calc(var(--t-loader-speed)/3 * -1)
+    animation-delay ($loader-speed/3) * -1
   &:last-child
-    animation-delay calc(var(--t-loader-speed)/3)
+    animation-delay ($loader-speed/3)
 
 @keyframes loader
   0%, 80%, 100%

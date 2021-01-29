@@ -1,8 +1,8 @@
+@require '_variables'
 @require '_mixins'
 
 $backdrop-color = #333333
-:root
-  --t-dialog-spacing 60px
+$dialog-spacing = 60px
 
 @keyframes fadin
   0%
@@ -22,20 +22,20 @@ $backdrop-color = #333333
   right 0
   bottom 0
   left 0
-  max-height calc(100vh - var(--t-dialog-spacing))
-  padding-bottom var(--t-dialog-spacing)
+  max-height 100vh
   background-color alpha($backdrop-color, .5)
-  z-index var(--t-layer-middle)
+  z-index $layer-middle
   animation fadin 300ms
   overflow-y scroll
+  box-sizing border-box
 
 .t-dialog
   position relative
-  margin var(--t-dialog-spacing) auto 0
+  margin $dialog-spacing auto
   padding 20px
   width 95%
   max-width 600px
-  background-color var(--t-color-lightest)
+  background-color $color-lightest
   animation moveup 300ms
   border-radius 6px
   box-sizing border-box
@@ -55,15 +55,13 @@ $backdrop-color = #333333
   .t-button
     margin 0
     line-height 20px
-    font-size var(--t-font-size-lg)
+    font-size $font-size-lg
     +highlight()
-      color var(--t-color-red)
+      color $color-red
 
 .t-dialog-open
   overflow hidden
 
 +breakpoint('sm')
-  .t-dialog-backdrop
-    padding-bottom calc(var(--t-dialog-spacing) * 2)
   .t-dialog
-    margin calc(var(--t-dialog-spacing) * 2) auto 0
+    margin $dialog-spacing * 2 auto

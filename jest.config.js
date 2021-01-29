@@ -17,7 +17,7 @@ module.exports = {
     '@react\/(.*)$': `<rootDir>/${project.scripts.source.root.react}$1`,
     '@vue\/test-utils$': `<rootDir>/node_modules/@vue/test-utils`,
     '@vue\/(.*)$': `<rootDir>/${project.scripts.source.root.vue}$1`,
-    '@vue$': 'vue/dist/vue.common.js'
+    'vue$': 'vue/dist/vue.common.js'
   },
   setupFilesAfterEnv: [
     '<rootDir>/jest.setup.js'

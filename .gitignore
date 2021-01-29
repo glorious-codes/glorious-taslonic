@@ -157,6 +157,7 @@ local.properties
 assets/css/
 assets/js/
 react.js
+react-styled.js
 vue-plugin.js
 taslonic.css
 

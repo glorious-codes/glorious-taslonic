@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils';
-import { closeButton } from './close-button';
+import { tCloseButton } from './close-button';
 
 describe('Close Button', () => {
   function mountComponent({ listeners = {} } = {}){
-    return mount(closeButton, { listeners });
+    return mount(tCloseButton, { listeners });
   }
 
   it('should have base css class', () => {

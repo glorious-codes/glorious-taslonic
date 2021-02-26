@@ -1,12 +1,10 @@
 import buttonService from '@base/services/button/button';
-import { loader } from '@vue/components/loader/loader';
+import { tLoader } from '@vue/components/loader/loader';
 import template from './button.html';
 
-export const button = {
+export const tButton = {
   name: 't-button',
-  components: {
-    tLoader: loader
-  },
+  components: { tLoader },
   props: ['theme', 'block', 'tag', 'type'],
   data(){
     return {

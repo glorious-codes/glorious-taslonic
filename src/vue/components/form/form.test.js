@@ -3,7 +3,7 @@ import { REQUEST_ERROR_MESSAGE } from '@base/constants/form';
 import { PromiseMock } from '@base/mocks/promise';
 import formService from '@base/services/form/form';
 import toasterService from '@vue/services/toaster/toaster';
-import { form } from './form';
+import { tForm } from './form';
 
 jest.useFakeTimers();
 
@@ -11,7 +11,7 @@ describe('Form', () => {
   let wrapper;
 
   function mountComponent(propsData = {}, content = ''){
-    wrapper = mount(form, { propsData, slots: { default: content } });
+    wrapper = mount(tForm, { propsData, slots: { default: content } });
     jest.runOnlyPendingTimers();
     return wrapper;
   }

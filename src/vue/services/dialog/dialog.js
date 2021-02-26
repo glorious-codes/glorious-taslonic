@@ -1,4 +1,4 @@
-import { dialog } from '@vue/components/dialog/dialog';
+import { tDialog } from '@vue/components/dialog/dialog';
 import dialogService from '@base/services/dialog/dialog';
 import componentBuilder from '@vue/builders/component/component';
 
@@ -20,9 +20,7 @@ _public.open = ({ title, width, onClose, content, name, hideCloseButton } = {}) 
 function buildDialog({ wrapper, title, width, onClose, hideCloseButton }) {
   return componentBuilder.build({
     controller: {
-      components: {
-        tDialog: dialog
-      },
+      components: { tDialog },
       data(){
         return { title, width, hideCloseButton };
       },

@@ -1,7 +1,7 @@
 import loaderService from '@base/services/loader/loader';
 import template from './loader.html';
 
-export const loader = {
+export const tLoader = {
   name: 't-loader',
   props: ['theme'],
   mounted(){

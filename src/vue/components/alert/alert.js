@@ -1,14 +1,12 @@
 import { DISMISS_BUTTON_TEXT } from '@base/constants/alert';
 import domService from '@base/services/dom/dom';
 import keyboardSubscriptionService from '@base/services/keyboardSubscription/keyboardSubscription';
-import { button } from '@vue/components/button/button';
+import { tButton } from '@vue/components/button/button';
 import template from './alert.html';
 
-export const alert = {
+export const tAlert = {
   name: 't-alert',
-  components: {
-    tButton: button
-  },
+  components: { tButton },
   props: {
     dismissButtonText: { default: DISMISS_BUTTON_TEXT },
     onDismiss: { default: function(){ return () => {}; } }

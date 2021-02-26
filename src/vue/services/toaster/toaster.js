@@ -1,7 +1,7 @@
 import idService from '@base/services/id/id';
 import toasterService from '@base/services/toaster/toaster';
 import componentBuilder from '@vue/builders/component/component';
-import { toast } from '@vue/components/toast/toast';
+import { tToast } from '@vue/components/toast/toast';
 
 const _public = {};
 
@@ -14,9 +14,7 @@ function buildToastElement(title, message, theme){
   const id = idService.generate();
   const { element } = componentBuilder.build({
     controller: {
-      components: {
-        tToast: toast
-      },
+      components: { tToast },
       data(){
         return {
           title,

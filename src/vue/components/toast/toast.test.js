@@ -1,9 +1,9 @@
 import { shallowMount } from '@vue/test-utils';
-import { toast } from './toast';
+import { tToast } from './toast';
 
 describe('Toast', () => {
   function mount(propsData = {}, content = ''){
-    return shallowMount(toast, { propsData, slots: { default: content } });
+    return shallowMount(tToast, { propsData, slots: { default: content } });
   }
 
   it('should have base css class', () => {

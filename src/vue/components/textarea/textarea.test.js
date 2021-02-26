@@ -1,39 +1,39 @@
 import { shallowMount } from '@vue/test-utils';
-import { formControl } from '@vue/components/form-control/form-control';
-import { textarea } from './textarea';
+import { tFormControl } from '@vue/components/form-control/form-control';
+import { tTextarea } from './textarea';
 
 describe('Select', () => {
   function mount({ listeners = {}, ...propsData } = {}){
-    return shallowMount(textarea, { propsData, listeners });
+    return shallowMount(tTextarea, { propsData, listeners });
   }
 
   it('should pass value to form control', () => {
     const value = 'Taslonic';
     const wrapper = mount({ value });
-    expect(wrapper.findComponent(formControl).props('value')).toEqual(value);
+    expect(wrapper.findComponent(tFormControl).props('value')).toEqual(value);
   });
 
   it('should pass required to form control', () => {
     const required = true;
     const wrapper = mount({ required });
-    expect(wrapper.findComponent(formControl).props('required')).toEqual(required);
+    expect(wrapper.findComponent(tFormControl).props('required')).toEqual(required);
   });
 
   it('should pass validations to form control', () => {
     const validations = [];
     const wrapper = mount({ validations });
-    expect(wrapper.findComponent(formControl).props('validations')).toEqual(validations);
+    expect(wrapper.findComponent(tFormControl).props('validations')).toEqual(validations);
   });
 
   it('should pass block to form control', () => {
     const block = true;
     const wrapper = mount({ block });
-    expect(wrapper.findComponent(formControl).props('block')).toEqual(block);
+    expect(wrapper.findComponent(tFormControl).props('block')).toEqual(block);
   });
 
   it('should form control query for a textarea', () => {
     const wrapper = mount();
-    expect(wrapper.findComponent(formControl).props('formControlElSelector')).toEqual('textarea');
+    expect(wrapper.findComponent(tFormControl).props('formControlElSelector')).toEqual('textarea');
   });
 
   it('should not be disabled by default', () => {

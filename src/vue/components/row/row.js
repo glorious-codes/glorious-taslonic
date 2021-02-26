@@ -1,7 +1,7 @@
 import rowService from '@base/services/row/row';
 import template from './row.html';
 
-export const row = {
+export const tRow = {
   name: 't-row',
   props: ['align', 'offset', 'vertical-align'],
   computed: {

@@ -1,14 +1,12 @@
 import { CANCEL_BUTTON_TEXT, CONFIRM_BUTTON_TEXT } from '@base/constants/confirm';
 import domService from '@base/services/dom/dom';
 import keyboardSubscriptionService from '@base/services/keyboardSubscription/keyboardSubscription';
-import { button } from '@vue/components/button/button';
+import { tButton } from '@vue/components/button/button';
 import template from './confirm.html';
 
-export const confirm = {
+export const tConfirm = {
   name: 't-confirm',
-  components: {
-    tButton: button
-  },
+  components: { tButton },
   props: ['cancelButtonText', 'confirmButtonText', 'onCancel', 'onConfirm'],
   data(){
     return {

@@ -1,15 +1,12 @@
-import { formBanner } from '@vue/components/form-banner/form-banner';
-import { loader } from '@vue/components/loader/loader';
+import { tFormBanner } from '@vue/components/form-banner/form-banner';
+import { tLoader } from '@vue/components/loader/loader';
 import formService from '@base/services/form/form';
 import toasterService from '@vue/services/toaster/toaster';
 import template from './form.html';
 
-export const form = {
+export const tForm = {
   name: 't-form',
-  components: {
-    tFormBanner: formBanner,
-    tLoader: loader
-  },
+  components: { tFormBanner, tLoader },
   props: [
     'onFetch',
     'onFetchSuccess',

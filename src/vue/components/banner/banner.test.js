@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils';
-import { banner } from './banner';
+import { tBanner } from './banner';
 
 describe('Banner', () => {
   function mountComponent(propsData = {}, content = ''){
-    return mount(banner, { propsData, slots: { default: content } });
+    return mount(tBanner, { propsData, slots: { default: content } });
   }
 
   it('should have base css class', () => {

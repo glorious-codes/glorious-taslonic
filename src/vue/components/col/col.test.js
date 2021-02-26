@@ -1,9 +1,9 @@
 import { shallowMount } from '@vue/test-utils';
-import { col } from './col';
+import { tCol } from './col';
 
 describe('Column', () => {
   function mount(propsData = {}, content = ''){
-    return shallowMount(col, { propsData, slots: { default: content } });
+    return shallowMount(tCol, { propsData, slots: { default: content } });
   }
 
   it('should have base css class', () => {

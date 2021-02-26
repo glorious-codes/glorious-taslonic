@@ -1,7 +1,7 @@
 import colService from '@base/services/col/col';
 import template from './col.html';
 
-export const col = {
+export const tCol = {
   name: 't-col',
   props: [
     'xs',

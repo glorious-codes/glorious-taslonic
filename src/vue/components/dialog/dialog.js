@@ -1,12 +1,10 @@
 import keyboardSubscriptionService from '@base/services/keyboardSubscription/keyboardSubscription';
-import { button } from '@vue/components/button/button';
+import { tButton } from '@vue/components/button/button';
 import template from './dialog.html';
 
-export const dialog = {
+export const tDialog = {
   name: 't-dialog',
-  components: {
-    tButton: button
-  },
+  components: { tButton },
   props: ['width', 'title', 'onClose', 'hideCloseButton'],
   data(){
     return {

@@ -1,11 +1,11 @@
 import { mount } from '@vue/test-utils';
 import testingService from '@base/services/testing/testing';
 import keyboardSubscriptionService from '@base/services/keyboardSubscription/keyboardSubscription';
-import { dialog } from './dialog';
+import { tDialog } from './dialog';
 
 describe('Dialog', () => {
   function mountComponent(propsData = {}, content = ''){
-    return mount(dialog, { propsData, slots: { default: content } });
+    return mount(tDialog, { propsData, slots: { default: content } });
   }
 
   it('should have appropriate css class', () => {

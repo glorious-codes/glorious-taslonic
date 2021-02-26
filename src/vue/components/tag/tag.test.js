@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils';
-import { tag } from './tag';
+import { tTag } from './tag';
 
 describe('Tag', () => {
   function mountComponent(propsData = {}, content = ''){
-    return mount(tag, { propsData, slots: { default: content } });
+    return mount(tTag, { propsData, slots: { default: content } });
   }
 
   it('should have base css class', () => {

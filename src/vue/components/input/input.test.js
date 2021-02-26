@@ -1,39 +1,39 @@
 import { shallowMount } from '@vue/test-utils';
-import { formControl } from '@vue/components/form-control/form-control';
-import { input } from './input';
+import { tFormControl } from '@vue/components/form-control/form-control';
+import { tInput } from './input';
 
 describe('Input', () => {
   function mount({ listeners = {}, ...propsData } = {}){
-    return shallowMount(input, { propsData, listeners });
+    return shallowMount(tInput, { propsData, listeners });
   }
 
   it('should pass value to form control', () => {
     const value = 'Rafael';
     const wrapper = mount({ value });
-    expect(wrapper.findComponent(formControl).props('value')).toEqual(value);
+    expect(wrapper.findComponent(tFormControl).props('value')).toEqual(value);
   });
 
   it('should pass required to form control', () => {
     const required = true;
     const wrapper = mount({ required });
-    expect(wrapper.findComponent(formControl).props('required')).toEqual(required);
+    expect(wrapper.findComponent(tFormControl).props('required')).toEqual(required);
   });
 
   it('should pass validations to form control', () => {
     const validations = [];
     const wrapper = mount({ validations });
-    expect(wrapper.findComponent(formControl).props('validations')).toEqual(validations);
+    expect(wrapper.findComponent(tFormControl).props('validations')).toEqual(validations);
   });
 
   it('should pass block to form control', () => {
     const block = true;
     const wrapper = mount({ block });
-    expect(wrapper.findComponent(formControl).props('block')).toEqual(block);
+    expect(wrapper.findComponent(tFormControl).props('block')).toEqual(block);
   });
 
   it('should form control query for an input', () => {
     const wrapper = mount();
-    expect(wrapper.findComponent(formControl).props('formControlElSelector')).toEqual('input');
+    expect(wrapper.findComponent(tFormControl).props('formControlElSelector')).toEqual('input');
   });
 
   it('should input contain an attribute type as text by default', () => {

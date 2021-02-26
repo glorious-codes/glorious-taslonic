@@ -1,7 +1,7 @@
 import tagService from '@base/services/tag/tag';
 import template from './tag.html';
 
-export const tag = {
+export const tTag = {
   name: 't-tag',
   props: ['theme'],
   computed: {

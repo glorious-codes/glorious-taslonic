@@ -1,9 +1,9 @@
 import { shallowMount } from '@vue/test-utils';
-import { container } from './container';
+import { tContainer } from './container';
 
 describe('Container', () => {
   function mount(propsData = {}, content = ''){
-    return shallowMount(container, { propsData, slots: { default: content } });
+    return shallowMount(tContainer, { propsData, slots: { default: content } });
   }
 
   it('should have base css class', () => {

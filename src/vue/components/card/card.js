@@ -1,6 +1,6 @@
 import template from './card.html';
 
-export const card = {
+export const tCard = {
   name: 't-card',
   props: ['title', 'titleTagName'],
   computed: {

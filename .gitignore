@@ -156,9 +156,8 @@ local.properties
 .sass-cache/
 assets/css/
 assets/js/
-react.js
-react-styled.js
-vue-plugin.js
+/react
+/vue
 taslonic.css
 
 # Tests generated files

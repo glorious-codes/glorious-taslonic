@@ -102,5 +102,6 @@ function buildConfig(type, cssType){
 module.exports = [
   buildConfig('react'),
   buildConfig('react-styled', 'inline'),
+  buildConfig('vue'),
   buildConfig('vue-plugin')
 ];

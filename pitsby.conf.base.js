@@ -17,8 +17,8 @@ module.exports = {
     './dist/taslonic.css'
   ],
   scripts: [
-    './dist/react.js',
-    './dist/vue-plugin.js'
+    './dist/react/index.js',
+    './dist/vue/plugin.js'
   ],
   other: [
     './dist/images/'

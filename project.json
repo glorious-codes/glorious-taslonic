@@ -13,7 +13,7 @@
           "output": {
             "library": "taslonicReact",
             "libraryTarget": "umd",
-            "filename": "react.js"
+            "filename": "react/index.js"
           }
         },
         "react-styled": {
@@ -21,16 +21,24 @@
           "output": {
             "library": "taslonicReact",
             "libraryTarget": "umd",
-            "filename": "react-styled.js"
+            "filename": "react/styled.js"
           }
         },
-        "vue-plugin": {
+        "vue": {
           "entry": "./src/vue/index.js",
           "output": {
             "library": "taslonicVue",
             "libraryTarget": "umd",
+            "filename": "vue/index.js"
+          }
+        },
+        "vue-plugin": {
+          "entry": "./src/vue/plugin.js",
+          "output": {
+            "library": "taslonicVue",
+            "libraryTarget": "umd",
             "libraryExport": "default",
-            "filename": "vue-plugin.js"
+            "filename": "vue/plugin.js"
           }
         }
       }
@@ -62,7 +70,8 @@
         "src/**/*.js",
         "!src/**/*.doc.js",
         "!src/**/index.js",
-        "!src/**/mocks/**/*.js"
+        "!src/**/mocks/**/*.js",
+        "!src/base/styles/**/*"
       ]
     }
   }

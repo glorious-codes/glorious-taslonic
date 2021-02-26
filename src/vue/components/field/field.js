@@ -1,7 +1,7 @@
 import fieldService from '@base/services/field/field';
 import template from './field.html';
 
-export const field = {
+export const tField = {
   name: 't-field',
   props: ['label', 'required', 'block'],
   data(){

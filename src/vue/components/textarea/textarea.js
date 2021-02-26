@@ -1,11 +1,9 @@
-import { formControl } from '@vue/components/form-control/form-control';
+import { tFormControl } from '@vue/components/form-control/form-control';
 import template from './textarea.html';
 
-export const textarea = {
+export const tTextarea = {
   name: 't-textarea',
-  components: {
-    tFormControl: formControl
-  },
+  components: { tFormControl },
   props: {
     cols: { type: String },
     rows: { type: String },

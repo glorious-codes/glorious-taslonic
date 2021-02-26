@@ -1,12 +1,10 @@
-import { formControl } from '@vue/components/form-control/form-control';
+import { tFormControl } from '@vue/components/form-control/form-control';
 import inputService from '@base/services/input/input';
 import template from './input.html';
 
-export const input = {
+export const tInput = {
   name: 't-input',
-  components: {
-    tFormControl: formControl
-  },
+  components: { tFormControl },
   props: {
     type: { type: String },
     value: { type: String },

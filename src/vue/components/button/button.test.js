@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils';
 import buttonService from '@base/services/button/button';
-import { button } from './button';
+import { tButton } from './button';
 
 describe('Button', () => {
   function mountComponent({ listeners = {}, ...propsData } = {}, content = ''){
-    return mount(button, { propsData, listeners, slots: { default: content } });
+    return mount(tButton, { propsData, listeners, slots: { default: content } });
   }
 
   it('should have base css class', () => {

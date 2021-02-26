@@ -1,4 +1,4 @@
-import { confirm } from '@vue/components/confirm/confirm';
+import { tConfirm } from '@vue/components/confirm/confirm';
 import dialogService from '@vue/services/dialog/dialog';
 
 const _public = {};
@@ -29,9 +29,7 @@ _public.open = ({
 
 function buildConfirm({ content, cancelButtonText, confirmButtonText, onCancel, onConfirm }){
   return {
-    components: {
-      tConfirm: confirm
-    },
+    components: { tConfirm },
     data(){
       return { cancelButtonText, confirmButtonText, onCancel, onConfirm };
     },

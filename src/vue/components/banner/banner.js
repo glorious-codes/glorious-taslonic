@@ -1,14 +1,11 @@
 import bannerService from '@base/services/banner/banner';
-import { button } from '@vue/components/button/button';
-import { closeButton } from '@vue/components/close-button/close-button';
+import { tButton } from '@vue/components/button/button';
+import { tCloseButton } from '@vue/components/close-button/close-button';
 import template from './banner.html';
 
-export const banner = {
+export const tBanner = {
   name: 't-banner',
-  components: {
-    tButton: button,
-    tCloseButton: closeButton
-  },
+  components: { tButton, tCloseButton },
   props: ['theme', 'triggerText', 'onTriggerClick', 'onClose'],
   data(){
     return {

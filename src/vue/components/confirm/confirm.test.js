@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils';
-import { confirm } from './confirm';
+import { tConfirm } from './confirm';
 
 describe('Confirm', () => {
   function mountComponent(propsData = {}, content = ''){
-    return mount(confirm, { propsData, slots: { default: content } });
+    return mount(tConfirm, { propsData, slots: { default: content } });
   }
 
   function getButton(wrapper, type){

@@ -1,9 +1,9 @@
 import { shallowMount } from '@vue/test-utils';
-import { field } from './field';
+import { tField } from './field';
 
 describe('Field', () => {
   function mount(propsData = {}, content = ''){
-    return shallowMount(field, { propsData, slots: { default: content } });
+    return shallowMount(tField, { propsData, slots: { default: content } });
   }
 
   it('should have base css class', () => {

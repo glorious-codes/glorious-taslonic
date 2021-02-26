@@ -1,10 +1,10 @@
 import { shallowMount } from '@vue/test-utils';
-import { banner } from '@vue/components/banner/banner';
-import { formBanner } from './form-banner';
+import { tBanner } from '@vue/components/banner/banner';
+import { tFormBanner } from './form-banner';
 
 describe('Form Banner', () => {
   function mount(propsData = {}){
-    return shallowMount(formBanner, { propsData });
+    return shallowMount(tFormBanner, { propsData });
   }
 
   it('should have base css class', () => {
@@ -19,7 +19,7 @@ describe('Form Banner', () => {
     const onTriggerClick = jest.fn();
     const onClose = jest.fn();
     const wrapper = mount({ message, theme, triggerText, onTriggerClick, onClose });
-    const formBanner = wrapper.findComponent(banner);
+    const formBanner = wrapper.findComponent(tBanner);
     expect(formBanner.text()).toEqual(message);
     expect(formBanner.props('theme')).toEqual(theme);
     expect(formBanner.props('triggerText')).toEqual(triggerText);

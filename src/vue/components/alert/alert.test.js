@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils';
 import testingService from '@base/services/testing/testing';
-import { alert } from './alert';
+import { tAlert } from './alert';
 
 describe('Alert', () => {
   function mountComponent(propsData = {}, content = ''){
-    return mount(alert, { propsData, slots: { default: content } });
+    return mount(tAlert, { propsData, slots: { default: content } });
   }
 
   it('should have base css class', () => {

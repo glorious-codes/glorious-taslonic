@@ -1,12 +1,10 @@
 import selectService from '@base/services/select/select';
-import { formControl } from '@vue/components/form-control/form-control';
+import { tFormControl } from '@vue/components/form-control/form-control';
 import template from './select.html';
 
-export const select = {
+export const tSelect = {
   name: 't-select',
-  components: {
-    tFormControl: formControl
-  },
+  components: { tFormControl },
   props: {
     value: { type: String },
     name: { type: String },

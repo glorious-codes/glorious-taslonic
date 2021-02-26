@@ -1,13 +1,13 @@
 import { shallowMount } from '@vue/test-utils';
 import { REQUIRED_ERROR_MESSAGE } from '@base/constants/messages';
-import { formControl } from './form-control';
+import { tFormControl } from './form-control';
 
 jest.useFakeTimers();
 
 describe('Form Control', () => {
   function mount(propsData = {}, content = '<input type="text" />'){
     propsData.formControlElSelector = propsData.formControlElSelector || 'input';
-    const wrapper = shallowMount(formControl, { propsData, slots: { default: content } });
+    const wrapper = shallowMount(tFormControl, { propsData, slots: { default: content } });
     jest.runOnlyPendingTimers();
     return wrapper;
   }

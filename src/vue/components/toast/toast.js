@@ -1,12 +1,10 @@
 import toastService from '@base/services/toast/toast';
-import { closeButton } from '@vue/components/close-button/close-button';
+import { tCloseButton } from '@vue/components/close-button/close-button';
 import template from './toast.html';
 
-export const toast = {
+export const tToast = {
   name: 't-toast',
-  components: {
-    tCloseButton: closeButton
-  },
+  components: { tCloseButton },
   props: ['title', 'theme', 'onClose'],
   methods: {
     handleClose(){

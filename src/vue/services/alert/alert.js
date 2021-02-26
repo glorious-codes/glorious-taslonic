@@ -1,4 +1,4 @@
-import { alert } from '@vue/components/alert/alert';
+import { tAlert } from '@vue/components/alert/alert';
 import dialogService from '@vue/services/dialog/dialog';
 
 const _public = {};
@@ -25,9 +25,7 @@ _public.open = ({
 
 function buildConfirm({ content, dismissButtonText, onDismiss }){
   return {
-    components: {
-      tAlert: alert
-    },
+    components: { tAlert },
     data(){
       return { dismissButtonText, onDismiss };
     },

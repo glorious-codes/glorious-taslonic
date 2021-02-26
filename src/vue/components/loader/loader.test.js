@@ -1,9 +1,9 @@
 import { shallowMount } from '@vue/test-utils';
-import { loader } from './loader';
+import { tLoader } from './loader';
 
 describe('Loader', () => {
   function mount(propsData = {}){
-    return shallowMount(loader, { propsData });
+    return shallowMount(tLoader, { propsData });
   }
 
   it('should have appropriate css class', () => {

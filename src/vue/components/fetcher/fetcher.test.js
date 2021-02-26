@@ -1,12 +1,12 @@
 import { mount } from '@vue/test-utils';
 import { PromiseMock } from '@base/mocks/promise';
-import { banner } from '@vue/components/banner/banner';
-import { loader } from '@vue/components/loader/loader';
-import { fetcher } from './fetcher';
+import { tBanner } from '@vue/components/banner/banner';
+import { tLoader } from '@vue/components/loader/loader';
+import { tFetcher } from './fetcher';
 
 describe('Fetcher', () => {
   function mountComponent(propsData = {}, content = ''){
-    return mount(fetcher, { propsData, slots: { default: content } });
+    return mount(tFetcher, { propsData, slots: { default: content } });
   }
 
   function simulateFetch(responseType, options){
@@ -28,13 +28,13 @@ describe('Fetcher', () => {
   it('should show loader on fetch', () => {
     const onFetch = simulateFetch('success', { shouldAbort: true });
     const wrapper = mountComponent({ onFetch });
-    expect(wrapper.findAllComponents(loader).length).toEqual(1);
+    expect(wrapper.findAllComponents(tLoader).length).toEqual(1);
   });
 
   it('should hide loader on fetch success', () => {
     const onFetch = simulateFetch('success');
     const wrapper = mountComponent({ onFetch });
-    expect(wrapper.findAllComponents(loader).length).toEqual(0);
+    expect(wrapper.findAllComponents(tLoader).length).toEqual(0);
   });
 
   it('should show banner on fetch error', () => {
@@ -62,7 +62,7 @@ describe('Fetcher', () => {
     const wrapper = mountComponent({ onFetch });
     wrapper.find('[data-close-button]').trigger('click');
     wrapper.vm.$nextTick(() => {
-      expect(wrapper.findAllComponents(banner).length).toEqual(0);
+      expect(wrapper.findAllComponents(tBanner).length).toEqual(0);
     });
   });
 

@@ -2,7 +2,7 @@ import { FormControlModel } from '@base/models/form-control/form-control';
 import formControlService from '@base/services/form-control/form-control';
 import template from './form-control.html';
 
-export const formControl = {
+export const tFormControl = {
   name: 't-form-control',
   props: ['value', 'required', 'autofocus', 'validations', 'formControlElSelector', 'block'],
   data(){

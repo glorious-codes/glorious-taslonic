@@ -1,14 +1,11 @@
-import { banner } from '@vue/components/banner/banner';
-import { loader } from '@vue/components/loader/loader';
+import { tBanner } from '@vue/components/banner/banner';
+import { tLoader } from '@vue/components/loader/loader';
 import fetcherService from '@base/services/fetcher/fetcher';
 import template from './fetcher.html';
 
-export const fetcher = {
+export const tFetcher = {
   name: 't-fetcher',
-  components: {
-    tBanner: banner,
-    tLoader: loader
-  },
+  components: { tBanner, tLoader },
   props: [
     'onFetch',
     'onFetchSuccess',

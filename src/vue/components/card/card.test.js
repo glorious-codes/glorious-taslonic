@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils';
-import { card } from './card';
+import { tCard } from './card';
 
 describe('Card', () => {
   function mountComponent(propsData = {}, content = ''){
-    return mount(card, { propsData, slots: { default: content } });
+    return mount(tCard, { propsData, slots: { default: content } });
   }
 
   it('should have base css class', () => {

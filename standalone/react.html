@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Taslonic: Standalone React</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <link href="https://taslonic.com/images/favicon-taslonic-32x32.png?v=1" rel="shortcut icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glorious/taslonic/taslonic.css">
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.13.8/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react@16.14.0/umd/react.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@16.14.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@glorious/taslonic/react/index.js"></script>
+    <style media="screen">
+      html, body {
+        font-family: Arial, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-root></div>
+    <script type="text/babel">
+      (function(){
+        const { Button, alert } = taslonicReact;
+
+        const Example = () => {
+          const openAlert = () => {
+            alert.open({ content: <p>Great, it works!</p> })
+          }
+
+          return (
+            <Button onClick={openAlert}>Click Here</Button>
+          );
+        };
+
+        ReactDOM.render(<Example />, document.querySelector('[data-root]'));
+      }());
+    </script>
+  </body>
+</html>

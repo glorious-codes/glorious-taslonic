@@ -21,7 +21,7 @@ _public.buildCssClasses = ({
   handleOffsetProps({
     'offset-xs': offsetXs,
     'offset-sm': offsetSm,
-    'offset-md':offsetMd,
+    'offset-md': offsetMd,
     'offset-lg': offsetLg
   }, cssClasses);
   handleAlignProps({
@@ -34,11 +34,11 @@ _public.buildCssClasses = ({
 };
 
 function handleSizeProps(sizeProps, cssClasses){
-  handleProps(sizeProps, size => isValidSize(size, getMaxCols()), cssClasses);
+  handleProps(sizeProps, size => isValidSize(parseInt(size), getMaxCols()), cssClasses);
 }
 
 function handleOffsetProps(offsetProps, cssClasses){
-  handleProps(offsetProps, offset => isValidSize(offset, getMaxOffset()), cssClasses);
+  handleProps(offsetProps, offset => isValidOffsetSize(parseInt(offset), getMaxOffset()), cssClasses);
 }
 
 function handleAlignProps(alignProps, cssClasses){
@@ -54,12 +54,15 @@ function handleProps(props, isValidPropValue, cssClasses){
 }
 
 function isValidSize(size, maxValue){
-  const value = parseInt(size);
-  return value && value <= maxValue;
+  return size && size <= maxValue;
+}
+
+function isValidOffsetSize(size, maxValue){
+  return size === 0 || size <= maxValue;
 }
 
 function isValidAlign(align){
-  return ['center', 'right'].includes(align);
+  return ['left', 'center', 'right'].includes(align);
 }
 
 function getMaxCols(){

@@ -35,42 +35,42 @@ module.exports = {
     {
       name: 'offsetXs',
       type: 'String, Number',
-      values: '1-11'
+      values: '0-11'
     },
     {
       name: 'offsetSm',
       type: 'String, Number',
-      values: '1-11'
+      values: '0-11'
     },
     {
       name: 'offsetMd',
       type: 'String, Number',
-      values: '1-11'
+      values: '0-11'
     },
     {
       name: 'offsetLg',
       type: 'String, Number',
-      values: '1-11'
+      values: '0-11'
     },
     {
       name: 'alignXs',
       type: 'String',
-      values: 'center, right'
+      values: 'left, center, right'
     },
     {
       name: 'alignSm',
       type: 'String',
-      values: 'center, right'
+      values: 'left, center, right'
     },
     {
       name: 'alignMd',
       type: 'String',
-      values: 'center, right'
+      values: 'left, center, right'
     },
     {
       name: 'alignLg',
       type: 'String',
-      values: 'center, right'
+      values: 'left, center, right'
     }
   ],
   examples: [

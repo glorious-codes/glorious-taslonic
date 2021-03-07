@@ -35,19 +35,64 @@ module.exports = {
   description: 'Specific container for columns.',
   properties: [
     {
-      name: 'align',
+      name: 'align-xs',
       type: 'String',
-      values: 'center, right'
+      values: 'left, center, right'
     },
     {
-      name: 'offset',
+      name: 'align-sm',
+      type: 'String',
+      values: 'left, center, right'
+    },
+    {
+      name: 'align-md',
+      type: 'String',
+      values: 'left, center, right'
+    },
+    {
+      name: 'align-lg',
+      type: 'String',
+      values: 'left, center, right'
+    },
+    {
+      name: 'offset-xs',
       type: 'String, Number',
-      values: '1-10'
+      values: '0-10'
     },
     {
-      name: 'vertical-align',
+      name: 'offset-sm',
+      type: 'String, Number',
+      values: '0-10'
+    },
+    {
+      name: 'offset-md',
+      type: 'String, Number',
+      values: '0-10'
+    },
+    {
+      name: 'offset-lg',
+      type: 'String, Number',
+      values: '0-10'
+    },
+    {
+      name: 'vertical-align-xs',
       type: 'String',
-      values: 'middle, bottom'
+      values: 'top, middle, bottom'
+    },
+    {
+      name: 'vertical-align-sm',
+      type: 'String',
+      values: 'top, middle, bottom'
+    },
+    {
+      name: 'vertical-align-md',
+      type: 'String',
+      values: 'top, middle, bottom'
+    },
+    {
+      name: 'vertical-align-lg',
+      type: 'String',
+      values: 'top, middle, bottom'
     }
   ],
   examples: [
@@ -91,7 +136,7 @@ module.exports = {
         </div>
         <!-- The following div has been created for documentation purpose only -->
         <div data-row-container>
-          <t-row align="center">
+          <t-row align-xs="center">
             <t-col xs="2">
               <span>2 cols</span>
             </t-col>
@@ -105,7 +150,7 @@ module.exports = {
         </div>
         <!-- The following div has been created for documentation purpose only -->
         <div data-row-container>
-          <t-row align="right">
+          <t-row align-xs="right">
             <t-col xs="2">
               <span>2 cols</span>
             </t-col>
@@ -131,7 +176,7 @@ module.exports = {
             <p>Default Row</p>
           </t-col>
         </t-row>
-        <t-row offset="5">
+        <t-row offset-xs="5">
           <t-col>
             <p>Offset Row</p>
           </t-col>
@@ -161,7 +206,7 @@ module.exports = {
         </div>
         <!-- The following div has been created for documentation purpose only -->
         <div data-row-container>
-          <t-row vertical-align="middle">
+          <t-row vertical-align-xs="middle">
             <t-col xs="4">
               <span style="height: 200px">4 cols</span>
             </t-col>
@@ -175,7 +220,7 @@ module.exports = {
         </div>
         <!-- The following div has been created for documentation purpose only -->
         <div data-row-container>
-          <t-row vertical-align="bottom">
+          <t-row vertical-align-xs="bottom">
             <t-col xs="4">
               <span style="height: 200px">4 cols</span>
             </t-col>

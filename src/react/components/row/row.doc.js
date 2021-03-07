@@ -35,19 +35,64 @@ module.exports = {
   description: 'Specific container for columns.',
   properties: [
     {
-      name: 'align',
+      name: 'alignXs',
       type: 'String',
-      values: 'center, right'
+      values: 'left, center, right'
     },
     {
-      name: 'offset',
+      name: 'alignSm',
+      type: 'String',
+      values: 'left, center, right'
+    },
+    {
+      name: 'alignMd',
+      type: 'String',
+      values: 'left, center, right'
+    },
+    {
+      name: 'alignLg',
+      type: 'String',
+      values: 'left, center, right'
+    },
+    {
+      name: 'offsetXs',
       type: 'String, Number',
-      values: '1-10'
+      values: '0-10'
     },
     {
-      name: 'verticalAlign',
+      name: 'offsetSm',
+      type: 'String, Number',
+      values: '0-10'
+    },
+    {
+      name: 'offsetMd',
+      type: 'String, Number',
+      values: '0-10'
+    },
+    {
+      name: 'offsetLg',
+      type: 'String, Number',
+      values: '0-10'
+    },
+    {
+      name: 'verticalAlignXs',
       type: 'String',
-      values: 'middle, bottom'
+      values: 'top, middle, bottom'
+    },
+    {
+      name: 'verticalAlignSm',
+      type: 'String',
+      values: 'top, middle, bottom'
+    },
+    {
+      name: 'verticalAlignMd',
+      type: 'String',
+      values: 'top, middle, bottom'
+    },
+    {
+      name: 'verticalAlignLg',
+      type: 'String',
+      values: 'top, middle, bottom'
     }
   ],
   examples: [
@@ -101,7 +146,7 @@ module.exports = {
               </div>
               {/* The following div has been created for documentation purpose only */}
               <div data-row-container>
-                <Row align="center">
+                <Row alignXs="center">
                   <Col xs="2">
                     <span>2 cols</span>
                   </Col>
@@ -115,7 +160,7 @@ module.exports = {
               </div>
               {/* The following div has been created for documentation purpose only */}
               <div data-row-container>
-                <Row align="right">
+                <Row alignXs="right">
                   <Col xs="2">
                     <span>2 cols</span>
                   </Col>
@@ -147,7 +192,7 @@ module.exports = {
                   <p>Default Row</p>
                 </Col>
               </Row>
-              <Row offset="5">
+              <Row offsetXs="5">
                 <Col>
                   <p>Offset Row</p>
                 </Col>
@@ -183,7 +228,7 @@ module.exports = {
               </div>
               {/* The following div has been created for documentation purpose only */}
               <div data-row-container>
-                <Row verticalAlign="middle">
+                <Row verticalAlignXs="middle">
                   <Col xs="4">
                     <span style={{ height: '200px' }}>4 cols</span>
                   </Col>
@@ -197,7 +242,7 @@ module.exports = {
               </div>
               {/* The following div has been created for documentation purpose only */}
               <div data-row-container>
-                <Row verticalAlign="bottom">
+                <Row verticalAlignXs="bottom">
                   <Col xs="4">
                     <span style={{ height: '200px' }}>4 cols</span>
                   </Col>

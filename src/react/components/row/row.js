@@ -2,14 +2,44 @@ import '@base/styles/row.styl';
 import rowService from '@base/services/row/row';
 import React from 'react';
 
-export const Row = ({ align, offset, verticalAlign, children }) => {
+export const Row = ({
+  align,
+  alignXs,
+  alignSm,
+  alignMd,
+  alignLg,
+  offset,
+  offsetXs,
+  offsetSm,
+  offsetMd,
+  offsetLg,
+  verticalAlign,
+  verticalAlignXs,
+  verticalAlignSm,
+  verticalAlignMd,
+  verticalAlignLg,
+  children
+}) => {
+  const cssClassOrientedProps = {
+    align,
+    alignXs,
+    alignSm,
+    alignMd,
+    alignLg,
+    offset,
+    offsetXs,
+    offsetSm,
+    offsetMd,
+    offsetLg,
+    verticalAlign,
+    verticalAlignXs,
+    verticalAlignSm,
+    verticalAlignMd,
+    verticalAlignLg
+  };
   return (
-    <div className={buildCssClasses({ align, offset, verticalAlign })}>
+    <div className={rowService.buildCssClasses(cssClassOrientedProps)}>
       { children }
     </div>
   );
 };
-
-function buildCssClasses({ align, offset, verticalAlign }){
-  return rowService.buildCssClasses({ align, offset, verticalAlign });
-}

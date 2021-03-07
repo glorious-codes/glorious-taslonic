@@ -25,13 +25,13 @@ flexbox-pack($pack)
   -ms-flex-pack $pack
 
 flexbox-align($align, $ms-align, $webkit-align)
-  -webkit-box-align: $webkit-align;
-  -ms-flex-align: $ms-align;
-  align-items: $align;
+  -webkit-box-align $webkit-align
+  -ms-flex-align $ms-align
+  align-items $align
 
 flexbox-justify($justify, $pack)
   flexbox-pack($pack)
-  justify-content: $justify;
+  justify-content $justify
 
 highlight()
   &:hover,

@@ -6,21 +6,44 @@
   flexbox(0, 1, auto)
   flexbox-orient(horizontal)
   flexbox-direction(row, normal)
-  flexbox-align-items(flex-start, start, start)
+  flexbox-align(start, flex-start, flex-start)
   flebox-wrap(wrap)
   flexbox-justify(flex-start, start)
   margin ($row-gutter * -1) ($col-padding * -1) 0
   box-sizing border-box
+  &.t-row-left
+    flexbox-justify(flex-start, start)
   &.t-row-center
     flexbox-justify(center, center)
   &.t-row-right
     flexbox-justify(flex-end, end)
+  &.t-row-top
+    flexbox-align(start, flex-start, flex-start)
   &.t-row-middle
     flexbox-align(center, center, center)
   &.t-row-bottom
-    flexbox-align(flex-end, end, end)
+    flexbox-align(end, flex-end, flex-end)
   & + .t-row
     padding-top $row-gutter
   for $size in (1..10)
     &.t-row-offset-{$size}
       padding-top $size * 10px
+
+for $screen in xs sm md lg
+  +breakpoint($screen)
+    .t-row
+      &.t-row-{$screen}-left
+        flexbox-justify(flex-start, start)
+      &.t-row-{$screen}-center
+        flexbox-justify(center, center)
+      &.t-row-{$screen}-right
+        flexbox-justify(flex-end, end)
+      &.t-row-{$screen}-top
+        flexbox-align(start, flex-start, flex-start)
+      &.t-row-{$screen}-middle
+        flexbox-align(center, center, center)
+      &.t-row-{$screen}-bottom
+        flexbox-align(end, flex-end, flex-end)
+      for $size in (0..10)
+        &.t-row-offset-{$screen}-{$size}
+          padding-top $size * 10px

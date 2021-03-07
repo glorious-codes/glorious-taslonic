@@ -32,10 +32,12 @@ describe('Form Control Model', () => {
   }
 
   it('should identify form control', () => {
-    idService.generate = jest.fn(() => '123');
+    const id = '123';
+    idService.generate = jest.fn(() => id);
     const formControlEl = mockFormControlElement();
     const formControl = new FormControlModel(formControlEl);
-    expect(formControl.id).toEqual('123');
+    expect(formControl.id).toEqual(id);
+    expect(formControl.element.getAttribute('id')).toEqual(id);
   });
 
   it('should optionally initialize form control with a value', () => {

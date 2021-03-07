@@ -101,6 +101,15 @@ describe('Form Control', () => {
     expect(formControlModelInstanceMock.onRequiredChange).toHaveBeenCalledWith(required);
   });
 
+  it('should reset validations if validations prop changes', () => {
+    const newValidations = [{}];
+    FormControlModel.mockImplementation(FormControlModelMock);
+    const wrapper = mountComponent();
+    formControlModelInstanceMock.setValidations = jest.fn();
+    wrapper.setProps({ validations: newValidations });
+    expect(formControlModelInstanceMock.setValidations).toHaveBeenCalledWith(newValidations);
+  });
+
   it('should destroy form control model on unmount', () => {
     FormControlModel.mockImplementation(FormControlModelMock);
     const wrapper = mountComponent();

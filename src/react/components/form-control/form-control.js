@@ -34,6 +34,10 @@ export const FormControl = ({ value, required, validations, formControlElSelecto
     if(formControlModel) formControlModel.onRequiredChange(required);
   }, [required]);
 
+  useEffect(() => {
+    if(formControlModel) formControlModel.setValidations(validations);
+  }, [validations]);
+
   return (
     <span className={buildCssClasses({ errorMessage, block })} ref={formControlEl}>
       { children }

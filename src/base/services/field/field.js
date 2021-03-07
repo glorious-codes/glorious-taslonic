@@ -14,6 +14,15 @@ _public.buildCssClasses = ({ required, block, element } = {}) => {
   return cssClasses.join(' ').replace(/\s+/g, ' ').trim();
 };
 
+_public.findFormControlId = ({ element }) => {
+  const formControlEl = getFormControlElement(element);
+  return formControlEl ? formControlEl.getAttribute('id') : '';
+};
+
+function getFormControlElement(fieldElement){
+  return queryChild(fieldElement, 'input') || queryChild(fieldElement, 'select') || queryChild(fieldElement, 'textarea');
+}
+
 function getBaseCssClass(){
   return 't-field';
 }
@@ -35,6 +44,10 @@ function shouldAppendRequiredCssClass(required, element){
 
 function containsRequiredFormControl(element){
   return element && !!element.querySelector('[required]');
+}
+
+function queryChild(element, tagName){
+  return element && element.querySelector(tagName);
 }
 
 export default _public;

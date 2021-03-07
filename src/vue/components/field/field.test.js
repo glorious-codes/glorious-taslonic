@@ -33,4 +33,13 @@ describe('Field', () => {
       expect(wrapper.classes()).toContain('t-field-required');
     });
   });
+
+  it('should set for attribute in accordance with form control id', () => {
+    const id = '123asd';
+    const wrapper = mount({}, `<input type="text" id="${id}" />`);
+    wrapper.vm.$nextTick(() => {
+      const label = wrapper.find('label');
+      expect(label.attributes('for')).toEqual(id);
+    });
+  });
 });

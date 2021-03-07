@@ -37,4 +37,11 @@ describe('Field', () => {
     const wrapper = mountComponent({}, <input type="text" required />);
     expect(getRootElProp(wrapper, 'className').includes('t-field-required')).toEqual(true);
   });
+
+  it('should set for attribute in accordance with form control id', () => {
+    const id = '123asd';
+    const wrapper = mountComponent({}, <input type="text" id={id} />);
+    const label = wrapper.find('label');
+    expect(label.props().htmlFor).toEqual(id);
+  });
 });

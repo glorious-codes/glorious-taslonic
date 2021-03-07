@@ -12,7 +12,10 @@ export const Field = ({ label, required, block, children }) => {
 
   return (
     <span ref={fieldElement} className={cssClasses}>
-      <label className="t-field-label">
+      <label
+        className="t-field-label"
+        htmlFor={fieldService.findFormControlId({ element: fieldElement.current })}
+      >
         { label }
       </label>
       <div className="t-field-content">

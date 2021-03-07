@@ -6,15 +6,20 @@ export const tField = {
   props: ['label', 'required', 'block'],
   data(){
     return {
-      element: null
+      element: null,
+      formControlId: null
     };
   },
   mounted(){
     this.setElement(this.$el);
+    this.setFormControlId(fieldService.findFormControlId({ element: this.$el }));
   },
   methods: {
     setElement(element){
       this.element = element;
+    },
+    setFormControlId(id){
+      this.formControlId = id;
     }
   },
   computed: {

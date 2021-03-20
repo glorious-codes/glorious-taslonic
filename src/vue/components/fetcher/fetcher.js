@@ -24,7 +24,7 @@ export const tFetcher = {
     this.setFetcher(fetcherService.build({
       onFetch: () => this.handleCallbackProp(this.onFetch),
       onFetchSuccess: response => this.handleCallbackProp(this.onFetchSuccess, response),
-      onFetchError: () => this.handleFetchError(this.onFetchError),
+      onFetchError: err => this.handleFetchError(this.onFetchError, err),
       onProcessChange: this.handleProccess
     }));
   },
@@ -34,12 +34,12 @@ export const tFetcher = {
       this.setFetchFailed(fetchFailed);
       if(isFetching) this.setBanner(null);
     },
-    handleFetchError(callback){
+    handleFetchError(callback, err){
       this.setBanner({
         message: this.getBannerMessage(),
         onTriggerClick: () => this.fetcher.fetch()
       });
-      this.handleCallbackProp(callback);
+      this.handleCallbackProp(callback, err);
     },
     handleCallbackProp(callback, data){
       return callback && callback(data);

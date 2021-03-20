@@ -66,6 +66,14 @@ describe('Fetcher', () => {
     });
   });
 
+  it('should execute fetch error callback on fetch error', () => {
+    const err = { status: 404 };
+    const onFetch = simulateFetch('error', { err });
+    const onFetchError = jest.fn();
+    mountComponent({ onFetch, onFetchError });
+    expect(onFetchError).toHaveBeenCalledWith(err);
+  });
+
   it('should execute fetch success callback on fetch success', () => {
     const response = { some: 'data' };
     const onFetch = simulateFetch('success', { response });

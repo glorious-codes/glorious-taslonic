@@ -29,18 +29,21 @@ describe('Fetcher', () => {
     const onFetch = simulateFetch('success', { shouldAbort: true });
     const wrapper = mountComponent({ onFetch });
     expect(wrapper.findAllComponents(tLoader).length).toEqual(1);
+    expect(wrapper.find('[data-fetcher-content]').attributes('aria-hidden')).toEqual('true');
   });
 
   it('should hide loader on fetch success', () => {
     const onFetch = simulateFetch('success');
     const wrapper = mountComponent({ onFetch });
     expect(wrapper.findAllComponents(tLoader).length).toEqual(0);
+    expect(wrapper.find('[data-fetcher-content]').attributes('aria-hidden')).toEqual('false');
   });
 
   it('should show banner on fetch error', () => {
     const onFetch = simulateFetch('error');
     const wrapper = mountComponent({ onFetch });
     expect(wrapper.find('[data-banner-content]').text()).toEqual('Something went wrong. Please, try again.');
+    expect(wrapper.find('[data-fetcher-content]').attributes('aria-hidden')).toEqual('true');
   });
 
   it('should optionally show banner with custom message on fetch error', () => {

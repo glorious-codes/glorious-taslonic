@@ -10,7 +10,13 @@
   >
     {{ banner.message }}
   </t-banner>
-  <div class="t-fetcher-content" aria-live="polite" :aria-busy="isBusy" data-fetcher-content>
+  <div
+    class="t-fetcher-content"
+    aria-live="polite"
+    :aria-busy="isBusy"
+    :aria-hidden="isContentHidden"
+    data-fetcher-content
+  >
     <slot></slot>
   </div>
 </div>

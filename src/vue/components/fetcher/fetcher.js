@@ -67,6 +67,9 @@ export const tFetcher = {
     },
     isBusy(){
       return this.isFetching ? 'true' : 'false';
+    },
+    isContentHidden(){
+      return this.fetchFailed || this.isFetching ? 'true' : 'false';
     }
   },
   template

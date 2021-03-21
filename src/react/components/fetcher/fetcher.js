@@ -61,7 +61,13 @@ export class Fetcher extends Component {
       <div className={fetcherService.buildCssClasses({ fetching, fetchFailed })}>
         { handleLoader(fetching) }
         { handleBanner(banner, () => this.setBanner(null)) }
-        <div className="t-fetcher-content" aria-live="polite" aria-busy={fetching} data-fetcher-content>
+        <div
+          className="t-fetcher-content"
+          aria-live="polite"
+          aria-busy={fetching}
+          aria-hidden={fetchFailed || fetching}
+          data-fetcher-content
+        >
           { this.props.children }
         </div>
       </div>

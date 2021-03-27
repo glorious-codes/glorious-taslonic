@@ -15,7 +15,8 @@ export const Col = ({
   alignSm,
   alignMd,
   alignLg,
-  children
+  children,
+  ...rest
 }) => {
   return (
     <div
@@ -32,7 +33,7 @@ export const Col = ({
         alignSm,
         alignMd,
         alignLg
-      })}>
+      })} {...rest}>
       { children }
     </div>
   );

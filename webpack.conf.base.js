@@ -54,6 +54,9 @@ function getBaseConfig() {
       new CopyWebpackPlugin([{
         from: project.images.source.files,
         to: project.images.dist.root
+      }, {
+        from: project.data.source.files,
+        to: project.data.dist.root
       }])
     ]
   };

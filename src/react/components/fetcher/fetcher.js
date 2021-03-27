@@ -52,6 +52,7 @@ export class Fetcher extends Component {
       onProcessChange: process => this.handleProcessChange(process)
     });
     this.setState({ fetcher });
+    this.handleCallbackProp(this.props.onMount, fetcher);
   }
 
   render(){

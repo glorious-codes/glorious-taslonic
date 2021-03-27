@@ -85,6 +85,16 @@ describe('Fetcher', () => {
     expect(onFetchSuccess).toHaveBeenCalledWith(response);
   });
 
+  it('should execute mount callback on mount passing fetcher instance if callback has been given', () => {
+    const onFetch = simulateFetch('success');
+    const onMount = jest.fn(fetcher => {
+      fetcher.fetch();
+      expect(onFetch).toHaveBeenCalledTimes(2);
+    });
+    mountComponent({ onFetch, onMount });
+    expect(onMount).toHaveBeenCalled();
+  });
+
   it('should render some content', () => {
     const onFetch = simulateFetch('success', { shouldAbort: true });
     const wrapper = mountComponent({ onFetch }, '<p>Hello</p>');

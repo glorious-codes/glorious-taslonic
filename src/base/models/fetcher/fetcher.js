@@ -10,14 +10,17 @@ export class Fetcher {
     this.handleFetch(this.options.onFetch);
   }
   handleFetch(onFetch){
-    this.handleProcessChange({ isFetching: true });
-    onFetch && onFetch().then(response => {
-      this.handleProcessChange({ fetchSucceeded: true });
-      this.runCallbackOption(this.options.onFetchSuccess, response);
-    }).catch(err => {
-      this.handleProcessChange({ fetchFailed: true });
-      this.runCallbackOption(this.options.onFetchError, err);
-    });
+    const promise = onFetch && onFetch();
+    if(isPromise(promise)){
+      this.handleProcessChange({ isFetching: true });
+      promise.then(response => {
+        this.handleProcessChange({ fetchSucceeded: true });
+        this.runCallbackOption(this.options.onFetchSuccess, response);
+      }).catch(err => {
+        this.handleProcessChange({ fetchFailed: true });
+        this.runCallbackOption(this.options.onFetchError, err);
+      });
+    }
   }
   handleProcessChange(process){
     this.runCallbackOption(this.options.onProcessChange, process);
@@ -25,4 +28,8 @@ export class Fetcher {
   runCallbackOption(callback, data){
     return callback && callback(data);
   }
+}
+
+function isPromise(promise){
+  return promise && promise.then;
 }

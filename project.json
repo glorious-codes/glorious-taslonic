@@ -64,6 +64,15 @@
       "root": "images/[name].[ext]"
     }
   },
+  "data": {
+    "source": {
+      "root": "src/base/data/",
+      "files": "src/base/data/**/*.*"
+    },
+    "dist": {
+      "root": "data/[name].[ext]"
+    }
+  },
   "tests": {
     "source": {
       "files": [

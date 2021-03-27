@@ -18,7 +18,8 @@ export const Row = ({
   verticalAlignSm,
   verticalAlignMd,
   verticalAlignLg,
-  children
+  children,
+  ...rest
 }) => {
   const cssClassOrientedProps = {
     align,
@@ -38,7 +39,7 @@ export const Row = ({
     verticalAlignLg
   };
   return (
-    <div className={rowService.buildCssClasses(cssClassOrientedProps)}>
+    <div className={rowService.buildCssClasses(cssClassOrientedProps)} {...rest}>
       { children }
     </div>
   );

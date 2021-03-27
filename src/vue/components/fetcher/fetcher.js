@@ -10,6 +10,7 @@ export const tFetcher = {
     'onFetch',
     'onFetchSuccess',
     'onFetchError',
+    'onMount',
     'fetchErrorMessage'
   ],
   data(){
@@ -21,12 +22,14 @@ export const tFetcher = {
     };
   },
   created(){
-    this.setFetcher(fetcherService.build({
+    const fetcher = fetcherService.build({
       onFetch: () => this.handleCallbackProp(this.onFetch),
       onFetchSuccess: response => this.handleCallbackProp(this.onFetchSuccess, response),
       onFetchError: err => this.handleFetchError(this.onFetchError, err),
       onProcessChange: this.handleProccess
-    }));
+    });
+    this.setFetcher(fetcher);
+    this.handleCallbackProp(this.onMount, fetcher);
   },
   methods: {
     handleProccess({ isFetching, fetchFailed }){

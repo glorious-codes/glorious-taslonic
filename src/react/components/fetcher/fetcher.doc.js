@@ -19,6 +19,11 @@ module.exports = {
       values: 'Any'
     },
     {
+      name: 'onMount',
+      type: 'Function',
+      values: 'Any'
+    },
+    {
       name: 'fetchErrorMessage',
       type: 'String',
       values: 'Any'
@@ -126,6 +131,141 @@ module.exports = {
           )
         }
       }
+    },
+    {
+      title: 'Fetching programmatically',
+      description: 'You can receive the fetcher instance to re-fetch data when your context changes.',
+      controller: function(){
+        const { useState, useEffect } = React;
+        const { Col, Row, Card, Fetcher, Field, Select } = taslonicReact;
+
+        return function(){
+          const [artists, setArtists] = useState([]);
+          const [selectedArtist, setSelectedArtist] = useState({});
+          const [selectedArtistId, setSelectedArtistId] = useState('');
+          const [fetcher, setFetcher] = useState();
+          const onFetchArtists = () => {
+            return axios.get(`external/dist/data/artists.json`);
+          }
+          const onFetchArtistsSuccess = ({ data }) => setArtists(data);
+          const onFetcherMount = fetcher => setFetcher(fetcher);
+          const onFetch = () => {
+            if(selectedArtistId) {
+              return axios.get(`external/dist/data/${selectedArtistId}.json`);
+            }
+          }
+          const onFetchSuccess = ({ data }) => setSelectedArtist(data);
+          const onArtistChange = ({ target: { value } }) => {
+            setSelectedArtistId(value);
+          }
+
+          useEffect(() => {
+            if(selectedArtistId) fetcher.fetch();
+          }, [selectedArtistId])
+
+          return (
+            <Fetcher
+              onFetch={onFetchArtists}
+              onFetchSuccess={onFetchArtistsSuccess}>
+              <Row align="center">
+                <Col sm="5">
+                  <Field label="Brazilian Artist" block>
+                    <Select
+                      name="artist"
+                      placeholder="Select"
+                      onChange={onArtistChange}
+                      block>
+                      {
+                        artists.map(artist => (
+                          <option value={artist.id} key={artist.id}>
+                            {artist.name}
+                          </option>
+                        ))
+                      }
+                    </Select>
+                  </Field>
+                </Col>
+              </Row>
+              <Row align="center" style={{ display: selectedArtistId ? 'flex': 'none' }}>
+                <Col sm="5">
+                  <Card>
+                    <Fetcher
+                      onFetch={onFetch}
+                      onMount={onFetcherMount}
+                      onFetchSuccess={onFetchSuccess}>
+                      <div className="artist-card-content">
+                        {
+                          selectedArtist.avatarUrl &&
+                          <img
+                            src={`external/dist/${selectedArtist.avatarUrl}`}
+                            alt={`${selectedArtist.name}'s avatar`}
+                            width="100px"
+                            height="100px" />
+                        }
+                        <h1>{selectedArtist.name}</h1>
+                        <div className="artist-card-content-profession">
+                          {selectedArtist.profession}
+                        </div>
+                        {
+                          selectedArtist.intro &&
+                          <p>
+                            {`${selectedArtist.intro.substring(0, 270)}...`}
+                          </p>
+                        }
+                        <a
+                          href={selectedArtist.source}
+                          rel="noreferrer"
+                          target="_blank">
+                          Learn More
+                        </a>
+                      </div>
+                    </Fetcher>
+                  </Card>
+                </Col>
+              </Row>
+            </Fetcher>
+          )
+        }
+      },
+      styles: `
+      .artist-card-content {
+        padding: 20px 0;
+        text-align: center;
+      }
+
+      .artist-card-content img {
+        width: 100px;
+        border-radius: 50px;
+        overflow: hidden;
+      }
+
+      .artist-card-content h1 {
+        margin: 0;
+        letter-spacing: -1px;
+      }
+
+      .artist-card-content-profession {
+        margin-bottom: 10px;
+        color: #C4CDD5;
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      .artist-card-content a {
+        display: block;
+        font-size: 14px;
+        color: #627380;
+        text-decoration: none;
+      }
+
+      .artist-card-content a:hover,
+      .artist-card-content a:focus,
+      .artist-card-content a:active {
+        color: #3282E1;
+        text-decoration: underline;
+      }
+`
     }
   ]
 };

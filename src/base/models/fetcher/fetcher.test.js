@@ -51,4 +51,10 @@ describe('Fetcher', () => {
     fetcher.fetch();
     expect(onFetch).toHaveBeenCalledTimes(2);
   });
+
+  it('should do nothing if fetch callback does not return a promise', () => {
+    const onFetch = jest.fn();
+    new Fetcher({ onFetch });
+    expect(onFetch).toHaveBeenCalled();
+  });
 });

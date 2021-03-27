@@ -17,10 +17,12 @@ module.exports = {
     './dist/taslonic.css'
   ],
   scripts: [
+    'https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js',
     './dist/react/index.js',
     './dist/vue/plugin.js'
   ],
   other: [
+    './dist/data/',
     './dist/images/'
   ],
   custom: {

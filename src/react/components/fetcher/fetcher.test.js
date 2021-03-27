@@ -12,6 +12,7 @@ describe('Fetcher', () => {
         onFetch={props.onFetch}
         onFetchSuccess={props.onFetchSuccess}
         onFetchError={props.onFetchError}
+        onMount={props.onMount}
         fetchErrorMessage={props.fetchErrorMessage}
       >
         { content }
@@ -94,6 +95,16 @@ describe('Fetcher', () => {
     const onFetchSuccess = jest.fn();
     mountComponent({ onFetch, onFetchSuccess });
     expect(onFetchSuccess).toHaveBeenCalledWith(response);
+  });
+
+  it('should execute mount callback on mount passing fetcher instance if callback has been given', () => {
+    const onFetch = simulateFetch('success');
+    const onMount = jest.fn(fetcher => {
+      fetcher.fetch();
+      expect(onFetch).toHaveBeenCalledTimes(2);
+    });
+    mountComponent({ onFetch, onMount });
+    expect(onMount).toHaveBeenCalled();
   });
 
   it('should render some content', () => {

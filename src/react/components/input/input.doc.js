@@ -147,7 +147,7 @@ module.exports = {
         return function(){
           const validations = [{
             isValid: data => (!data || data.toLowerCase() == 'javascript'),
-            errorMessage: 'Please, enter a cooler one'
+            errorMessage: 'Please, enter a funnier one'
           }];
 
           return (

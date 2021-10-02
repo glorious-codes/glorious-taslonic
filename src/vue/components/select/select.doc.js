@@ -109,7 +109,7 @@ module.exports = {
           return {
             validations: [{
               isValid: data => (!data || data.toLowerCase() == 'javascript'),
-              errorMessage: 'Please, enter a cooler one'
+              errorMessage: 'Please, enter a funnier one'
             }]
           };
         }

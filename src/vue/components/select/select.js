@@ -5,6 +5,7 @@ import template from './select.html';
 export const tSelect = {
   name: 't-select',
   components: { tFormControl },
+  inheritAttrs: false,
   props: {
     value: { type: String },
     name: { type: String },

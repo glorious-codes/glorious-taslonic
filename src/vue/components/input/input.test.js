@@ -80,4 +80,11 @@ describe('Input', () => {
     wrapper.find('input').trigger('blur');
     expect(onBlur).toHaveBeenCalled();
   });
+
+  it('should optionally set a custom attribute', () => {
+    const label = 'Email address';
+    const wrapper = mount({ 'aria-label': label });
+    expect(wrapper.findComponent(tFormControl).attributes('aria-label')).toEqual(undefined);
+    expect(wrapper.find('input').attributes('aria-label')).toEqual(label);
+  });
 });

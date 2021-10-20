@@ -10,6 +10,7 @@
       :name="name"
       :autofocus="autofocus"
       :disabled="disabled"
+      v-bind="$attrs"
       v-on="{...$listeners, input: () => {}}"
     >
       <option value="" v-if="placeholder">{{ placeholder }}</option>

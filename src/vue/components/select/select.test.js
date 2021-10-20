@@ -82,4 +82,11 @@ describe('Select', () => {
     const wrapper = mount({}, '<option value="">Select</option>');
     expect(wrapper.find('option').text()).toEqual('Select');
   });
+
+  it('should optionally set a custom attribute', () => {
+    const label = 'City';
+    const wrapper = mount({ 'aria-label': label });
+    expect(wrapper.findComponent(tFormControl).attributes('aria-label')).toEqual(undefined);
+    expect(wrapper.find('select').attributes('aria-label')).toEqual(label);
+  });
 });

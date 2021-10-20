@@ -86,4 +86,11 @@ describe('Select', () => {
     wrapper.find('textarea').trigger('blur');
     expect(onBlur).toHaveBeenCalled();
   });
+
+  it('should optionally set a custom attribute', () => {
+    const label = 'Notes';
+    const wrapper = mount({ 'aria-label': label });
+    expect(wrapper.findComponent(tFormControl).attributes('aria-label')).toEqual(undefined);
+    expect(wrapper.find('textarea').attributes('aria-label')).toEqual(label);
+  });
 });

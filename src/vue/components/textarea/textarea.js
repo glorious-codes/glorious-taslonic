@@ -4,6 +4,7 @@ import template from './textarea.html';
 export const tTextarea = {
   name: 't-textarea',
   components: { tFormControl },
+  inheritAttrs: false,
   props: {
     cols: { type: String },
     rows: { type: String },

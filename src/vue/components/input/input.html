@@ -12,6 +12,7 @@
     :readonly="readonly"
     :autofocus="autofocus"
     :disabled="disabled"
+    v-bind="$attrs"
     v-on="{...$listeners, input: () => {}}"
   />
 </t-form-control>

@@ -5,6 +5,7 @@ import template from './input.html';
 export const tInput = {
   name: 't-input',
   components: { tFormControl },
+  inheritAttrs: false,
   props: {
     type: { type: String },
     value: { type: String },

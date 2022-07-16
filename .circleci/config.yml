@@ -34,6 +34,7 @@ jobs:
             - "project.json"
             - "jest.*.js"
             - "webpack.*.js"
+            - "pitsby.*.js"
             - ".babelrc"
             - ".eslintrc"
             - ".firebaserc"
@@ -42,16 +43,6 @@ jobs:
             - ".git/*"
             - ".circleci/*"
             - "src/*"
-
-  format:
-    <<: *defaults
-
-    steps:
-      - attach_workspace:
-          at: ~/glorious-taslonic
-      - run:
-          name: Format
-          command: npm run format
 
   build:
     <<: *defaults
@@ -67,6 +58,16 @@ jobs:
           paths:
             - "dist/*"
 
+  format:
+    <<: *defaults
+
+    steps:
+      - attach_workspace:
+          at: ~/glorious-taslonic
+      - run:
+          name: Format
+          command: npm run format
+
   test:
     <<: *defaults
 
@@ -78,6 +79,20 @@ jobs:
           command: npm run test -- --maxWorkers=2 --coverage --coverageReporters=lcov
       - coveralls/upload:
           verbose: true
+
+  docs:
+    <<: *defaults
+
+    steps:
+      - attach_workspace:
+          at: ~/glorious-taslonic
+      - run:
+          name: Docs
+          command: NODE_ENV=production npm run docs
+      - persist_to_workspace:
+          root: "."
+          paths:
+            - "docs/*"
 
   deploy:
     <<: *defaults
@@ -95,10 +110,14 @@ workflows:
   branch-workflow:
     jobs:
       - install
-      - format:
+      - build:
           requires:
             - install
-      - build:
+      - docs:
+          requires:
+            - install
+            - build
+      - format:
           requires:
             - install
       - test:
@@ -106,8 +125,9 @@ workflows:
             - install
       - deploy:
           requires:
-            - format
             - build
+            - docs
+            - format
             - test
           filters:
             branches:

@@ -1,49 +1,115 @@
-# Javascript Node CircleCI 2.0 configuration file
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
 version: 2.1
+
 orbs:
   coveralls: coveralls/coveralls@1.0.6
+
+defaults: &defaults
+  docker:
+    - image: cimg/node:16.13.2-browsers
+  working_directory: ~/glorious-taslonic
+
 jobs:
-  build:
-    docker:
-      - image: cimg/node:16.13.2-browsers
+  install:
+    <<: *defaults
 
     steps:
       - checkout
-      # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-{{ checksum "package-lock.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-
       - run:
           name: Install
           command: npm install
-
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
+      - persist_to_workspace:
+          root: "."
+          paths:
+            - "package.json"
+            - "package-lock.json"
+            - "project.json"
+            - "jest.*.js"
+            - "webpack.*.js"
+            - ".babelrc"
+            - ".eslintrc"
+            - ".firebaserc"
+            - "firebase.json"
+            - "node_modules"
+            - ".git/*"
+            - ".circleci/*"
+            - "src/*"
 
+  format:
+    <<: *defaults
+
+    steps:
+      - attach_workspace:
+          at: ~/glorious-taslonic
       - run:
           name: Format
           command: npm run format
 
+  build:
+    <<: *defaults
+
+    steps:
+      - attach_workspace:
+          at: ~/glorious-taslonic
       - run:
           name: Build
           command: NODE_ENV=production npm run build
+      - persist_to_workspace:
+          root: "."
+          paths:
+            - "dist/*"
 
-      - run:
-          name: Docs
-          command: NODE_ENV=production npm run docs
+  test:
+    <<: *defaults
 
+    steps:
+      - attach_workspace:
+          at: ~/glorious-taslonic
       - run:
           name: Test
           command: npm run test -- --maxWorkers=2 --coverage --coverageReporters=lcov
+      - coveralls/upload:
+          verbose: true
 
+  deploy:
+    <<: *defaults
+
+    steps:
+      - attach_workspace:
+          at: ~/glorious-taslonic
       - run:
           name: Deploy
-          command: ./.circleci/deploy.sh
+          command: npm run deploy -- --token=$FIREBASE_TOKEN
 
-      - coveralls/upload
+workflows:
+  version: 2
+
+  branch-workflow:
+    jobs:
+      - install
+      - format:
+          requires:
+            - install
+      - build:
+          requires:
+            - install
+      - test:
+          requires:
+            - install
+      - deploy:
+          requires:
+            - format
+            - build
+            - test
+          filters:
+            branches:
+              only:
+                - master

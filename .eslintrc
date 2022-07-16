@@ -24,6 +24,7 @@
       "version": "detect"
     }
   },
+  "ignorePatterns": ["*.doc.js"],
   "rules": {
     "indent": ["error", 2],
     "linebreak-style": ["error", "unix"],

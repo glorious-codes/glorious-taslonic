@@ -1,6 +1,9 @@
 #!/bin/sh
 
-npm run build:clear
+rm -rf ./dist
+rm -rf ./react
+rm -rf ./vue
+rm ./taslonic.css
 NODE_ENV=production npm run build
 cp -r ./dist/react ./react
 cp -r ./dist/vue ./vue

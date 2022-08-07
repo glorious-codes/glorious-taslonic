@@ -19,9 +19,7 @@ module.exports = {
     '@vue\/(.*)$': `<rootDir>/${project.scripts.source.root.vue}$1`,
     'vue$': 'vue/dist/vue.common.js'
   },
-  setupFilesAfterEnv: [
-    '<rootDir>/jest.setup.js'
-  ],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testMatch: ['**/**.test.js'],
   transform: {
     '^.+\\.styl$': '<rootDir>/src/base/mocks/raw-files.js',

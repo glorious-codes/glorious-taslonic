@@ -61,7 +61,7 @@
       "files": "src/base/images/**/*.*"
     },
     "dist": {
-      "root": "images/[name].[ext]"
+      "root": "images/[name][ext]"
     }
   },
   "data": {
@@ -70,7 +70,7 @@
       "files": "src/base/data/**/*.*"
     },
     "dist": {
-      "root": "data/[name].[ext]"
+      "root": "data/[name][ext]"
     }
   },
   "tests": {

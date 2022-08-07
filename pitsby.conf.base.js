@@ -1,16 +1,15 @@
 module.exports = {
   projects: [
     {
-      engine: 'vue',
-      collectDocsFrom: './src/vue',
-      importFrom: './dist/vue',
-      libraryName: 'taslonicVue',
-      version: '2.6.11'
-    },
-    {
       engine: 'react',
       collectDocsFrom: './src/react',
       version: '16.14.0'
+    },
+    {
+      engine: 'vue',
+      collectDocsFrom: './src/vue',
+      libraryName: 'taslonicVue',
+      version: '2.6.11'
     }
   ],
   styles: [

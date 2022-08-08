@@ -480,14 +480,14 @@ module.exports = {
           }
           const isLateSubmission = () => {
             // Forcing an invalid situation for documentation purposes.
-            return new Date().getTime() > buildYesterdayDate().getTime();
+            return new Date().getTime() > buildTwoDaysBeforeNowDate().getTime();
           }
           const buildLateSubmissionErrorMessage = () => {
-            const [weekDay, day, month, year] = buildYesterdayDate().toUTCString().split(' ');
+            const [weekDay, day, month, year] = buildTwoDaysBeforeNowDate().toUTCString().split(' ');
             const dateString = [weekDay, day, month, year].join(' ');
             return `Sorry, we have stopped accepting submissions on ${dateString}.`
           }
-          const buildYesterdayDate = () => new Date(new Date().getTime() - 86400000);
+          const buildTwoDaysBeforeNowDate = () => new Date(new Date().getTime() - 172800000);
 
           return (
             <Row align="center">

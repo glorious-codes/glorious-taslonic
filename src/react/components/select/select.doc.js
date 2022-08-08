@@ -73,7 +73,7 @@ module.exports = {
               <Col md="3">
                 <Select validations={validations} placeholder="Select" block>
                   <option value="java">Java</option>
-                  <option value="javascript">Javascript</option>
+                  <option value="javascript">JavaScript</option>
                   <option value="go">Go</option>
                 </Select>
               </Col>

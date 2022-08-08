@@ -119,7 +119,7 @@ module.exports = {
         <t-col md="3">
           <t-select :validations="validations" placeholder="Select" block>
             <option value="java">Java</option>
-            <option value="javascript">Javascript</option>
+            <option value="javascript">JavaScript</option>
             <option value="go">Go</option>
           </t-select>
         </t-col>

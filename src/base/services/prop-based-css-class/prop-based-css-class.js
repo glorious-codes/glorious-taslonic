@@ -6,10 +6,11 @@ _public.handleProp = (propValue, isValidPropValue, currentCssClasses, baseCssCla
 };
 
 _public.handleBooleanProps = (props, isValidBooleanProp, currentCssClasses, baseCssClass) => {
-  const [ propName ] = Object.keys(props);
-  const propValue = props[propName];
-  if(shouldAppendBoolenPropCssClass(propName, propValue, isValidBooleanProp))
-    currentCssClasses.push(`${baseCssClass}-${propName}`);
+  Object.entries(props).forEach(([propName, propValue]) => {
+    if(shouldAppendBoolenPropCssClass(propName, propValue, isValidBooleanProp)) {
+      currentCssClasses.push(`${baseCssClass}-${propName}`);
+    }
+  });
 };
 
 function shouldAppendBoolenPropCssClass(propName, propValue, isValidBooleanProp){

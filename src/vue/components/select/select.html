@@ -10,6 +10,7 @@
       :name="name"
       :autofocus="autofocus"
       :disabled="disabled"
+      :multiple="multiple"
       v-bind="$attrs"
       v-on="{...$listeners, input: () => {}}"
     >

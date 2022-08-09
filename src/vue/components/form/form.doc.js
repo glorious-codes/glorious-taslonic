@@ -448,15 +448,15 @@ module.exports = {
           },
           isLateSubmission(){
             // Forcing an invalid situation for documentation purposes.
-            return new Date().getTime() > this.buildYesterdayDate().getTime();
+            return new Date().getTime() > this.buildTwoDaysBeforeNowDate().getTime();
           },
           buildLateSubmissionErrorMessage(){
-            const [weekDay, day, month, year] = this.buildYesterdayDate().toUTCString().split(' ');
+            const [weekDay, day, month, year] = this.buildTwoDaysBeforeNowDate().toUTCString().split(' ');
             const dateString = [weekDay, day, month, year].join(' ');
             return `Sorry, we have stopped accepting submissions on ${dateString}.`
           },
-          buildYesterdayDate(){
-            return new Date(new Date().getTime() - 86400000);
+          buildTwoDaysBeforeNowDate(){
+            return new Date(new Date().getTime() - 172800000);
           },
           setBanner(banner){
             this.banner = banner;

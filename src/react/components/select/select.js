@@ -9,6 +9,7 @@ export const Select = ({
   block,
   disabled,
   required,
+  multiple,
   children,
   ...rest
 }) => {
@@ -20,8 +21,8 @@ export const Select = ({
       validations={validations}
       formControlElSelector="select"
     >
-      <span className={selectService.buildWrapperCssClasses({ disabled })}>
-        <select disabled={disabled} {...rest}>
+      <span className={selectService.buildWrapperCssClasses({ disabled, multiple })}>
+        <select disabled={disabled} multiple={multiple} {...rest}>
           { placeholder && <option value="">{placeholder}</option> }
           { children }
         </select>

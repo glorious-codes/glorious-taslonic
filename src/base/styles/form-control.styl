@@ -48,16 +48,17 @@ select-arrow()
   .t-select-wrapper
     position relative
     select
-      padding-top 9px
-      padding-right 30px
-      padding-bottom 9px
+      padding 9px
       line-height $font-size-lg
-    &:before
-      select-arrow()
-      transform rotate(-135deg) translate(-60%, -60%)
-    &:after
-      select-arrow()
-      transform rotate(45deg) translate(-50%, -50%)
+    &:not(.t-select-wrapper-multiple)
+      select
+        padding 9px 30px 9px 9px
+      &:before
+        select-arrow()
+        transform rotate(-135deg) translate(-60%, -60%)
+      &:after
+        select-arrow()
+        transform rotate(45deg) translate(-50%, -50%)
     &.t-select-wrapper-disabled
       &:before
         border-color $color-grey

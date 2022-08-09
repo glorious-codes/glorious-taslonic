@@ -5,11 +5,12 @@ _public.handleProp = (propValue, isValidPropValue, currentCssClasses, baseCssCla
     currentCssClasses.push(`${baseCssClass}-${propValue}`);
 };
 
-_public.handleBooleanProp = (prop, isValidBooleanProp, currentCssClasses, baseCssClass) => {
-  const [ propName ] = Object.keys(prop);
-  const propValue = prop[propName];
-  if(shouldAppendBoolenPropCssClass(propName, propValue, isValidBooleanProp))
-    currentCssClasses.push(`${baseCssClass}-${propName}`);
+_public.handleBooleanProps = (props, isValidBooleanProp, currentCssClasses, baseCssClass) => {
+  Object.entries(props).forEach(([propName, propValue]) => {
+    if(shouldAppendBoolenPropCssClass(propName, propValue, isValidBooleanProp)) {
+      currentCssClasses.push(`${baseCssClass}-${propName}`);
+    }
+  });
 };
 
 function shouldAppendBoolenPropCssClass(propName, propValue, isValidBooleanProp){

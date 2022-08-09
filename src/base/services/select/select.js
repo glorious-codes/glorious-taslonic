@@ -2,11 +2,11 @@ import propBasedCssClassService from '@base/services/prop-based-css-class/prop-b
 
 const _public = {};
 
-_public.buildWrapperCssClasses = ({ disabled } = {}) => {
+_public.buildWrapperCssClasses = ({ disabled, multiple } = {}) => {
   const wrapperBaseCssClass = getWrapperBaseCssClass();
   const cssClasses = [wrapperBaseCssClass];
-  propBasedCssClassService.handleBooleanProp(
-    { disabled },
+  propBasedCssClassService.handleBooleanProps(
+    { disabled, multiple },
     isValidBooleanProp,
     cssClasses,
     wrapperBaseCssClass
@@ -19,7 +19,7 @@ function getWrapperBaseCssClass(){
 }
 
 function isValidBooleanProp(propName){
-  return ['disabled'].includes(propName);
+  return ['disabled', 'multiple'].includes(propName);
 }
 
 export default _public;

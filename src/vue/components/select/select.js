@@ -14,12 +14,13 @@ export const tSelect = {
     autofocus: { type: Boolean },
     block: { type: Boolean },
     required: { type: Boolean },
-    disabled: { type: Boolean }
+    disabled: { type: Boolean },
+    multiple: { type: Boolean }
   },
   computed: {
     wrapperCssClasses(){
-      const { disabled } = this;
-      return selectService.buildWrapperCssClasses({ disabled });
+      const { disabled, multiple } = this;
+      return selectService.buildWrapperCssClasses({ disabled, multiple });
     }
   },
   template

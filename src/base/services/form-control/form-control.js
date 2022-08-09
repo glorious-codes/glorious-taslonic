@@ -8,7 +8,7 @@ _public.buildCssClasses = ({ errorMessage, block } = {}) => {
   const baseCssClass = getBaseCssClass();
   const cssClasses = [baseCssClass];
   handleInvalidCssClass(errorMessage, cssClasses, baseCssClass);
-  propBasedCssClassService.handleBooleanProp(
+  propBasedCssClassService.handleBooleanProps(
     { block },
     isValidBooleanProp,
     cssClasses,

@@ -44,7 +44,7 @@ describe('Prop Based Css Class Service', () => {
     const baseCssClass = 't-base';
     const currentCssClasses = [baseCssClass];
     const isValidBooleanProp = prop => ['block'].includes(prop);
-    propBaseCssClassService.handleBooleanProp(
+    propBaseCssClassService.handleBooleanProps(
       { block: true },
       isValidBooleanProp,
       currentCssClasses,
@@ -57,7 +57,7 @@ describe('Prop Based Css Class Service', () => {
     const baseCssClass = 't-base';
     const currentCssClasses = [baseCssClass];
     const isValidBooleanProp = prop => ['block'].includes(prop);
-    propBaseCssClassService.handleBooleanProp(
+    propBaseCssClassService.handleBooleanProps(
       { block: 'true' },
       isValidBooleanProp,
       currentCssClasses,
@@ -70,7 +70,7 @@ describe('Prop Based Css Class Service', () => {
     const baseCssClass = 't-base';
     const currentCssClasses = [baseCssClass];
     const isValidBooleanProp = prop => ['block'].includes(prop);
-    propBaseCssClassService.handleBooleanProp(
+    propBaseCssClassService.handleBooleanProps(
       { block: false },
       isValidBooleanProp,
       currentCssClasses,
@@ -83,7 +83,7 @@ describe('Prop Based Css Class Service', () => {
     const baseCssClass = 't-base';
     const currentCssClasses = [baseCssClass];
     const isValidBooleanProp = prop => ['block'].includes(prop);
-    propBaseCssClassService.handleBooleanProp(
+    propBaseCssClassService.handleBooleanProps(
       {},
       isValidBooleanProp,
       currentCssClasses,
@@ -96,7 +96,7 @@ describe('Prop Based Css Class Service', () => {
     const baseCssClass = 't-base';
     const currentCssClasses = [baseCssClass];
     const isValidBooleanProp = prop => ['block'].includes(prop);
-    propBaseCssClassService.handleBooleanProp(
+    propBaseCssClassService.handleBooleanProps(
       { lowered: true },
       isValidBooleanProp,
       currentCssClasses,

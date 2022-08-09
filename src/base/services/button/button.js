@@ -13,7 +13,7 @@ _public.buildCssClasses = ({ theme, block } = {}) => {
     cssClasses,
     baseCssClass
   );
-  propBasedCssClassService.handleBooleanProp(
+  propBasedCssClassService.handleBooleanProps(
     { block },
     isValidBooleanProp,
     cssClasses,

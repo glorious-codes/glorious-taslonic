@@ -5,7 +5,7 @@ const _public = {};
 _public.buildCssClasses = ({ required, block, element } = {}) => {
   const baseCssClass = getBaseCssClass();
   const cssClasses = [baseCssClass, buildRequiredCssClass(required, element, baseCssClass)];
-  propBasedCssClassService.handleBooleanProp(
+  propBasedCssClassService.handleBooleanProps(
     { block },
     isValidBooleanProp,
     cssClasses,

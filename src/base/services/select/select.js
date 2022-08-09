@@ -5,7 +5,7 @@ const _public = {};
 _public.buildWrapperCssClasses = ({ disabled } = {}) => {
   const wrapperBaseCssClass = getWrapperBaseCssClass();
   const cssClasses = [wrapperBaseCssClass];
-  propBasedCssClassService.handleBooleanProp(
+  propBasedCssClassService.handleBooleanProps(
     { disabled },
     isValidBooleanProp,
     cssClasses,

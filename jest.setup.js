@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom'
 import Vue from '@vue';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';

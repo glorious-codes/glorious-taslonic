@@ -9,7 +9,7 @@ export const tAlert = {
   components: { tButton },
   props: {
     dismissButtonText: { default: DISMISS_BUTTON_TEXT },
-    onDismiss: { default: function(){ return () => {}; } }
+    onDismiss: { type: Function }
   },
   data(){
     return {
@@ -21,12 +21,20 @@ export const tAlert = {
     const keycodes = { enter: 13 };
     const dismissButton = this.$refs.dismissButton.$el;
     this.enterSubscriptionId = subscribe(keycodes.enter, () => {
-      if(!domService.isFocused(dismissButton)) this.onDismiss();
+      if(!domService.isFocused(dismissButton)) this.dismiss();
     });
   },
   beforeDestroy(){
     const { unsubscribe } = keyboardSubscriptionService;
     unsubscribe(this.enterSubscriptionId);
+  },
+  methods: {
+    onDismissButtonClick(){
+      this.dismiss();
+    },
+    dismiss(){
+      this.onDismiss && this.onDismiss();
+    }
   },
   template
 };

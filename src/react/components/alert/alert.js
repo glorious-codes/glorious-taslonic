@@ -7,7 +7,7 @@ import { Button } from '@react/components/button/button';
 export const Alert = ({
   children,
   dismissButtonText = DISMISS_BUTTON_TEXT,
-  onDismiss = () => {}
+  onDismiss
 }) => {
 
   useEffect(() => {
@@ -19,10 +19,10 @@ export const Alert = ({
 
   return (
     <div className="t-alert-content">
-      { children }
+      {children}
       <div className="t-alert-footer">
-        <Button theme="primary" onClick={onDismiss}>
-          { dismissButtonText }
+        <Button theme="primary" onClick={() => onDismiss && onDismiss()}>
+          {dismissButtonText}
         </Button>
       </div>
     </div>

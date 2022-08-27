@@ -4,11 +4,15 @@ const _public = {};
 
 _public.simulateKeydown = simulateKeydown;
 
-function simulateKeydown (keyCode){
+async function pause(){
+  await new Promise(resolve => setTimeout(resolve));
+}
+
+function simulateKeydown(keyCode){
   const evt = document.createEvent('Event');
   evt.keyCode = keyCode;
   evt.initEvent('keydown');
   document.dispatchEvent(evt);
 }
 
-export { _public as default, simulateKeydown, userEvent };
+export { _public as default, pause, simulateKeydown, userEvent };

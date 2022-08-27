@@ -12,9 +12,7 @@ _public.build = (formEl, options) => {
   return form;
 };
 
-_public.get = id => {
-  return id ? getFormModel(id) : forms;
-};
+_public.get = id => getFormModel(id);
 
 _public.destroy = id => {
   delete forms[id];

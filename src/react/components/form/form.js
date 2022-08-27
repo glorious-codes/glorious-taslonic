@@ -65,7 +65,7 @@ export class Form extends Component {
   }
 
   handleLoader(){
-    if(this.state.fetching) return <Loader data-form-loader />;
+    if(this.state.fetching) return <Loader />;
   }
 
   handleBanner(){
@@ -73,8 +73,6 @@ export class Form extends Component {
     if(banner)
       return (
         <FormBanner
-          theme="danger"
-          triggerText="Retry"
           message={banner.message}
           onTriggerClick={banner.onTriggerClick}
           onClose={() => this.setBanner(null)}

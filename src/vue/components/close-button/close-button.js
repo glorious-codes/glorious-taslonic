@@ -3,6 +3,7 @@ import template from './close-button.html';
 
 export const tCloseButton = {
   name: 't-close-button',
+  props: ['ariaLabel'],
   components: { tButton },
   template
 };

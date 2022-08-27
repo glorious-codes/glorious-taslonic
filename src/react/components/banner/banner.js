@@ -7,6 +7,7 @@ import { CloseButton } from '@react/components/close-button/close-button';
 export const Banner = ({
   theme,
   triggerText,
+  closeButtonAriaLabel,
   onTriggerClick,
   onClose,
   children,
@@ -25,7 +26,7 @@ export const Banner = ({
           { children }
         </div>
         { onTriggerClick && buildTrigger(triggerText, onTriggerClick) }
-        <CloseButton onClick={onCloseButtonClick} />
+        <CloseButton aria-label={closeButtonAriaLabel} onClick={onCloseButtonClick} />
       </div>
     );
 };

@@ -6,7 +6,7 @@ import template from './banner.html';
 export const tBanner = {
   name: 't-banner',
   components: { tButton, tCloseButton },
-  props: ['theme', 'triggerText', 'onTriggerClick', 'onClose'],
+  props: ['theme', 'triggerText', 'closeButtonAriaLabel', 'onTriggerClick', 'onClose'],
   data(){
     return {
       isVisible: true

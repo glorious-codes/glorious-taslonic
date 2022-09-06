@@ -1,5 +1,7 @@
 import '@base/styles/fetcher.styl';
 import React, { Component } from 'react';
+import { CLOSE_BUTTON_ARIA_LABEL } from '@base/constants/banner';
+import { TRIGGER_TEXT } from '@base/constants/fetcher';
 import { Loader } from '@react/components/loader/loader';
 import { Banner } from '@react/components/banner/banner';
 import fetcherService from '@base/services/fetcher/fetcher';
@@ -19,7 +21,7 @@ export class Fetcher extends Component {
   }
 
   handleProcessChange({ isFetching, fetchFailed }){
-    this.setFetching(isFetching);
+    this.setFetching(!!isFetching);
     this.setFetchFailed(fetchFailed);
     if(isFetching) this.setBanner(null);
   }
@@ -85,7 +87,8 @@ function handleBanner(banner, onBannerClose){
     return (
       <Banner
         theme="danger"
-        triggerText="Retry"
+        closeButtonAriaLabel={CLOSE_BUTTON_ARIA_LABEL}
+        triggerText={TRIGGER_TEXT}
         onTriggerClick={banner.onTriggerClick}
         onClose={onBannerClose}
         data-fetcher-error-banner

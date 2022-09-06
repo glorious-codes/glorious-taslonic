@@ -41,7 +41,7 @@
   },
   "overrides": [
     {
-      "files": [ "src/**/*.test.js" ],
+      "files": [ "src/**/*.test.js", "src/base/tests/*.js" ],
       "rules": {
         "max-lines": ["error", { "max": 300 }],
         "max-statements": ["error", { "max": 25 },

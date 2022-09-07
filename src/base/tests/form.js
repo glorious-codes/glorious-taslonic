@@ -4,7 +4,7 @@ import { REQUEST_ERROR_MESSAGE } from '@base/constants/form';
 import { CLOSE_BUTTON_ARIA_LABEL, TRIGGER_TEXT } from '@base/constants/form-banner';
 import { TITLE_TEXT as LOADER_TITLE_TEXT } from '@base/constants/loader';
 import { REQUIRED_ERROR_MESSAGE }  from '@base/constants/messages';
-import { PromiseMock } from '@base/mocks/promise';
+import { PendingPromiseMock } from '@base/mocks/promise';
 import formService from '@base/services/form/form';
 
 export function run(mountComponent, { screen, waitFor, within }){
@@ -20,7 +20,7 @@ export function run(mountComponent, { screen, waitFor, within }){
     });
 
     it('should fetch on initialize if fetch listener has been given', async () => {
-      const onFetch = jest.fn(() => new PromiseMock('success', { shouldAbort: true }));
+      const onFetch = jest.fn(() => new PendingPromiseMock());
       const { container } = await mount({ onFetch });
       const formEl = container.firstChild;
       const formContentEl = container.querySelector('[data-form-content]');
@@ -34,7 +34,7 @@ export function run(mountComponent, { screen, waitFor, within }){
 
     it('should handle fetch success', async () => {
       const response = { some: 'response' };
-      const onFetch = jest.fn(() => new PromiseMock('success', { response }));
+      const onFetch = jest.fn(() => Promise.resolve(response));
       const onFetchSuccess = jest.fn();
       const { container } = await mount({ onFetch, onFetchSuccess });
       const formEl = container.firstChild;
@@ -50,7 +50,7 @@ export function run(mountComponent, { screen, waitFor, within }){
 
     it('should handle fetch error', async () => {
       const err = { some: 'err' };
-      const onFetch = jest.fn(() => new PromiseMock('error', { err }));
+      const onFetch = jest.fn(() => Promise.reject(err));
       const onFetchError = jest.fn();
       const { container } = await mount({ onFetch, onFetchError });
       const formEl = container.firstChild;
@@ -66,7 +66,7 @@ export function run(mountComponent, { screen, waitFor, within }){
     });
 
     it('should remove error banner on banner close button click', async () => {
-      const onFetch = jest.fn(() => new PromiseMock('error'));
+      const onFetch = jest.fn(() => Promise.reject());
       const { userEvent } = await mount({ onFetch });
       await waitFor(() => {
         expect(screen.getByText(REQUEST_ERROR_MESSAGE)).toBeInTheDocument();
@@ -79,13 +79,13 @@ export function run(mountComponent, { screen, waitFor, within }){
 
     it('should optionally show error banner with custom message on fetch error', async () => {
       const fetchErrorMessage = 'Oops!';
-      const onFetch = jest.fn(() => new PromiseMock('error'));
+      const onFetch = jest.fn(() => Promise.reject());
       await mount({ onFetch, fetchErrorMessage });
       expect(screen.getByText(fetchErrorMessage)).toBeInTheDocument();
     });
 
     it('should execute fetch callback on error banner retry button click', async () => {
-      const onFetch = jest.fn(() => new PromiseMock('error'));
+      const onFetch = jest.fn(() => Promise.reject());
       const { userEvent } = await mount({ onFetch });
       await waitFor(() => {
         expect(screen.getByText(REQUEST_ERROR_MESSAGE)).toBeInTheDocument();
@@ -120,7 +120,7 @@ export function run(mountComponent, { screen, waitFor, within }){
     });
 
     it('should execute submit callback on submit if form is valid', async () => {
-      const onSubmit = jest.fn(() => new PromiseMock('success', { shouldAbort: true }));
+      const onSubmit = jest.fn(() => new PendingPromiseMock());
       const { userEvent } = await mount({ onSubmit });
       fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' });
       submit(userEvent);
@@ -131,50 +131,62 @@ export function run(mountComponent, { screen, waitFor, within }){
       expect(screen.getByTitle(LOADER_TITLE_TEXT)).toBeInTheDocument();
     });
 
+    it('should not execute submit callback more than once', async () => {
+      const onSubmit = jest.fn(() => new PendingPromiseMock());
+      const { userEvent } = await mount({ onSubmit });
+      fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' });
+      userEvent.dblClick(getSubmitButton());
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+    });
+
     it('should execute submit success callback on submit success', async () => {
       const response = { some: 'data' };
-      const onSubmit = jest.fn(() => new PromiseMock('success', { response }));
+      const onSubmit = jest.fn(() => Promise.resolve(response));
       const onSubmitSuccess = jest.fn();
       const { userEvent } = await mount({ onSubmit, onSubmitSuccess });
       fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' });
       submit(userEvent);
-      expect(onSubmitSuccess).toHaveBeenCalledWith(response);
-      expect(getSubmitButton()).toBeInTheDocument();
-      expect(screen.queryByTitle(LOADER_TITLE_TEXT)).not.toBeInTheDocument();
+      await waitFor(() => {
+        expect(onSubmitSuccess).toHaveBeenCalledWith(response);
+        expect(screen.queryByTitle(LOADER_TITLE_TEXT)).not.toBeInTheDocument();
+        expect(getSubmitButton()).toBeInTheDocument();
+      });
     });
 
     it('should optionally show a success title and message on submit success', async () => {
-      const onSubmit = jest.fn(() => new PromiseMock('success', { response: {} }));
+      const onSubmit = jest.fn(() => Promise.resolve({}));
       const submitSuccessTitle = 'Good job!';
       const submitSuccessMessage = 'Form successfully sent';
       const { userEvent } = await mount({ onSubmit, submitSuccessTitle, submitSuccessMessage });
       fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' });
       submit(userEvent);
-      const toastElement = document.querySelector('[data-toast]');
-      expect(within(toastElement).getByText(submitSuccessTitle)).toBeInTheDocument();
-      expect(within(toastElement).getByText(submitSuccessMessage)).toBeInTheDocument();
-      userEvent.click(within(toastElement).getByRole('button'));
-      expect(toastElement).not.toBeInTheDocument();
+      await waitFor(() => {
+        const toastElement = getToastElement();
+        expect(within(toastElement).getByText(submitSuccessTitle)).toBeInTheDocument();
+        expect(within(toastElement).getByText(submitSuccessMessage)).toBeInTheDocument();
+      });
+      userEvent.click(within(getToastElement()).getByRole('button'));
+      expect(getToastElement()).not.toBeInTheDocument();
     });
 
     it('should execute submit error callback on submit error', async () => {
       const err = { some: 'err' };
-      const onSubmit = jest.fn(() => new PromiseMock('error', { err }));
+      const onSubmit = jest.fn(() => Promise.reject(err));
       const onSubmitError = jest.fn();
       const { userEvent } = await mount({ onSubmit, onSubmitError });
       fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' });
       submit(userEvent);
-      expect(onSubmitError).toHaveBeenCalledWith(err);
       await waitFor(() => {
         const formErrorBannerElement = document.querySelector('[data-form-error-banner]');
         expect(within(formErrorBannerElement).getByText(REQUEST_ERROR_MESSAGE)).toBeInTheDocument();
       });
+      expect(onSubmitError).toHaveBeenCalledWith(err);
       expect(getSubmitButton()).toBeInTheDocument();
       expect(screen.queryByTitle(LOADER_TITLE_TEXT)).not.toBeInTheDocument();
     });
 
     it('should optionally show error banner with custom message on submit error', async () => {
-      const onSubmit = jest.fn(() => new PromiseMock('error', { err: {} }));
+      const onSubmit = jest.fn(() => Promise.reject({}));
       const submitErrorMessage = 'Ops...';
       const { userEvent } = await mount({ onSubmit, submitErrorMessage });
       fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' });
@@ -186,10 +198,14 @@ export function run(mountComponent, { screen, waitFor, within }){
     });
 
     it('should execute submit callback on error banner retry button click', async () => {
-      const onSubmit = jest.fn(() => new PromiseMock('error', { err: {} }));
+      const onSubmit = jest.fn(() => Promise.reject({}));
       const { userEvent } = await mount({ onSubmit });
       fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' });
       submit(userEvent);
+      await waitFor(() => {
+        expect(getSubmitButton()).toBeInTheDocument();
+        expect(screen.queryByTitle(LOADER_TITLE_TEXT)).not.toBeInTheDocument();
+      });
       await waitFor(() => {
         const formErrorBannerElement = document.querySelector('[data-form-error-banner]');
         userEvent.click(within(formErrorBannerElement).getByRole('button', { name: TRIGGER_TEXT }));
@@ -230,6 +246,10 @@ export function run(mountComponent, { screen, waitFor, within }){
 
     function getSubmitButton(){
       return screen.queryByRole('button', { name: SUBMIT_BUTTON_TEXT });
+    }
+
+    function getToastElement(){
+      return document.querySelector('[data-toast]');
     }
   });
 }

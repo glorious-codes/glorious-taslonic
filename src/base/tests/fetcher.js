@@ -1,11 +1,11 @@
 import { CLOSE_BUTTON_ARIA_LABEL } from '@base/constants/banner';
 import { FETCH_ERROR_MESSAGE, TRIGGER_TEXT } from '@base/constants/fetcher';
-import { PromiseMock } from '@base/mocks/promise';
+import { PendingPromiseMock } from '@base/mocks/promise';
 
 export function run(mount, { screen, waitFor }){
   describe('Fetcher', () => {
     it('should fetch on initialize', () => {
-      const onFetch = jest.fn(() => new PromiseMock('success', { shouldAbort: true }));
+      const onFetch = jest.fn(() => new PendingPromiseMock());
       const { container } = mount({ onFetch });
       const fetcherContentEl = container.querySelector('[data-fetcher-content]');
       expect(onFetch).toHaveBeenCalled();

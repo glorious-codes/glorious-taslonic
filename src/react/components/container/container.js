@@ -2,10 +2,10 @@ import '@base/styles/container.styl';
 import containerService from '@base/services/container/container';
 import React from 'react';
 
-export const Container = ({ size, children }) => {
+export const Container = ({ size, children, ...rest }) => {
   return (
-    <div className={buildCssClasses(size)}>
-      { children }
+    <div className={buildCssClasses(size)} {...rest}>
+      {children}
     </div>
   );
 };

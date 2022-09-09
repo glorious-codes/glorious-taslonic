@@ -8,6 +8,7 @@ export const Button = ({ theme, block, tag, type = 'button', children, ...rest }
   const TagName = buttonService.buildTagName(tag);
   const [submitting, setSubmitting] = useState();
   const buttonEl = useRef();
+  const handleType = () => (!tag || tag == 'button') && { type };
   const handleLoader = submitting => {
     return submitting ? <Loader data-button-loader /> : null;
   };
@@ -34,12 +35,12 @@ export const Button = ({ theme, block, tag, type = 'button', children, ...rest }
     <TagName
       className={buildCssClasses({ theme, block })}
       tabIndex="0"
-      type={type}
       ref={buttonEl}
-      { ...rest }
+      {...handleType()}
+      {...rest}
     >
-      { handleLoader(submitting) }
-      { handleContent(submitting, children) }
+      {handleLoader(submitting)}
+      {handleContent(submitting, children)}
     </TagName>
   );
 };

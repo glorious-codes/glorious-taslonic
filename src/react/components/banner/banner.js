@@ -1,5 +1,6 @@
 import '@base/styles/banner.styl';
 import React, { useState } from 'react';
+import { CLOSE_BUTTON_ARIA_LABEL } from '@base/constants/banner';
 import bannerService from '@base/services/banner/banner';
 import { Button } from '@react/components/button/button';
 import { CloseButton } from '@react/components/close-button/close-button';
@@ -7,7 +8,7 @@ import { CloseButton } from '@react/components/close-button/close-button';
 export const Banner = ({
   theme,
   triggerText,
-  closeButtonAriaLabel,
+  closeButtonAriaLabel = CLOSE_BUTTON_ARIA_LABEL,
   onTriggerClick,
   onClose,
   children,

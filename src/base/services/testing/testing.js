@@ -15,4 +15,8 @@ function simulateKeydown(keyCode){
   document.dispatchEvent(evt);
 }
 
-export { _public as default, pause, simulateKeydown, userEvent };
+function stringifyAttributes(obj){
+  return Object.entries(obj).map(([key, value]) => `${key}=${value}`).join(' ');
+}
+
+export { _public as default, pause, stringifyAttributes, simulateKeydown, userEvent };

@@ -19,4 +19,15 @@ function stringifyAttributes(obj){
   return Object.entries(obj).map(([key, value]) => `${key}=${value}`).join(' ');
 }
 
-export { _public as default, pause, stringifyAttributes, simulateKeydown, userEvent };
+function expectFirstChild({ container }){
+  return expect(container.firstChild);
+}
+
+export {
+  _public as default,
+  expectFirstChild,
+  pause,
+  stringifyAttributes,
+  simulateKeydown,
+  userEvent
+};

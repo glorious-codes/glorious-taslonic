@@ -1,3 +1,5 @@
+import { expectFirstChild } from '@base/services/testing/testing';
+
 export function run(mount, { screen }){
   describe('Column', () => {
     it('should have base css class', () => {
@@ -57,9 +59,5 @@ export function run(mount, { screen }){
       mount({ content: text });
       expect(screen.getByText(text)).toBeInTheDocument();
     });
-
-    function expectFirstChild({ container }){
-      return expect(container.firstChild);
-    }
   });
 }

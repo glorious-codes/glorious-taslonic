@@ -71,6 +71,7 @@ export function run(mountComponent, { screen, waitFor, within }){
       await waitFor(() => {
         expect(screen.getByText(REQUEST_ERROR_MESSAGE)).toBeInTheDocument();
       });
+      expect(getBanner()).toHaveClass('t-banner-danger');
       userEvent.click(screen.getByLabelText(CLOSE_BUTTON_ARIA_LABEL));
       await waitFor(() => {
         expect(screen.queryByText(REQUEST_ERROR_MESSAGE)).not.toBeInTheDocument();
@@ -180,6 +181,7 @@ export function run(mountComponent, { screen, waitFor, within }){
         const formErrorBannerElement = document.querySelector('[data-form-error-banner]');
         expect(within(formErrorBannerElement).getByText(REQUEST_ERROR_MESSAGE)).toBeInTheDocument();
       });
+      expect(getBanner()).toHaveClass('t-banner-danger');
       expect(onSubmitError).toHaveBeenCalledWith(err);
       expect(getSubmitButton()).toBeInTheDocument();
       expect(screen.queryByTitle(LOADER_TITLE_TEXT)).not.toBeInTheDocument();
@@ -250,6 +252,10 @@ export function run(mountComponent, { screen, waitFor, within }){
 
     function getToastElement(){
       return document.querySelector('[data-toast]');
+    }
+
+    function getBanner(){
+      return screen.getByText(REQUEST_ERROR_MESSAGE).parentElement;
     }
   });
 }

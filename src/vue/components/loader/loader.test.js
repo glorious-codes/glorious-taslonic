@@ -1,24 +1,17 @@
-import { shallowMount } from '@vue/test-utils';
-import { tLoader } from './loader';
+import { run } from '@base/tests/loader';
+import { customRender, screen, stringifyAttributes } from '@vue/services/testing/testing';
+import { tLoader } from '@vue/';
 
-describe('Loader', () => {
-  function mount(propsData = {}){
-    return shallowMount(tLoader, { propsData });
-  }
-
-  it('should have appropriate css class', () => {
-    const wrapper = mount();
-    expect(wrapper.classes()).toContain('t-loader');
+function mount({ theme, ...rest} = {}){
+  return customRender({
+    components: { tLoader },
+    data(){
+      return {
+        theme
+      };
+    },
+    template: `<t-loader :theme="theme" ${stringifyAttributes(rest)} />`
   });
+}
 
-  it('should optionally set a light theme', () => {
-    const wrapper = mount({ theme: 'light' });
-    expect(wrapper.classes()).toContain('t-loader-light');
-  });
-
-  it('should contain animated elements', () => {
-    const wrapper = mount();
-    const elements = wrapper.vm.$el.querySelectorAll('span');
-    expect(elements.length).toEqual(3);
-  });
-});
+run(mount, { screen });

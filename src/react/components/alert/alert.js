@@ -18,7 +18,7 @@ export const Alert = ({
   }, [onDismiss]);
 
   return (
-    <div className="t-alert-content">
+    <div className="t-alert-content" data-alert>
       {children}
       <div className="t-alert-footer">
         <Button theme="primary" onClick={() => onDismiss && onDismiss()}>

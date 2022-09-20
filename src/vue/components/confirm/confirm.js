@@ -2,16 +2,21 @@ import { CANCEL_BUTTON_TEXT, CONFIRM_BUTTON_TEXT } from '@base/constants/confirm
 import domService from '@base/services/dom/dom';
 import keyboardSubscriptionService from '@base/services/keyboardSubscription/keyboardSubscription';
 import { tButton } from '@vue/components/button/button';
+import { renderContent } from '@vue/services/content/content';
 import template from './confirm.html';
 
 export const tConfirm = {
   name: 't-confirm',
   components: { tButton },
-  props: ['cancelButtonText', 'confirmButtonText', 'onCancel', 'onConfirm'],
+  props: {
+    content: { type: [String, Object] },
+    cancelButtonText: { default: CANCEL_BUTTON_TEXT },
+    confirmButtonText: { default: CONFIRM_BUTTON_TEXT },
+    onCancel: { type: Function },
+    onConfirm: { type: Function }
+  },
   data(){
     return {
-      defaultCancelButtonText: CANCEL_BUTTON_TEXT,
-      defaultConfirmButtonText: CONFIRM_BUTTON_TEXT,
       escSubcriptionId: null,
       enterSubscriptionId: null
     };
@@ -24,6 +29,9 @@ export const tConfirm = {
       if(!this.isCancelButtonFocused() && !this.isConfirmButtonFocused())
         this.handleCallbackProp(this.onConfirm);
     });
+  },
+  mounted(){
+    renderContent(this.content, this.$el);
   },
   beforeDestroy(){
     const { unsubscribe } = keyboardSubscriptionService;

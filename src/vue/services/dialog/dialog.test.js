@@ -1,51 +1,48 @@
-import dialogService from './dialog';
+import { run } from '@base/tests/dialog';
+import { customRender, screen } from '@vue/services/testing/testing';
+import { dialog } from '@vue/';
 
-jest.useFakeTimers();
-
-describe('Dialog Service', () => {
-  afterEach(() => {
-    document.body.innerHTML = '';
+function mount(dialogOptions){
+  return customRender({
+    data(){
+      return {
+        openDialog: null
+      };
+    },
+    methods: {
+      open(){
+        this.setOpenDialog(dialog.open(dialogOptions));
+      },
+      close(){
+        this.openDialog.close();
+      },
+      setOpenDialog(openDialog){
+        this.openDialog = openDialog;
+      }
+    },
+    template: `
+      <div>
+        <button @click="open">Open dialog</button>
+        <button @click="close">Close dialog</button>
+      </div>
+    `
   });
+}
 
-  it('should render a custom content', () => {
-    const content = { template: '<p>Hello!</p>' };
-    dialogService.open({ content });
-    expect(document.querySelector('p').textContent).toEqual('Hello!');
-  });
+function buildContentMarkup({ title, paragraph }){
+  return {
+    data(){
+      return {
+        title,
+        paragraph
+      };
+    },
+    template: `
+      <p :title="title">
+        {{ paragraph }}
+      </p>
+    `
+  };
+}
 
-  it('should optionally set a title', () => {
-    const title = 'Custom Title';
-    dialogService.open({ title });
-    expect(document.querySelector('[data-dialog-title]').textContent).toEqual(title);
-  });
-
-  it('should optionally set a width', () => {
-    const width = '300px';
-    dialogService.open({ width });
-    expect(document.querySelector('[data-dialog]').style.maxWidth).toEqual(width);
-  });
-
-  it('should optionally set a custom dialog wrapper name', () => {
-    dialogService.open({ name: 'confirm' });
-    expect(document.querySelector('[data-confirm-wrapper]')).toBeDefined();
-  });
-
-  it('should execute close callback on close', () => {
-    const onClose = jest.fn();
-    dialogService.open({ onClose });
-    document.querySelector('[aria-label="close"]').click();
-    expect(onClose).toHaveBeenCalled();
-  });
-
-  it('should optionally not render close button', () => {
-    dialogService.open({ hideCloseButton: true });
-    expect(document.querySelector('[aria-label="close"]')).toEqual(null);
-  });
-
-  it('should destroy dialog', () => {
-    const dialog = dialogService.open();
-    dialog.close();
-    jest.runOnlyPendingTimers();
-    expect(document.querySelector('[data-dialog-wrapper]')).toEqual(null);
-  });
-});
+run(mount, { screen, buildContentMarkup });

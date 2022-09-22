@@ -6,7 +6,7 @@ import { Toast } from '@react/components/toast/toast';
 
 const _public = {};
 
-_public.pop = ({ title, message, theme }) => {
+_public.pop = ({ title, message = '', theme } = {}) => {
   buildToastElement(title, message, theme, toastEl => {
     toasterService.pop(toastEl);
   });

@@ -1,7 +1,5 @@
 <div :class="classes" data-toast>
-  <h3 class="t-toast-title" v-if="title" data-toast-title>{{ title }}</h3>
-  <div class="t-toast-content" data-toast-content>
-    <slot></slot>
-  </div>
-  <t-close-button @click="handleClose" />
+  <h3 class="t-toast-title" v-if="title" data-toast-title></h3>
+  <div class="t-toast-content" data-toast-content></div>
+  <t-close-button :aria-label="closeButtonAriaLabel" @click="handleClose" />
 </div>

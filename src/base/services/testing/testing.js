@@ -16,7 +16,7 @@ function simulateKeydown(keyCode){
 }
 
 function stringifyAttributes(obj){
-  return Object.entries(obj).map(([key, value]) => `${key}=${value}`).join(' ');
+  return Object.entries(obj).map(([key, value]) => `${key}="${value}"`).join(' ');
 }
 
 function expectFirstChild({ container }){

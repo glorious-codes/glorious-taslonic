@@ -23,9 +23,14 @@ function expectFirstChild({ container }){
   return expect(container.firstChild);
 }
 
+function expectFirstGrandChild({ container }){
+  return expect(container.firstChild.firstChild);
+}
+
 export {
   _public as default,
   expectFirstChild,
+  expectFirstGrandChild,
   pause,
   stringifyAttributes,
   simulateKeydown,

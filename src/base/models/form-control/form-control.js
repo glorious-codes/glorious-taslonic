@@ -48,12 +48,13 @@ export class FormControlModel {
     this.form = form;
   }
   configValidations(formControlEl, validations = []){
-    this.setValidations(validations);
+    this.setValidations(validations, formControlEl);
     this.configValidationListeners(formControlEl);
-    this.validate(formControlEl);
   }
-  setValidations(validations){
+  setValidations(validations, formControlEl){
+    const element = formControlEl || this.element;
     this.validations = validations;
+    this.validate(element);
   }
   configValidationListeners(formControlEl){
     formControlEl.addEventListener('input', evt => this.onInput(evt));

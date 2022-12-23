@@ -42,6 +42,9 @@ export const tFormControl = {
     required(required){
       this.formControl.onRequiredChange(required);
     },
+    validations(validations) {
+      this.formControl.setValidations(validations);
+    },
     value(value) {
       this.formControl.setElementValue(value);
     }

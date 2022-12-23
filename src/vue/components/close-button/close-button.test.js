@@ -1,30 +1,12 @@
-import { mount } from '@vue/test-utils';
+import { run } from '@base/tests/close-button';
+import { customRender, screen } from '@vue/services/testing/testing';
 import { tCloseButton } from './close-button';
 
-describe('Close Button', () => {
-  function mountComponent({ listeners = {} } = {}){
-    return mount(tCloseButton, { listeners });
-  }
-
-  it('should have base css class', () => {
-    const wrapper = mountComponent();
-    expect(wrapper.classes()).toContain('t-close-button');
+function mount(){
+  return customRender({
+    components: { tCloseButton },
+    template: '<t-close-button />'
   });
+}
 
-  it('should contain a lookless theme button', () => {
-    const wrapper = mountComponent();
-    expect(wrapper.find('button').classes()).toContain('t-button-lookless');
-  });
-
-  it('should contain a icon as button label', () => {
-    const wrapper = mountComponent();
-    expect(wrapper.find('button').text()).toEqual('×');
-  });
-
-  it('should optionally set listeners', () => {
-    const onChange = jest.fn();
-    const wrapper = mountComponent({ listeners: { change: onChange } });
-    wrapper.find('[data-close-button]').trigger('change');
-    expect(onChange).toHaveBeenCalled();
-  });
-});
+run(mount, { screen });

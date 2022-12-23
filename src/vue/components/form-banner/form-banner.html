@@ -1,5 +1,11 @@
 <div class="t-form-banner">
-  <t-banner :theme="theme" :on-trigger-click="onTriggerClick" :trigger-text="triggerText" :on-close="onClose">
+  <t-banner
+    :close-button-aria-label="closeButtonAriaLabel"
+    :theme="theme"
+    :trigger-text="triggerText"
+    :on-trigger-click="onTriggerClick"
+    :on-close="onClose"
+  >
     {{ message }}
   </t-banner>
 </div>

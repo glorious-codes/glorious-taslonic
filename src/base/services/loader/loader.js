@@ -1,3 +1,4 @@
+import { TITLE_TEXT } from '@base/constants/loader';
 import propBasedCssClassService from '@base/services/prop-based-css-class/prop-based-css-class';
 
 const _public = {};
@@ -14,8 +15,11 @@ _public.buildCssClasses = ({ theme } = {}) => {
   return cssClasses.join(' ');
 };
 
-_public.buildAnimatedElements = () => {
-  return [buildElement(), buildElement(), buildElement()];
+_public.appendAnimatedElements = wrapperEl => {
+  [buildElement(), buildElement(), buildElement()].forEach(el => {
+    wrapperEl.appendChild(el);
+  });
+  wrapperEl.setAttribute('title', TITLE_TEXT);
 };
 
 function buildElement(){

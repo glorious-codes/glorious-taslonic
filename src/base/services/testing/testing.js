@@ -1,10 +1,38 @@
+import userEvent from '@testing-library/user-event';
+
 const _public = {};
 
-_public.simulateKeydown = keyCode => {
+_public.simulateKeydown = simulateKeydown;
+
+async function pause(){
+  await new Promise(resolve => setTimeout(resolve));
+}
+
+function simulateKeydown(keyCode){
   const evt = document.createEvent('Event');
   evt.keyCode = keyCode;
   evt.initEvent('keydown');
   document.dispatchEvent(evt);
-};
+}
 
-export default _public;
+function stringifyAttributes(obj){
+  return Object.entries(obj).map(([key, value]) => `${key}="${value}"`).join(' ');
+}
+
+function expectFirstChild({ container }){
+  return expect(container.firstChild);
+}
+
+function expectFirstGrandChild({ container }){
+  return expect(container.firstChild.firstChild);
+}
+
+export {
+  _public as default,
+  expectFirstChild,
+  expectFirstGrandChild,
+  pause,
+  stringifyAttributes,
+  simulateKeydown,
+  userEvent
+};

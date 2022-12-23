@@ -5,7 +5,7 @@ export const tLoader = {
   name: 't-loader',
   props: ['theme'],
   mounted(){
-    loaderService.buildAnimatedElements().forEach(el => this.$el.appendChild(el));
+    loaderService.appendAnimatedElements(this.$el);
   },
   computed: {
     classes(){

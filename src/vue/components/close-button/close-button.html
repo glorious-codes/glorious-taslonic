@@ -1,3 +1,10 @@
 <span class="t-close-button">
-  <t-button theme="lookless" v-on="$listeners" data-close-button>×</t-button>
+  <t-button
+    theme="lookless"
+    :aria-label="ariaLabel"
+    v-on="$listeners"
+    data-close-button
+  >
+    ×
+  </t-button>
 </span>

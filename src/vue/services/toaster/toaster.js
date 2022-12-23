@@ -5,7 +5,7 @@ import { tToast } from '@vue/components/toast/toast';
 
 const _public = {};
 
-_public.pop = ({ title, message, theme }) => {
+_public.pop = ({ title, message = '', theme } = {}) => {
   const toastEl = buildToastElement(title, message, theme);
   toasterService.pop(toastEl);
 };
@@ -18,6 +18,7 @@ function buildToastElement(title, message, theme){
       data(){
         return {
           title,
+          message,
           theme
         };
       },
@@ -33,9 +34,13 @@ function buildToastElement(title, message, theme){
       }
     },
     template: `
-    <t-toast :title="title" :on-close="onClose" :theme="theme" data-toast-id=${id}>
-      ${message}
-    </t-toast>`
+    <t-toast
+      :title="title"
+      :message="message"
+      :theme="theme"
+      :on-close="onClose"
+      data-toast-id=${id}
+    />`
   });
   return element;
 }

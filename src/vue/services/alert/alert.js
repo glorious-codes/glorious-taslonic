@@ -13,7 +13,7 @@ _public.open = ({
   const dialog = dialogService.open({
     title,
     width,
-    content: buildConfirm({
+    content: buildAlert({
       content,
       dismissButtonText,
       onDismiss: () => handleCallbackOption(onDismiss, dialog.close)
@@ -23,18 +23,20 @@ _public.open = ({
   });
 };
 
-function buildConfirm({ content, dismissButtonText, onDismiss }){
+function buildAlert({ content = '', dismissButtonText, onDismiss }){
   return {
     components: { tAlert },
     data(){
-      return { dismissButtonText, onDismiss };
+      return { content, dismissButtonText, onDismiss };
     },
     template: `
-    <t-alert
-      :dismissButtonText="dismissButtonText"
-      :onDismiss="onDismiss">
-      ${content}
-    </t-alert>`
+      <t-alert
+        :dismissButtonText="dismissButtonText"
+        :onDismiss="onDismiss"
+        :content="content"
+      >
+      </t-alert>
+    `
   };
 }
 

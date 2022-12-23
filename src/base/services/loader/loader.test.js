@@ -16,13 +16,11 @@ describe('Loader Service', () => {
     expect(cssClasses).toEqual('t-loader');
   });
 
-  it('should build animated elements', () => {
-    const items = loaderService.buildAnimatedElements();
+  it('should append animated elements in a container', () => {
+    const container = document.createElement('div');
+    loaderService.appendAnimatedElements(container);
+    const items = Array.from(container.querySelectorAll('span'));
+    items.forEach(item => expect(item).toHaveClass('t-loader-item'));
     expect(items.length).toEqual(3);
-  });
-
-  it('should items have appropriate css class', () => {
-    const items = loaderService.buildAnimatedElements();
-    items.forEach(item => expect(item.getAttribute('class')).toEqual('t-loader-item'));
   });
 });

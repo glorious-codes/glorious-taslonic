@@ -1,28 +1,21 @@
-import { shallowMount } from '@vue/test-utils';
-import { tContainer } from './container';
+import { run } from '@base/tests/container';
+import { customRender, screen, stringifyAttributes } from '@vue/services/testing/testing';
+import { tContainer } from '@vue/';
 
-describe('Container', () => {
-  function mount(propsData = {}, content = ''){
-    return shallowMount(tContainer, { propsData, slots: { default: content } });
-  }
-
-  it('should have base css class', () => {
-    const wrapper = mount();
-    expect(wrapper.classes()).toContain('t-container');
+function mount({ content, size, ...rest } = {}){
+  return customRender({
+    components: { tContainer },
+    data(){
+      return {
+        size
+      };
+    },
+    template: `
+      <t-container :size="size" ${stringifyAttributes(rest)}>
+        ${content}
+      </t-container>
+    `
   });
+}
 
-  it('should optionally set a small size', () => {
-    const wrapper = mount({ size: 'sm' });
-    expect(wrapper.classes()).toContain('t-container-sm');
-  });
-
-  it('should optionally set a large size', () => {
-    const wrapper = mount({ size: 'lg' });
-    expect(wrapper.classes()).toContain('t-container-lg');
-  });
-
-  it('should render some content', () => {
-    const wrapper = mount({}, '<p>Hello</p>');
-    expect(wrapper.find('p').text()).toEqual('Hello');
-  });
-});
+run(mount, { screen });

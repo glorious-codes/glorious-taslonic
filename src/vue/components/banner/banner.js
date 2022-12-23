@@ -1,3 +1,4 @@
+import { CLOSE_BUTTON_ARIA_LABEL } from '@base/constants/banner';
 import bannerService from '@base/services/banner/banner';
 import { tButton } from '@vue/components/button/button';
 import { tCloseButton } from '@vue/components/close-button/close-button';
@@ -6,10 +7,11 @@ import template from './banner.html';
 export const tBanner = {
   name: 't-banner',
   components: { tButton, tCloseButton },
-  props: ['theme', 'triggerText', 'onTriggerClick', 'onClose'],
+  props: ['theme', 'triggerText', 'closeButtonAriaLabel', 'onTriggerClick', 'onClose'],
   data(){
     return {
-      isVisible: true
+      isVisible: true,
+      defaultCloseButtonAriaLabel: CLOSE_BUTTON_ARIA_LABEL
     };
   },
   methods: {

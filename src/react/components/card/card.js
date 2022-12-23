@@ -1,15 +1,15 @@
 import '@base/styles/card.styl';
 import React from 'react';
 
-export const Card = ({ title, titleTagName, children }) => (
-  <div className="t-card">
-    { handleTitle(title, titleTagName) }
+export const Card = ({ title, titleTagName, children, ...rest }) => (
+  <div className="t-card" {...rest}>
+    {handleTitle(title, titleTagName)}
     <div className="t-card-content">
-      { children }
+      {children}
     </div>
   </div>
 );
 
 function handleTitle(title, Tag = 'h3'){
-  if(title) return <Tag className="t-card-title">{ title }</Tag>;
+  return title && <Tag className="t-card-title">{ title }</Tag>;
 }

@@ -5,7 +5,6 @@ import formControlService from '@base/services/form-control/form-control';
 
 export const FormControl = ({ value, required, validations, formControlElSelector, block, children }) => {
   const [formControlModel, setFormControlModel] = useState();
-  const [currentValue, setCurrentValue] = useState(value);
   const [errorMessage, setErrorMessage] = useState();
   const { buildCssClasses } = formControlService;
   const onValidate = errorMessage => setErrorMessage(errorMessage);
@@ -24,18 +23,15 @@ export const FormControl = ({ value, required, validations, formControlElSelecto
   }, []);
 
   useEffect(() => {
-    if(formControlModel && value !== currentValue) {
-      formControlModel.setElementValue(value);
-      setCurrentValue(value);
-    }
-  });
+    formControlModel && formControlModel.setElementValue(value);
+  }, [value]);
 
   useEffect(() => {
-    if(formControlModel) formControlModel.onRequiredChange(required);
+    formControlModel && formControlModel.onRequiredChange(required);
   }, [required]);
 
   useEffect(() => {
-    if(formControlModel) formControlModel.setValidations(validations);
+    formControlModel && formControlModel.setValidations(validations);
   }, [validations]);
 
   return (

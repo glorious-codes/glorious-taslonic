@@ -2,7 +2,7 @@ import '@base/styles/field.styl';
 import React, { useState, useEffect, useRef } from 'react';
 import fieldService from '@base/services/field/field';
 
-export const Field = ({ label, required, block, children }) => {
+export const Field = ({ label, required, block, children, ...rest }) => {
   const [cssClasses, setCssClasses] = useState('');
   const fieldElement = useRef();
 
@@ -11,7 +11,7 @@ export const Field = ({ label, required, block, children }) => {
   }, [required, block, fieldElement, setCssClasses]);
 
   return (
-    <span ref={fieldElement} className={cssClasses}>
+    <span ref={fieldElement} className={cssClasses} {...rest}>
       <label
         className="t-field-label"
         htmlFor={fieldService.findFormControlId({ element: fieldElement.current })}

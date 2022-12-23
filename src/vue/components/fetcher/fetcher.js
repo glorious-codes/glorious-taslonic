@@ -1,3 +1,5 @@
+import { CLOSE_BUTTON_ARIA_LABEL } from '@base/constants/banner';
+import { TRIGGER_TEXT } from '@base/constants/fetcher';
 import { tBanner } from '@vue/components/banner/banner';
 import { tLoader } from '@vue/components/loader/loader';
 import fetcherService from '@base/services/fetcher/fetcher';
@@ -18,7 +20,9 @@ export const tFetcher = {
       fetcher: null,
       isFetching: false,
       fetchFailed: false,
-      banner: null
+      banner: null,
+      closeButtonAriaLabel: CLOSE_BUTTON_ARIA_LABEL,
+      triggerText: TRIGGER_TEXT
     };
   },
   created(){

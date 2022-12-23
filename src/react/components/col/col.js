@@ -33,7 +33,9 @@ export const Col = ({
         alignSm,
         alignMd,
         alignLg
-      })} {...rest}>
+      })}
+      {...rest}
+    >
       { children }
     </div>
   );

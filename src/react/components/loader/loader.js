@@ -6,9 +6,7 @@ export const Loader = ({ theme, ...rest }) => {
   const wrapper = useRef();
 
   useEffect(() => {
-    loaderService.buildAnimatedElements().map(element => {
-      wrapper.current.appendChild(element);
-    });
+    loaderService.appendAnimatedElements(wrapper.current);
   }, []);
 
   return (

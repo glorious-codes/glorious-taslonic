@@ -1,63 +1,71 @@
-import { shallowMount } from '@vue/test-utils';
-import { tRow } from './row';
+import { run } from '@base/tests/row';
+import { customRender, screen, stringifyAttributes } from '@vue/services/testing/testing';
+import { tRow } from '@vue/';
 
-describe('Row', () => {
-  function mount(propsData = {}, content = ''){
-    return shallowMount(tRow, { propsData, slots: { default: content } });
-  }
-
-  it('should have base css class', () => {
-    const wrapper = mount();
-    expect(wrapper.classes()).toContain('t-row');
+function mount({
+  content,
+  align,
+  alignXs,
+  alignSm,
+  alignMd,
+  alignLg,
+  offset,
+  offsetXs,
+  offsetSm,
+  offsetMd,
+  offsetLg,
+  verticalAlign,
+  verticalAlignXs,
+  verticalAlignSm,
+  verticalAlignMd,
+  verticalAlignLg,
+  ...rest
+} = {}){
+  return customRender({
+    components: { tRow },
+    data(){
+      return {
+        content,
+        align,
+        alignXs,
+        alignSm,
+        alignMd,
+        alignLg,
+        offset,
+        offsetXs,
+        offsetSm,
+        offsetMd,
+        offsetLg,
+        verticalAlign,
+        verticalAlignXs,
+        verticalAlignSm,
+        verticalAlignMd,
+        verticalAlignLg
+      };
+    },
+    template: `
+      <t-row
+        :align="align"
+        :align-xs="alignXs"
+        :align-sm="alignSm"
+        :align-md="alignMd"
+        :align-lg="alignLg"
+        :offset="offset"
+        :offset-xs="offsetXs"
+        :offset-sm="offsetSm"
+        :offset-md="offsetMd"
+        :offset-lg="offsetLg"
+        :vertical-align="verticalAlign"
+        :vertical-align-xs="verticalAlignXs"
+        :vertical-align-sm="verticalAlignSm"
+        :vertical-align-md="verticalAlignMd"
+        :vertical-align-lg="verticalAlignLg"
+        ${stringifyAttributes(rest)}
+      >
+        ${content}
+      </t-row>
+    `
   });
+}
 
-  it('should optionally align contents at top', () => {
-    const wrapper = mount({ align: 'left' });
-    expect(wrapper.classes()).toContain('t-row-left');
-  });
-
-  it('should optionally align contents at center on extra small screens', () => {
-    const wrapper = mount({ alignXs: 'center' });
-    expect(wrapper.classes()).toContain('t-row-xs-center');
-  });
-
-  it('should optionally align contents at right on large screens', () => {
-    const wrapper = mount({ alignLg: 'right' });
-    expect(wrapper.classes()).toContain('t-row-lg-right');
-  });
-
-  it('should optionally vertical align contents at top', () => {
-    const wrapper = mount({ verticalAlign: 'top' });
-    expect(wrapper.classes()).toContain('t-row-top');
-  });
-
-  it('should optionally vertical align contents at middle on small screens', () => {
-    const wrapper = mount({ verticalAlignSm: 'middle' });
-    expect(wrapper.classes()).toContain('t-row-sm-middle');
-  });
-
-  it('should optionally vertical align contents at bottom on medium screens', () => {
-    const wrapper = mount({ verticalAlignMd: 'bottom' });
-    expect(wrapper.classes()).toContain('t-row-md-bottom');
-  });
-
-  it('should optionally offset row', () => {
-    const wrapper = mount({ offset: '2' });
-    expect(wrapper.classes()).toContain('t-row-offset-2');
-  });
-
-  it('should optionally offset row on extra small screens', () => {
-    const wrapper = mount({ offsetXs: '5' });
-    expect(wrapper.classes()).toContain('t-row-offset-xs-5');
-  });
-
-  it('should optionally offset row on medium screens', () => {
-    const wrapper = mount({ offsetSm: '0' });
-    expect(wrapper.classes()).toContain('t-row-offset-sm-0');
-  });
-
-  it('should render some content', () => {
-    const wrapper = mount({}, '<p>Hello</p>');
-    expect(wrapper.find('p').text()).toEqual('Hello');
-  });
-});
+run(mount, { screen });

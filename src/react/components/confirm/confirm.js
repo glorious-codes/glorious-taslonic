@@ -9,10 +9,11 @@ export const Confirm = ({
   children,
   cancelButtonText = CANCEL_BUTTON_TEXT,
   confirmButtonText = CONFIRM_BUTTON_TEXT,
-  onCancel = () => {},
-  onConfirm = () => {}
+  onCancel,
+  onConfirm
 }) => {
   const confirmEl = useRef();
+  const handleCallbackProp = callback => callback && callback();
   const queryCancelButton = () => {
     return confirmEl.current.querySelectorAll('[data-confirm-footer] button')[0];
   };
@@ -20,10 +21,9 @@ export const Confirm = ({
   useEffect(() => {
     const { subscribe, unsubscribe } = keyboardSubscriptionService;
     const keyCodes = { esc: 27, enter: 13 };
-    const escSubcriptionId = subscribe(keyCodes.esc, onCancel);
+    const escSubcriptionId = subscribe(keyCodes.esc, () => handleCallbackProp(onCancel));
     const enterSubcriptionId = subscribe(keyCodes.enter, () => {
-      const cancelButtonEl = queryCancelButton();
-      if(!domService.isFocused(cancelButtonEl)) onConfirm();
+      !domService.isFocused(queryCancelButton()) && handleCallbackProp(onConfirm);
     });
     return () => {
       unsubscribe(escSubcriptionId);
@@ -32,14 +32,14 @@ export const Confirm = ({
   }, [onCancel, onConfirm]);
 
   return (
-    <div className="t-confirm-content" ref={confirmEl}>
-      { children }
+    <div className="t-confirm-content" ref={confirmEl} data-confirm>
+      {children}
       <div className="t-confirm-footer" data-confirm-footer>
-        <Button onClick={ onCancel }>
-          { cancelButtonText }
+        <Button onClick={onCancel}>
+          {cancelButtonText}
         </Button>
-        <Button theme="primary" onClick={ onConfirm }>
-          { confirmButtonText }
+        <Button theme="primary" onClick={onConfirm}>
+          {confirmButtonText}
         </Button>
       </div>
     </div>

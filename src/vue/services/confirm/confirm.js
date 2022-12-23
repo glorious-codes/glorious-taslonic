@@ -31,15 +31,16 @@ function buildConfirm({ content, cancelButtonText, confirmButtonText, onCancel, 
   return {
     components: { tConfirm },
     data(){
-      return { cancelButtonText, confirmButtonText, onCancel, onConfirm };
+      return { content, cancelButtonText, confirmButtonText, onCancel, onConfirm };
     },
     template: `
     <t-confirm
+      :content="content"
       :cancelButtonText="cancelButtonText"
       :confirmButtonText="confirmButtonText"
       :onCancel="onCancel"
-      :onConfirm="onConfirm">
-      ${content}
+      :onConfirm="onConfirm"
+    >
     </t-confirm>`
   };
 }

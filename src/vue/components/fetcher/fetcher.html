@@ -3,7 +3,8 @@
   <t-banner
     v-if="banner"
     theme="danger"
-    trigger-text="Retry"
+    :close-button-aria-label="closeButtonAriaLabel"
+    :trigger-text="triggerText"
     :on-trigger-click="banner.onTriggerClick"
     :on-close="() => setBanner(null)"
     data-fetcher-error-banner

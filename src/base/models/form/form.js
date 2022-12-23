@@ -30,7 +30,7 @@ export class Form {
     return process == 'fetch' ? this.handleFetch(this.options) : this.handleSubmit();
   }
   handleFetch({ onFetch, onFetchSuccess, onFetchError }){
-    if(onFetch) this.processRequest(onFetch, onFetchSuccess, onFetchError, 'isFetching');
+    onFetch && this.processRequest(onFetch, onFetchSuccess, onFetchError, 'isFetching');
   }
   handleSubmit(evt){
     const { onSubmit, onSubmitSuccess, onSubmitError } = this.options;
@@ -40,8 +40,8 @@ export class Form {
       this.processRequest(onSubmit, onSubmitSuccess, onSubmitError, 'isSubmitting') :
       this.highlightFirstErroredFormControl();
   }
-  notifyListeners(listeners = [], data){
-    listeners.forEach(listener => listener.notifyFn(data));
+  notifyListeners(listeners, data){
+    listeners && listeners.forEach(listener => listener.notifyFn(data));
   }
   isValid(){
     return this.getErrorObjectKeys().length === 0;

@@ -59,7 +59,6 @@ module.exports = {
       title: 'Select with custom validations',
       description: 'Validations should be an Array of objects containing a function isValid that returns a Boolean and an errorMessage.',
       controller: function(){
-        const { useState } = React;
         const { Row, Col, Select } = taslonicReact;
 
         return function(){

@@ -7,7 +7,7 @@ module.exports = {
       params: [
         {
           name: 'content',
-          type: 'String, Vue Component',
+          type: 'String',
           values: 'Any',
           description: 'Content to be shown in the dialog.',
           required: true

@@ -1,5 +1,5 @@
 module.exports = {
   metrics: {
-    googleAnalyticsId: 'UA-176132330-2'
+    plausibleId: 'taslonic.com'
   }
 };

@@ -1,5 +1,6 @@
 module.exports = {
   metrics: {
-    googleAnalyticsId: 'UA-176132330-1'
+    plausibleId: 'dev.taslonic.com',
+    plausibleOptions: { trackLocalhost: false }
   }
 };

@@ -5,7 +5,7 @@ module.exports = {
     {
       name: 'block',
       type: 'Boolean',
-      values: 'true, false'
+      values: 'any'
     },
     {
       name: 'tag',

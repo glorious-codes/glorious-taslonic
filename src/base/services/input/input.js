@@ -5,7 +5,24 @@ _public.parseType = type => {
 };
 
 function isValidCustomType(type){
-  return ['email', 'number', 'password', 'search', 'tel', 'url'].includes(type);
+  return [
+    'color',
+    'date',
+    'datetime-local',
+    'email',
+    'file',
+    'hidden',
+    'month',
+    'number',
+    'password',
+    'range',
+    'search',
+    'tel',
+    'text',
+    'time',
+    'url',
+    'week'
+  ].includes(type);
 }
 
 export default _public;

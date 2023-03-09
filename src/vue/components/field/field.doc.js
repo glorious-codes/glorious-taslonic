@@ -11,12 +11,12 @@ module.exports = {
     {
       name: 'required',
       type: 'Boolean',
-      values: 'true, false'
+      values: 'any'
     },
     {
       name: 'block',
       type: 'Boolean',
-      values: 'true, false'
+      values: 'any'
     }
   ],
   examples: [

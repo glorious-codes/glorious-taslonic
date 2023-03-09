@@ -20,22 +20,22 @@ module.exports = {
     {
       name: 'block',
       type: 'Boolean',
-      values: 'true, false'
+      values: 'any'
     },
     {
       name: 'autoFocus',
       type: 'Boolean',
-      values: 'true, false'
+      values: 'any'
     },
     {
       name: 'disabled',
       type: 'Boolean',
-      values: 'true, false'
+      values: 'any'
     },
     {
       name: 'required',
       type: 'Boolean',
-      values: 'true, false'
+      values: 'any'
     }
   ],
   examples: [

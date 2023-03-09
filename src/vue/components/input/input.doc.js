@@ -30,27 +30,27 @@ module.exports = {
     {
       name: 'autofocus',
       type: 'Boolean',
-      values: 'true, false'
+      values: 'any'
     },
     {
       name: 'readonly',
       type: 'Boolean',
-      values: 'true, false'
+      values: 'any'
     },
     {
       name: 'block',
       type: 'Boolean',
-      values: 'true, false'
+      values: 'any'
     },
     {
       name: 'disabled',
       type: 'Boolean',
-      values: 'true, false'
+      values: 'any'
     },
     {
       name: 'required',
       type: 'Boolean',
-      values: 'true, false'
+      values: 'any'
     }
   ],
   examples: [

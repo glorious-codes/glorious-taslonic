@@ -5,7 +5,7 @@ module.exports = {
     {
       name: 'type',
       type: 'String',
-      values: 'email, number, password, search, tel, text, url'
+      values: 'color, date, datetime-local, email, file, hidden, number, password, range, search, tel, text, time, url'
     },
     {
       name: 'name',
@@ -67,8 +67,8 @@ module.exports = {
       }
     },
     {
-      title: 'Input with custom type',
-      description: 'If you not pass a type, input type will be set as text by default.',
+      title: 'Input with type',
+      description: 'If you not pass a type, it will be set as text.',
       controller: function(){
         const { Input, Col, Row } = taslonicReact;
 
@@ -77,26 +77,51 @@ module.exports = {
             <>
               <Row>
                 <Col md="4">
-                  <Input type="email" placeholder="Email" block />
+                  <Input type="search" placeholder="Search" aria-label="search" block />
                 </Col>
                 <Col md="4">
-                  <Input type="number" placeholder="Number" block />
+                  <Input type="password" placeholder="Password" aria-label="password" block />
                 </Col>
                 <Col md="4">
-                  <Input type="password" placeholder="Password" block />
+                  <Input type="number" placeholder="Number" aria-label="number" block />
                 </Col>
               </Row>
               <Row>
                 <Col md="4">
-                  <Input type="search" placeholder="Search" block />
+                  <Input type="email" placeholder="Email" aria-label="email" block />
                 </Col>
                 <Col md="4">
-                  <Input type="tel" placeholder="Phone" block />
+                  <Input type="url" placeholder="URL" aria-label="url" block />
                 </Col>
                 <Col md="4">
-                  <Input type="url" placeholder="URL" block />
+                  <Input type="tel" placeholder="Phone" aria-label="phone" block />
                 </Col>
               </Row>
+              <Row>
+                <Col md="4">
+                  <Input type="file" aria-label="File" block />
+                </Col>
+                <Col md="4">
+                  <Input type="range" value="90" min="0" max="100" aria-label="range" block />
+                </Col>
+                <Col md="4">
+                  <Input type="color" value="#6772FF" aria-label="color" block />
+                </Col>
+              </Row>
+              <Row>
+                <Col md="4">
+                  <Input type="datetime-local" aria-label="date and time" block />
+                </Col>
+                <Col md="4">
+                  <Input type="date" aria-label="date" block />
+                </Col>
+                <Col md="4">
+                  <Input type="time" aria-label="time" block />
+                </Col>
+              </Row>
+              <div>
+                <Input type="hidden" />
+              </div>
             </>
           );
         }

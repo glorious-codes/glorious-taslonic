@@ -10,7 +10,7 @@ module.exports = {
     {
       name: 'type',
       type: 'String',
-      values: 'email, number, password, search, tel, text, url'
+      values: 'color, date, datetime-local, email, file, hidden, number, password, range, search, tel, text, time, url'
     },
     {
       name: 'name',
@@ -83,30 +83,52 @@ module.exports = {
       `
     },
     {
-      title: 'Input with custom type',
-      description: 'If you not pass a type, input type will be set as text by default.',
+      title: 'Input with type',
+      description: 'If you not pass a type, it will be set as text.',
       template: `
       <div>
         <t-row>
           <t-col md="4">
-            <t-input type="email" placeholder="Email" block />
+            <t-input type="search" placeholder="Search" aria-label="search" block />
           </t-col>
           <t-col md="4">
-            <t-input type="number" placeholder="Number" block />
+            <t-input type="password" placeholder="Password" aria-label="password" block />
           </t-col>
           <t-col md="4">
-            <t-input type="password" placeholder="Password" block />
+            <t-input type="number" placeholder="Number" aria-label="number" block />
           </t-col>
         </t-row>
         <t-row>
           <t-col md="4">
-            <t-input type="search" placeholder="Search" block />
+            <t-input type="email" placeholder="Email" aria-label="email" block />
           </t-col>
           <t-col md="4">
-            <t-input type="tel" placeholder="Phone" block />
+            <t-input type="url" placeholder="URL" aria-label="url" block />
           </t-col>
           <t-col md="4">
-            <t-input type="url" placeholder="URL" block />
+            <t-input type="tel" placeholder="Phone" aria-label="phone" block />
+          </t-col>
+        </t-row>
+        <t-row>
+          <t-col md="4">
+            <t-input type="file" aria-label="File" block />
+          </t-col>
+          <t-col md="4">
+            <t-input type="range" value="90" min="0" max="100" aria-label="range" block />
+          </t-col>
+          <t-col md="4">
+            <t-input type="color" value="#6772FF" aria-label="color" block />
+          </t-col>
+        </t-row>
+        <t-row>
+          <t-col md="4">
+            <t-input type="datetime-local" aria-label="date and time" block />
+          </t-col>
+          <t-col md="4">
+            <t-input type="date" aria-label="date" block />
+          </t-col>
+          <t-col md="4">
+            <t-input type="time" aria-label="time" block />
           </t-col>
         </t-row>
       </div>

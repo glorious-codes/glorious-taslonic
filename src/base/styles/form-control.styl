@@ -43,6 +43,21 @@ select-arrow()
       color $color-grey-darker
       border-color $color-grey-light
       pointer-events none
+  input
+    &[type='color'],
+    &[type='datetime-local'],
+    &[type='date'],
+    &[type='time'],
+    &[type='file']
+      height 42px
+    &[type='color']
+      padding 5px
+    &[type='file']
+      display flex
+      align-items center
+    &[type='range']
+      -webkit-appearance revert
+
   textarea
     font-family inherit
   .t-select-wrapper

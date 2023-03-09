@@ -40,6 +40,9 @@ module.exports = {
       .p-topbar .p-logo {
         max-height: 20px;
       }
+      input {
+        font-family: sans-serif;
+      }
     `,
     windowTitle: 'Taslonic',
   },

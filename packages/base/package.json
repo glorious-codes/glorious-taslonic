@@ -1,0 +1,9 @@
+{
+  "name": "@glorious/taslonic-base",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Common modules for all Taslonic packages",
+  "main": "src/index.js",
+  "author": "Rafael Camargo <hello@rafaelcamargo.com>",
+  "license": "MIT"
+}

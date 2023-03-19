@@ -5,5 +5,11 @@
   "description": "Common modules for all Taslonic packages",
   "main": "src/index.js",
   "author": "Rafael Camargo <hello@rafaelcamargo.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "rm -rf ./dist && mkdir ./dist && npx stylus -c $(find ./src/styles -name '*.styl' | grep -v '_') -p > ./dist/taslonic.css"
+  },
+  "devDependencies": {
+    "stylus": "^0.59.0"
+  }
 }

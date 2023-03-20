@@ -8,5 +8,8 @@
     "packages/react",
     "packages/vue",
     "packages/base"
-  ]
+  ],
+  "scripts": {
+    "docs": "echo \"Skip docs\" && exit 0"
+  }
 }

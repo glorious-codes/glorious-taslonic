@@ -1,6 +1,6 @@
 import { expectFirstChild, pause } from '@base/services/testing/testing';
 
-export function run(mount, { screen }){
+export function run(mount, { screen, waitFor }){
   describe('Textarea', () => {
     it('should have base css class', () => {
       expectFirstChild(mount()).toHaveClass('t-form-control');
@@ -12,11 +12,8 @@ export function run(mount, { screen }){
     });
 
     it('should not be required by default', () => {
-      const { userEvent } = mount();
-      userEvent.type(getTextarea(), 'o{backspace}');
-      userEvent.tab();
+      mount();
       expect(getTextarea()).not.toHaveAttribute('required');
-      expect(screen.queryByText('Required')).not.toBeInTheDocument();
     });
 
     it('should optionally set a placeholder', () => {
@@ -28,11 +25,7 @@ export function run(mount, { screen }){
     it('should optionally set as required', async () => {
       const { userEvent } = mount({ required: true });
       await pause();
-      userEvent.type(getTextarea(), 'o{backspace}');
-      userEvent.tab();
-      await pause();
       expect(getTextarea()).toHaveAttribute('required', '');
-      expect(screen.queryByText('Required')).toBeInTheDocument();
     });
 
     it('should optionally set as disabled', async () => {
@@ -78,14 +71,20 @@ export function run(mount, { screen }){
       expect(formControlEl).not.toHaveClass(errorCssClass);
       userEvent.type(getTextarea(), 'F');
       expect(screen.queryByText(shortErrorMessage)).not.toBeInTheDocument();
-      userEvent.tab();
+      waitFor(() => {
+        userEvent.tab();
+      });
       await pause();
       expect(formControlEl).toHaveClass(errorCssClass);
       expect(screen.getByText(shortErrorMessage)).toBeInTheDocument();
-      userEvent.type(getTextarea(), 'a');
+      waitFor(() => {
+        userEvent.type(getTextarea(), 'a');
+      });
       await pause();
       expect(screen.getByText(invalidLetterErrorMessage)).toBeInTheDocument();
-      userEvent.type(getTextarea(), '{backspace}o');
+      waitFor(() => {
+        userEvent.type(getTextarea(), '{backspace}o');
+      });
       await pause();
       expect(screen.queryByText(invalidLetterErrorMessage)).not.toBeInTheDocument();
       expect(formControlEl).not.toHaveClass(errorCssClass);

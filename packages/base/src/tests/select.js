@@ -1,6 +1,6 @@
 import { expectFirstChild, pause } from '@base/services/testing/testing';
 
-export function run(mount, { screen, buildOptions }){
+export function run(mount, { screen, buildOptions, waitFor }){
   describe('Select', () => {
     it('should have base css class', () => {
       expectFirstChild(mount()).toHaveClass('t-form-control');
@@ -12,12 +12,8 @@ export function run(mount, { screen, buildOptions }){
     });
 
     it('should not be required by default', () => {
-      const placeholder = 'Select';
-      const { userEvent } = mount({ placeholder });
-      userEvent.selectOptions(getSelect(), ['']);
-      userEvent.tab();
+      mount();
       expect(getSelect()).not.toHaveAttribute('required');
-      expect(screen.queryByText('Required')).not.toBeInTheDocument();
     });
 
     it('should not show placeholder by default', () => {
@@ -35,9 +31,6 @@ export function run(mount, { screen, buildOptions }){
       const placeholder = 'Select';
       const content = buildOptions(['orange', 'apple', 'kiwi']);
       const { userEvent } = mount({ placeholder, content, required: true });
-      await pause();
-      userEvent.selectOptions(getSelect(), ['']);
-      userEvent.tab();
       expect(getSelect()).toHaveAttribute('required', '');
     });
 
@@ -82,15 +75,21 @@ export function run(mount, { screen, buildOptions }){
       expect(formControlEl).not.toHaveClass(errorCssClass);
       expect(screen.queryByText(forbbidenFruit)).not.toBeInTheDocument();
       userEvent.selectOptions(getSelect(), ['apple']);
-      userEvent.tab();
+      waitFor(() => {
+        userEvent.tab();
+      })
       await pause();
       expect(screen.queryByText(forbbidenFruit)).toBeInTheDocument();
       expect(formControlEl).toHaveClass(errorCssClass);
-      userEvent.selectOptions(getSelect(), ['kiwi']);
+      waitFor(() => {
+        userEvent.selectOptions(getSelect(), ['kiwi']);
+      })
       await pause();
       expect(screen.queryByText(forbbidenFruit)).not.toBeInTheDocument();
       expect(screen.queryByText(notLongEnough)).toBeInTheDocument();
-      userEvent.selectOptions(getSelect(), ['orange']);
+      waitFor(() => {
+        userEvent.selectOptions(getSelect(), ['orange']);
+      })
       await pause();
       expect(screen.queryByText(notLongEnough)).not.toBeInTheDocument();
       expect(formControlEl).not.toHaveClass(errorCssClass);

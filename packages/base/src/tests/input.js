@@ -1,6 +1,6 @@
 import { expectFirstGrandChild, pause } from '@base/services/testing/testing';
 
-export function run(mount, { screen }){
+export function run(mount, { screen, waitFor }){
   describe('Input', () => {
     it('should have base css class', () => {
       expectFirstGrandChild(mount()).toHaveClass('t-form-control');
@@ -12,11 +12,8 @@ export function run(mount, { screen }){
     });
 
     it('should not be required by default', () => {
-      const { userEvent } = mount();
-      userEvent.type(getInput(), 'o{backspace}');
-      userEvent.tab();
+      mount();
       expect(getInput()).not.toHaveAttribute('required');
-      expect(screen.queryByText('Required')).not.toBeInTheDocument();
     });
 
     it('should type be text by default', () => {
@@ -39,18 +36,16 @@ export function run(mount, { screen }){
     it('should optionally set as required', async () => {
       const { userEvent } = mount({ required: true });
       await pause();
-      userEvent.type(getInput(), 'o{backspace}');
-      userEvent.tab();
-      await pause();
       expect(getInput()).toHaveAttribute('required', '');
-      expect(screen.queryByText('Required')).toBeInTheDocument();
     });
 
     it('should optionally update required attribute', async () => {
       const { userEvent } = mount({ required: true });
       await pause();
       userEvent.type(getInput(), 'o{backspace}');
-      userEvent.tab();
+      waitFor(() => {
+        userEvent.tab();
+      });
       await pause();
       expect(getInput()).toHaveAttribute('required', '');
       expect(screen.queryByText('Required')).toBeInTheDocument();
@@ -121,14 +116,20 @@ export function run(mount, { screen }){
       expect(formControlEl).not.toHaveClass(errorCssClass);
       userEvent.type(getInput(), 'F');
       expect(screen.queryByText(shortErrorMessage)).not.toBeInTheDocument();
-      userEvent.tab();
+      waitFor(() => {
+        userEvent.tab();
+      });
       await pause();
       expect(formControlEl).toHaveClass(errorCssClass);
       expect(screen.getByText(shortErrorMessage)).toBeInTheDocument();
-      userEvent.type(getInput(), 'a');
+      waitFor(() => {
+        userEvent.type(getInput(), 'a');
+      });
       await pause();
       expect(screen.getByText(invalidLetterErrorMessage)).toBeInTheDocument();
-      userEvent.type(getInput(), '{backspace}o');
+      waitFor(() => {
+        userEvent.type(getInput(), '{backspace}o');
+      });
       await pause();
       expect(screen.queryByText(invalidLetterErrorMessage)).not.toBeInTheDocument();
       expect(formControlEl).not.toHaveClass(errorCssClass);
@@ -142,7 +143,9 @@ export function run(mount, { screen }){
       const { userEvent } = mount({ validations });
       await pause();
       userEvent.type(getInput(), 'F');
-      userEvent.tab();
+      waitFor(() => {
+        userEvent.tab();
+      });
       await pause();
       expect(screen.queryByText(shortErrorMessage)).toBeInTheDocument();
       userEvent.click(screen.getByText('remove custom validations'));

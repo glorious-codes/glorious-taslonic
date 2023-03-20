@@ -7,9 +7,13 @@
   "author": "Rafael Camargo <hello@rafaelcamargo.com>",
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf ./dist && mkdir ./dist && npx stylus -c $(find ./src/styles -name '*.styl' | grep -v '_') -p > ./dist/taslonic.css"
+    "build": "rm -rf ./dist && mkdir ./dist && npx stylus -c $(find ./src/styles -name '*.styl' | grep -v '_') -p > ./dist/taslonic.css",
+    "postinstall": "npm run build"
   },
   "devDependencies": {
     "stylus": "^0.59.0"
+  },
+  "dependencies": {
+    "shortid": "^2.2.15"
   }
 }

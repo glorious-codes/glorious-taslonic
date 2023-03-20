@@ -99,44 +99,42 @@ export function run(mountComponent, { screen, waitFor, within }){
       const onSubmit = jest.fn();
       const { userEvent } = await mount({ onSubmit });
       expect(screen.queryAllByText(REQUIRED_ERROR_MESSAGE)).toHaveLength(0);
-      submit(userEvent);
+      await submit(userEvent);
       expect(onSubmit).not.toHaveBeenCalled();
       expect(getSubmitButton()).toBeInTheDocument();
-      await waitFor(() => {
-        expect(screen.queryAllByText(REQUIRED_ERROR_MESSAGE)).toHaveLength(3);
-      });
+      expect(screen.queryAllByText(REQUIRED_ERROR_MESSAGE)).toHaveLength(3);
     });
 
     it('should not execute submit callback if custom validations are not satisfied', async () => {
       const onSubmit = jest.fn();
       const { userEvent } = await mount({ onSubmit });
-      fillForm(userEvent, { name: 'a', fruit: 'papaya', bio: 'fuck' });
-      submit(userEvent);
+      await fillForm(userEvent, { name: 'a', fruit: 'papaya', bio: 'fuck' }, waitFor);
+      await submit(userEvent);
       expect(onSubmit).not.toHaveBeenCalled();
-      await waitFor(() => {
-        expect(screen.queryByText(ERROR_MESSAGES.TOO_SHORT_NAME)).toBeInTheDocument();
-        expect(screen.queryByText(ERROR_MESSAGES.NOT_CITRIC_FRUIT)).toBeInTheDocument();
-        expect(screen.queryByText(ERROR_MESSAGES.OFFENSIVE_BIO)).toBeInTheDocument();
-      });
+      expect(screen.queryByText(ERROR_MESSAGES.TOO_SHORT_NAME)).toBeInTheDocument();
+      expect(screen.queryByText(ERROR_MESSAGES.NOT_CITRIC_FRUIT)).toBeInTheDocument();
+      expect(screen.queryByText(ERROR_MESSAGES.OFFENSIVE_BIO)).toBeInTheDocument();
     });
 
     it('should execute submit callback on submit if form is valid', async () => {
       const onSubmit = jest.fn(() => new PendingPromiseMock());
       const { userEvent } = await mount({ onSubmit });
-      fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' });
-      submit(userEvent);
+      await fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' }, waitFor);
+      await submit(userEvent);
       expect(onSubmit).toHaveBeenCalled();
       await waitFor(() => {
         expect(getSubmitButton()).not.toBeInTheDocument();
+        expect(screen.getByTitle(LOADER_TITLE_TEXT)).toBeInTheDocument();
       });
-      expect(screen.getByTitle(LOADER_TITLE_TEXT)).toBeInTheDocument();
     });
 
     it('should not execute submit callback more than once', async () => {
       const onSubmit = jest.fn(() => new PendingPromiseMock());
       const { userEvent } = await mount({ onSubmit });
-      fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' });
-      userEvent.dblClick(getSubmitButton());
+      await fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' }, waitFor);
+      await waitFor(() => {
+        userEvent.dblClick(getSubmitButton());
+      });
       expect(onSubmit).toHaveBeenCalledTimes(1);
     });
 
@@ -145,8 +143,8 @@ export function run(mountComponent, { screen, waitFor, within }){
       const onSubmit = jest.fn(() => Promise.resolve(response));
       const onSubmitSuccess = jest.fn();
       const { userEvent } = await mount({ onSubmit, onSubmitSuccess });
-      fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' });
-      submit(userEvent);
+      await fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' }, waitFor);
+      await submit(userEvent);
       await waitFor(() => {
         expect(onSubmitSuccess).toHaveBeenCalledWith(response);
         expect(screen.queryByTitle(LOADER_TITLE_TEXT)).not.toBeInTheDocument();
@@ -159,8 +157,8 @@ export function run(mountComponent, { screen, waitFor, within }){
       const submitSuccessTitle = 'Good job!';
       const submitSuccessMessage = 'Form successfully sent';
       const { userEvent } = await mount({ onSubmit, submitSuccessTitle, submitSuccessMessage });
-      fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' });
-      submit(userEvent);
+      await fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' }, waitFor);
+      await submit(userEvent);
       await waitFor(() => {
         const toastElement = getToastElement();
         expect(within(toastElement).getByText(submitSuccessTitle)).toBeInTheDocument();
@@ -175,8 +173,8 @@ export function run(mountComponent, { screen, waitFor, within }){
       const onSubmit = jest.fn(() => Promise.reject(err));
       const onSubmitError = jest.fn();
       const { userEvent } = await mount({ onSubmit, onSubmitError });
-      fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' });
-      submit(userEvent);
+      await fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' }, waitFor);
+      await submit(userEvent);
       await waitFor(() => {
         const formErrorBannerElement = document.querySelector('[data-form-error-banner]');
         expect(within(formErrorBannerElement).getByText(REQUEST_ERROR_MESSAGE)).toBeInTheDocument();
@@ -191,8 +189,8 @@ export function run(mountComponent, { screen, waitFor, within }){
       const onSubmit = jest.fn(() => Promise.reject({}));
       const submitErrorMessage = 'Ops...';
       const { userEvent } = await mount({ onSubmit, submitErrorMessage });
-      fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' });
-      submit(userEvent);
+      await fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' }, waitFor);
+      await submit(userEvent);
       await waitFor(() => {
         const formErrorBannerElement = document.querySelector('[data-form-error-banner]');
         expect(within(formErrorBannerElement).getByText(submitErrorMessage)).toBeInTheDocument();
@@ -202,8 +200,8 @@ export function run(mountComponent, { screen, waitFor, within }){
     it('should execute submit callback on error banner retry button click', async () => {
       const onSubmit = jest.fn(() => Promise.reject({}));
       const { userEvent } = await mount({ onSubmit });
-      fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' });
-      submit(userEvent);
+      await fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' }, waitFor);
+      await submit(userEvent);
       await waitFor(() => {
         expect(getSubmitButton()).toBeInTheDocument();
         expect(screen.queryByTitle(LOADER_TITLE_TEXT)).not.toBeInTheDocument();
@@ -233,17 +231,22 @@ export function run(mountComponent, { screen, waitFor, within }){
       return result;
     }
 
-    function fillForm(userEvent, fields){
-      const actions = {
-        name: value => userEvent.type(screen.getByLabelText(FIELD_LABELS.NAME), value),
-        fruit: value => userEvent.selectOptions(screen.getByLabelText(FIELD_LABELS.FRUIT), value),
-        bio: value => userEvent.type(screen.getByLabelText(FIELD_LABELS.BIO), value)
-      };
-      Object.entries(fields).forEach(([fieldName, fieldValue]) => actions[fieldName](fieldValue));
+    async function fillForm(userEvent, fields, waitFor){
+      await waitFor(() => {
+        userEvent.type(screen.getByLabelText(FIELD_LABELS.NAME), fields.name);
+      });
+      await waitFor(() => {
+        userEvent.selectOptions(screen.getByLabelText(FIELD_LABELS.FRUIT), fields.fruit);
+      });
+      await waitFor(() => {
+        userEvent.type(screen.getByLabelText(FIELD_LABELS.BIO), fields.bio);
+      });
     }
 
-    function submit(userEvent){
-      userEvent.click(getSubmitButton());
+    async function submit(userEvent){
+      await waitFor(() => {
+        userEvent.click(getSubmitButton());
+      });
     }
 
     function getSubmitButton(){

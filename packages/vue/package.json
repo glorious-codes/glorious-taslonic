@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "description": "A glorious UI library for Vue",
   "main": "dist/index.js",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "webpack",
+    "format": "eslint './src/**/*.js'",
+    "test": "jest"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/glorious-codes/glorious-taslonic.git"

@@ -1,0 +1,35 @@
+{
+  "source": {
+    "root": "src",
+    "libs": {
+      "vue": {
+        "entry": "./src/index.js",
+        "output": {
+          "library": "taslonicVue",
+          "libraryTarget": "umd",
+          "filename": "index.js"
+        }
+      },
+      "vue-plugin": {
+        "entry": "./src/plugin.js",
+        "output": {
+          "library": "taslonicVue",
+          "libraryTarget": "umd",
+          "libraryExport": "default",
+          "filename": "plugin.js"
+        }
+      }
+    }
+  },
+  "dist": {
+    "root": "dist/"
+  },
+  "tests": {
+    "source": {
+      "files": [
+        "src/**/*.js",
+        "!src/**/*.doc.js"
+      ]
+    }
+  }
+}

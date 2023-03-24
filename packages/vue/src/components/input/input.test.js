@@ -1,5 +1,5 @@
 import { run } from '@base/tests/input';
-import { customRender, screen, stringifyAttributes } from '@vue/services/testing/testing';
+import { customRender, screen, waitFor, stringifyAttributes } from '@vue/services/testing/testing';
 import { tInput } from '@vue/';
 
 function mount({
@@ -53,4 +53,4 @@ function mount({
   });
 }
 
-run(mount, { screen });
+run(mount, { screen, waitFor });

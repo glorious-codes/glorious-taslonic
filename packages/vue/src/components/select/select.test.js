@@ -1,5 +1,5 @@
 import { run } from '@base/tests/select';
-import { customRender, screen, stringifyAttributes } from '@vue/services/testing/testing';
+import { customRender, screen, waitFor, stringifyAttributes } from '@vue/services/testing/testing';
 import { tSelect } from '@vue/';
 
 function mount({ placeholder, validations, block, required, disabled, content = '', ...rest } = {}){
@@ -35,4 +35,4 @@ function buildOptions(opts){
   )).join('');
 }
 
-run(mount, { screen, buildOptions });
+run(mount, { screen, waitFor, buildOptions });

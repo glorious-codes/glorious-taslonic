@@ -2,7 +2,6 @@
 > Glorious components for Vue & React.
 
 [![CircleCI](https://circleci.com/gh/glorious-codes/glorious-taslonic.svg?style=svg)](https://circleci.com/gh/glorious-codes/glorious-taslonic)
-[![Coverage Status](https://coveralls.io/repos/github/glorious-codes/glorious-taslonic/badge.svg)](https://coveralls.io/github/glorious-codes/glorious-taslonic)
 
 ## Contributing
 
@@ -23,26 +22,18 @@ cd glorious-taslonic
 npm install
 ```
 
-5. In one terminal tab run:
-``` bash
-npm run build -- --watch
-```
-
-6. In another run:
-``` bash
-npm run start
-```
-
-Docs will be running on `http://localhost:7000`.
+5. From here, refer to the README of the Taslonic package you want to contribute for:
+- [React]()
+- [Vue]()
 
 ## Tests
 
 1. Ensure that all code that you have added is covered with unit tests:
 ``` bash
-npm run test
+npm run test -ws --if-present
 ```
 
 2. You can optionally generate coverage report after running tests:
 ``` bash
-npm run test -- --coverage
+npm run test -ws --if-present -- --coverage
 ```

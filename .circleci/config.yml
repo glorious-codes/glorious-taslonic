@@ -36,7 +36,7 @@ jobs:
           at: ~/glorious-taslonic
       - run:
           name: Build
-          command: NODE_ENV=production npm run build -ws --if-present
+          command: bash ./scripts/build_packages.sh
       - persist_to_workspace:
           root: "."
           paths:
@@ -71,6 +71,10 @@ jobs:
       - run:
           name: Docs
           command: NODE_ENV=production npm run docs
+      - persist_to_workspace:
+          root: "."
+          paths:
+            - "*"
 
   deploy:
     <<: *defaults

@@ -1,5 +1,6 @@
 {
   "name": "@glorious/taslonic-monorepo",
+  "private": true,
   "version": "1.0.0",
   "description": "Monorepo for all Taslonic packages",
   "author": "Rafael Camargo <hello@rafaelcamargo.com>",

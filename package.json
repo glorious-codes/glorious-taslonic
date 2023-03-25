@@ -10,6 +10,7 @@
     "packages/base"
   ],
   "scripts": {
-    "docs": "echo \"Skip docs\" && exit 0"
+    "docs": "echo \"Skip docs\" && exit 0",
+    "deploy": "echo \"Skip deploy\" && exit 0"
   }
 }

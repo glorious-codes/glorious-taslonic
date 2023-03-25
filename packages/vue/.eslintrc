@@ -1,0 +1,44 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "globals": {
+    "module": true
+  },
+  "ignorePatterns": ["*.doc.js"],
+  "rules": {
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "no-console": 0,
+    "react/prop-types": 0,
+    "react/display-name": 0,
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "complexity": ["error", { "max": 3 }],
+    "max-lines": ["error", { "max": 120 }],
+    "max-statements": ["error", { "max": 5 },
+      { "ignoreTopLevelFunctions": true }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [ "src/**/*.test.js"],
+      "rules": {
+        "max-lines": ["error", { "max": 300 }],
+        "max-statements": ["error", { "max": 25 },
+          { "ignoreTopLevelFunctions": true }
+        ]
+      }
+    }
+  ]
+}

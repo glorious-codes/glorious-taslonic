@@ -1,11 +1,8 @@
 version: 2.1
 
-orbs:
-  coveralls: coveralls/coveralls@1.0.6
-
 defaults: &defaults
   docker:
-    - image: cimg/node:16.13.2-browsers
+    - image: cimg/node:16.19.0-browsers
   working_directory: ~/glorious-taslonic
 
 jobs:
@@ -29,20 +26,7 @@ jobs:
       - persist_to_workspace:
           root: "."
           paths:
-            - "package.json"
-            - "package-lock.json"
-            - "project.json"
-            - "jest.*.js"
-            - "webpack.*.js"
-            - "pitsby.*.js"
-            - ".babelrc"
-            - ".eslintrc"
-            - ".firebaserc"
-            - "firebase.json"
-            - "node_modules"
-            - ".git/*"
-            - ".circleci/*"
-            - "src/*"
+            - "*"
 
   build:
     <<: *defaults
@@ -52,11 +36,11 @@ jobs:
           at: ~/glorious-taslonic
       - run:
           name: Build
-          command: NODE_ENV=production npm run build
+          command: NODE_ENV=production npm run build -ws --if-present
       - persist_to_workspace:
           root: "."
           paths:
-            - "dist/*"
+            - "*"
 
   format:
     <<: *defaults
@@ -66,7 +50,7 @@ jobs:
           at: ~/glorious-taslonic
       - run:
           name: Format
-          command: npm run format
+          command: npm run format -ws --if-present
 
   test:
     <<: *defaults
@@ -76,9 +60,7 @@ jobs:
           at: ~/glorious-taslonic
       - run:
           name: Test
-          command: npm run test -- --maxWorkers=2 --coverage --coverageReporters=lcov
-      - coveralls/upload:
-          verbose: true
+          command: npm run test -ws --if-present -- --runInBand --coverage --coverageReporters=lcov
 
   docs:
     <<: *defaults
@@ -89,10 +71,6 @@ jobs:
       - run:
           name: Docs
           command: NODE_ENV=production npm run docs
-      - persist_to_workspace:
-          root: "."
-          paths:
-            - "docs/*"
 
   deploy:
     <<: *defaults

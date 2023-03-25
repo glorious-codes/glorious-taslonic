@@ -1,0 +1,35 @@
+{
+  "source": {
+    "root": "src",
+    "libs": {
+      "react": {
+        "entry": "./src/index.js",
+        "output": {
+          "library": "taslonicReact",
+          "libraryTarget": "umd",
+          "filename": "index.js"
+        }
+      },
+      "react-styled": {
+        "entry": "./src/styled.js",
+        "output": {
+          "library": "taslonicReact",
+          "libraryTarget": "umd",
+          "filename": "styled.js"
+        }
+      }
+    }
+  },
+  "dist": {
+    "root": "dist/"
+  },
+  "tests": {
+    "source": {
+      "files": [
+        "src/**/*.js",
+        "!src/**/*.doc.js",
+        "!src/styled.js"
+      ]
+    }
+  }
+}

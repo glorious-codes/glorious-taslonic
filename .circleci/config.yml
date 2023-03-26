@@ -50,7 +50,7 @@ jobs:
           at: ~/glorious-taslonic
       - run:
           name: Format
-          command: npm run format -ws --if-present
+          command: npm run format
 
   test:
     <<: *defaults

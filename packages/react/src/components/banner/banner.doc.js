@@ -78,7 +78,7 @@ module.exports = {
               <Col md="4">
                 <Banner
                   theme="warning"
-                  triggerText="See Vulnerabilities"
+                  triggerText="View Vulnerabilities"
                   onTriggerClick={viewVulnerabilities}
                 >
                   We found security vulnerabilities.
@@ -112,11 +112,11 @@ module.exports = {
       description: 'You can optionally execute some action at the moment user closes a Banner.',
       controller: function(){
         const { Banner } = taslonicReact;
-        const onClose = () => alert('Clicked on "Close Button"!');
+        const handleClose = () => alert('Clicked on "Close Button"!');
 
         return function(){
           return (
-            <Banner theme="danger" onClose={onClose}>
+            <Banner theme="danger" onClose={handleClose}>
               Sorry, something went wrong.
             </Banner>
           );

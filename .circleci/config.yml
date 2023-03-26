@@ -36,7 +36,7 @@ jobs:
           at: ~/glorious-taslonic
       - run:
           name: Build
-          command: NODE_ENV=production npm run build -ws --if-present
+          command: npm run build
       - persist_to_workspace:
           root: "."
           paths:
@@ -60,7 +60,7 @@ jobs:
           at: ~/glorious-taslonic
       - run:
           name: Test
-          command: npm run test -ws --if-present -- --runInBand --coverage --coverageReporters=lcov
+          command: npm run test
 
   docs:
     <<: *defaults
@@ -71,6 +71,10 @@ jobs:
       - run:
           name: Docs
           command: NODE_ENV=production npm run docs
+      - persist_to_workspace:
+          root: "."
+          paths:
+            - "*"
 
   deploy:
     <<: *defaults

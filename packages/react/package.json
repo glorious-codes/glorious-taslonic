@@ -4,12 +4,13 @@
   "description": "A glorious UI library for React",
   "main": "dist/index.js",
   "files": [
-    "dist/**"
+    "dist/**/*"
   ],
   "scripts": {
     "build": "webpack",
     "format": "eslint './src/**/*.js'",
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "bash ../../scripts/build-packages.sh"
   },
   "repository": {
     "type": "git",
@@ -18,8 +19,7 @@
   "keywords": [
     "ui",
     "library",
-    "custom",
-    "elements",
+    "components",
     "javascript",
     "react"
   ],
@@ -51,5 +51,12 @@
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
     "webpack-merge": "^5.8.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.x <18.x",
+    "react-dom": ">=16.x <18.x"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

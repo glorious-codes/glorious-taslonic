@@ -1,5 +1,6 @@
 {
   "name": "@glorious/taslonic-monorepo",
+  "private": true,
   "version": "1.0.0",
   "description": "Monorepo for all Taslonic packages",
   "author": "Rafael Camargo <hello@rafaelcamargo.com>",
@@ -10,7 +11,13 @@
     "packages/base"
   ],
   "scripts": {
-    "docs": "echo \"Skip docs\" && exit 0",
-    "deploy": "echo \"Skip deploy\" && exit 0"
+    "build": "bash ./scripts/build-packages.sh",
+    "start": "npm run docs -- --watch --port=5000",
+    "docs": "pitsby build",
+    "test": "npm run test -ws --if-present -- --runInBand --coverage --coverageReporters=lcov",
+    "deploy": "firebase deploy --non-interactive"
+  },
+  "devDependencies": {
+    "@glorious/pitsby": "^1.34.0"
   }
 }

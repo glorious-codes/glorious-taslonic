@@ -64,12 +64,12 @@ module.exports = {
           };
         },
         methods: {
-          onSubmit(){
+          handleSubmit(){
             // Here's a request simulation.
             // onSubmit must return a Promise.
             return new Promise(resolve => setTimeout(() => resolve({ status: 'OK' }), 2000));
           },
-          onSubmitSuccess(response){
+          handleSubmitSuccess(response){
             // onSubmitSuccess receives the response sent by the server.
             this.data = { name: '', surname: '' }
           }
@@ -79,8 +79,8 @@ module.exports = {
       <t-row align="center">
         <t-col md="4">
           <t-form
-            :on-submit="onSubmit"
-            :on-submit-success="onSubmitSuccess"
+            :on-submit="handleSubmit"
+            :on-submit-success="handleSubmitSuccess"
             submit-success-title="Good job!"
             submit-success-message="Form successfully sent.">
             <t-row>
@@ -120,7 +120,7 @@ module.exports = {
           };
         },
         methods: {
-          onSubmit(){
+          handleSubmit(){
             this.setSuccessBannerVisibility(false);
             // Here's a request simulation.
             // onSubmit must return a Promise.
@@ -128,7 +128,7 @@ module.exports = {
               resolve({ statusCode: 200 });
             }, 2000));
           },
-          onSubmitSuccess(response){
+          handleSubmitSuccess(response){
             // onSubmitSuccess receives the response sent by the server.
             this.setSuccessBannerVisibility(true);
           },
@@ -141,8 +141,8 @@ module.exports = {
       <t-row align="center">
         <t-col md="4">
           <t-form
-            :on-submit="onSubmit"
-            :on-submit-success="onSubmitSuccess">
+            :on-submit="handleSubmit"
+            :on-submit-success="handleSubmitSuccess">
             <t-row v-if="isSuccessBannerVisible">
               <t-col>
                 <t-banner theme="success" :on-close="() => setSuccessBannerVisibility(false)">
@@ -186,14 +186,14 @@ module.exports = {
           };
         },
         methods: {
-          onSubmit(){
+          handleSubmit(){
             // Here's a request simulation.
             // onSubmit must return a Promise.
             return new Promise((resolve, reject) => setTimeout(() => {
               reject({ statusCode: 503 })
             }, 2000));
           },
-          onSubmitError(err){
+          handleSubmitError(err){
             // onSubmitError receives the error sent by the server.
           }
         }
@@ -202,8 +202,8 @@ module.exports = {
       <t-row align="center">
         <t-col md="4">
           <t-form
-            :on-submit="onSubmit"
-            :on-submit-error="onSubmitError"
+            :on-submit="handleSubmit"
+            :on-submit-error="handleSubmitError"
             submit-error-message="Sorry, we could not reach the server. Please try again.">
             <t-row>
               <t-col>
@@ -241,7 +241,7 @@ module.exports = {
           };
         },
         methods: {
-          onFetch(){
+          handleFetch(){
             // Here's a request simulation.
             // onFetch must return a Promise.
             return new Promise(resolve => {
@@ -253,11 +253,11 @@ module.exports = {
               }), 2000);
             });
           },
-          onFetchSuccess({ data }){
+          handleFetchSuccess({ data }){
             // onFetchSuccess receives the response sent by the server.
             this.data = data
           },
-          onSubmit(){
+          handleSubmit(){
             // Here's a request simulation.
             // onSubmit must return a Promise.
             return new Promise(resolve => setTimeout(() => resolve({ statusCode: 200 }), 2000));
@@ -268,9 +268,9 @@ module.exports = {
       <t-row align="center">
         <t-col md="4">
           <t-form
-            :on-fetch="onFetch"
-            :on-fetch-success="onFetchSuccess"
-            :on-submit="onSubmit"
+            :on-fetch="handleFetch"
+            :on-fetch-success="handleFetchSuccess"
+            :on-submit="handleSubmit"
             submit-success-title="Good job!"
             submit-success-message="Form successfully sent.">
             <t-row>
@@ -309,14 +309,14 @@ module.exports = {
           };
         },
         methods: {
-          onFetch(){
+          handleFetch(){
             // Here's a request simulation.
             // onFetch must return a Promise.
             return new Promise((resolve, reject) => setTimeout(() => {
               reject({ some: 'err' })
             }, 2000));
           },
-          onFetchError(err){
+          handleFetchError(err){
             // onFetchError receives the error sent by the server.
           }
         }
@@ -325,8 +325,8 @@ module.exports = {
       <t-row align="center">
         <t-col md="4">
           <t-form
-            :on-fetch="onFetch"
-            :on-fetch-error="onFetchError"
+            :on-fetch="handleFetch"
+            :on-fetch-error="handleFetchError"
             fetch-error-message="We had some trouble fetching data. Please try again.">
             <t-row>
               <t-col>
@@ -371,12 +371,12 @@ module.exports = {
           };
         },
         methods: {
-          onSubmit(){
+          handleSubmit(){
             // Here's a request simulation.
             // onSubmit must return a Promise.
             return new Promise(resolve => setTimeout(() => resolve({ status: 'OK' }), 2000));
           },
-          onSubmitSuccess(response){
+          handleSubmitSuccess(response){
             // onSubmitSuccess receives the response sent by the server.
             this.data = { name: '', surname: '' }
           }
@@ -386,8 +386,8 @@ module.exports = {
       <t-row align="center">
         <t-col md="4">
           <t-form
-            :on-submit="onSubmit"
-            :on-submit-success="onSubmitSuccess"
+            :on-submit="handleSubmit"
+            :on-submit-success="handleSubmitSuccess"
             submit-success-title="Good job!"
             submit-success-message="Form successfully sent.">
             <t-row>
@@ -433,7 +433,7 @@ module.exports = {
           };
         },
         methods: {
-          onSubmit(){
+          handleSubmit(){
             const errors = this.getFormErros();
             if(errors.length) {
               this.setBanner({ theme: 'danger', message: errors[0] })
@@ -466,7 +466,7 @@ module.exports = {
       template: `
       <t-row align="center">
         <t-col md="4">
-          <t-form :on-submit="onSubmit">
+          <t-form :on-submit="handleSubmit">
             <t-row v-if="banner">
               <t-col>
                 <t-banner :theme="banner.theme" :on-close="() => setBanner(null)">

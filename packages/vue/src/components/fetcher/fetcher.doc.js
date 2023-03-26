@@ -39,7 +39,7 @@ module.exports = {
           };
         },
         methods: {
-          onFetch(){
+          handleFetch(){
             // Here's a request simulation.
             // onFetch must return a Promise.
             return new Promise(resolve => {
@@ -48,7 +48,7 @@ module.exports = {
               }, 2000);
             });
           },
-          onFetchSuccess(data){
+          handleFetchSuccess(data){
             // onFetchSuccess receives the response sent by the server.
             this.data = data;
           }
@@ -59,8 +59,8 @@ module.exports = {
         <t-col md="6">
           <t-card>
             <t-fetcher
-              :on-fetch="onFetch"
-              :on-fetch-success="onFetchSuccess">
+              :on-fetch="handleFetch"
+              :on-fetch-success="handleFetchSuccess">
               <span>{{ data.greeting }}</span>
             </t-fetcher>
           </t-card>
@@ -72,14 +72,14 @@ module.exports = {
       title: 'Handling fetch error',
       controller: {
         methods: {
-          onFetch(){
+          handleFetch(){
             // Here's a request simulation.
             // onFetch must return a Promise.
             return new Promise((resolve, reject) => {
               setTimeout(() => reject(), 2000);
             });
           },
-          onFetchError(err){
+          handleFetchError(err){
             // onFetchError receives the error sent by the server.
           }
         }
@@ -88,8 +88,8 @@ module.exports = {
       <t-row align="center">
         <t-col md="6">
           <t-fetcher
-            :on-fetch="onFetch"
-            :on-fetch-error="onFetchError">
+            :on-fetch="handleFetch"
+            :on-fetch-error="handleFetchError">
             <span>Content to be shown on fetch success only.</span>
           </t-fetcher>
         </t-col>
@@ -101,14 +101,14 @@ module.exports = {
       description: 'You can optionally show a custom error message when fetch fails.',
       controller: {
         methods: {
-          onFetch(){
+          handleFetch(){
             // Here's a request simulation.
             // onFetch must return a Promise.
             return new Promise((resolve, reject) => {
               setTimeout(() => reject(), 2000);
             });
           },
-          onFetchError(err){
+          handleFetchError(err){
             // onFetchError receives the error sent by the server.
           }
         }
@@ -117,8 +117,8 @@ module.exports = {
       <t-row align="center">
         <t-col md="6">
           <t-fetcher
-            :on-fetch="onFetch"
-            :on-fetch-error="onFetchError"
+            :on-fetch="handleFetch"
+            :on-fetch-error="handleFetchError"
             fetch-error-message="Ops, we're facing some issues. Please, try again.">
             <span>Content to be shown on fetch success only.</span>
           </t-fetcher>
@@ -135,50 +135,53 @@ module.exports = {
             artists: [],
             selectedArtist: {},
             fetcher: null,
-            selectedArtistId: ''
+            selectedArtistId: '',
+            SOURCE_BASE_URL: 'external/packages/base/src'
           };
         },
         methods: {
-          onFetchArtists(){
-            return axios.get(`external/dist/data/artists.json`);
+          handleFetchArtists(){
+            return axios.get(`${this.SOURCE_BASE_URL}/data/artists/artists.json`);
           },
-          onFetchArtistsSuccess({ data }){
+          handleFetchArtistsSuccess({ data }){
             this.artists = data;
           },
-          onFetch(){
-            if(this.selectedArtistId) return axios.get(`external/dist/data/${this.selectedArtistId}.json`);
+          handleFetchArtist(){
+            if(this.selectedArtistId) {
+              return axios.get(`${this.SOURCE_BASE_URL}/data/artists/${this.selectedArtistId}.json`);
+            }
           },
-          onFetcherMount(fetcher){
+          handleFetcherMount(fetcher){
             this.fetcher = fetcher;
           },
-          onFetchSuccess({ data }){
+          handleFetchArtistSuccess({ data }){
             this.selectedArtist = data;
           },
-          onArtistChange(){
+          handleArtistChange(){
             if(this.selectedArtistId) this.fetcher.fetch();
           },
           buildFullAvatarUrl(url){
-            return url ? `external/dist/${url}` : '';
+            return url ? `${this.SOURCE_BASE_URL}/${url}` : '';
           },
           buildAvatarAltText(artistName){
             return `${artistName}'s avatar`;
           },
           parseIntro(intro){
-            return intro ? `${intro.substring(0, 270)}...` : '';
+            return intro ? `${intro.substring(0, 270)}…` : '';
           }
         }
       },
       template: `
       <t-fetcher
-        :on-fetch="onFetchArtists"
-        :on-fetch-success="onFetchArtistsSuccess">
+        :on-fetch="handleFetchArtists"
+        :on-fetch-success="handleFetchArtistsSuccess">
         <t-row align="center">
           <t-col sm="5">
             <t-field label="Brazilian Artist" block>
               <t-select
                 v-model="selectedArtistId"
                 placeholder="Select"
-                @change="onArtistChange"
+                @change="handleArtistChange"
                 block>
                 <option v-for="artist in artists" :value="artist.id">
                   {{ artist.name }}
@@ -191,9 +194,9 @@ module.exports = {
           <t-col sm="5">
             <t-card>
               <t-fetcher
-                :on-fetch="onFetch"
-                :on-mount="onFetcherMount"
-                :on-fetch-success="onFetchSuccess">
+                :on-fetch="handleFetchArtist"
+                :on-mount="handleFetcherMount"
+                :on-fetch-success="handleFetchArtistSuccess">
                 <div class="artist-card-content">
                   <img
                     :src="buildFullAvatarUrl(selectedArtist.avatarUrl)"

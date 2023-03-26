@@ -2,34 +2,34 @@ module.exports = {
   projects: [
     {
       engine: 'react',
-      collectDocsFrom: './src/react',
+      collectDocsFrom: './packages/react/src',
       version: '16.14.0'
     },
     {
       engine: 'vue',
-      collectDocsFrom: './src/vue',
+      collectDocsFrom: './packages/vue/src',
       libraryName: 'taslonicVue',
       version: '2.6.11'
     }
   ],
   styles: [
-    './dist/taslonic.css'
+    './packages/base/dist/taslonic.css'
   ],
   scripts: [
     'https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js',
-    './dist/react/index.js',
-    './dist/vue/plugin.js'
+    './packages/react/dist/index.js',
+    './packages/vue/dist/plugin.js'
   ],
   other: [
-    './dist/data/',
-    './dist/images/'
+    './packages/base/src/data/',
+    './packages/base/src/images/'
   ],
   custom: {
     favicon: {
-      filepath: './dist/images/favicon_taslonic_32x32.png'
+      filepath: './packages/base/src/images/favicon_taslonic_32x32.png'
     },
     logo: {
-      filepath: './dist/images/logo.svg',
+      filepath: './packages/base/src/images/logo.svg',
       width: '150px',
       height: '25px'
     },

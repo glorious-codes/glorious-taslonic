@@ -38,7 +38,7 @@ module.exports = {
 
         return function(){
           const [data, setData] = useState({});
-          const onFetch = () => {
+          const handleFetch = () => {
             // Here's a request simulation.
             // onFetch must return a Promise.
             return new Promise(resolve => {
@@ -47,7 +47,7 @@ module.exports = {
               }, 2000);
             });
           }
-          const onFetchSuccess = data => {
+          const handleFetchSuccess = data => {
             // onFetchSuccess receives the response sent by the server.
             setData(data);
           }
@@ -57,8 +57,8 @@ module.exports = {
               <Col md="6">
                 <Card>
                   <Fetcher
-                    onFetch={onFetch}
-                    onFetchSuccess={onFetchSuccess}
+                    onFetch={handleFetch}
+                    onFetchSuccess={handleFetchSuccess}
                   >
                     <span>{ data.greeting }</span>
                   </Fetcher>
@@ -75,21 +75,21 @@ module.exports = {
         const { Col, Row, Fetcher } = taslonicReact;
 
         return function(){
-          const onFetch = () => {
+          const handleFetch = () => {
             // Here's a request simulation.
             // onFetch must return a Promise.
             return new Promise((resolve, reject) => {
               setTimeout(() => reject(), 2000);
             });
           }
-          const onFetchError = err => {
+          const handleFetchError = err => {
             // onFetchError receives the error sent by the server.
           }
 
           return (
             <Row align="center">
               <Col md="6">
-                <Fetcher onFetch={onFetch} onFetchError={onFetchError}>
+                <Fetcher onFetch={handleFetch} onFetchError={handleFetchError}>
                   <span>Content to be shown on fetch success only.</span>
                 </Fetcher>
               </Col>
@@ -105,14 +105,14 @@ module.exports = {
         const { Col, Row, Fetcher } = taslonicReact;
 
         return function(){
-          const onFetch = () => {
+          const handleFetch = () => {
             // Here's a request simulation.
             // onFetch must return a Promise.
             return new Promise((resolve, reject) => {
               setTimeout(() => reject(), 2000);
             });
           }
-          const onFetchError = err => {
+          const handleFetchError = err => {
             // onFetchError receives the error sent by the server.
           }
 
@@ -120,8 +120,8 @@ module.exports = {
             <Row align="center">
               <Col md="6">
                 <Fetcher
-                  onFetch={onFetch}
-                  onFetchError={onFetchError}
+                  onFetch={handleFetch}
+                  onFetchError={handleFetchError}
                   fetchErrorMessage="Ops, we're facing some issues. Please, try again."
                 >
                   <span>Content to be shown on fetch success only.</span>
@@ -140,22 +140,23 @@ module.exports = {
         const { Col, Row, Card, Fetcher, Field, Select } = taslonicReact;
 
         return function(){
+          const ARTISTS_URL = 'external/packages/base/src/data/artists';
           const [artists, setArtists] = useState([]);
           const [selectedArtist, setSelectedArtist] = useState({});
           const [selectedArtistId, setSelectedArtistId] = useState('');
           const [fetcher, setFetcher] = useState();
-          const onFetchArtists = () => {
-            return axios.get(`external/dist/data/artists.json`);
-          }
-          const onFetchArtistsSuccess = ({ data }) => setArtists(data);
-          const onFetcherMount = fetcher => setFetcher(fetcher);
-          const onFetch = () => {
+          const fetchArtists = () => axios.get(`${ARTISTS_URL}/artists.json`);
+          const handleFetchArtistsSuccess = ({ data }) => setArtists(data);
+          const handleFetcherMount = fetcher => setFetcher(fetcher);
+          const fetchArtist = () => {
             if(selectedArtistId) {
-              return axios.get(`external/dist/data/${selectedArtistId}.json`);
+              return axios.get(`${ARTISTS_URL}/${selectedArtistId}.json`);
             }
           }
-          const onFetchSuccess = ({ data }) => setSelectedArtist(data);
-          const onArtistChange = ({ target: { value } }) => {
+          const handleFetchArtistSuccess = ({ data }) => {
+            setSelectedArtist(data);
+          }
+          const handleArtistChange = ({ target: { value } }) => {
             setSelectedArtistId(value);
           }
 
@@ -165,15 +166,15 @@ module.exports = {
 
           return (
             <Fetcher
-              onFetch={onFetchArtists}
-              onFetchSuccess={onFetchArtistsSuccess}>
+              onFetch={fetchArtists}
+              onFetchSuccess={handleFetchArtistsSuccess}>
               <Row align="center">
                 <Col sm="5">
                   <Field label="Brazilian Artist" block>
                     <Select
                       name="artist"
                       placeholder="Select"
-                      onChange={onArtistChange}
+                      onChange={handleArtistChange}
                       block>
                       {
                         artists.map(artist => (
@@ -190,14 +191,14 @@ module.exports = {
                 <Col sm="5">
                   <Card>
                     <Fetcher
-                      onFetch={onFetch}
-                      onMount={onFetcherMount}
-                      onFetchSuccess={onFetchSuccess}>
+                      onFetch={fetchArtist}
+                      onMount={handleFetcherMount}
+                      onFetchSuccess={handleFetchArtistSuccess}>
                       <div className="artist-card-content">
                         {
                           selectedArtist.avatarUrl &&
                           <img
-                            src={`external/dist/${selectedArtist.avatarUrl}`}
+                            src={`external/packages/base/src/${selectedArtist.avatarUrl}`}
                             alt={`${selectedArtist.name}'s avatar`}
                             width="100px"
                             height="100px" />
@@ -209,7 +210,7 @@ module.exports = {
                         {
                           selectedArtist.intro &&
                           <p>
-                            {`${selectedArtist.intro.substring(0, 270)}...`}
+                            {`${selectedArtist.intro.substring(0, 270)}…`}
                           </p>
                         }
                         <a

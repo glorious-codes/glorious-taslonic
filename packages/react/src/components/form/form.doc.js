@@ -63,16 +63,16 @@ module.exports = {
 
         return function(){
           const [data, setData] = useState({});
-          const onDataChange = ({ target: { name, value } }) => {
+          const handleDataChange = ({ target: { name, value } }) => {
             const newData = { ...data, [name]: value };
             setData(newData);
           }
-          const onSubmit = () => {
+          const handleSubmit = () => {
             // Here's a request simulation.
             // onSubmit must return a Promise.
             return new Promise(resolve => setTimeout(() => resolve({ statusCode: 200 }), 2000));
           }
-          const onSubmitSuccess = response => {
+          const handleSubmitSuccess = response => {
             // onSubmitSuccess receives the response sent by the server.
             setData({ name: '', surname: '' });
           }
@@ -81,21 +81,21 @@ module.exports = {
             <Row align="center">
               <Col md="4">
                 <Form
-                  onSubmit={onSubmit}
-                  onSubmitSuccess={onSubmitSuccess}
+                  onSubmit={handleSubmit}
+                  onSubmitSuccess={handleSubmitSuccess}
                   submitSuccessTitle="Good job!"
                   submitSuccessMessage="Form successfully sent.">
                   <Row>
                     <Col>
                       <Field label="Name" block>
-                        <Input name="name" value={data.name} onChange={onDataChange} block required />
+                        <Input name="name" value={data.name} onChange={handleDataChange} block required />
                       </Field>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
                       <Field label="Surname" block>
-                        <Input name="surname" value={data.surname} onChange={onDataChange} block />
+                        <Input name="surname" value={data.surname} onChange={handleDataChange} block />
                       </Field>
                     </Col>
                   </Row>
@@ -123,17 +123,17 @@ module.exports = {
         return function(){
           const [data, setData] = useState({});
           const [isSuccessBannerVisible, setSuccessBannerVisibility] = useState(false);
-          const onDataChange = ({ target: { name, value } }) => {
+          const handleDataChange = ({ target: { name, value } }) => {
             const newData = { ...data, [name]: value };
             setData(newData);
           }
-          const onSubmit = () => {
+          const handleSubmit = () => {
             setSuccessBannerVisibility(false);
             // Here's a request simulation.
             // onSubmit must return a Promise.
             return new Promise(resolve => setTimeout(() => resolve({ statusCode: 200 }), 2000));
           }
-          const onSubmitSuccess = response => {
+          const handleSubmitSuccess = response => {
             // onSubmitSuccess receives the response sent by the server.
             setSuccessBannerVisibility(true);
           }
@@ -142,8 +142,8 @@ module.exports = {
             <Row align="center">
               <Col md="4">
                 <Form
-                  onSubmit={onSubmit}
-                  onSubmitSuccess={onSubmitSuccess}>
+                  onSubmit={handleSubmit}
+                  onSubmitSuccess={handleSubmitSuccess}>
                   {
                     isSuccessBannerVisible &&
                     <Row>
@@ -157,14 +157,14 @@ module.exports = {
                   <Row>
                     <Col>
                       <Field label="Name" block>
-                        <Input name="name" value={data.name} onChange={onDataChange} block required />
+                        <Input name="name" value={data.name} onChange={handleDataChange} block required />
                       </Field>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
                       <Field label="Surname" block>
-                        <Input name="surname" value={data.surname} onChange={onDataChange} block />
+                        <Input name="surname" value={data.surname} onChange={handleDataChange} block />
                       </Field>
                     </Col>
                   </Row>
@@ -191,16 +191,16 @@ module.exports = {
 
         return function(){
           const [data, setData] = useState({});
-          const onDataChange = ({ target: { name, value } }) => {
+          const handleDataChange = ({ target: { name, value } }) => {
             const newData = { ...data, [name]: value };
             setData(newData);
           }
-          const onSubmit = () => {
+          const handleSubmit = () => {
             // Here's a request simulation.
             // onSubmit must return a Promise.
             return new Promise((resolve, reject) => setTimeout(() => reject({ statusCode: 503 }), 2000));
           }
-          const onSubmitError = err => {
+          const handleSubmitError = err => {
             // onSubmitError receives the error sent by the server.
           }
 
@@ -208,19 +208,19 @@ module.exports = {
             <Row align="center">
               <Col md="4">
                 <Form
-                  onSubmit={onSubmit}
-                  onSubmitError={onSubmitError}>
+                  onSubmit={handleSubmit}
+                  onSubmitError={handleSubmitError}>
                   <Row>
                     <Col>
                       <Field label="Name" block>
-                        <Input name="name" value={data.name} onChange={onDataChange} block required />
+                        <Input name="name" value={data.name} onChange={handleDataChange} block required />
                       </Field>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
                       <Field label="Surname" block>
-                        <Input name="surname" value={data.surname} onChange={onDataChange} block />
+                        <Input name="surname" value={data.surname} onChange={handleDataChange} block />
                       </Field>
                     </Col>
                   </Row>
@@ -247,11 +247,11 @@ module.exports = {
 
         return function(){
           const [data, setData] = useState({});
-          const onDataChange = ({ target: { name, value } }) => {
+          const handleDataChange = ({ target: { name, value } }) => {
             const newData = { ...data, [name]: value };
             setData(newData);
           };
-          const onFetch = () => {
+          const handleFetch = () => {
             // Here's a request simulation.
             // onFetch must return a Promise.
             return new Promise(resolve => {
@@ -263,40 +263,36 @@ module.exports = {
               }), 2000);
             });
           };
-          const onFetchSuccess = ({ data }) => {
+          const handleFetchSuccess = ({ data }) => {
             // onFetchSuccess receives the response sent by the server.
             setData(data);
           };
-          const onSubmit = () => {
+          const handleSubmit = () => {
             // Here's a request simulation.
             // onSubmit must return a Promise.
             return new Promise(resolve => setTimeout(() => resolve({ statusCode: 200 }), 2000));
-          };
-          const onSubmitSuccess = () => {
-
           };
 
           return (
             <Row align="center">
               <Col md="4">
                 <Form
-                  onFetch={onFetch}
-                  onFetchSuccess={onFetchSuccess}
-                  onSubmit={onSubmit}
-                  onSubmitSuccess={onSubmitSuccess}
+                  onFetch={handleFetch}
+                  onFetchSuccess={handleFetchSuccess}
+                  onSubmit={handleSubmit}
                   submitSuccessTitle="Good job!"
                   submitSuccessMessage="Form successfully sent.">
                   <Row>
                     <Col>
                       <Field label="Name" block>
-                        <Input name="name" value={data.name} onChange={onDataChange} block required />
+                        <Input name="name" value={data.name} onChange={handleDataChange} block required />
                       </Field>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
                       <Field label="Surname" block>
-                        <Input name="surname" value={data.surname} onChange={onDataChange} block />
+                        <Input name="surname" value={data.surname} onChange={handleDataChange} block />
                       </Field>
                     </Col>
                   </Row>
@@ -323,18 +319,18 @@ module.exports = {
 
         return function(){
           const [data, setData] = useState({});
-          const onDataChange = ({ target: { name, value } }) => {
+          const handleDataChange = ({ target: { name, value } }) => {
             const newData = { ...data, [name]: value };
             setData(newData);
           };
-          const onFetch = () => {
+          const handleFetch = () => {
             // Here's a request simulation.
             // onFetch must return a Promise.
             return new Promise((resolve, reject) => {
               setTimeout(() => reject({ statusCode: 503 }), 2000);
             });
           };
-          const onFetchError = err => {
+          const handleFetchError = err => {
             // onFetchError receives the error sent by the server.
           };
 
@@ -342,19 +338,19 @@ module.exports = {
             <Row align="center">
               <Col md="4">
                 <Form
-                  onFetch={onFetch}
-                  onFetchError={onFetchError}>
+                  onFetch={handleFetch}
+                  onFetchError={handleFetchError}>
                   <Row>
                     <Col>
                       <Field label="Name" block>
-                        <Input name="name" value={data.name} onChange={onDataChange} block required />
+                        <Input name="name" value={data.name} onChange={handleDataChange} block required />
                       </Field>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
                       <Field label="Surname" block>
-                        <Input name="surname" value={data.surname} onChange={onDataChange} block />
+                        <Input name="surname" value={data.surname} onChange={handleDataChange} block />
                       </Field>
                     </Col>
                   </Row>
@@ -388,16 +384,16 @@ module.exports = {
             },
             errorMessage: 'Surname must be at least 3 chars long.'
           }];
-          const onDataChange = ({ target: { name, value } }) => {
+          const handleDataChange = ({ target: { name, value } }) => {
             const newData = { ...data, [name]: value };
             setData(newData);
           }
-          const onSubmit = () => {
+          const handleSubmit = () => {
             // Here's a request simulation.
             // onSubmit must return a Promise.
             return new Promise(resolve => setTimeout(() => resolve({ status: 'OK' }), 2000));
           }
-          const onSubmitSuccess = () => {
+          const handleSubmitSuccess = () => {
             // onSubmitSuccess receives the response sent by the server.
             setData({ name: '', surname: '' });
           }
@@ -406,14 +402,14 @@ module.exports = {
             <Row align="center">
               <Col md="4">
                 <Form
-                  onSubmit={onSubmit}
-                  onSubmitSuccess={onSubmitSuccess}
+                  onSubmit={handleSubmit}
+                  onSubmitSuccess={handleSubmitSuccess}
                   submitSuccessTitle="Good job!"
                   submitSuccessMessage="Form successfully sent.">
                   <Row>
                     <Col>
                       <Field label="Name" block>
-                        <Input name="name" value={data.name} onChange={onDataChange} block required />
+                        <Input name="name" value={data.name} onChange={handleDataChange} block required />
                       </Field>
                     </Col>
                   </Row>
@@ -422,7 +418,7 @@ module.exports = {
                     <Row>
                       <Col>
                         <Field label="Surname" block>
-                          <Input name="surname" value={data.surname} validations={surnameValidations} onChange={onDataChange} block required />
+                          <Input name="surname" value={data.surname} validations={surnameValidations} onChange={handleDataChange} block required />
                         </Field>
                       </Col>
                     </Row>
@@ -461,11 +457,11 @@ module.exports = {
         return function(){
           const [data, setData] = useState({});
           const [banner, setBanner] = useState();
-          const onDataChange = ({ target: { name, value } }) => {
+          const handleDataChange = ({ target: { name, value } }) => {
             const newData = { ...data, [name]: value };
             setData(newData);
           }
-          const onSubmit = () => {
+          const handleSubmit = () => {
             const errors = getFormErros();
             if(errors.length) {
               setBanner({ theme: 'danger', message: errors[0] })
@@ -492,7 +488,7 @@ module.exports = {
           return (
             <Row align="center">
               <Col md="4">
-                <Form onSubmit={onSubmit}>
+                <Form onSubmit={handleSubmit}>
                   {
                     banner &&
                     <Row>
@@ -506,14 +502,14 @@ module.exports = {
                   <Row>
                     <Col>
                       <Field label="Name" block>
-                        <Input name="name" value={data.name} onChange={onDataChange} block required />
+                        <Input name="name" value={data.name} onChange={handleDataChange} block required />
                       </Field>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
                       <Field label="Surname" block>
-                        <Input name="surname" value={data.surname} onChange={onDataChange} block />
+                        <Input name="surname" value={data.surname} onChange={handleDataChange} block />
                       </Field>
                     </Col>
                   </Row>

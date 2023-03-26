@@ -74,7 +74,7 @@ module.exports = {
         <t-col md="4">
           <t-banner
             theme="warning"
-            trigger-text="See Vulnerabilities"
+            trigger-text="View Vulnerabilities"
             :on-trigger-click="viewVulnerabilities"
           >
             We found security vulnerabilities.
@@ -106,13 +106,13 @@ module.exports = {
       description: 'You can optionally execute some action at the moment user closes a Banner.',
       controller: {
         methods: {
-          onClose(){
+          handleClose(){
             alert('Clicked on "Close Button"!');
           }
         }
       },
       template: `
-      <t-banner theme="danger" :on-close="onClose">
+      <t-banner theme="danger" :on-close="handleClose">
         Sorry, something went wrong.
       </t-banner>
       `

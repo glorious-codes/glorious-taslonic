@@ -1,0 +1,11 @@
+## 1.0.0 (2023-03-31)
+
+* 1.0.0 ([7fdd681](https://github.com/glorious-codes/glorious-taslonic/commit/7fdd681))
+* chore: add conventional-changelog to the project ([a82f132](https://github.com/glorious-codes/glorious-taslonic/commit/a82f132))
+* chore: improve docs ([fcb5180](https://github.com/glorious-codes/glorious-taslonic/commit/fcb5180))
+* chore: improve pre publish script ([790e2e3](https://github.com/glorious-codes/glorious-taslonic/commit/790e2e3))
+* chore: install common deps for react and vue ([23bc485](https://github.com/glorious-codes/glorious-taslonic/commit/23bc485))
+* chore: install vue specific deps ([1378c3c](https://github.com/glorious-codes/glorious-taslonic/commit/1378c3c))
+* chore: move react files from src to react package ([a7200b3](https://github.com/glorious-codes/glorious-taslonic/commit/a7200b3))
+* chore: move vue files from src to vue package ([b70a500](https://github.com/glorious-codes/glorious-taslonic/commit/b70a500))
+* chore: set up workspaces ([308cd0e](https://github.com/glorious-codes/glorious-taslonic/commit/308cd0e))

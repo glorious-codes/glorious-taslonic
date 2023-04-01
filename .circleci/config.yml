@@ -8,7 +8,6 @@ defaults: &defaults
 jobs:
   install:
     <<: *defaults
-
     steps:
       - checkout
       - restore_cache:
@@ -30,7 +29,6 @@ jobs:
 
   build:
     <<: *defaults
-
     steps:
       - attach_workspace:
           at: ~/glorious-taslonic
@@ -44,7 +42,6 @@ jobs:
 
   format:
     <<: *defaults
-
     steps:
       - attach_workspace:
           at: ~/glorious-taslonic
@@ -52,19 +49,55 @@ jobs:
           name: Format
           command: npm run format
 
-  test:
+  test_react:
     <<: *defaults
-
     steps:
       - attach_workspace:
           at: ~/glorious-taslonic
       - run:
-          name: Test
-          command: npm run test
+          name: Test React
+          command: |
+            npm run test -w=packages/react -- --runInBand --coverage --coverageReporters=lcov && \
+            npm run format:coverage -w=packages/react
+      - persist_to_workspace:
+          root: "."
+          paths:
+            - "./packages/react/coverage/lcov.info"
+
+  test_vue:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/glorious-taslonic
+      - run:
+          name: Test Vue
+          command: |
+            npm run test -w=packages/vue -- --runInBand --coverage --coverageReporters=lcov && \
+            npm run format:coverage -w=packages/vue
+      - persist_to_workspace:
+          root: "."
+          paths:
+            - "./packages/vue/coverage/lcov.info"
+
+  test_coverage_upload:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/glorious-taslonic
+      - run:
+          name: Install Coveralls CLI
+          command: curl -L https://coveralls.io/coveralls-linux.tar.gz | tar -xz -C /usr/local/bin
+      - run:
+          name: Upload Coverage Reports
+          command: |
+            coveralls --repo-token=$COVERALLS_REPO_TOKEN && \
+            coveralls --file ./packages/react/coverage/lcov.info --parallel && \
+            coveralls --file ./packages/vue/coverage/lcov.info --parallel && \
+            coveralls --done
+
 
   docs:
     <<: *defaults
-
     steps:
       - attach_workspace:
           at: ~/glorious-taslonic
@@ -78,7 +111,6 @@ jobs:
 
   deploy:
     <<: *defaults
-
     steps:
       - attach_workspace:
           at: ~/glorious-taslonic
@@ -102,15 +134,23 @@ workflows:
       - format:
           requires:
             - install
-      - test:
+      - test_react:
           requires:
             - install
+      - test_vue:
+          requires:
+            - install
+      - test_coverage_upload:
+          requires:
+            - test_react
+            - test_vue
       - deploy:
           requires:
             - build
             - docs
             - format
-            - test
+            - test_react
+            - test_vue
           filters:
             branches:
               only:

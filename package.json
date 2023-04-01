@@ -5,7 +5,8 @@
   "files": [
     "react/**",
     "vue/**",
-    "taslonic.css"
+    "taslonic.css",
+    "warn-deprecation.js"
   ],
   "scripts": {
     "build": "webpack",

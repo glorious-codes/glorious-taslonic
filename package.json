@@ -5,8 +5,7 @@
   "files": [
     "react/**",
     "vue/**",
-    "taslonic.css",
-    "warn-deprecation.js"
+    "taslonic.css"
   ],
   "scripts": {
     "build": "webpack",
@@ -15,7 +14,7 @@
     "docs": "pitsby build",
     "test": "jest",
     "deploy": "firebase deploy --non-interactive",
-    "prepublishOnly": "node ./warn-deprecation && bash ./pre-publish.sh"
+    "prepublishOnly": "bash ./pre-publish.sh"
   },
   "repository": {
     "type": "git",

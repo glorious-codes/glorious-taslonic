@@ -9,6 +9,7 @@
   "scripts": {
     "build": "webpack",
     "format": "eslint './src/**/*.js'",
+    "format:coverage": "node ./format-coverage.js",
     "test": "jest",
     "prepublishOnly": "bash ../../scripts/build-packages.sh",
     "log": "conventional-changelog -i CHANGELOG.md -s --commit-path ."

@@ -57,8 +57,7 @@ jobs:
       - run:
           name: Test React
           command: |
-            npm run test -w=packages/react -- --runInBand --coverage --coverageReporters=lcov && \
-            npm run format:coverage -w=packages/react
+            npm run test -w=packages/react -- --runInBand --coverage --coverageReporters=lcov
       - persist_to_workspace:
           root: "."
           paths:
@@ -72,8 +71,7 @@ jobs:
       - run:
           name: Test Vue
           command: |
-            npm run test -w=packages/vue -- --runInBand --coverage --coverageReporters=lcov && \
-            npm run format:coverage -w=packages/vue
+            npm run test -w=packages/vue -- --runInBand --coverage --coverageReporters=lcov
       - persist_to_workspace:
           root: "."
           paths:
@@ -90,9 +88,8 @@ jobs:
       - run:
           name: Upload Coverage Reports
           command: |
-            coveralls --repo-token=$COVERALLS_REPO_TOKEN && \
-            coveralls --file ./packages/react/coverage/lcov.info --parallel && \
-            coveralls --file ./packages/vue/coverage/lcov.info --parallel && \
+            coveralls -f packages/vue/coverage/lcov.info --base-path packages/vue/ --parallel --job-flag vue && \
+            coveralls -f packages/react/coverage/lcov.info --base-path packages/react/ --parallel --job-flag react && \
             coveralls --done
 
 

@@ -13,14 +13,25 @@ async function mount(props = {}, testOptions){
         formData: {}
       };
     },
+    methods: {
+      handleRequestError(err = {}, errorMessageProp, onError = () => {}){
+        if(!this.props[errorMessageProp]) {
+          err.message && this.setProps({ ...this.props, [errorMessageProp]: err.message });
+        }
+        onError(err);
+      },
+      setProps(props){
+        this.props = props;
+      }
+    },
     template: `
       <t-form
         :on-fetch="props.onFetch"
         :on-fetch-success="props.onFetchSuccess"
-        :on-fetch-error="props.onFetchError"
+        :on-fetch-error="err => handleRequestError(err, 'fetchErrorMessage', props.onFetchError)"
         :on-submit="props.onSubmit"
         :on-submit-success="props.onSubmitSuccess"
-        :on-submit-error="props.onSubmitError"
+        :on-submit-error="err => handleRequestError(err, 'submitErrorMessage', props.onSubmitError)"
         :fetch-error-message="props.fetchErrorMessage"
         :submit-error-message="props.submitErrorMessage"
         :submit-success-title="props.submitSuccessTitle"

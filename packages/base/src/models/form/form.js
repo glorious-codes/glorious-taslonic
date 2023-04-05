@@ -7,7 +7,11 @@ export class Form {
     this.setOptions(options);
     this.setErrors({});
     this.configListeners(formEl);
-    setTimeout(() => this.handleFetch(options));
+    this.onProcessChange(options.onProcessChange);
+  }
+  init(){
+    this.handleFetch(this.options);
+    this.initialized = true;
   }
   identify(formEl){
     const id = idService.generate();

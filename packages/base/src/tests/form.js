@@ -24,21 +24,22 @@ export function run(mountComponent, { screen, waitFor, within }){
       const { container } = await mount({ onFetch });
       const formEl = container.firstChild;
       const formContentEl = container.querySelector('[data-form-content]');
-      await waitFor(() => {
-        expect(formEl).toHaveClass('t-form-fetching');
-      });
+      expect(formEl).toHaveClass('t-form-fetching');
       expect(formContentEl).toHaveAttribute('aria-busy', 'true');
       expect(formContentEl).toHaveAttribute('aria-live', 'polite');
       expect(screen.getByTitle('loading')).toBeInTheDocument();
     });
 
     it('should handle fetch success', async () => {
+      let resolveFetchPromise;
       const response = { some: 'response' };
-      const onFetch = jest.fn(() => Promise.resolve(response));
+      const fetchPromise = new Promise(resolve => { resolveFetchPromise = resolve; });
+      const onFetch = jest.fn(() => fetchPromise);
       const onFetchSuccess = jest.fn();
       const { container } = await mount({ onFetch, onFetchSuccess });
       const formEl = container.firstChild;
       const formContentEl = container.querySelector('[data-form-content]');
+      resolveFetchPromise(response);
       await waitFor(() => {
         expect(formEl).not.toHaveClass('t-form-fetching');
       });
@@ -49,12 +50,15 @@ export function run(mountComponent, { screen, waitFor, within }){
     });
 
     it('should handle fetch error', async () => {
+      let rejectFetchPromise;
       const err = { some: 'err' };
-      const onFetch = jest.fn(() => Promise.reject(err));
+      const fetchPromise = new Promise((resolve, reject) => { rejectFetchPromise = reject; });
+      const onFetch = jest.fn(() => fetchPromise);
       const onFetchError = jest.fn();
       const { container } = await mount({ onFetch, onFetchError });
       const formEl = container.firstChild;
       const formContentEl = container.querySelector('[data-form-content]');
+      rejectFetchPromise(err);
       await waitFor(() => {
         expect(formEl).toHaveClass('t-form-fetch-failed');
       });
@@ -66,8 +70,11 @@ export function run(mountComponent, { screen, waitFor, within }){
     });
 
     it('should remove error banner on banner close button click', async () => {
-      const onFetch = jest.fn(() => Promise.reject());
+      let rejectFetchPromise;
+      const fetchPromise = new Promise((resolve, reject) => { rejectFetchPromise = reject; });
+      const onFetch = jest.fn(() => fetchPromise);
       const { userEvent } = await mount({ onFetch });
+      rejectFetchPromise();
       await waitFor(() => {
         expect(screen.getByText(REQUEST_ERROR_MESSAGE)).toBeInTheDocument();
       });
@@ -79,15 +86,43 @@ export function run(mountComponent, { screen, waitFor, within }){
     });
 
     it('should optionally show error banner with custom message on fetch error', async () => {
+      let rejectFetchPromise;
+      const fetchPromise = new Promise((resolve, reject) => { rejectFetchPromise = reject; });
+      const onFetch = jest.fn(() => fetchPromise);
       const fetchErrorMessage = 'Oops!';
-      const onFetch = jest.fn(() => Promise.reject());
       await mount({ onFetch, fetchErrorMessage });
-      expect(screen.getByText(fetchErrorMessage)).toBeInTheDocument();
+      rejectFetchPromise();
+      await waitFor(() => {
+        expect(screen.getByText(fetchErrorMessage)).toBeInTheDocument();
+      });
+    });
+
+    it('should optionally show error banner with custom dynamic message on fetch error', async () => {
+      let rejectFetchPromise;
+      const message = 'Ops, resource not found.'
+      const fetchPromise = new Promise((resolve, reject) => { rejectFetchPromise = reject; });
+      const onFetch = jest.fn(() => fetchPromise);
+      const { userEvent } = await mount({ onFetch });
+      rejectFetchPromise({ message });
+      await waitFor(() => {
+        const formErrorBannerElement = document.querySelector('[data-form-error-banner]');
+        expect(within(formErrorBannerElement).getByText(message)).toBeInTheDocument();
+      });
     });
 
     it('should execute fetch callback on error banner retry button click', async () => {
-      const onFetch = jest.fn(() => Promise.reject());
+      let requests = 0;
+      let rejectFetchPromise;
+      const fetchPromises = {
+        1: new Promise((resolve, reject) => { rejectFetchPromise = reject; }),
+        2: new PendingPromiseMock()
+      }
+      const onFetch = jest.fn(() => {
+        ++requests;
+        return fetchPromises[requests];
+      });
       const { userEvent } = await mount({ onFetch });
+      rejectFetchPromise();
       await waitFor(() => {
         expect(screen.getByText(REQUEST_ERROR_MESSAGE)).toBeInTheDocument();
       });
@@ -194,6 +229,18 @@ export function run(mountComponent, { screen, waitFor, within }){
       await waitFor(() => {
         const formErrorBannerElement = document.querySelector('[data-form-error-banner]');
         expect(within(formErrorBannerElement).getByText(submitErrorMessage)).toBeInTheDocument();
+      });
+    });
+
+    it('should optionally show error banner with custom dynamic message on submit error', async () => {
+      const message = 'Ops, our fault. Please, try again.'
+      const onSubmit = jest.fn(() => Promise.reject({ message }));
+      const { userEvent } = await mount({ onSubmit });
+      await fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' }, waitFor);
+      await submit(userEvent);
+      await waitFor(() => {
+        const formErrorBannerElement = document.querySelector('[data-form-error-banner]');
+        expect(within(formErrorBannerElement).getByText(message)).toBeInTheDocument();
       });
     });
 

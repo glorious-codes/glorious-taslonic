@@ -29,10 +29,10 @@ _public.getMessage = key => {
   return getFormConstant(key);
 };
 
-_public.buildCssClasses = ({ fetching, fetchFailed } = {}) => {
+_public.buildCssClasses = ({ isFetching, fetchFailed } = {}) => {
   const baseCssClass = getBaseCssClass();
   const cssClasses = [baseCssClass];
-  if(fetching) cssClasses.push(`${baseCssClass}-fetching`);
+  if(isFetching) cssClasses.push(`${baseCssClass}-fetching`);
   if(fetchFailed) cssClasses.push(`${baseCssClass}-fetch-failed`);
   return cssClasses.join(' ');
 };

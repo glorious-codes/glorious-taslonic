@@ -1,116 +1,96 @@
-import React, { Component, createRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Loader } from '@react/components/loader/loader';
 import { FormBanner } from '@react/components/form-banner/form-banner';
 import toasterService from '@react/services/toaster/toaster';
 import formService from '@base/services/form/form';
 
-export class Form extends Component {
-  constructor(props){
-    super(props);
-    this.state = {};
-    this.formEl = createRef();
-  }
-
-  handleRequest(requestFn){
-    this.setBanner(null);
-    this.setFetchFailed(false);
-    return requestFn && requestFn();
-  }
-
-  handleRequestError(requestType, callbackProp){
-    this.setBanner({
-      message: this.getBannerMessage(requestType),
-      onTriggerClick: () => this.handleProcess(requestType)
-    });
+export const Form  = ({
+  onSubmit,
+  onSubmitSuccess,
+  onSubmitError,
+  onFetch,
+  onFetchSuccess,
+  onFetchError,
+  submitSuccessTitle,
+  submitSuccessMessage,
+  submitErrorMessage,
+  fetchErrorMessage,
+  children
+}) => {
+  const [form, setForm] = useState();
+  const [banner, setBanner] = useState(null);
+  const [isFetching, setFetching] = useState();
+  const [fetchFailed, setFetchFailed] = useState(false);
+  const formEl = useRef();
+  const handleRequest = requestFn => {
+    if(requestFn) {
+      setBanner(null);
+      setFetchFailed(false);
+      return requestFn();
+    }
+  };
+  const handleSubmitSuccess = response => {
+    if(submitSuccessMessage) {
+      toasterService.pop({
+        title: submitSuccessTitle,
+        message: submitSuccessMessage,
+        theme: 'success'
+      });
+    }
+    handleCallbackProp(onSubmitSuccess, response);
+  };
+  const handleRequestError = (requestType, callbackProp, form) => {
+    if(requestType == 'fetch') setFetchFailed(true);
+    setBanner({ onTriggerClick: () => form.handleProcess(requestType) });
     callbackProp();
-    if(requestType == 'fetch') this.setFetchFailed(true);
-  }
-
-  setBanner(banner){
-    this.setState({ banner });
-  }
-
-  setFetching(fetching){
-    this.setState({ fetching });
-  }
-
-  setFetchFailed(fetchFailed){
-    this.setState({ fetchFailed });
-  }
-
-  getBannerMessage(type){
-    const { fetchErrorMessage, submitErrorMessage } = this.props;
-    const message = type == 'fetch' ? fetchErrorMessage : submitErrorMessage;
+  };
+  const getBannerMessage = () => {
+    const message = fetchFailed ? fetchErrorMessage : submitErrorMessage;
     return message || formService.getMessage('REQUEST_ERROR_MESSAGE');
-  }
+  };
+  const onProcessChange = ({ isFetching }) => setFetching(isFetching);
+  const handleCallbackProp = (callback, data) => callback && callback(data);
+  const buildFormModelOptions = form => ({
+    onFetch: () => handleRequest(onFetch),
+    onFetchSuccess: response => handleCallbackProp(onFetchSuccess, response),
+    onSubmit: () => handleRequest(onSubmit),
+    onSubmitSuccess: response => handleSubmitSuccess(response),
+    onFetchError: err => handleRequestError('fetch', () => handleCallbackProp(onFetchError, err), form),
+    onSubmitError: err => handleRequestError('submit', () => handleCallbackProp(onSubmitError, err), form)
+  });
 
-  handleSubmitSuccess(response){
-    const message = this.props.submitSuccessMessage;
-    const title = this.props.submitSuccessTitle;
-    if(message) toasterService.pop({ title, message, theme: 'success' });
-    this.handleCallbackProp(this.props.onSubmitSuccess, response);
-  }
+  useEffect(() => {
+    const form = formService.build(formEl.current, { onProcessChange });
+    form.setOptions(buildFormModelOptions(form));
+    setForm(form);
+    return () => formService.destroy(form.id);
+  }, []);
 
-  onProcessChange({ isFetching }){
-    this.setFetching(isFetching);
-  }
+  useEffect(() => {
+    if(form && !form.initialized) form.init();
+  }, [form]);
 
-  handleCallbackProp(callback, data){
-    callback && callback(data);
-  }
+  useEffect(() => {
+    if(form) form.setOptions(buildFormModelOptions(form));
+  }, [form, onSubmit, onSubmitSuccess, onSubmitError, onFetch, onFetchSuccess, onFetchError]);
 
-  handleProcess(type){
-    this.state.form.handleProcess(type);
-  }
-
-  handleLoader(){
-    if(this.state.fetching) return <Loader />;
-  }
-
-  handleBanner(){
-    const { banner } = this.state;
-    if(banner)
-      return (
+  return (
+    <form
+      className={formService.buildCssClasses({ isFetching, fetchFailed })}
+      ref={formEl}
+      noValidate>
+      {isFetching && <Loader />}
+      { banner && (
         <FormBanner
-          message={banner.message}
+          message={getBannerMessage()}
           onTriggerClick={banner.onTriggerClick}
-          onClose={() => this.setBanner(null)}
+          onClose={() => setBanner(null)}
           data-form-error-banner
         />
-      );
-  }
-
-  componentDidMount(){
-    const form = formService.build(this.formEl.current, {
-      onFetch: this.props.onFetch ? () => this.handleRequest(() => this.props.onFetch()) : null,
-      onFetchSuccess: response => this.handleCallbackProp(this.props.onFetchSuccess, response),
-      onFetchError: err => this.handleRequestError('fetch', () => this.handleCallbackProp(this.props.onFetchError, err)),
-      onSubmit: () => this.handleRequest(() => this.props.onSubmit()),
-      onSubmitSuccess: response => this.handleSubmitSuccess(response),
-      onSubmitError: err => this.handleRequestError('submit', () => this.handleCallbackProp(this.props.onSubmitError, err))
-    });
-    form.onProcessChange(process => this.onProcessChange(process));
-    this.setState({ form });
-  }
-
-  componentWillUnmount(){
-    formService.destroy(this.state.form.id);
-  }
-
-  render(){
-    const { fetching, fetchFailed } = this.state;
-    const { children } = this.props;
-    return (
-      <form
-        className={formService.buildCssClasses({ fetching, fetchFailed })}
-        ref={this.formEl}
-        noValidate>
-        { this.handleLoader() }
-        { this.handleBanner() }
-        <div className="t-form-content" aria-live="polite" aria-busy={fetching} data-form-content>
-          { children }
-        </div>
-      </form>
-    );
-  }
-}
+      )}
+      <div className="t-form-content" aria-live="polite" aria-busy={isFetching} data-form-content>
+        { children }
+      </div>
+    </form>
+  );
+};

@@ -3,14 +3,12 @@ import { Fetcher } from '@base/models/fetcher/fetcher';
 
 const _public = {};
 
-_public.build = ({ onFetch, onFetchError, onFetchSuccess, onProcessChange }) => {
-  return new Fetcher({ onFetch, onFetchError, onFetchSuccess, onProcessChange });
-};
+_public.build = params => new Fetcher(params);
 
-_public.buildCssClasses = ({ fetching, fetchFailed } = {}) => {
+_public.buildCssClasses = ({ isFetching, fetchFailed } = {}) => {
   const baseCssClass = getBaseCssClass();
   const cssClasses = [baseCssClass];
-  if(fetching) cssClasses.push(`${baseCssClass}-fetching`);
+  if(isFetching) cssClasses.push(`${baseCssClass}-fetching`);
   if(fetchFailed) cssClasses.push(`${baseCssClass}-fetch-failed`);
   return cssClasses.join(' ');
 };

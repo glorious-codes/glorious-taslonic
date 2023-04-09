@@ -18,8 +18,7 @@ export const tFetcher = {
   data(){
     return {
       fetcher: null,
-      isFetching: false,
-      fetchFailed: false,
+      fetchStatus: {},
       banner: null,
       closeButtonAriaLabel: CLOSE_BUTTON_ARIA_LABEL,
       triggerText: TRIGGER_TEXT
@@ -34,18 +33,14 @@ export const tFetcher = {
     });
     this.setFetcher(fetcher);
     this.handleCallbackProp(this.onMount, fetcher);
+    fetcher.init();
   },
   methods: {
-    handleProccess({ isFetching, fetchFailed }){
-      this.setFetching(isFetching);
-      this.setFetchFailed(fetchFailed);
-      if(isFetching) this.setBanner(null);
+    handleProccess({ isFetching, fetchFailed, fetchSucceeded }){
+      this.setFetchStatus({ isFetching, fetchFailed, fetchSucceeded });
     },
     handleFetchError(callback, err){
-      this.setBanner({
-        message: this.getBannerMessage(),
-        onTriggerClick: () => this.fetcher.fetch()
-      });
+      this.setBanner({ onTriggerClick: () => this.fetcher.fetch() });
       this.handleCallbackProp(callback, err);
     },
     handleCallbackProp(callback, data){
@@ -54,29 +49,23 @@ export const tFetcher = {
     setFetcher(fetcher){
       this.fetcher = fetcher;
     },
-    setFetching(isFetching){
-      this.isFetching = isFetching;
-    },
-    setFetchFailed(hasFailed){
-      this.fetchFailed = hasFailed;
+    setFetchStatus({ isFetching, fetchFailed, fetchSucceeded }){
+      this.fetchStatus = { isFetching, fetchFailed, fetchSucceeded };
     },
     setBanner(banner){
       this.banner = banner;
-    },
-    getBannerMessage(){
-      return this.fetchErrorMessage || fetcherService.getMessage('FETCH_ERROR_MESSAGE');
     }
   },
   computed: {
     classes(){
-      const { isFetching, fetchFailed } = this;
-      return fetcherService.buildCssClasses({ fetching: isFetching, fetchFailed });
+      const { isFetching, fetchFailed } = this.fetchStatus;
+      return fetcherService.buildCssClasses({ isFetching, fetchFailed });
     },
     isBusy(){
-      return this.isFetching ? 'true' : 'false';
+      return this.fetchStatus.isFetching ? 'true' : 'false';
     },
-    isContentHidden(){
-      return this.fetchFailed || this.isFetching ? 'true' : 'false';
+    bannerMessage(){
+      return this.fetchErrorMessage || fetcherService.getMessage('FETCH_ERROR_MESSAGE');
     }
   },
   template

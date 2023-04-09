@@ -1,8 +1,8 @@
 import { run } from '@base/tests/fetcher';
-import { customRender, screen, waitFor } from '@vue/services/testing/testing';
+import { customRender, screen, waitFor, within } from '@vue/services/testing/testing';
 import { tFetcher } from '@vue/';
 
-function mount(props){
+function mount(props = {}){
   return customRender({
     components: { tFetcher },
     data(){
@@ -10,17 +10,28 @@ function mount(props){
         props
       };
     },
+    methods: {
+      handleFetchError(err = {}, onFetchError = () => {}){
+        if(!this.props.fetchErrorMessage) {
+          err.message && this.setProps({ ...this.props, fetchErrorMessage: err.message });
+        }
+        onFetchError(err);
+      },
+      setProps(props){
+        this.props = props;
+      }
+    },
     template: `
       <t-fetcher
         :on-fetch="props.onFetch"
         :on-fetch-success="props.onFetchSuccess"
-        :on-fetch-error="props.onFetchError"
+        :on-fetch-error="err => handleFetchError(err, props.onFetchError)"
         :on-mount="props.onMount"
         :fetch-error-message="props.fetchErrorMessage"
       >
-        <p>Content Mock</p>
+        <p>Some content</p>
       </t-fetcher>`
   });
 }
 
-run(mount, { screen, waitFor });
+run(mount, { screen, waitFor, within });

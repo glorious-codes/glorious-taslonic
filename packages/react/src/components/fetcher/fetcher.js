@@ -1,98 +1,80 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CLOSE_BUTTON_ARIA_LABEL } from '@base/constants/banner';
 import { TRIGGER_TEXT } from '@base/constants/fetcher';
 import { Loader } from '@react/components/loader/loader';
 import { Banner } from '@react/components/banner/banner';
 import fetcherService from '@base/services/fetcher/fetcher';
 
-export class Fetcher extends Component {
-  constructor(props){
-    super(props);
-    this.state = {};
-  }
+export const Fetcher = ({
+  onFetch,
+  onFetchSuccess,
+  onFetchError,
+  fetchErrorMessage,
+  onMount,
+  children
+}) => {
+  const [fetcher, setFetcher] = useState();
+  const [banner, setBanner] = useState();
+  const [fetchStatus, setFetchStatus] = useState({});
+  const { isFetching, fetchFailed, fetchSucceeded } = fetchStatus;
+  const shouldShowBanner = () => !!fetchFailed && !!banner;
+  const getFetcherContent = () => !!fetchSucceeded && children;
+  const handleFetchError = (err, fetcher) => {
+    setBanner({ onTriggerClick: () => fetcher.fetch() });
+    handleCallbackProp(onFetchError, err);
+  };
+  const handleProcessChange = ({ isFetching, fetchFailed, fetchSucceeded }) => {
+    setFetchStatus({ isFetching, fetchFailed, fetchSucceeded });
+  };
+  const handleCallbackProp = (callback, data) => callback && callback(data);
+  const getBannerMessage = () => {
+    return fetchErrorMessage || fetcherService.getMessage('FETCH_ERROR_MESSAGE');
+  };
+  const buildFetcherOptions = fetcher => ({
+    onFetch,
+    onFetchSuccess: response => handleCallbackProp(onFetchSuccess, response),
+    onFetchError: err => handleFetchError(err, fetcher),
+    onProcessChange: process => handleProcessChange(process)
+  });
 
-  handleFetchError(err){
-    this.setBanner({
-      message: this.getBannerMessage(),
-      onTriggerClick: () => this.state.fetcher.fetch()
-    });
-    this.handleCallbackProp(this.props.onFetchError, err);
-  }
+  useEffect(() => {
+    const fetcher = fetcherService.build();
+    fetcher.setOptions(buildFetcherOptions(fetcher));
+    handleCallbackProp(onMount, fetcher);
+    setFetcher(fetcher);
+  }, []);
 
-  handleProcessChange({ isFetching, fetchFailed }){
-    this.setFetching(!!isFetching);
-    this.setFetchFailed(fetchFailed);
-    if(isFetching) this.setBanner(null);
-  }
+  useEffect(() => {
+    if(fetcher && !fetcher.initialized) fetcher.init();
+  }, [fetcher]);
 
-  handleCallbackProp(callback, data){
-    callback && callback(data);
-  }
+  useEffect(() => {
+    if(fetcher) fetcher.setOptions(buildFetcherOptions(fetcher));
+  }, [fetcher, onFetch, onFetchSuccess, onFetchError, fetchErrorMessage]);
 
-  setBanner(banner){
-    this.setState({ banner });
-  }
-
-  setFetching(fetching){
-    this.setState({ fetching });
-  }
-
-  setFetchFailed(fetchFailed){
-    this.setState({ fetchFailed });
-  }
-
-  getBannerMessage(){
-    return this.props.fetchErrorMessage || fetcherService.getMessage('FETCH_ERROR_MESSAGE');
-  }
-
-  componentDidMount(){
-    const fetcher = fetcherService.build({
-      onFetch: () => this.props.onFetch(),
-      onFetchSuccess: response => this.handleCallbackProp(this.props.onFetchSuccess, response),
-      onFetchError: err => this.handleFetchError(err),
-      onProcessChange: process => this.handleProcessChange(process)
-    });
-    this.setState({ fetcher });
-    this.handleCallbackProp(this.props.onMount, fetcher);
-  }
-
-  render(){
-    const { fetching, fetchFailed, banner } = this.state;
-
-    return (
-      <div className={fetcherService.buildCssClasses({ fetching, fetchFailed })}>
-        { handleLoader(fetching) }
-        { handleBanner(banner, () => this.setBanner(null)) }
-        <div
-          className="t-fetcher-content"
-          aria-live="polite"
-          aria-busy={fetching}
-          aria-hidden={fetchFailed || fetching}
-          data-fetcher-content
+  return (
+    <div className={fetcherService.buildCssClasses({ isFetching, fetchFailed })}>
+      {isFetching && <Loader />}
+      { shouldShowBanner() && (
+        <Banner
+          closeButtonAriaLabel={CLOSE_BUTTON_ARIA_LABEL}
+          triggerText={TRIGGER_TEXT}
+          onTriggerClick={banner.onTriggerClick}
+          onClose={() => setBanner(null)}
+          theme="danger"
+          data-fetcher-error-banner
         >
-          { this.props.children }
-        </div>
-      </div>
-    );
-  }
-}
-
-function handleLoader(fetching){
-  if(fetching) return <Loader data-form-loader />;
-}
-
-function handleBanner(banner, onBannerClose){
-  if(banner)
-    return (
-      <Banner
-        theme="danger"
-        closeButtonAriaLabel={CLOSE_BUTTON_ARIA_LABEL}
-        triggerText={TRIGGER_TEXT}
-        onTriggerClick={banner.onTriggerClick}
-        onClose={onBannerClose}
-        data-fetcher-error-banner
+          {getBannerMessage()}
+        </Banner>
+      )}
+      <div
+        className="t-fetcher-content"
+        aria-live="polite"
+        aria-busy={!!isFetching}
+        data-fetcher-content
       >
-        {banner.message}
-      </Banner>
-    );
-}
+        { getFetcherContent() }
+      </div>
+    </div>
+  );
+};

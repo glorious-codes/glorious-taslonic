@@ -1,6 +1,9 @@
 export class Fetcher {
-  constructor({ onFetch, onFetchSuccess, onFetchError, onProcessChange }){
-    this.setOptions({ onFetch, onFetchSuccess, onFetchError, onProcessChange });
+  constructor(options){
+    this.setOptions(options);
+  }
+  init(){
+    this.initialized = true;
     this.fetch();
   }
   setOptions(options){

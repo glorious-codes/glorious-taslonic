@@ -1,7 +1,7 @@
 <div :class="classes">
-  <t-loader v-if="isFetching" data-form-loader />
+  <t-loader v-if="fetchStatus.isFetching" data-form-loader />
   <t-banner
-    v-if="banner"
+    v-if="banner && fetchStatus.fetchFailed"
     theme="danger"
     :close-button-aria-label="closeButtonAriaLabel"
     :trigger-text="triggerText"
@@ -9,15 +9,14 @@
     :on-close="() => setBanner(null)"
     data-fetcher-error-banner
   >
-    {{ banner.message }}
+    {{ bannerMessage }}
   </t-banner>
   <div
     class="t-fetcher-content"
     aria-live="polite"
     :aria-busy="isBusy"
-    :aria-hidden="isContentHidden"
     data-fetcher-content
   >
-    <slot></slot>
+    <slot v-if="fetchStatus.fetchSucceeded"></slot>
   </div>
 </div>

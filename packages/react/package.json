@@ -1,6 +1,6 @@
 {
   "name": "@glorious/taslonic-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A glorious UI library for React",
   "main": "dist/index.js",
   "files": [

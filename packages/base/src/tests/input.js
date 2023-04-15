@@ -1,6 +1,6 @@
-import { expectFirstGrandChild, pause } from '@base/services/testing/testing';
+import { expectFirstGrandChild, setRangeInputValue, pause } from '@base/services/testing/testing';
 
-export function run(mount, { screen, waitFor }){
+export function run(mount, { screen, fireEvent, waitFor }){
   describe('Input', () => {
     it('should have base css class', () => {
       expectFirstGrandChild(mount()).toHaveClass('t-form-control');
@@ -153,8 +153,45 @@ export function run(mount, { screen, waitFor }){
       expect(screen.queryByText(shortErrorMessage)).not.toBeInTheDocument();
     });
 
+    it('should optionally validate a selected file', async () => {
+      const label = 'File'
+      const shortFilenameErrorMessage = 'Filename must be at least 5 chars long';
+      const validations = [{
+        isValid: (val, evt) => evt.target.files[0].name.split('.')[0].length >= 5,
+        errorMessage: shortFilenameErrorMessage
+      }];
+      const { userEvent } = mount({ 'aria-label': label, type: 'file', validations });
+      const input = screen.getByLabelText(label);
+      userEvent.upload(input, mockFile());
+      await pause();
+      waitFor(() => {
+        userEvent.tab();
+      });
+      await pause();
+      expect(screen.queryByText(shortFilenameErrorMessage)).toBeInTheDocument();
+    });
+
+    it('should optionally validate a range', async () => {
+      const lowRangeErrorMessage = 'Must be greater than 50';
+      const validations = [{
+        isValid: val => parseInt(val) > 50,
+        errorMessage: lowRangeErrorMessage
+      }];
+      const { userEvent, container } = mount({ type: 'range', value: '51', validations });
+      await pause();
+      const input = screen.getByRole('slider');
+      await setRangeInputValue(waitFor, input, '50');
+      expect(screen.queryByText(lowRangeErrorMessage)).toBeInTheDocument();
+      await setRangeInputValue(waitFor, input, '51');
+      expect(screen.queryByText(lowRangeErrorMessage)).not.toBeInTheDocument();
+    });
+
     function getInput(){
       return screen.getByRole('textbox');
+    }
+
+    function mockFile(){
+      return new File(['almost no content'], 'b.txt', {type: 'text/txt'})
     }
   });
 }

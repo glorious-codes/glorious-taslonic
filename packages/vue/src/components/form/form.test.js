@@ -1,14 +1,37 @@
 import { run } from '@base/tests/form';
-import { customRender, screen, waitFor, within } from '@vue/services/testing/testing';
+import { customRender, screen, stringifyAttributes, waitFor, within } from '@vue/services/testing/testing';
 import { tButton, tField, tForm, tInput, tSelect, tTextarea } from '@vue/';
 
-async function mount(props = {}, testOptions){
+async function mount({
+  onSubmit,
+  onSubmitSuccess,
+  onSubmitError,
+  onFetch,
+  onFetchSuccess,
+  onFetchError,
+  submitSuccessTitle,
+  submitSuccessMessage,
+  submitErrorMessage,
+  fetchErrorMessage,
+  ...rest
+} = {}, testOptions){
   const { FIELD_LABELS, SUBMIT_BUTTON_TEXT, customValidations, fruits } = testOptions;
   return customRender({
     components: { tButton, tField, tForm, tInput, tSelect, tTextarea },
     data(){
       return {
-        props,
+        props: {
+          onSubmit,
+          onSubmitSuccess,
+          onSubmitError,
+          onFetch,
+          onFetchSuccess,
+          onFetchError,
+          submitSuccessTitle,
+          submitSuccessMessage,
+          submitErrorMessage,
+          fetchErrorMessage
+        },
         customValidations,
         formData: {}
       };
@@ -35,7 +58,9 @@ async function mount(props = {}, testOptions){
         :fetch-error-message="props.fetchErrorMessage"
         :submit-error-message="props.submitErrorMessage"
         :submit-success-title="props.submitSuccessTitle"
-        :submit-success-message="props.submitSuccessMessage">
+        :submit-success-message="props.submitSuccessMessage"
+        ${stringifyAttributes(rest)}
+      >
           <t-field label="${FIELD_LABELS.NAME}">
             <t-input v-model="formData.name" :validations="customValidations.name" required />
           </t-field>

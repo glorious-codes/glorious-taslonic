@@ -1,13 +1,26 @@
 import { run } from '@base/tests/fetcher';
-import { customRender, screen, waitFor, within } from '@vue/services/testing/testing';
+import { customRender, screen, stringifyAttributes, waitFor, within } from '@vue/services/testing/testing';
 import { tFetcher } from '@vue/';
 
-function mount(props = {}){
+function mount({
+  onFetch,
+  onFetchSuccess,
+  onFetchError,
+  fetchErrorMessage,
+  onMount,
+  ...rest
+} = {}){
   return customRender({
     components: { tFetcher },
     data(){
       return {
-        props
+        props: {
+          onFetch,
+          onFetchSuccess,
+          onFetchError,
+          fetchErrorMessage,
+          onMount
+        }
       };
     },
     methods: {
@@ -28,6 +41,7 @@ function mount(props = {}){
         :on-fetch-error="err => handleFetchError(err, props.onFetchError)"
         :on-mount="props.onMount"
         :fetch-error-message="props.fetchErrorMessage"
+        ${stringifyAttributes(rest)}
       >
         <p>Some content</p>
       </t-fetcher>`

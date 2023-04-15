@@ -41,7 +41,7 @@ export class FormControlModel {
     if(this.form)
       this.setSubmitListenerId(this.form.onSubmit(() => {
         this.setBlurred(true);
-        this.validate(formControlEl);
+        validateInitialization(formControlEl);
       }));
   }
   setForm(form){
@@ -54,27 +54,34 @@ export class FormControlModel {
   setValidations(validations, formControlEl){
     const element = formControlEl || this.element;
     this.validations = validations;
-    this.validate(element);
+    validateInitialization(element);
   }
   configValidationListeners(formControlEl){
-    formControlEl.addEventListener('input', evt => this.onInput(evt));
-    formControlEl.addEventListener('blur', evt => this.onBlur(evt));
+    const eventType = getChangeEventType(formControlEl);
+    formControlEl.addEventListener(eventType, evt => this.handleChange(evt));
+    formControlEl.addEventListener('blur', evt => this.handleBlur(evt));
+    formControlEl.addEventListener('click', evt => this.handleClick(evt));
   }
-  onInput(evt){
-    this.validate(evt.target);
-    this.handleCallbackOption('onInput', evt);
+  handleChange(evt){
+    const type = getChangeEventType(evt.target);
+    const listenerProp = `on${type[0].toUpperCase()}${type.substring(1)}`;
+    this.validate(evt.target, evt);
+    this.handleCallbackOption(listenerProp, evt);
   }
-  onBlur({ target }){
+  handleClick(evt){
+    if(hasInputType(evt.target, 'file') || hasInputType(evt.target, 'range')) this.handleBlur(evt);
+  }
+  handleBlur(evt){
     this.setBlurred(true);
-    this.validate(target);
+    this.validate(evt.target, evt);
   }
   onRequiredChange(required){
     this.setElementRequired(required);
     this.validate(this.element);
   }
-  validate({ value }){
+  validate({ value }, evt){
     const errors = this.buildValidations().map(({ isValid, errorMessage }) => {
-      if(!isValid(value)) return errorMessage;
+      if(!isValid(value, evt)) return errorMessage;
     }).filter(err => !!err);
     return errors.length ? this.emitError(errors[0]) : this.emitSuccess();
   }
@@ -108,4 +115,16 @@ export class FormControlModel {
     this.form.clearError(this.id);
     this.form.removeSubmitListener(this.submitListenerId);
   }
+}
+
+function validateInitialization(formControlEl){
+  formControlEl.dispatchEvent(new Event(getChangeEventType(formControlEl)));
+}
+
+function getChangeEventType(formControlEl){
+  return hasInputType(formControlEl) ? 'change' : 'input';
+}
+
+function hasInputType(formControlEl, type){
+  return formControlEl.type === type
 }

@@ -27,12 +27,23 @@ function expectFirstGrandChild({ container }){
   return expect(container.firstChild.firstChild);
 }
 
+async function setRangeInputValue(waitFor, input, value){
+  await waitFor(() => {
+    input.dispatchEvent(new Event('click'));
+  });
+  input.value = value;
+  await waitFor(() => {
+    input.dispatchEvent(new Event('input'));
+  });
+}
+
 export {
   _public as default,
   expectFirstChild,
   expectFirstGrandChild,
   pause,
-  stringifyAttributes,
+  setRangeInputValue,
   simulateKeydown,
+  stringifyAttributes,
   userEvent
 };

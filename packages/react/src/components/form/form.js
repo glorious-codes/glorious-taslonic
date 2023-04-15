@@ -15,7 +15,8 @@ export const Form  = ({
   submitSuccessMessage,
   submitErrorMessage,
   fetchErrorMessage,
-  children
+  children,
+  ...rest
 }) => {
   const [form, setForm] = useState();
   const [banner, setBanner] = useState(null);
@@ -78,7 +79,9 @@ export const Form  = ({
     <form
       className={formService.buildCssClasses({ isFetching, fetchFailed })}
       ref={formEl}
-      noValidate>
+      noValidate
+      {...rest}
+    >
       {isFetching && <Loader />}
       { banner && (
         <FormBanner

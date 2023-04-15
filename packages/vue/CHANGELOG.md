@@ -1,4 +1,16 @@
+## 1.1.0 (2023-04-15)
+
+* feat: allow custom attributes to be passed to fetcher ([b07812e](https://github.com/glorious-codes/glorious-taslonic/commit/b07812e))
+* feat: allow custom attributes to be passed to form ([2b58dd6](https://github.com/glorious-codes/glorious-taslonic/commit/2b58dd6))
+* feat: improve input to allow file validation ([ebd566a](https://github.com/glorious-codes/glorious-taslonic/commit/ebd566a))
+* chore: improve range input ([871f37f](https://github.com/glorious-codes/glorious-taslonic/commit/871f37f))
+* chore: improve npm log script ([93c9326](https://github.com/glorious-codes/glorious-taslonic/commit/93c9326))
+* chore: remove unnecessary unit tests ([3c91014](https://github.com/glorious-codes/glorious-taslonic/commit/3c91014))
+
+
+
 ## 1.0.1 (2023-04-09)
+
 * fix: dynamic error message on fetcher component ([e31310b](https://github.com/glorious-codes/glorious-taslonic/commit/e31310b))
 * fix: dynamic error message on form component ([7d3e67a](https://github.com/glorious-codes/glorious-taslonic/commit/7d3e67a))
 

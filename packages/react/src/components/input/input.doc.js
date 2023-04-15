@@ -186,6 +186,28 @@ module.exports = {
       }
     },
     {
+      title: 'Input with custom file validations',
+      description: 'You can read the selected files by inspecting the event passed as second argument to the validation function.',
+      controller: function(){
+        const { Row, Col, Input } = taslonicReact;
+
+        return function(){
+          const validations = [{
+            isValid: (data, evt) => (!data || evt.target.files[0].size <= 2048),
+            errorMessage: 'File must not exceed 2kb'
+          }];
+
+          return (
+            <Row>
+              <Col md="4">
+                <Input type="file" validations={validations} block />
+              </Col>
+            </Row>
+          );
+        }
+      }
+    },
+    {
       title: 'Input with autofocus',
       controller: function(){
         const { Input } = taslonicReact;

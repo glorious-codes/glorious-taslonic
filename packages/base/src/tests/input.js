@@ -153,8 +153,32 @@ export function run(mount, { screen, waitFor }){
       expect(screen.queryByText(shortErrorMessage)).not.toBeInTheDocument();
     });
 
+    it('should optionally validate a selected file', async () => {
+      const label = 'File'
+      const shortFilenameErrorMessage = 'Filename must be at least 5 chars long';
+      const validations = [{
+        isValid: (val, evt) => {
+          return evt.target.files[0].name.split('.')[0].length >= 5;
+        },
+        errorMessage: shortFilenameErrorMessage
+      }];
+      const { userEvent, container } = mount({ 'aria-label': label, type: 'file', validations });
+      const input = screen.getByLabelText(label);
+      userEvent.upload(input, mockFile());
+      await pause();
+      waitFor(() => {
+        userEvent.tab();
+      });
+      await pause();
+      expect(screen.queryByText(shortFilenameErrorMessage)).toBeInTheDocument();
+    });
+
     function getInput(){
       return screen.getByRole('textbox');
+    }
+
+    function mockFile(){
+      return new File(['almost no content'], 'b.txt', {type: 'text/txt'})
     }
   });
 }

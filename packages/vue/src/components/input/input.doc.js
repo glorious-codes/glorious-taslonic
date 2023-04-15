@@ -168,6 +168,27 @@ module.exports = {
       `
     },
     {
+      title: 'Input with custom file validations',
+      description: 'You can read the selected files by inspecting the event passed as second argument to the validation function.',
+      controller: {
+        data(){
+          return {
+            validations: [{
+              isValid: (data, evt) => (!data || evt.target.files[0].size <= 2048),
+              errorMessage: 'File must not exceed 2kb'
+            }]
+          };
+        }
+      },
+      template: `
+      <t-row>
+        <t-col md="4">
+          <t-input type="file" :validations="validations" block />
+        </t-col>
+      </t-row>
+      `
+    },
+    {
       title: 'Input with autofocus',
       template: `
       <t-input autofocus />

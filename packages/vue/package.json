@@ -11,7 +11,7 @@
     "format": "eslint './src/**/*.js'",
     "test": "jest",
     "prepublishOnly": "bash ../../scripts/build-packages.sh",
-    "log": "conventional-changelog -i CHANGELOG.md -s --commit-path ."
+    "log": "conventional-changelog -i CHANGELOG.md -s"
   },
   "repository": {
     "type": "git",

@@ -69,7 +69,7 @@ export class FormControlModel {
     this.handleCallbackOption(listenerProp, evt);
   }
   handleClick(evt){
-    if(isFileInput(evt.target)) this.handleBlur(evt);
+    if(hasInputType(evt.target, 'file') || hasInputType(evt.target, 'range')) this.handleBlur(evt);
   }
   handleBlur(evt){
     this.setBlurred(true);
@@ -122,9 +122,9 @@ function validateInitialization(formControlEl){
 }
 
 function getChangeEventType(formControlEl){
-  return isFileInput(formControlEl) ? 'change' : 'input';
+  return hasInputType(formControlEl) ? 'change' : 'input';
 }
 
-function isFileInput(formControlEl){
-  return formControlEl.type === 'file'
+function hasInputType(formControlEl, type){
+  return formControlEl.type === type
 }

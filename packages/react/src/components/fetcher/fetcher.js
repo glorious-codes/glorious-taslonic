@@ -11,7 +11,8 @@ export const Fetcher = ({
   onFetchError,
   fetchErrorMessage,
   onMount,
-  children
+  children,
+  ...rest
 }) => {
   const [fetcher, setFetcher] = useState();
   const [banner, setBanner] = useState();
@@ -53,7 +54,7 @@ export const Fetcher = ({
   }, [fetcher, onFetch, onFetchSuccess, onFetchError, fetchErrorMessage]);
 
   return (
-    <div className={fetcherService.buildCssClasses({ isFetching, fetchFailed })}>
+    <div className={fetcherService.buildCssClasses({ isFetching, fetchFailed })} {...rest}>
       {isFetching && <Loader />}
       { shouldShowBanner() && (
         <Banner

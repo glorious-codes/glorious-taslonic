@@ -14,13 +14,7 @@ function mount(initialProps){
       }
     };
     return (
-      <Fetcher
-        onFetch={props.onFetch}
-        onFetchSuccess={props.onFetchSuccess}
-        onFetchError={props.onFetchError || buildErrorHandler()}
-        fetchErrorMessage={props.fetchErrorMessage}
-        onMount={props.onMount}
-      >
+      <Fetcher {...props} onFetchError={props.onFetchError || buildErrorHandler()}>
         <p>Some content</p>
       </Fetcher>
     );

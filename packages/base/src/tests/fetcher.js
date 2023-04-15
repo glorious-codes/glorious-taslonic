@@ -158,5 +158,13 @@ export function run(mount, { screen, waitFor, within }){
       });
       expect(onFetch).toHaveBeenCalledTimes(2);
     });
+
+    it('should accept custom attributes', async () => {
+      const attrName = 'data-any-custom-attr';
+      const attrValue = 'some-value';
+      const { container } = await mount({ [attrName]: attrValue });
+      const fetcherEl = container.firstChild;
+      expect(fetcherEl).toHaveAttribute(attrName, attrValue);
+    });
   });
 }

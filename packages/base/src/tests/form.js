@@ -267,6 +267,14 @@ export function run(mountComponent, { screen, waitFor, within }){
       expect(formService.get(formId)).not.toBeDefined();
     });
 
+    it('should accept custom attributes', async () => {
+      const attrName = 'data-any-custom-attr';
+      const attrValue = 'some-value';
+      const { container } = await mount({ [attrName]: attrValue });
+      const formEl = container.firstChild;
+      expect(formEl).toHaveAttribute(attrName, attrValue);
+    });
+
     async function mount(props){
       const result = mountComponent(props, {
         FIELD_LABELS,

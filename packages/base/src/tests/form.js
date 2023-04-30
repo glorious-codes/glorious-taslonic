@@ -1,5 +1,5 @@
 import { pause } from '@base/services/testing/testing';
-import { ERROR_MESSAGES, FIELD_LABELS, SUBMIT_BUTTON_TEXT, customValidations, fruits } from '@base/mocks/form';
+import { ERROR_MESSAGES, FIELDS, SUBMIT_BUTTON_TEXT } from '@base/mocks/form';
 import { REQUEST_ERROR_MESSAGE } from '@base/constants/form';
 import { CLOSE_BUTTON_ARIA_LABEL, TRIGGER_TEXT } from '@base/constants/form-banner';
 import { TITLE_TEXT as LOADER_TITLE_TEXT } from '@base/constants/loader';
@@ -142,7 +142,7 @@ export function run(mountComponent, { screen, waitFor, within }){
 
     it('should not execute submit callback if custom validations are not satisfied', async () => {
       const onSubmit = jest.fn();
-      const { userEvent } = await mount({ onSubmit });
+      const { container, userEvent } = await mount({ onSubmit });
       await fillForm(userEvent, { name: 'a', fruit: 'papaya', bio: 'fuck' }, waitFor);
       await submit(userEvent);
       expect(onSubmit).not.toHaveBeenCalled();
@@ -276,25 +276,20 @@ export function run(mountComponent, { screen, waitFor, within }){
     });
 
     async function mount(props){
-      const result = mountComponent(props, {
-        FIELD_LABELS,
-        SUBMIT_BUTTON_TEXT,
-        customValidations,
-        fruits
-      });
+      const result = mountComponent(props, { FIELDS, SUBMIT_BUTTON_TEXT });
       await pause();
       return result;
     }
 
-    async function fillForm(userEvent, fields, waitFor){
+    async function fillForm(userEvent, { name, fruit, bio }, waitFor){
       await waitFor(() => {
-        userEvent.type(screen.getByLabelText(FIELD_LABELS.NAME), fields.name);
+        userEvent.type(screen.getByLabelText(FIELDS.NAME.LABEL), name);
       });
       await waitFor(() => {
-        userEvent.selectOptions(screen.getByLabelText(FIELD_LABELS.FRUIT), fields.fruit);
+        userEvent.selectOptions(screen.getByLabelText(FIELDS.FRUIT.LABEL), fruit);
       });
       await waitFor(() => {
-        userEvent.type(screen.getByLabelText(FIELD_LABELS.BIO), fields.bio);
+        userEvent.type(screen.getByLabelText(FIELDS.BIO.LABEL), bio);
       });
     }
 

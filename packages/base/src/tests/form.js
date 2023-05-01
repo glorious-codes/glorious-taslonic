@@ -1,5 +1,5 @@
 import { pause } from '@base/services/testing/testing';
-import { ERROR_MESSAGES, FIELD_LABELS, SUBMIT_BUTTON_TEXT, customValidations, fruits } from '@base/mocks/form';
+import { ERROR_MESSAGES, FIELDS, SUBMIT_BUTTON_TEXT } from '@base/mocks/form';
 import { REQUEST_ERROR_MESSAGE } from '@base/constants/form';
 import { CLOSE_BUTTON_ARIA_LABEL, TRIGGER_TEXT } from '@base/constants/form-banner';
 import { TITLE_TEXT as LOADER_TITLE_TEXT } from '@base/constants/loader';
@@ -142,7 +142,7 @@ export function run(mountComponent, { screen, waitFor, within }){
 
     it('should not execute submit callback if custom validations are not satisfied', async () => {
       const onSubmit = jest.fn();
-      const { userEvent } = await mount({ onSubmit });
+      const { container, userEvent } = await mount({ onSubmit });
       await fillForm(userEvent, { name: 'a', fruit: 'papaya', bio: 'fuck' }, waitFor);
       await submit(userEvent);
       expect(onSubmit).not.toHaveBeenCalled();
@@ -185,6 +185,18 @@ export function run(mountComponent, { screen, waitFor, within }){
         expect(screen.queryByTitle(LOADER_TITLE_TEXT)).not.toBeInTheDocument();
         expect(getSubmitButton()).toBeInTheDocument();
       });
+    });
+
+    it('should not show validation errors if form is reset on submit success', async () => {
+      const onSubmit = jest.fn(() => Promise.resolve({}));
+      const { userEvent } = await mount({ onSubmit }, { resetOnSubmitSuccess: true });
+      await fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' }, waitFor);
+      await waitFor(() => {
+        userEvent.type(screen.getByLabelText(FIELDS.NAME.LABEL), '{enter}')
+      });
+      expect(screen.queryByText(ERROR_MESSAGES.TOO_SHORT_NAME)).not.toBeInTheDocument();
+      expect(screen.queryByText(ERROR_MESSAGES.NOT_CITRIC_FRUIT)).not.toBeInTheDocument();
+      expect(screen.queryByText(ERROR_MESSAGES.OFFENSIVE_BIO)).not.toBeInTheDocument();
     });
 
     it('should optionally show a success title and message on submit success', async () => {
@@ -275,26 +287,21 @@ export function run(mountComponent, { screen, waitFor, within }){
       expect(formEl).toHaveAttribute(attrName, attrValue);
     });
 
-    async function mount(props){
-      const result = mountComponent(props, {
-        FIELD_LABELS,
-        SUBMIT_BUTTON_TEXT,
-        customValidations,
-        fruits
-      });
+    async function mount(props, testingOptions){
+      const result = mountComponent(props, { FIELDS, SUBMIT_BUTTON_TEXT, ...testingOptions });
       await pause();
       return result;
     }
 
-    async function fillForm(userEvent, fields, waitFor){
+    async function fillForm(userEvent, { name, fruit, bio }, waitFor){
       await waitFor(() => {
-        userEvent.type(screen.getByLabelText(FIELD_LABELS.NAME), fields.name);
+        userEvent.type(screen.getByLabelText(FIELDS.NAME.LABEL), name);
       });
       await waitFor(() => {
-        userEvent.selectOptions(screen.getByLabelText(FIELD_LABELS.FRUIT), fields.fruit);
+        userEvent.selectOptions(screen.getByLabelText(FIELDS.FRUIT.LABEL), fruit);
       });
       await waitFor(() => {
-        userEvent.type(screen.getByLabelText(FIELD_LABELS.BIO), fields.bio);
+        userEvent.type(screen.getByLabelText(FIELDS.BIO.LABEL), bio);
       });
     }
 

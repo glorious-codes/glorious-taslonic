@@ -4,7 +4,7 @@ import { FormBanner } from '@react/components/form-banner/form-banner';
 import toasterService from '@react/services/toaster/toaster';
 import formService from '@base/services/form/form';
 
-export const Form  = ({
+export const Form = ({
   onSubmit,
   onSubmitSuccess,
   onSubmitError,

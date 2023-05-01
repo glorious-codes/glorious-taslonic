@@ -15,7 +15,7 @@ async function mount({
   fetchErrorMessage,
   ...rest
 } = {}, testOptions){
-  const { FIELD_LABELS, SUBMIT_BUTTON_TEXT, customValidations, fruits } = testOptions;
+  const { FIELDS, SUBMIT_BUTTON_TEXT } = testOptions;
   return customRender({
     components: { tButton, tField, tForm, tInput, tSelect, tTextarea },
     data(){
@@ -32,11 +32,15 @@ async function mount({
           submitErrorMessage,
           fetchErrorMessage
         },
-        customValidations,
+        FIELDS: FIELDS,
         formData: {}
       };
     },
     methods: {
+      handleSubmitSuccess(response, onSubmitSuccess){
+        if(testOptions.resetOnSubmitSuccess) this.resetForm();
+        onSubmitSuccess(response);
+      },
       handleRequestError(err = {}, errorMessageProp, onError = () => {}){
         if(!this.props[errorMessageProp]) {
           err.message && this.setProps({ ...this.props, [errorMessageProp]: err.message });
@@ -45,6 +49,16 @@ async function mount({
       },
       setProps(props){
         this.props = props;
+      },
+      resetForm(){
+        this.setFormData({
+          [FIELDS.NAME.NAME]: '',
+          [FIELDS.FRUIT.NAME]: '',
+          [FIELDS.BIO.NAME]: ''
+        });
+      },
+      setFormData(data){
+        this.formData = data;
       }
     },
     template: `
@@ -53,7 +67,7 @@ async function mount({
         :on-fetch-success="props.onFetchSuccess"
         :on-fetch-error="err => handleRequestError(err, 'fetchErrorMessage', props.onFetchError)"
         :on-submit="props.onSubmit"
-        :on-submit-success="props.onSubmitSuccess"
+        :on-submit-success="response => handleSubmitSuccess(response, props.onSubmitSuccess)"
         :on-submit-error="err => handleRequestError(err, 'submitErrorMessage', props.onSubmitError)"
         :fetch-error-message="props.fetchErrorMessage"
         :submit-error-message="props.submitErrorMessage"
@@ -61,17 +75,17 @@ async function mount({
         :submit-success-message="props.submitSuccessMessage"
         ${stringifyAttributes(rest)}
       >
-          <t-field label="${FIELD_LABELS.NAME}">
-            <t-input v-model="formData.name" :validations="customValidations.name" required />
+          <t-field :label="FIELDS.NAME.LABEL">
+            <t-input v-model="formData.name" :validations="FIELDS.NAME.VALIDATIONS" required />
           </t-field>
-          <t-field label="${FIELD_LABELS.FRUIT}">
-            <t-select v-model="formData.fruit" :validations="customValidations.fruit" required>
+          <t-field :label="FIELDS.FRUIT.LABEL">
+            <t-select v-model="formData.fruit" :validations="FIELDS.FRUIT.VALIDATIONS" required>
               <option value="">Select</option>
-              ${fruits.map(({ value, text }) => `<option value="${value}">${text}</option>`)}
+              ${FIELDS.FRUIT.OPTIONS.map(({ value, text }) => `<option value="${value}">${text}</option>`)}
             </t-select>
           </t-field>
-          <t-field label="${FIELD_LABELS.BIO}">
-            <t-textarea v-model="formData.bio" :validations="customValidations.bio" required />
+          <t-field :label="FIELDS.BIO.LABEL">
+            <t-textarea v-model="formData.bio" :validations="FIELDS.BIO.VALIDATIONS" required />
           </t-field>
           <t-button type="submit">${SUBMIT_BUTTON_TEXT}</t-button>
       </t-form>`

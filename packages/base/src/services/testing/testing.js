@@ -4,8 +4,8 @@ const _public = {};
 
 _public.simulateKeydown = simulateKeydown;
 
-async function pause(){
-  await new Promise(resolve => setTimeout(resolve));
+async function pause(timeout){
+  await new Promise(resolve => setTimeout(resolve, timeout));
 }
 
 function simulateKeydown(keyCode){

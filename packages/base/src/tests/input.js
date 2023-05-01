@@ -141,12 +141,12 @@ export function run(mount, { screen, fireEvent, waitFor }){
         { isValid: value => value?.length > 1, errorMessage: shortErrorMessage }
       ];
       const { userEvent } = mount({ validations });
-      await pause();
+      await pause(100);
       userEvent.type(getInput(), 'F');
       waitFor(() => {
         userEvent.tab();
       });
-      await pause();
+      await pause(100);
       expect(screen.queryByText(shortErrorMessage)).toBeInTheDocument();
       userEvent.click(screen.getByText('remove custom validations'));
       await pause();
@@ -181,8 +181,10 @@ export function run(mount, { screen, fireEvent, waitFor }){
       await pause();
       const input = screen.getByRole('slider');
       await setRangeInputValue(waitFor, input, '50');
+      await pause(100);
       expect(screen.queryByText(lowRangeErrorMessage)).toBeInTheDocument();
       await setRangeInputValue(waitFor, input, '51');
+      await pause(100);
       expect(screen.queryByText(lowRangeErrorMessage)).not.toBeInTheDocument();
     });
 

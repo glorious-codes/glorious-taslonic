@@ -1,3 +1,12 @@
+## 1.1.1 (2023-05-01)
+
+* chore: improve testing service ([db43a7e](https://github.com/glorious-codes/glorious-taslonic/commit/db43a7e))
+* fix: form control behavior on submit success ([c0cb72a](https://github.com/glorious-codes/glorious-taslonic/commit/c0cb72a))
+* chore: improve source map config ([2c8c37d](https://github.com/glorious-codes/glorious-taslonic/commit/2c8c37d))
+* chore: refactor form mocks ([c2db870](https://github.com/glorious-codes/glorious-taslonic/commit/c2db870))
+
+
+
 ## 1.1.0 (2023-04-15)
 
 * feat: allow custom attributes to be passed to fetcher ([b07812e](https://github.com/glorious-codes/glorious-taslonic/commit/b07812e))

@@ -8,9 +8,20 @@ function mount(initialProps = {}, testOptions){
     const [props, setProps] = useState(initialProps);
     const [formData, setFormData] = useState({});
     const { FIELDS, SUBMIT_BUTTON_TEXT } = testOptions;
+    const resetForm = () => {
+      setFormData({
+        [FIELDS.NAME.NAME]: '',
+        [FIELDS.FRUIT.NAME]: '',
+        [FIELDS.BIO.NAME]: ''
+      });
+    };
     const getFormFieldValue = fieldAttr => formData[fieldAttr] || '';
     const handleFieldValueChange = ({ target: { name, value } }) => {
       setFormData(prevState => ({ ...prevState, [name]: value }));
+    };
+    const handleSubmitSuccess = response => {
+      if(testOptions.resetOnSubmitSuccess) resetForm();
+      props.onSubmitSuccess && props.onSubmitSuccess(response);
     };
     const buildRequestErrorHandler = errorMessageProp => {
       if(!props[errorMessageProp]) {
@@ -21,6 +32,7 @@ function mount(initialProps = {}, testOptions){
     };
     return (
       <Form {...props}
+        onSubmitSuccess={handleSubmitSuccess}
         onSubmitError={props.onSubmitError || buildRequestErrorHandler('submitErrorMessage')}
         onFetchError={props.onFetchError || buildRequestErrorHandler('fetchErrorMessage')}
       >

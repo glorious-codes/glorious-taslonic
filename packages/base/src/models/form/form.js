@@ -1,4 +1,8 @@
-import { FORM_ID_CUSTOM_ATTR }  from '@base/constants/form';
+import {
+  FORM_ID_CUSTOM_ATTR,
+  SUBMIT_PROCESS_DESCRIPTION,
+  FETCH_PROCESS_DESCRIPTION
+}  from '@base/constants/form';
 import idService from '@base/services/id/id';
 
 export class Form {
@@ -34,14 +38,14 @@ export class Form {
     return process == 'fetch' ? this.handleFetch(this.options) : this.handleSubmit();
   }
   handleFetch({ onFetch, onFetchSuccess, onFetchError }){
-    onFetch && this.processRequest(onFetch, onFetchSuccess, onFetchError, 'isFetching');
+    onFetch && this.processRequest(onFetch, onFetchSuccess, onFetchError, FETCH_PROCESS_DESCRIPTION);
   }
   handleSubmit(evt){
     const { onSubmit, onSubmitSuccess, onSubmitError } = this.options;
     evt && evt.preventDefault();
     this.notifyListeners(this.submitListeners);
     return this.isValid() ?
-      this.processRequest(onSubmit, onSubmitSuccess, onSubmitError, 'isSubmitting') :
+      this.processRequest(onSubmit, onSubmitSuccess, onSubmitError, SUBMIT_PROCESS_DESCRIPTION) :
       this.highlightFirstErroredFormControl();
   }
   notifyListeners(listeners, data){
@@ -59,7 +63,12 @@ export class Form {
       this.setProcessing(true);
       this.notifyListeners(this.processListeners, { [processDescription]: true });
       result
-        .then(response => this.runCallbackOption(successCallback, response))
+        .then(response => {
+          if(processDescription == SUBMIT_PROCESS_DESCRIPTION) {
+            this.notifyListeners(this.submitSuccessListeners);
+          }
+          this.runCallbackOption(successCallback, response);
+        })
         .catch(err => this.runCallbackOption(errorCallback, err))
         .finally(() => this.onProcessRequestComplete(processDescription));
     }
@@ -94,8 +103,14 @@ export class Form {
     this.processListeners = this.addListener(this.processListeners, { notifyFn });
   }
   onSubmit(notifyFn){
+    this.addEventToExistingListeners(notifyFn, 'submitListeners');
+  }
+  onSubmitSuccess(notifyFn){
+    this.addEventToExistingListeners(notifyFn, 'submitSuccessListeners');
+  }
+  addEventToExistingListeners(notifyFn, existingListenersKey){
     const listener = { id: idService.generate(), notifyFn };
-    this.submitListeners = this.addListener(this.submitListeners, listener);
+    this[existingListenersKey] = this.addListener(this[existingListenersKey], listener);
     return listener.id;
   }
   addListener(listeners = [], newListener){
@@ -103,6 +118,12 @@ export class Form {
     return listeners;
   }
   removeSubmitListener(id){
-    this.submitListeners = this.submitListeners.filter(listener => listener.id !== id);
+    this.removeEventFromExistingListeners(id, 'submitListeners');
+  }
+  removeSubmitSuccessListener(id){
+    this.removeEventFromExistingListeners(id, 'submitSuccessListeners');
+  }
+  removeEventFromExistingListeners(id, existingListenersKey){
+    this[existingListenersKey] = this[existingListenersKey].filter(listener => listener.id !== id);
   }
 }

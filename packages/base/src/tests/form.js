@@ -187,6 +187,18 @@ export function run(mountComponent, { screen, waitFor, within }){
       });
     });
 
+    it('should not show validation errors if form is reset on submit success', async () => {
+      const onSubmit = jest.fn(() => Promise.resolve({}));
+      const { userEvent } = await mount({ onSubmit }, { resetOnSubmitSuccess: true });
+      await fillForm(userEvent, { name: 'Jim', fruit: 'lemmon', bio: 'Hi' }, waitFor);
+      await waitFor(() => {
+        userEvent.type(screen.getByLabelText(FIELDS.NAME.LABEL), '{enter}')
+      });
+      expect(screen.queryByText(ERROR_MESSAGES.TOO_SHORT_NAME)).not.toBeInTheDocument();
+      expect(screen.queryByText(ERROR_MESSAGES.NOT_CITRIC_FRUIT)).not.toBeInTheDocument();
+      expect(screen.queryByText(ERROR_MESSAGES.OFFENSIVE_BIO)).not.toBeInTheDocument();
+    });
+
     it('should optionally show a success title and message on submit success', async () => {
       const onSubmit = jest.fn(() => Promise.resolve({}));
       const submitSuccessTitle = 'Good job!';
@@ -275,8 +287,8 @@ export function run(mountComponent, { screen, waitFor, within }){
       expect(formEl).toHaveAttribute(attrName, attrValue);
     });
 
-    async function mount(props){
-      const result = mountComponent(props, { FIELDS, SUBMIT_BUTTON_TEXT });
+    async function mount(props, testingOptions){
+      const result = mountComponent(props, { FIELDS, SUBMIT_BUTTON_TEXT, ...testingOptions });
       await pause();
       return result;
     }

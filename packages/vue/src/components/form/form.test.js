@@ -37,6 +37,10 @@ async function mount({
       };
     },
     methods: {
+      handleSubmitSuccess(response, onSubmitSuccess){
+        if(testOptions.resetOnSubmitSuccess) this.resetForm();
+        onSubmitSuccess(response);
+      },
       handleRequestError(err = {}, errorMessageProp, onError = () => {}){
         if(!this.props[errorMessageProp]) {
           err.message && this.setProps({ ...this.props, [errorMessageProp]: err.message });
@@ -45,6 +49,16 @@ async function mount({
       },
       setProps(props){
         this.props = props;
+      },
+      resetForm(){
+        this.setFormData({
+          [FIELDS.NAME.NAME]: '',
+          [FIELDS.FRUIT.NAME]: '',
+          [FIELDS.BIO.NAME]: ''
+        });
+      },
+      setFormData(data){
+        this.formData = data;
       }
     },
     template: `
@@ -53,7 +67,7 @@ async function mount({
         :on-fetch-success="props.onFetchSuccess"
         :on-fetch-error="err => handleRequestError(err, 'fetchErrorMessage', props.onFetchError)"
         :on-submit="props.onSubmit"
-        :on-submit-success="props.onSubmitSuccess"
+        :on-submit-success="response => handleSubmitSuccess(response, props.onSubmitSuccess)"
         :on-submit-error="err => handleRequestError(err, 'submitErrorMessage', props.onSubmitError)"
         :fetch-error-message="props.fetchErrorMessage"
         :submit-error-message="props.submitErrorMessage"

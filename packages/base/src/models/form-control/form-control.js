@@ -38,11 +38,13 @@ export class FormControlModel {
   }
   configForm(formControlEl){
     this.setForm(formControlService.findParentFormModel(formControlEl));
-    if(this.form)
+    if(this.form) {
       this.setSubmitListenerId(this.form.onSubmit(() => {
         this.setBlurred(true);
         validateInitialization(formControlEl);
       }));
+      this.setSubmitSuccessListenerId(this.form.onSubmitSuccess(() => this.setBlurred(false)));
+    }
   }
   setForm(form){
     this.form = form;
@@ -108,12 +110,16 @@ export class FormControlModel {
   setSubmitListenerId(id){
     this.submitListenerId = id;
   }
+  setSubmitSuccessListenerId(id){
+    this.submitSuccessListenerId = id;
+  }
   destroy(){
     this.form && this.clearControlFromParentFormModel();
   }
   clearControlFromParentFormModel(){
     this.form.clearError(this.id);
     this.form.removeSubmitListener(this.submitListenerId);
+    this.form.removeSubmitSuccessListener(this.submitSuccessListenerId);
   }
 }
 

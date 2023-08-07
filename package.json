@@ -19,7 +19,7 @@
     "deploy": "firebase deploy --non-interactive"
   },
   "devDependencies": {
-    "@glorious/pitsby": "^1.34.0",
+    "@glorious/pitsby": "^1.36.0",
     "firebase-tools": "^11.25.1"
   }
 }

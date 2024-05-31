@@ -26,8 +26,8 @@ Is it a **behavior-related bug**? If so, paste here a link to Taslonic playgroun
 containing the simulation of your bug. You just need to implement a layout over
 there using the component you think is buggy and then copy/paste that URL here.
 
-- [Playground: React](https://components.taslonic.com/#!/components/react/playground)
-- [Playground: Vue](https://components.taslonic.com/#!/components/vue/playground)
+- [Playground: React](https://taslonic-docs.compilorama.com/#!/components/react/playground)
+- [Playground: Vue](https://taslonic-docs.compilorama.com/#!/components/vue/playground)
 
 ### Environment
 

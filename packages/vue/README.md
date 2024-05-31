@@ -3,7 +3,7 @@
 
 ## Usage
 
-To get started with Taslonic in your Vue project, please refer to the [instructions](https://taslonic.com/vue) found on the Taslonic's Official Website.
+To get started with Taslonic in your Vue project, please refer to the [instructions](https://taslonic.compilorama.com/vue) found on the Taslonic's Official Website.
 
 ## Contributing
 

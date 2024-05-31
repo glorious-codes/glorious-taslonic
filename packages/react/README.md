@@ -3,7 +3,7 @@
 
 ## Usage
 
-To get started with Taslonic in your React project, please refer to the [instructions](https://taslonic.com/react) found on the Taslonic's Official Website.
+To get started with Taslonic in your React project, please refer to the [instructions](https://taslonic.compilorama.com/react) found on the Taslonic's Official Website.
 
 ## Contributing
 

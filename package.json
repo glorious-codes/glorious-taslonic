@@ -13,13 +13,13 @@
   "scripts": {
     "build": "bash ./scripts/build-packages.sh",
     "format": "npm run format -ws --if-present",
-    "start": "npm run docs -- --watch --port=5000",
+    "start": "npm run docs -- --watch --port=5005",
     "docs": "pitsby build",
     "test": "npm run test -ws --if-present -- --runInBand --coverage --coverageReporters=lcov",
     "deploy": "firebase deploy --non-interactive"
   },
   "devDependencies": {
-    "@glorious/pitsby": "^1.37.0",
+    "@glorious/pitsby": "^1.37.2",
     "firebase-tools": "^11.25.1"
   }
 }

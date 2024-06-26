@@ -1,5 +1,1 @@
-module.exports = {
-  metrics: {
-    plausibleId: 'taslonic.com'
-  }
-};
+module.exports = {};
